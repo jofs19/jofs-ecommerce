@@ -65,7 +65,7 @@
 
 		<div class="form-group">
 	    	<label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
-	    	<input type="email" id="email" name="email" class="form-control unicase-form-control text-input">
+	    	<input type="email" id="email" name="email" class="form-control unicase-form-control text-input" autocomplete="off">
 			@error('email')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
