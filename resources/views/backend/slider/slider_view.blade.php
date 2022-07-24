@@ -42,13 +42,17 @@
                                                     style="width: 70px; height: 40px;"> </td>
                                             <td>
                                                 @if($item->title == NULL)
-                                                    <span class="badge badge-pill badge-danger"> No Title </span>
+                                                    <span class="badge badge-round badge-secondary"> No Title </span>
                                                 @else
                                                     {{ $item->title }}
                                                 @endif
                                             </td>
 
-                                            <td>{{ $item->description }}</td>
+                                            <td>                                      @if($item->description == NULL)
+                                                <span class="badge badge-round badge-secondary"> No Description </span>
+                                            @else
+                                                {{ $item->description }}
+                                            @endif</td>
                                             <td>
                                                 @if($item->status == 1)
                                                     <span class="badge badge-pill badge-success"> Active </span>

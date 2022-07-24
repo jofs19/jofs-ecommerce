@@ -30,7 +30,6 @@
                     <form method="post" action="{{ route('category.update', $category->id) }}">
                         @csrf
 
-                        <input type="hidden" name="id" value="{{ $category->id }}">
              	          
                                 <!--brand name eng-->
                                 <div class="form-group">
