@@ -24,9 +24,12 @@ $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
 
              @foreach($subcategories as $subcategory)
                       <div class="col-sm-12 col-md-3">
+
+                        <a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
+              
  <h2 class="title">
 @if(session()->get('language') == 'filipino') {{ $subcategory->subcategory_name_fil }} @else {{ $subcategory->subcategory_name_en }} @endif
-  </h2>
+  </h2> </a>
 
     <!--   // Get SubSubCategory Table Data -->
   @php
@@ -35,7 +38,7 @@ $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
 
    @foreach($subsubcategories as $subsubcategory)         
                         <ul class="links list-unstyled">
-                          <li><a href="#">
+                          <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
      @if(session()->get('language') == 'filipino') {{ $subsubcategory->subsubcategory_name_fil }} @else {{ $subsubcategory->subsubcategory_name_en }} @endif</a></li>
 
                         </ul>
@@ -59,18 +62,7 @@ $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
 
 
 
-              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paper-plane"></i>Kids and Babies</a> 
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-
-              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-futbol-o"></i>Sports</a> 
-                <!-- ================================== MEGAMENU VERTICAL ================================== --> 
-                <!-- /.dropdown-menu --> 
-                <!-- ================================== MEGAMENU VERTICAL ================================== --> </li>
-              <!-- /.menu-item -->
-
-              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-envira"></i>Home and Garden</a> 
-                <!-- /.dropdown-menu --> </li>
+              
               <!-- /.menu-item -->
 
             </ul>
