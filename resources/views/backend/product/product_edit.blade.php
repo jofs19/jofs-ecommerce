@@ -258,8 +258,7 @@
                                                 <h5>Product Size (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_size_en" class="form-control"
-                                                        value="{{ $products->product_size_en }}" data-role="tagsinput"
-                                                        required="">
+                                                        value="{{ $products->product_size_en }}" data-role="tagsinput">
                                                     @error('product_size_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -282,7 +281,7 @@
                                                 <div class="controls">
                                                     <input type="text" name="product_size_fil" class="form-control"
                                                         value="{{ $products->product_size_fil }}"
-                                                        data-role="tagsinput" required="">
+                                                        data-role="tagsinput">
                                                     @error('product_size_fil')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
