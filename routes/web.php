@@ -20,6 +20,9 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\CashController;
+use App\Http\Controllers\User\AllUserController;
 use App\Models\Cart;
 
 use Illuminate\Support\Facades\Auth;
@@ -198,6 +201,22 @@ Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wish
 Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
 
 Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
+
+//STRIPE
+
+Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+// COD
+
+Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
+//My Orders
+
+Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+
+Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
+
+Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
 
 // Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
 

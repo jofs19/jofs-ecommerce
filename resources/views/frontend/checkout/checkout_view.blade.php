@@ -53,7 +53,7 @@ Checkout Page
 	  </div>  <!-- // end form group  -->
 <div class="form-group">
 	    <label class="info-title" for="exampleInputEmail1"><b>Phone</b>  <span>*</span></label>
-	    <input type="number" name="shipping_phone" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Phone" value="{{ Auth::user()->phone }}" required="">
+	    <input type="tel" name="shipping_phone" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Phone" value="{{ Auth::user()->phone }}" required="">
 	  </div>  <!-- // end form group  -->
 	  <div class="form-group">
 	    <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
@@ -215,9 +215,9 @@ Checkout Page
 		    	</div> <!-- end col md 4 -->
 
 		    	<div class="col-md-4">
-		    		<label for="">Cash</label> 		
+		    		<label for="">COD</label> 		
        <input type="radio" name="payment_method" value="cash">	
-		  <img src="{{ asset('frontend/assets/images/payments/2.png') }}">  		
+		  <img src="{{ asset('frontend/assets/images/payments/6.png') }}">  		
 		    	</div> <!-- end col md 4 -->
 
 
