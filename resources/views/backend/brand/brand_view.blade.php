@@ -14,8 +14,8 @@
 
            <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Brand List</h3>
-              </div>
+                <h3 class="box-title">Brand List <span class="badge badge-pill badge-danger"> {{ count($brands) }} </span></h3>
+                 </div>
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="table-responsive">

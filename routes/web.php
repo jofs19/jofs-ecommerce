@@ -13,10 +13,13 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
@@ -211,14 +214,13 @@ Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('st
 
 Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
-//My Orders
+//My Orders (AllUserController Routes)
 
 Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
 
 Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
 
 Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
-
 
 Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
 
@@ -324,6 +326,8 @@ Route::prefix('orders')->group(function(){
     Route::get('/shipped/orders', [OrderController::class, 'ShippedOrders'])->name('shipped-orders');
     Route::get('/delivered/orders', [OrderController::class, 'DeliveredOrders'])->name('delivered-orders');
     Route::get('/cancel/orders', [OrderController::class, 'CancelOrders'])->name('cancel-orders');
+
+    
     // Update Status 
     Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm');
     Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
@@ -333,3 +337,65 @@ Route::prefix('orders')->group(function(){
     Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
 
     });
+
+    // Admin Reports Routes 
+    Route::prefix('reports')->group(function(){
+
+    Route::get('/view', [ReportController::class, 'ReportView'])->name('all-reports');
+
+    Route::post('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
+
+    Route::post('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
+
+    Route::post('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
+    
+    
+    });
+
+
+    // Admin Get All User Routes 
+    Route::prefix('alluser')->group(function(){
+
+    Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
+    
+    
+    });
+
+
+    // Admin Blog Routes 
+    Route::prefix('blog')->group(function(){
+
+    Route::get('/category', [BlogController::class, 'BlogCategory'])->name('blog.category');
+
+    Route::post('/store', [BlogController::class, 'BlogCategoryStore'])->name('blogcategory.store');
+
+    Route::get('/category/edit/{id}', [BlogController::class, 'BlogCategoryEdit'])->name('blog.category.edit');
+
+
+    Route::post('/update', [BlogController::class, 'BlogCategoryUpdate'])->name('blogcategory.update');
+
+    // Admin View Blog Post Routes 
+
+    Route::get('/list/post', [BlogController::class, 'ListBlogPost'])->name('list.post');
+
+    Route::get('/add/post', [BlogController::class, 'AddBlogPost'])->name('add.post');
+    
+    Route::post('/post/store', [BlogController::class, 'BlogPostStore'])->name('post-store');  
+
+    // Route::get('/post/edit/{id}', [BlogController::class, 'BlogPostEdit'])->name('post.edit');
+
+    // Route::post('/post/update/{id}', [BlogController::class, 'BlogPostUpdate'])->name('post.update');
+    
+    // Route::get('/delete/post/{id}', [BlogController::class, 'DeleteBlogPost'])->name('delete.post');
+
+    
+    
+    });
+
+    //  Frontend Blog Show Routes 
+
+    Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
+    Route::get('/post/details/{id}', [HomeBlogController::class, 'DetailsBlogPost'])->name('post.details');
+    Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'HomeBlogCatPost']);
+
+
