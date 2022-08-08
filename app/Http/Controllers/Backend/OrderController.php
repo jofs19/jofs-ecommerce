@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\PDF;
-
+use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller
@@ -18,7 +19,7 @@ class OrderController extends Controller
 
 	// Pending Orders 
 	public function PendingOrders(){
-		$orders = Order::where('status','Pending')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','pending')->orderBy('id','DESC')->get();
 		return view('backend.orders.pending_orders',compact('orders'));
 
 	} // end method 
@@ -145,6 +146,12 @@ class OrderController extends Controller
   
   
        public function ShippedToDelivered($order_id){
+
+		$product = OrderItem::where('order_id',$order_id)->get();
+		foreach ($product as $item) {
+			Product::where('id',$item->product_id)
+					->update(['product_qty' => DB::raw('product_qty-'.$item->qty)]);
+		} 
   
         Order::findOrFail($order_id)->update(['status' => 'delivered']);
   

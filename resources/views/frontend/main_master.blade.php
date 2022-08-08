@@ -139,7 +139,7 @@ $seo = App\Models\Seo::find(1);
     <input type="number" class="form-control" id="qty" value="1" min="1" >
   </div> <!-- // end form group -->
 <input type="hidden" id="product_id">
-<button type="submit" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
+<button type="submit" id="try" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
             
         </div><!-- // end col md -->
            
@@ -193,10 +193,13 @@ function productView(id){
                 $('#aviable').text('');
                 $('#stockout').text('');
                 $('#aviable').text('available');
+                $('#try').attr('disabled',false);
+
             }else{
                 $('#aviable').text('');
                 $('#stockout').text('');
                 $('#stockout').text('stockout');
+                $('#try').attr('disabled',true);
             } // end Stock Option 
             // Color
     $('select[name="color"]').empty();        
