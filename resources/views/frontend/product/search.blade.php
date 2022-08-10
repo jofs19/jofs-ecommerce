@@ -1,7 +1,7 @@
 @extends('frontend.main_master')
 @section('content')
 @section('title')
-Sub - Subcategory Product 
+Product Search Page 
 @endsection
 
 
@@ -13,17 +13,7 @@ Sub - Subcategory Product
     <div class="breadcrumb-inner">
       <ul class="list-inline list-unstyled">
         <li><a href="#">Home</a></li>
-        @foreach($breadsubsubcat as $item)
-        <li class='active'>{{ $item->category->category_name_en }}</li>
-        @endforeach
-
-        @foreach($breadsubsubcat as $item)
-        <li class='active'>{{ $item->subcategory->subcategory_name_en }}</li>
-        @endforeach
-
-         @foreach($breadsubsubcat as $item)
-        <li class='active'>{{ $item->subsubcategory_name_en }}</li>
-        @endforeach      
+        <li class='active'>Handbags</li>
       </ul>
     </div>
     <!-- /.breadcrumb-inner --> 
@@ -217,22 +207,7 @@ Sub - Subcategory Product
           </div>
         </div>
 
-
-        @foreach($breadsubsubcat as $item)
-
-        <span class="badge badge-danger" style="background: #808080">{{ $item->category->category_name_en }} </span>
-       
-               @endforeach
-       
-               @foreach($breadsubsubcat as $item)
-       
-        <span class="badge badge-danger" style="background: #808080">{{ $item->subcategory->subcategory_name_en }} </span>
-               @endforeach
-       
-                @foreach($breadsubsubcat as $item)
-       
-         <span class="badge badge-danger" style="background: #FF0000">{{ $item->subsubcategory_name_en }} </span>
-               @endforeach
+        <h4><b>Total Searched </b><span class="badge badge-danger" style="background: #FF0000;"> {{ count($products) }} </span> Items </h4>
 
 
         <div class="clearfix filters-container m-t-10">
@@ -348,7 +323,7 @@ Sub - Subcategory Product
 
 @else
 
-<div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+<div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">₱ {{ $product->selling_price }}</span> </div>
 @endif
 
 
@@ -509,7 +484,7 @@ Sub - Subcategory Product
             <div class="text-right">
               <div class="pagination-container">
                 <ul class="list-inline list-unstyled">
-                  {{ $products->links()  }}
+
                 </ul>
                 <!-- /.list-inline --> 
               </div>

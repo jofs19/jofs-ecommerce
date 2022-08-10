@@ -211,15 +211,6 @@ Order Traking Page
        <div class="step"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text"> Order Processing  </span> </div>
    
    
-       
-           
-             
-       
-   
-           
-       
-       @@ -221,7 +225,87 @@
-     
        <div class="step"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Picked</span> </div>
        <div class="step"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Shipped </span> </div>
    

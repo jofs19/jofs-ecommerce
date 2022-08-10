@@ -18,7 +18,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Publish All Reviews </h3>
+				  <h3 class="box-title">All Published Reviews </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

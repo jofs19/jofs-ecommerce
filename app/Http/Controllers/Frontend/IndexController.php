@@ -13,6 +13,8 @@ use App\Models\Product;
 use App\Models\MultiImg;
 use App\Models\Brand;
 use App\Models\BlogPost;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 class IndexController extends Controller
 {
     public function index()
@@ -154,8 +156,9 @@ class IndexController extends Controller
 	public function SubCatWiseProduct($subcat_id,$slug){
         $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);		
         $categories = Category::orderBy('category_name_en','ASC')->get();
-		return view('frontend.product.subcategory_view',compact('products','categories'));
+		$breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
 
+		return view('frontend.product.subcategory_view',compact('products','categories','breadsubcat'));
 	} // end method
 
 
@@ -163,8 +166,9 @@ class IndexController extends Controller
 	public function SubSubCatWiseProduct($subsubcat_id,$slug){
 		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
-		return view('frontend.product.sub_subcategory_view',compact('products','categories'));
+		$breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
 
+		return view('frontend.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
 	} //end method
 
 
@@ -184,6 +188,31 @@ class IndexController extends Controller
 			'size' => $product_size,
 
 		));
+
+	} // end method 
+
+
+     // Product Seach 
+	public function ProductSearch(Request $request){
+        $request->validate(["search" => "required"]);
+		$item = $request->search;
+		// echo "$item";
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+		$products = Product::where('product_name_en','LIKE',"%$item%")->get();
+		return view('frontend.product.search',compact('products','categories'));
+
+	}
+
+    	///// Advance Search Options 
+
+	public function SearchProduct(Request $request){
+		$request->validate(["search" => "required"]);
+
+		$item = $request->search;		 
+
+		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thumbnail','selling_price','id','product_slug_en')->limit(5)->get();
+
+        return view('frontend.product.search_product',compact('products'));
 
 	} // end method 
 

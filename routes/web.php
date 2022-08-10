@@ -479,3 +479,9 @@ Route::prefix('orders')->group(function(){
     
     });
 
+    /// Product Search Route 
+    Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+
+    // Advance Search Routes 
+    Route::post('search-product', [IndexController::class, 'SearchProduct']);
+
