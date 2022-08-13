@@ -31,6 +31,7 @@ use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\AllUserController;
+use App\Http\Controllers\Frontend\ShopController;
 use App\Models\Cart;
 
 use Illuminate\Support\Facades\Auth;
@@ -102,25 +103,20 @@ Route::prefix('brand')->group(function(){
 
 });
 
-//ADMIN Product Category-related routes
+// Admin Category all Routes  
 Route::prefix('category')->group(function(){
     Route::get('/view', [CategoryController::class, 'CategoryView'])->name('all.category');
     Route::post('/store', [CategoryController::class, 'CategoryStore'])->name('category.store');
     Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
-    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');    
+    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
     Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
-
-
-//ADMIN Product Sub Category-related routes
-
+    // Admin Sub Category All Routes
     Route::get('/sub/view', [SubCategoryController::class, 'SubCategoryView'])->name('all.subcategory');
     Route::post('/sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
     Route::get('/sub/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('subcategory.edit');
-    Route::post('/sub/update', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
+    Route::post('/update', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
     Route::get('/sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
-
-//ADMIN Product Sub-Sub Category-related routes
-
+    // Admin Sub->Sub Category All Routes
     Route::get('/sub/sub/view', [SubCategoryController::class, 'SubSubCategoryView'])->name('all.subsubcategory');
     Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
     Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubCategoryController::class, 'GetSubSubCategory']);
@@ -128,8 +124,7 @@ Route::prefix('category')->group(function(){
     Route::get('/sub/sub/edit/{id}', [SubCategoryController::class, 'SubSubCategoryEdit'])->name('subsubcategory.edit');
     Route::post('/sub/update', [SubCategoryController::class, 'SubSubCategoryUpdate'])->name('subsubcategory.update');
     Route::get('/sub/sub/delete/{id}', [SubCategoryController::class, 'SubSubCategoryDelete'])->name('subsubcategory.delete');
-});
-
+    });
 //ADMIN Product-related routes
 
     Route::prefix('product')->group(function(){
@@ -370,7 +365,7 @@ Route::prefix('orders')->group(function(){
     });
 
 
-    // Admin Blog Routes 
+    // Admin Blog category Routes 
     Route::prefix('blog')->group(function(){
 
     Route::get('/category', [BlogController::class, 'BlogCategory'])->name('blog.category');
@@ -390,11 +385,18 @@ Route::prefix('orders')->group(function(){
     
     Route::post('/post/store', [BlogController::class, 'BlogPostStore'])->name('post-store');  
 
-    // Route::get('/post/edit/{id}', [BlogController::class, 'BlogPostEdit'])->name('post.edit');
-
-    // Route::post('/post/update/{id}', [BlogController::class, 'BlogPostUpdate'])->name('post.update');
     
-    // Route::get('/delete/post/{id}', [BlogController::class, 'DeleteBlogPost'])->name('delete.post');
+
+    //< added routes
+
+    Route::get('/post/edit/{id}', [BlogController::class, 'BlogPostEdit'])->name('blogpost.edit');
+
+    Route::post('/post/update/{id}', [BlogController::class, 'BlogPostUpdate'])->name('blogpost.update');
+    
+    Route::get('/delete/post/{id}', [BlogController::class, 'BlogPostDelete'])->name('blogpost.delete');
+
+    //added routes />
+
 
     
     
@@ -484,4 +486,10 @@ Route::prefix('orders')->group(function(){
 
     // Advance Search Routes 
     Route::post('search-product', [IndexController::class, 'SearchProduct']);
+
+    // Shop Page Route 
+    Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop.page');
+
+    Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
+
 

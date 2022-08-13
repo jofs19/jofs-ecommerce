@@ -166,6 +166,10 @@
                         <td class="col-md-1">
                           <label for=""> Price </label>
                         </td>
+
+                        {{-- <td class="col-md-1">
+                          <label for=""> Download </label>
+                        </td> --}}
         
                       </tr>
         
@@ -198,9 +202,11 @@
                         </td>
         
                   <td class="col-md-2">
-                          <label for=""> ₱{{ $item->price }}  ( $ {{ $item->price * $item->qty}} ) </label>
-                        </td>
-                    
+                          <label for="" > ₱{{ $item->price }}  ( $ {{ $item->price * $item->qty}} ) </label>
+                        </td>     
+                        
+                        
+                        
         
                       </tr>
                       @endforeach

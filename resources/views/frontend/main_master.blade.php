@@ -113,7 +113,15 @@ $seo = App\Models\Seo::find(1);
   <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
   <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
   <li class="list-group-item">Brand: <strong id="pbrand"></strong></li>
-  <li class="list-group-item">Stock: <span class="badge badge-pill badge-success" id="aviable" style="background: green; color: white;"></span> 
+  <li class="list-group-item">Stock: <span class="badge badge-pill badge-success" id="aviable" style="background: green; color: white;"></span><b> {{ __('Available') }}</b> 
+
+</li>
+
+
+    
+    
+
+</li>
 <span class="badge badge-pill badge-danger" id="stockout" style="background: red; color: white;"></span> 
   </li>
 </ul>
@@ -137,7 +145,10 @@ $seo = App\Models\Seo::find(1);
        <div class="form-group">
     <label for="qty">Quantity</label>
     <input type="number" class="form-control" id="qty" value="1" min="1">
-  </div> <!-- // end form group -->
+
+ 
+
+</div> <!-- // end form group -->
 
 <input type="hidden" id="product_id">
 <button type="submit" id="try" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
@@ -196,12 +207,16 @@ function productView(id){
                 $('#stockout').text('');
                 $('#aviable').text('available');
                 $('#try').attr('disabled',false);
+                $('#qty').attr('max',data.product.product_qty);
+
 
             }else{
                 $('#aviable').text('');
                 $('#stockout').text('');
                 $('#stockout').text('stockout');
                 $('#try').attr('disabled',true);
+                $('#qty').attr('max',data.product.product_qty);
+
             } // end Stock Option 
             // Color
     $('select[name="color"]').empty();        
@@ -224,6 +239,8 @@ function productView(id){
  
 }
 // Eend Product View with Modal 
+
+
 
 
  // Start Add To Cart Product 

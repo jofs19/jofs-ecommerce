@@ -3,6 +3,12 @@
 @section('title')
 {{ $product->product_name_en }} Product Details
 @endsection
+
+<style>
+	.checked {
+  color: orange;
+}
+</style>
 <!-- ===== ======== HEADER : END ============================================== -->
 <div class="breadcrumb">
 	<div class="container">
@@ -126,25 +132,69 @@
   
         </div><!-- /.gallery-thumbs -->
     </div><!-- /.single-product-gallery -->
-</div><!-- /.gallery-holder -->        			
+</div><!-- /.gallery-holder -->       
+@php 
+	$reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+	$avarage = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+@endphp 			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
 							<h1 class="name" id="pname">
 @if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif
 							 </h1>
-							
-							<div class="rating-reviews m-t-20">
-								<div class="row">
+
+							 <div class="rating-reviews m-t-20">
+								<div class="row"> 
 									<div class="col-sm-3">
-										<div class="rating rateit-small"></div>
+				
+				   @if($avarage == 0)
+				   No Rating Yet 
+				   @elseif($avarage == 1 || $avarage < 2)
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				   @elseif($avarage == 2 || $avarage < 3)
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				  @elseif($avarage == 3 || $avarage < 4)
+				  <span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				
+				  @elseif($avarage == 4 || $avarage < 5)
+				  <span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				  @elseif($avarage == 5 || $avarage < 5)
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				   @endif
+				
+				
 									</div>
+				
+				
+				
 									<div class="col-sm-8">
 										<div class="reviews">
-											<a href="#" class="lnk">(13 Reviews)</a>
+											<a href="#" class="lnk">({{ count($reviewcount) }} Reviews)</a>
 										</div>
 									</div>
 								</div><!-- /.row -->		
 							</div><!-- /.rating-reviews -->
+						
 							<div class="stock-container info-container m-t-10">
 								<div class="row">
 									<div class="col-sm-2">
@@ -331,12 +381,49 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 		<div class="review">
 
         <div class="row">
-			<div class="col-md-3">
+			<div class="col-md-6">
 			<img style="border-radius: 50%" src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}"  width="40px;" height="40px;"> <br>
 			<b> {{ $item->user->name }}</b>
+
+			@if($item->rating == NULL)
+
+			@elseif($item->rating == 1)
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+			@elseif($item->rating == 2)
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+		   
+			@elseif($item->rating == 3)
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star"></span>
+		   <span class="fa fa-star"></span>
+		   
+			@elseif($item->rating == 4)
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star"></span>
+			@elseif($item->rating == 5)
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   <span class="fa fa-star checked"></span>
+		   
+		   @endif
 			</div>
 
-			<div class="col-md-9">
+			<div class="col-md-6">
 
 			</div>			
 		</div> <!-- // end row -->
@@ -371,7 +458,32 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 									<form role="form" class="cnt-form" method="post" action="{{ route('review.store') }}">
 										@csrf
 									
-										<input type="hidden" name="product_id" value="{{ $product->id }}">								
+										<input type="hidden" name="product_id" value="{{ $product->id }}">		
+										
+										<table class="table">	
+											<thead>
+												<tr>
+													<th class="cell-label">&nbsp;</th>
+													<th>1 star</th>
+													<th>2 stars</th>
+													<th>3 stars</th>
+													<th>4 stars</th>
+													<th>5 stars</th>
+												</tr>
+											</thead>	
+											<tbody>
+												<tr>
+													<td class="cell-label">Quality</td>
+													<td><input type="radio" name="quality" class="radio" value="1"></td>
+													<td><input type="radio" name="quality" class="radio" value="2"></td>
+													<td><input type="radio" name="quality" class="radio" value="3"></td>
+													<td><input type="radio" name="quality" class="radio" value="4"></td>
+													<td><input type="radio" name="quality" class="radio" value="5"></td>
+												</tr>
+										
+											</tbody>
+										</table>
+
 									<div class="row">
 										<div class="col-sm-6">
 								
