@@ -170,6 +170,8 @@
                         {{-- <td class="col-md-1">
                           <label for=""> Download </label>
                         </td> --}}
+
+                  
         
                       </tr>
         
@@ -242,13 +244,26 @@
               @if($order)
 
 
-              <form action="{{ route('return.order',$order->id) }}" method="post">
+              <form action="{{ route('return.order',$order->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
         
           <div class="form-group">
             <label for="label"> Order Return Reason:</label>
             <textarea name="return_reason" id="" class="form-control" cols="30" rows="05">Return Reason</textarea>    
 
+          </div>
+
+          <div class="form-group">
+            <h5>Product Image <span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input type="file" name="return_image" class="form-control" {{-- onChange="mainThumUrl(this)" --}} >
+              @error('return_image')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+              <br>
+              {{-- <img src="" id="mainThmb"> --}}
+        
+            </div>
           </div>
           
           <button type="submit" class="btn btn-danger">Return Order</button>

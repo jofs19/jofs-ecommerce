@@ -18,13 +18,13 @@
 
               <li>
 
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{-- <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="icon fa fa-sign-out"></i>
                     {{ __('Logout') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
-                </form>
+                </form> --}}
 
                     @else
                     <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a>

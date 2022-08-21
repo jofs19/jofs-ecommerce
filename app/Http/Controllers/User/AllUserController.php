@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use App\Mail\OrderMail;
 use Barryvdh\DomPDF\Facade\PDF;
 
+use Intervention\Image\Facades\Image;
 
 
 
@@ -56,9 +57,24 @@ class AllUserController extends Controller
 
      public function ReturnOrder(Request $request,$order_id){
 
+        // unlink(public_path('upload/return/'.$request->return_image));
+
+        // $return_img = Order::findOrFail($order_id);
+        // $img = $return_img->return_image;
+        // unlink($img);
+        
+		if ($request->file('return_image')) {
+			$image = $request->file('return_image');
+			$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+			Image::make($image)->resize(300,300)->save('upload/return/'.$name_gen);
+			$save_url = 'upload/return/'.$name_gen;
+			$data['return_image'] = $save_url; 
+			}
+
         Order::findOrFail($order_id)->update([
             'return_date' => Carbon::now()->format('d F Y'),
             'return_reason' => $request->return_reason,
+            'return_image' => $save_url,
             'return_order' => 1,
         ]);
 

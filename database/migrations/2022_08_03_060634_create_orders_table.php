@@ -20,8 +20,10 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->string('address')->nullable();
             $table->integer('post_code')->nullable();
             $table->text('notes')->nullable();
+            $table->string('receipt')->nullable();
             $table->string('payment_type');
             $table->string('payment_method')->nullable();
             $table->string('transaction_id')->nullable();
@@ -38,8 +40,11 @@ class CreateOrdersTable extends Migration
             $table->string('shipped_date')->nullable();
             $table->string('delivered_date')->nullable();
             $table->string('cancel_date')->nullable();
+            $table->string('cancel_reason')->nullable();
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
+            $table->string('return_image')->nullable();
+
             $table->string('status');
             $table->timestamps();
         }); 

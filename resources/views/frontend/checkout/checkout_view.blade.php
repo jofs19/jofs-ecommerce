@@ -33,7 +33,7 @@ Checkout Page
 			 <div class="col-md-6 col-sm-6 already-registered-login">
 		 <h4 class="checkout-subtitle"><b>Shipping Address</b></h4>
 
-	<form class="register-form" action="{{ route('checkout.store') }}" method="POST">
+	<form class="register-form" action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 
 
@@ -55,6 +55,12 @@ Checkout Page
 	    <label class="info-title" for="exampleInputEmail1"><b>Phone</b>  <span>*</span></label>
 	    <input type="tel" name="shipping_phone" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Phone" value="{{ Auth::user()->phone }}" required="">
 	  </div>  <!-- // end form group  -->
+
+	  <div class="form-group">
+	    <label class="info-title" for="exampleInputEmail1"><b>Address</b>  <span>*</span></label>
+	    <input type="text" name="shipping_address" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address" value="{{ Auth::user()->address }}" required="">
+	  </div>  <!-- // end form group  -->
+
 	  <div class="form-group">
 	    <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
 	    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="">
@@ -111,6 +117,20 @@ Checkout Page
 	 <label class="info-title" for="exampleInputEmail1">Notes <span>*</span></label>
 	     <textarea class="form-control" cols="30" rows="5" placeholder="Notes" name="notes"></textarea>
 	  </div>  <!-- // end form group  -->
+
+
+	<div class="form-group">
+		<h5>Receipt <span class="text-danger">*</span></h5>
+		<div class="controls">
+			<input type="file" name="receipt" class="form-control" {{-- onChange="mainThumUrl(this)" --}}  >
+			@error('receipt')
+				<span class="text-danger">{{ $message }}</span>
+			@enderror
+			<br>
+			{{-- <img src="" id="mainThmb"> --}}
+
+		</div>
+	</div>
 
 
 

@@ -57,7 +57,7 @@
 		
         <li class="treeview {{ ($prefix == '/brand')? 'active':'' }}">
           <a href="#">
-            <i data-feather="message-circle"></i>
+            <i class="glyphicon glyphicon-bitcoin"></i>
             <span>Brands</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -77,7 +77,7 @@
 
         <li class="treeview {{ ($prefix == '/category')? 'active':'' }}">
           <a href="#">
-            <i data-feather="mail"></i> <span>Category</span>
+            <i class="glyphicon glyphicon-tags"></i> <span>Category</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -96,7 +96,7 @@
 
         <li class="treeview" class="treeview {{ ($prefix == '/product')? 'active':'' }}">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-shopping-cart"></i>
             <span>Products</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -117,7 +117,7 @@
         <!--SLIDER-->
         <li class="treeview {{ ($prefix == '/slider')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-random"></i>
             <span>Slider</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -139,7 +139,7 @@
 
         <li class="treeview {{ ($prefix == '/coupons')?'active':'' }}  ">
          <a href="#">
-           <i data-feather="file"></i>
+           <i class="glyphicon glyphicon-certificate"></i>
            <span>Coupons</span>
            <span class="pull-right-container">
              <i class="fa fa-angle-right pull-right"></i>
@@ -165,7 +165,7 @@
 
       <li class="treeview {{ ($prefix == '/shipping')?'active':'' }}  ">
         <a href="#">
-          <i data-feather="file"></i>
+          <i class="glyphicon glyphicon-map-marker"></i>
           <span>Shipping Area</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-right pull-right"></i>
@@ -190,7 +190,7 @@
 
       <li class="treeview {{ ($prefix == '/blog')?'active':'' }}  ">
         <a href="#">
-          <i data-feather="file"></i>
+          <i class="glyphicon glyphicon-picture"></i>
           <span>Manage Blog</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-right pull-right"></i>
@@ -215,7 +215,7 @@
 
         <li class="treeview {{ ($prefix == '/setting')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-cog"></i>
             <span>Manage Setting</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -238,8 +238,8 @@
         
         <li class="treeview {{ ($prefix == '/return')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
-            <span>Return Order</span>
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+            <span>Returned Orders</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -261,7 +261,7 @@
 
         <li class="treeview {{ ($prefix == '/review')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-thumbs-up"></i>
             <span>Manage Review</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -288,7 +288,7 @@
 		  
         <li class="treeview {{ ($prefix == '/orders')?'active':'' }} ">          
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-bed"></i>
             <span>Orders </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -320,7 +320,7 @@
 
         <li class="treeview {{ ($prefix == '/stock')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-list-alt"></i>
             <span>Manage Stock </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -340,7 +340,7 @@
 		
         <li class="treeview {{ ($prefix == '/reports')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="glyphicon glyphicon-file"></i>
             <span>All Reports </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -360,7 +360,7 @@
 
         <li class="treeview {{ ($prefix == '/alluser')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
+            <i class="mdi mdi-account-multiple"></i>
             <span>All Users </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -381,8 +381,8 @@
 
         <li class="treeview {{ ($prefix == '/adminuserrole')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="file"></i>
-            <span>Admin User Role </span>
+            <i class="glyphicon glyphicon-briefcase"></i>
+            <span>Admin Role </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

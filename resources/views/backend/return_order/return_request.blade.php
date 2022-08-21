@@ -53,6 +53,8 @@
 		  </td>
 
 		<td width="25%">
+			<a href="{{ route('return.view',$item->id) }}" class="btn btn-info">View </a>		
+
             <a href="{{ route('return.approve',$item->id) }}" class="btn btn-danger">Approve </a>		
         </td>
 

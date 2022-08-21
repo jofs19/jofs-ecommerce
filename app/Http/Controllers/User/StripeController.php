@@ -47,6 +47,7 @@ class StripeController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'phone' => $request->phone,
+        'address' => $request->address,
         'post_code' => $request->post_code,
         'notes' => $request->notes,
 

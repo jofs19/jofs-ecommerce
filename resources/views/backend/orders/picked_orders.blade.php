@@ -47,6 +47,8 @@
 
 		<td width="25%">
  <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info" title="View Data"><i class="fa fa-eye"></i> </a>
+ <a href="{{ route('picked.shipped',$item->id) }}" class="btn btn-success fa fa-check" id="shipped"></a>
+
  <a target="_blank" href="{{ route('invoice.download',$item->id) }}" class="btn btn-danger" title="Invoice Download">
     <i class="fa fa-download"></i></a>
 		</td>

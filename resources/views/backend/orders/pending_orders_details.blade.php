@@ -55,6 +55,11 @@
                <th> {{ $order->email }} </th>
             </tr>
 
+            <tr>
+              <th> Shipping Address : </th>
+               <th> {{ $order->address }} </th>
+            </tr>
+
              <tr>
               <th> Division : </th>
                <th> {{ $order->division->division_name }} </th>
@@ -79,6 +84,13 @@
               <th> Order Date : </th>
                <th> {{ $order->order_date }} </th>
             </tr>
+
+            <tr>
+              <th> Notes : </th>
+               <th> {{ $order->notes }} </th>
+            </tr>
+
+            
 
            </table>
 
@@ -112,12 +124,15 @@
             </tr>
 
             @if ($order->payment_method == 'Cash On Delivery')
+
+            
                   
-            {{--                     
+                                
             <tr>
-                <th> Tranx ID : </th>
-                 <th> {{ $order->transaction_id }} </th>
-              </tr> --}}
+                <th> Receipt : </th>
+                 <th>           <img src="{{ asset($order->receipt) }}" alt="" srcset="" style="width: 100px; height:100px">
+                 </th>
+              </tr>
                 
             @else
 
@@ -176,6 +191,8 @@
 
 				</div>
 			  </div> <!--  // cod md -6 -->
+
+
 
 
 

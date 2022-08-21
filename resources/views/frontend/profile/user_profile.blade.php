@@ -41,6 +41,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="info-title" for="exampleInputEmail1">Address </label>
+                                <input type="text" name="address" class="form-control" value="{{ $user->address }}">
+                            </div>
+
+                            <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">User Image </label>
                                 <input type="file" name="profile_photo_path" class="form-control">
                             </div>

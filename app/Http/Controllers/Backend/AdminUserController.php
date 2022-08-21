@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AdminUserController extends Controller
 {
@@ -190,7 +191,22 @@ class AdminUserController extends Controller
 
     } // end method 
 
+	// public function DeleteUser($id){
+	// 	$user = User::findOrFail($id);
+	// 	// $img = $userimg->profile_photo_path;
+	// 	// unlink($img);
+    //     $user->delete();
+	// 	 $notification = array(
+	// 	   'message' => 'User Deleted Successfully',
+	// 	   'alert-type' => 'error'
+	//    );
 
+	//    return redirect()->back()->with($notification);
+	// } // end method
+
+
+
+	
 
 
 }

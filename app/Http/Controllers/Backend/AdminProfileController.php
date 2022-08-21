@@ -13,6 +13,10 @@ use Carbon\Carbon;
 
 class AdminProfileController extends Controller
 {
+
+    public function AdminCalendar(){
+        return view('admin.calendar');
+    }
     
     public function AdminProfile()
     {
@@ -28,12 +32,51 @@ class AdminProfileController extends Controller
         return view('admin.admin_profile_edit', compact('editData'));
     }
 
+    // public function AdminProfileStore(Request $request){
+
+    //     $admin_id = Auth::user()->id;
+    //     $old_image = Admin::find($admin_id)->profile_photo_path;
+
+    //     if($request->hasFile('profile_photo_path')){
+    //         $image = $request->file('profile_photo_path');
+    //         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    //         Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
+    //         $save_url = 'upload/admin_images/'.$name_gen;
+    //         $update = Admin::find($admin_id);
+    //         $update->profile_photo_path = $save_url;
+    //         $update->save();
+    //         if($old_image != 'upload/admin_images/no_image.jpg'){
+    //             unlink($old_image);
+    //         }
+    //     }else{
+    //         $update = Admin::find($admin_id);
+    //         $update->name = $request->name;
+    //         $update->email = $request->email;
+    //         $update->phone = $request->phone;
+    //         $update->save();
+    //     }
+    //     $notification = array(
+	// 		'message' => 'Admin User Updated Successfully',
+	// 		'alert-type' => 'info'
+	// 	);
+	// 	return redirect()->route('all.admin.user')->with($notification);
+  
+
+    // }
+
+    
+
     public function AdminProfileStore(Request $request)
     {
 		$id = Auth::user()->id;
 		$data = Admin::find($id);
         $data->name = $request->name;
         $data->email = $request->email;
+
+        // $image = $request->file('profile_photo_path');
+    	// $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    	// Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
+    	// $save_url = 'upload/admin_images/'.$name_gen;
 
 
         if ($request->file('profile_photo_path')) {
@@ -94,6 +137,22 @@ class AdminProfileController extends Controller
 		return view('backend.user.all_user',compact('users'));
 	}
 
+    public function DeleteUser($id){
+		$user = User::findOrFail($id);
+		// $img = $userimg->profile_photo_path;
+		// unlink($img);
+        $user->delete();
+		 $notification = array(
+		   'message' => 'User Deleted Successfully',
+		   'alert-type' => 'error'
+	   );
+
+	   return redirect()->back()->with($notification);
+	} // end method
+
+  
+
+  
 }
 
 // public function AdminUpdateChangePassword(Request $request){

@@ -72,6 +72,7 @@ Route::get('/admin/profile/edit', [AdminProfileController::class, 'AdminProfileE
 Route::post('/admin/profile/store', [AdminProfileController::class, 'AdminProfileStore'])->name('admin.profile.store');
 Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
 Route::post('/update/change/password', [AdminProfileController::class, 'AdminUpdateChangePassword'])->name('update.change.password');
+Route::get('/admin/calendar', [AdminProfileController::class, 'AdminCalendar'])->name('admin.calendar');
 });  // end Middleware admin
 
 
@@ -81,7 +82,7 @@ Route::post('/update/change/password', [AdminProfileController::class, 'AdminUpd
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     $id = Auth::user()->id;
     $user = User::find($id);
-    return view('dashboard', compact('user'));
+    return view('dashboard',compact('user'));
     
 })->name('dashboard');          //GO TO DASHBOARD AFTER SIGN IN
 
@@ -101,7 +102,7 @@ Route::prefix('brand')->group(function(){
     Route::post('/update', [BrandController::class, 'BrandUpdate'])->name('brand.update');
     Route::get('/delete/{id}', [BrandController::class, 'BrandDelete'])->name('brand.delete');
 
-});
+}); //end brand routes
 
 // Admin Category all Routes  
 Route::prefix('category')->group(function(){
@@ -124,7 +125,9 @@ Route::prefix('category')->group(function(){
     Route::get('/sub/sub/edit/{id}', [SubCategoryController::class, 'SubSubCategoryEdit'])->name('subsubcategory.edit');
     Route::post('/sub/update', [SubCategoryController::class, 'SubSubCategoryUpdate'])->name('subsubcategory.update');
     Route::get('/sub/sub/delete/{id}', [SubCategoryController::class, 'SubSubCategoryDelete'])->name('subsubcategory.delete');
-    });
+    }); //end category routes
+
+
 //ADMIN Product-related routes
 
     Route::prefix('product')->group(function(){
@@ -140,7 +143,7 @@ Route::prefix('category')->group(function(){
     Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product.inactive');
     Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product.active');
     Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
-}); 
+}); //end product routes
 
 // Admin Slider All Routes 
 
@@ -154,7 +157,7 @@ Route::prefix('category')->group(function(){
 
     Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
     Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
-});
+}); //end slider routes
 
 
 // Front-end related routed
@@ -163,6 +166,10 @@ Route::prefix('category')->group(function(){
 Route::get('/language/filipino', [LanguageController::class, 'Filipino'])->name('filipino.language');
 
 Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+//end language routes
+
+
 
 
 // Frontend Product Details Page url 
@@ -429,6 +436,8 @@ Route::prefix('orders')->group(function(){
     Route::get('/admin/request', [ReturnController::class, 'ReturnRequest'])->name('return.request');
 
     Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'ReturnRequestApprove'])->name('return.approve');
+    
+    Route::get('/admin/return/view/{order_id}', [ReturnController::class, 'ReturnRequestView'])->name('return.view');
 
     Route::get('/admin/all/request', [ReturnController::class, 'ReturnAllRequest'])->name('all.request');
     
@@ -492,4 +501,5 @@ Route::prefix('orders')->group(function(){
 
     Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
 
-
+    //Delete User
+    Route::get('/delete/user/{id}', [AdminProfileController::class, 'DeleteUser'])->name('delete.user');

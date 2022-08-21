@@ -38,8 +38,10 @@ class CashController extends Controller
      	'name' => $request->name,
      	'email' => $request->email,
      	'phone' => $request->phone,
+		'address' => $request->address,
      	'post_code' => $request->post_code,
      	'notes' => $request->notes,
+		'receipt' => $request->receipt,
 
      	'payment_type' => 'Cash On Delivery',
      	'payment_method' => 'Cash On Delivery',

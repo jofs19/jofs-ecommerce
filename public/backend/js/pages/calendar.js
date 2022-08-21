@@ -141,25 +141,21 @@
 				end: '2017-08-08',
                 className: 'bg-info'
             }, {
-                title: 'This is today check date',
+                title: 'Today',
                 start: today,
                 end: today,
-                className: 'bg-danger'
+                className: 'bg-info'
             }, {
                 title: 'This is your birthday',                
                 start: '2017-09-08',
 				end: '2017-09-08',
-                className: 'bg-info'
+                className: 'bg-danger'
             },
               {
                 title: 'Hanns birthday',                
                 start: '2017-10-08',
 				end: '2017-10-08',
                 className: 'bg-danger'
-            },{
-                title: 'Like it?',
-                start: new Date($.now() + 784800000),
-                className: 'bg-success'
             }];
 
         var $this = this;

@@ -87,6 +87,18 @@
 			</span>		
 			@enderror
 		</div>
+
+
+		<div class="form-group">
+		    <label class="info-title" for="exampleInputEmail1">Main Address <span>*</span></label>
+		    <input type="text" id="address" name="address" class="form-control unicase-form-control text-input">
+			@error('address')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>		
+			@enderror
+		</div>
+
         <div class="form-group">
 		    <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
 		    <input type="password" id="password" name="password" class="form-control unicase-form-control text-input">

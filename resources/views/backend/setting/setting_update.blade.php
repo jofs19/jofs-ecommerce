@@ -24,12 +24,40 @@
 				<div class="col-md-6">
 
 	 <div class="form-group">
-		<h5>Site Logo  <span class="text-danger"> </span></h5>
+		<label>Website Logo</label>
 		<div class="controls">
 	 <input type="file" name="logo" class="form-control"> </div>
 	</div>
 
+	
+	
 
+	<div class="form-group">
+		<label>Phone #1:</label>
+
+		<div class="input-group">
+		  <div class="input-group-addon">
+			<i class="fa fa-phone"></i>
+		  </div>
+		  <input type="tel" name="phone_one" class="form-control" data-inputmask="'mask':[ '(999) 999-9999']" data-mask="" value="{{ $setting->phone_one }}">
+		</div>
+		<!-- /.input group -->
+	  </div>
+
+	  <div class="form-group">
+		<label>Phone #2:</label>
+
+		<div class="input-group">
+		  <div class="input-group-addon">
+			<i class="fa fa-phone"></i>
+		  </div>
+		  <input type="tel" name="phone_two" class="form-control" data-inputmask="'mask':[ '(999) 999-9999']" data-mask="" value="{{ $setting->phone_two }}">
+		</div>
+		<!-- /.input group -->
+	  </div>
+	  
+
+{{-- 
 	<div class="form-group">
 		<h5>Phone One <span class="text-danger">*</span></h5>
 		<div class="controls">
@@ -42,51 +70,70 @@
 		<h5>Phone Two <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text" name="phone_two" class="form-control"  value="{{ $setting->phone_two }}"  > </div>
-	</div>
+	</div> --}}
 
 	<div class="form-group">
-		<h5>Email <span class="text-danger">*</span></h5>
-		<div class="controls">
-	 <input type="email" name="email" class="form-control" value="{{ $setting->email }}"   > </div>
+		<label>Email</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+			<input type="email" name="email" class="form-control" placeholder="Email" value="{{ $setting->email }}">
+		  </div>
 	</div>
 
+
+
+
+
 <div class="form-group">
-		<h5>Company Name <span class="text-danger">*</span></h5>
-		<div class="controls">
+	<label>Company Name</label>
+	<div class="controls">
 	 <input type="text" name="company_name" class="form-control" value="{{ $setting->company_name }}"   > </div>
 	</div>
 
 
 	<div class="form-group">
-		<h5>Company Address <span class="text-danger">*</span></h5>
+		<label>Company Address</label>
 		<div class="controls">
 	 <input type="text" name="company_address" class="form-control" value="{{ $setting->company_address }}"   > </div>
 	</div>
 
 
+
+
+
 	<div class="form-group">
-		<h5>Facebook <span class="text-danger">*</span></h5>
-		<div class="controls">
-	 <input type="text" name="facebook" class="form-control" value="{{ $setting->facebook }}"   > </div>
+		<label>Facebook</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-link"></i></span>
+			<input type="url" name="facebook" class="form-control" placeholder="URL" value="{{ $setting->facebook }}">
+		  </div>
 	</div>
 
 
 	<div class="form-group">
-		<h5>Twitter <span class="text-danger">*</span></h5>
-		<div class="controls">
-	 <input type="text" name="twitter" class="form-control"  value="{{ $setting->twitter }}"  > </div>
+		<label>Twitter</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-link"></i></span>
+			<input type="url" name="twitter" class="form-control" placeholder="URL" value="{{ $setting->twitter }}">
+		  </div>
 	</div>
 
-	<div class="form-group">
-		<h5>Linkedin <span class="text-danger">*</span></h5>
-		<div class="controls">
-	 <input type="text" name="linkedin" class="form-control"  value="{{ $setting->linkedin }}"  > </div>
-	</div>
 
 	<div class="form-group">
-		<h5>Youtube <span class="text-danger">*</span></h5>
-		<div class="controls">
-	 <input type="text" name="youtube" class="form-control"  value="{{ $setting->youtube }}"  > </div>
+		<label>Linkedin</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-link"></i></span>
+			<input type="url" name="linkedin" class="form-control" placeholder="URL" value="{{ $setting->linkedin }}">
+		  </div>
+	</div>
+
+
+	<div class="form-group">
+		<label>Youtube</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-link"></i></span>
+			<input type="url" name="youtube" class="form-control" placeholder="URL" value="{{ $setting->youtube }}">
+		  </div>
 	</div>
 
 
