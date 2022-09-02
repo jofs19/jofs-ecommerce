@@ -167,6 +167,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        // Ignited\LaravelOmnipay\LaravelOmnipayServiceProvider::class,
 
 
         /*
@@ -233,6 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+        // 'Omnipay' => Ignited\LaravelOmnipay\Facades\OmnipayFacade::class
+
     ],
 
 ];

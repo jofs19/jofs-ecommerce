@@ -39,6 +39,7 @@ class CashController extends Controller
      	'email' => $request->email,
      	'phone' => $request->phone,
 		'address' => $request->address,
+		'address2' => $request->address2,
      	'post_code' => $request->post_code,
      	'notes' => $request->notes,
 		'receipt' => $request->receipt,
@@ -48,6 +49,8 @@ class CashController extends Controller
 
      	'currency' =>  'Php',
      	'amount' => $total_amount,
+		'shipping_charge' => $request->shipping_charge,
+		'change_amount' => $request->change_amount,
 
 
      	'invoice_no' => 'VRTH'.mt_rand(10000000,99999999),

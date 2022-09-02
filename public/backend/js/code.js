@@ -9,15 +9,15 @@ $(function(){
                     text: "Delete This Data?",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Delete data'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
                         'Deleted!',
-                        'Your file has been deleted.',
+                        'Your data has been deleted.',
                         'success'
                       )
                     }
@@ -27,6 +27,38 @@ $(function(){
     });
 
   });
+
+  //Reject
+
+  $(function(){
+    $(document).on('click','#reject',function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+
+                  Swal.fire({
+                    title: 'Reject the Order?',
+                    text: "Once Rejected, You will not be able to revert it!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#00BC8B',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Reject Order'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = link
+                      Swal.fire(
+                        'Rejected!',
+                        'Order successfully rejected.',
+                        'success'
+                      )
+                    }
+                  }) 
+
+
+    });
+
+}); //end
 
 
 // Confirm 
@@ -38,19 +70,19 @@ $(function(){
 
 
                   Swal.fire({
-                    title: 'Are you sure to Confirm?',
-                    text: "Once Confirm, You will not be able to revert it!",
+                    title: 'Confirm the Order?',
+                    text: "Once Confirmed, You will not be able to revert it!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Confirm!'
+                    confirmButtonText: 'Confirm Order'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
-                        'Confirm!',
-                        'Confirm Changes',
+                        'Confirmed!',
+                        'Order successfully confirmed.',
                         'success'
                       )
                     }
@@ -75,15 +107,15 @@ $(function(){
                     text: "Once Processed, You will not be able to revert it!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Processing!'
+                    confirmButtonText: 'Process Order'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
-                        'Processing!',
-                        'Processing Changes',
+                        'Processed!',
+                        'Order successfully processed.',
                         'success'
                       )
                     }
@@ -108,15 +140,15 @@ $(function(){
                     text: "Once Picked, You will not be able to revert it!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Picked!'
+                    confirmButtonText: 'Pick Order'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
                         'Picked!',
-                        'Picked Changes',
+                        'Order successfully picked.',
                         'success'
                       )
                     }
@@ -141,15 +173,15 @@ $(function(){
                     text: "Once shipped, You will not be able to revert it!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, shipped!'
+                    confirmButtonText: 'Ship Order'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
-                        'shipped!',
-                        'shipped Changes',
+                        'Shipped!',
+                        'Order successfully shipped.',
                         'success'
                       )
                     }
@@ -172,18 +204,18 @@ $(function(){
 
                   Swal.fire({
                     title: 'Order Delivered?',
-                    text: "Once delivered, You will not be able to revert it!",
+                    text: "You will not be able to revert it!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#00BC8B',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delivered!'
+                    confirmButtonText: 'Order Delivered'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       window.location.href = link
                       Swal.fire(
-                        'delivered!',
-                        'Successfuly delivered',
+                        'Delivered!',
+                        'Order successfully delivered.',
                         'success'
                       )
                     }

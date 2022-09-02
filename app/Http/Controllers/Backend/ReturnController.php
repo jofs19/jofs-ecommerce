@@ -25,7 +25,8 @@ class ReturnController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return view('backend.return_order.all_return_request')->with($notification);
+
 
 
     } // end method 

@@ -14,11 +14,13 @@
 
                     <a href="{{ route('admin.profile.edit') }}" style="float: right" class="btn btn-rounded btn-success mb-5">Edit Profile</a>
                     
-
+{{-- src="http://127.0.0.1:8000/upload/admin_images/upload/admin_images/1742561658306068.png" --}}
                   <h6 class="widget-user-desc"><b> Email:</b> {{ $adminData->email }}</h6>
+                  <h6 class="widget-user-desc"><b> Phone:</b> {{ $adminData->phone }}</h6>
+
                 </div>
                 <div class="widget-user-image">
-                  <img class="rounded-circle" src="{{ (!empty($photo->profile_photo_path))? url('upload/admin_images/'.$photo->profile_photo_path):url('upload/no_image.jpg') }}" alt="User Avatar">
+                  <img class="rounded-circle" src="{{ (!empty($adminData->profile_photo_path))? url($adminData->profile_photo_path):url('upload/no_image.jpg') }}" alt="User Avatar">
                 </div>
                 <div class="box-footer">
                   <div class="row">

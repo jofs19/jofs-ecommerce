@@ -19,7 +19,7 @@
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="table-responsive">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped text-center">
                       <thead>
                           <tr>
                               <th>Category Icon</th>
@@ -34,11 +34,11 @@
 
                             @foreach($category as $item)
                           <tr>
-                              <td> <span><i class="{{ $item->category_icon }}"></i></span></td>
+                              <td  width="20"> <span><i class="{{ $item->category_icon }}"></i></span></td>
                               <td>{{ $item->category_name_en }}</td>
                               <td>{{ $item->category_name_fil }}</td>
 
-                              <td>
+                              <td width="100">
                                 
                                 <a href="{{  route('category.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                 <a href="{{  route('category.delete', $item->id) }}" class="btn btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i></a>

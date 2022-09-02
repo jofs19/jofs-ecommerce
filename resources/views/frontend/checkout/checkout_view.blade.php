@@ -57,9 +57,16 @@ Checkout Page
 	  </div>  <!-- // end form group  -->
 
 	  <div class="form-group">
-	    <label class="info-title" for="exampleInputEmail1"><b>Address</b>  <span>*</span></label>
+	    <label class="info-title" for="exampleInputEmail1"><b>Address Line 1</b>  <span>*</span></label>
 	    <input type="text" name="shipping_address" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address" value="{{ Auth::user()->address }}" required="">
 	  </div>  <!-- // end form group  -->
+
+
+	  <div class="form-group">
+	    <label class="info-title" for="exampleInputEmail1"><b>Address Line 2</b>  <span>*optional*</span></label>
+	    <input type="text" name="shipping_address2" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 2 (Optional)">
+	  </div>  <!-- // end form group  -->
+
 
 	  <div class="form-group">
 	    <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
@@ -123,16 +130,25 @@ Checkout Page
 		<h5>Receipt <span class="text-danger">*</span></h5>
 		<div class="controls">
 			<input type="file" name="receipt" class="form-control" {{-- onChange="mainThumUrl(this)" --}}  >
-			@error('receipt')
+			{{-- @error('receipt')
 				<span class="text-danger">{{ $message }}</span>
-			@enderror
+			@enderror --}}
 			<br>
 			{{-- <img src="" id="mainThmb"> --}}
 
 		</div>
 	</div>
 
+	<div class="form-group">
+	    <label class="info-title" for="exampleInputEmail1"><b>I want a change from: </b> </label>
+	    <input type="text" name="change_amount" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="(optional)">
+	  </div>  <!-- // end form group  -->
 
+
+	  <div class="form-group">
+		{{-- <label class="info-title" for="exampleInputEmail1"><b>Shipping charge: </b> </label> --}}
+		<input type="hidden" name="shipping_charge" class="form-control unicase-form-control text-input" id="shipping_form" placeholder="(optional)">
+	  </div>
 
 
 
@@ -189,11 +205,73 @@ Checkout Page
  <hr>
  <strong>Coupon Discount : </strong> ₱{{ session()->get('coupon')['discount_amount'] }} 
  <hr>
-  <strong>Grand Total : </strong> ₱{{ session()->get('coupon')['total_amount'] }}
+
+{{-- if grand total is greater than 1000 --}}
+	@if(session()->get('coupon')['total_amount'] > 1000)
+
+	<strong>Shipping Fee :</strong> Free Shipping
+	<hr>
+	<strong>Grand Total :</strong> ₱{{ session()->get('coupon')['total_amount']}}
+	
+
+	@else {{-- if grand total is less than 1000 --}}
+	<strong>Shipping Fee :</strong> <p id="shipping_fee"></p>
+	<hr>
+	<strong>Grand Total :</strong> <p id="grand_total"></p> 
+
+
+
+
+	@endif
+
+
+  
+  
+ 
+{{-- @php
+	$val= "<script>document.writeln(charge);</script>";
+	
+	
+@endphp
+
+  ₱{{ session()->get('coupon')['total_amount'] + intval($val) }}
+
+{{ intval($val) }} --}}
+
  <hr>
+
+ {{-- shippig charge --}}
+ 
+
+
+
+
+
+
 		 	@else
 <strong>SubTotal: </strong> ₱{{ $cartTotal }} <hr>
-<strong>Grand Total : </strong> ₱{{ $cartTotal }}<hr>
+{{-- <strong>Grand Total : </strong> ₱{{ $cartTotal }}<hr> --}}
+
+
+@if($cartTotal > 1000)
+
+<strong>Shipping Fee :</strong> Free Shipping
+<hr>
+<strong>Grand Total :</strong> ₱{{ $cartTotal}}
+
+
+@else {{-- if grand total is less than 1000 --}}
+<strong>Shipping Fee :</strong> <p id="shipping_fee"></p>
+<hr>
+<strong>Grand Total :</strong> <p id="grand_total"></p> 
+
+
+
+
+@endif
+
+
+
 		 	@endif 
 		 </li>
 					 
@@ -299,12 +377,196 @@ Checkout Page
                        var d =$('select[name="state_id"]').empty();
                           $.each(data, function(key, value){
                               $('select[name="state_id"]').append('<option value="'+ value.id +'">' + value.state_name + '</option>');
+
+							  	// If Session has coupon
+					@if(Session::has('coupon'))
+
+						if(value.state_name == 'Region I'){
+							if({{ session()->get('coupon')['total_amount'] }} < 1000){
+								$('#shipping_fee').html(` 65 `);
+								
+								
+
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] + 65}} 
+								
+								`);
+							$('#shipping_form').val(65);
+							}else{
+								$('#shipping_fee').html(` Free Shipping `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] }} 
+								
+								`);
+							$('#shipping_form').val(0);
+
+							}
+							
+
+								
+						}else if(value.state_name == 'Region II'){
+							if({{ session()->get('coupon')['total_amount'] }} < 1000){
+								$('#shipping_fee').html(` 75 `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] + 75}} 
+								
+								`);
+							$('#shipping_form').val(75);
+							}else{
+								$('#shipping_fee').html(` Free Shipping `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] }} 
+								
+								`);
+								$('#shipping_form').val(0);
+
+							}
+
+						}else if(value.state_name == 'Region III'){
+							if({{ session()->get('coupon')['total_amount'] }} < 1000){
+								$('#shipping_fee').html(` 85 `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] + 85}} 
+								
+								`);
+							$('#shipping_form').val(85);
+							}else{
+								$('#shipping_fee').html(` Free Shipping `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] }} 
+								
+								`);
+								$('#shipping_form').val(0);
+
+							}
+						}else if(value.state_name == 'Region IV-A'){
+							if({{ session()->get('coupon')['total_amount'] }} < 1000){
+								$('#shipping_fee').html(` 95 `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] + 95}} 
+								
+								`);
+							$('#shipping_form').val(95);
+							}else{
+								$('#shipping_fee').html(` Free Shipping `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] }} 
+								
+								`);
+								$('#shipping_form').val(0);
+
+							}
+						}else if(value.state_name == 'Region IV-B'){
+							if({{ session()->get('coupon')['total_amount'] }} < 1000){
+								$('#shipping_fee').html(` 105 `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] + 105}} 
+								
+								`);
+							$('#shipping_form').val(105);
+							}else{
+								$('#shipping_fee').html(` Free Shipping `);
+								$('#grand_total').html(` ₱{{ session()->get('coupon')['total_amount'] }} 
+								
+								`);
+								$('#shipping_form').val(0);
+
+							}
+						}
+
+
+							// If Session has no coupon
+							@else 
+
+							// If order is below 1000 and state is region I
+							if(value.state_name == 'Region I'){
+
+								if({{ $cartTotal }} < 1000){
+									$('#shipping_fee').html(` 65 `);
+
+								$('#grand_total').html(` ₱  {{ (int)$cartTotal + 65 }} 
+								
+								`);
+
+								$('#shipping_form').val(65);
+								}else{
+									$('#shipping_fee').html(` Free Shipping `);
+									$('#grand_total').html(` ₱ {{ (int)$cartTotal }} 
+									
+									`);
+									$('#shipping_form').val(0);
+
+								}
+
+
+							}else if(value.state_name == 'Region II'){
+								if({{ $cartTotal }} < 1000){
+									$('#shipping_fee').html(` 75 `);
+									$('#grand_total').html(` ₱  {{ (int)$cartTotal + 75 }} 
+									
+									`);
+								$('#shipping_form').val(75);
+								}else{
+									$('#shipping_fee').html(` Free Shipping `);
+									$('#grand_total').html(` ₱ {{ (int)$cartTotal }} 
+									
+									`);
+									$('#shipping_form').val(0);
+
+								}
+							}else if(value.state_name == 'Region III'){
+								if({{ $cartTotal }} < 1000){
+									$('#shipping_fee').html(` 85 `);
+									$('#grand_total').html(` ₱  {{ (int)$cartTotal + 85 }} 
+									
+									`);
+								$('#shipping_form').val(85);
+								}else{
+									$('#shipping_fee').html(` Free Shipping `);
+									$('#grand_total').html(` ₱ {{ (int)$cartTotal }} 
+									
+									`);
+									$('#shipping_form').val(0);
+
+								}
+							}else if(value.state_name == 'Region IV-A'){
+								if({{ $cartTotal }} < 1000){
+									$('#shipping_fee').html(` 95 `);
+									$('#grand_total').html(` ₱  {{ (int)$cartTotal + 95 }} 
+									
+									`);
+								$('#shipping_form').val(95);
+								}else{
+									$('#shipping_fee').html(` Free Shipping `);
+									$('#grand_total').html(` ₱ {{ (int)$cartTotal }} 
+									
+									`);
+									$('#shipping_form').val(0);
+
+								}
+							}else if(value.state_name == 'Region IV-B'){
+								if({{ $cartTotal }} < 1000){
+									$('#shipping_fee').html(` 105 `);
+									$('#grand_total').html(` ₱  {{ (int)$cartTotal + 105 }} 
+									
+									`);
+								$('#shipping_form').val(105);
+								}else{
+									$('#shipping_fee').html(` Free Shipping `);
+									$('#grand_total').html(` ₱ {{ (int)$cartTotal }} 
+									
+									`);
+									$('#shipping_form').val(0);
+
+								}
+							}
+
+
+							@endif
+
+
+
+							  
                           });
                     },
                 });
             } else {
                 alert('danger');
             }
+
+			
+
         });
  
     });

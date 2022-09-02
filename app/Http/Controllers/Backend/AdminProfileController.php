@@ -64,38 +64,100 @@ class AdminProfileController extends Controller
 
     // }
 
-    
+    public function AdminProfileStore(Request $request){
+ 
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        // $data->name = $request->name;
+        // $data->email = $request->email;
+        // $data->phone = $request->phone;
+        // $data->address = $request->address;   
 
-    public function AdminProfileStore(Request $request)
-    {
-		$id = Auth::user()->id;
-		$data = Admin::find($id);
-        $data->name = $request->name;
-        $data->email = $request->email;
+        $request->validate([
+            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
 
-        // $image = $request->file('profile_photo_path');
-    	// $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    	// Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
-    	// $save_url = 'upload/admin_images/'.$name_gen;
-
+        ]);
 
         if ($request->file('profile_photo_path')) {
-            $file = $request->file('profile_photo_path');
-            @unlink(public_path('upload/admin_images/' . $data->profile_photo_path));
-            $filename = date('YmdHi').$file->getClientOriginalExtension();
-            $file->move(public_path('upload/admin_images'), $filename);
-            $data['profile_photo_path'] = $filename;
-        }
-        $data->save();
 
+
+        $image = $request->file('profile_photo_path');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(917,1000)->save('upload/admin_images/'.$name_gen);
+        $save_url = 'upload/admin_images/'.$name_gen;
+
+           
+        Admin::findOrFail($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'profile_photo_path' => $save_url,
+        ]);
+
+        
+
+         
         $notification = array(
-            'message' => 'Profile Updated Successfully',
+            'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'success'
         );
+ 
+        return redirect()->route('admin.profile')->with($notification);
+        
 
+        }else{
+
+            Admin::findOrFail($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ]);
+
+             
+        $notification = array(
+            'message' => 'Admin Profile Updated Successfully',
+            'alert-type' => 'success'
+        );
+ 
         return redirect()->route('admin.profile')->with($notification);
 
-    }//end method
+        }
+        // $data->save();
+
+ 
+    } // End Mehtod  
+    
+
+    // public function AdminProfileStore(Request $request)
+    // {
+	// 	$id = Auth::user()->id;
+	// 	$data = Admin::find($id);
+    //     $data->name = $request->name;
+    //     $data->email = $request->email;
+
+    //     // $image = $request->file('profile_photo_path');
+    // 	// $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    // 	// Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
+    // 	// $save_url = 'upload/admin_images/'.$name_gen;
+
+
+    //     if ($request->file('profile_photo_path')) {
+    //         $file = $request->file('profile_photo_path');
+    //         @unlink(public_path('upload/admin_images/' . $data->profile_photo_path));
+    //         $filename = date('YmdHi').$file->getClientOriginalExtension();
+    //         $file->move(public_path('upload/admin_images'), $filename);
+    //         $data['profile_photo_path'] = $filename;
+    //     }
+    //     $data->save();
+
+    //     $notification = array(
+    //         'message' => 'Profile Updated Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('admin.profile')->with($notification);
+
+    // }//end method
 
     public function AdminChangePassword(){
         return view('admin.admin_change_password');

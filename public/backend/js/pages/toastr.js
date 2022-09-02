@@ -26,8 +26,8 @@ $(document).ready(function () {
     });
     $(".tst3").on("click", function () {
         $.toast({
-            heading: 'Welcome to my Sunny Admin',
-            text: 'Use the predefined ones, or specify a custom position object.',
+            heading: 'Order Confirmed',
+            text: 'The order has been confirmed.',
             position: 'top-right',
             loaderBg: '#ff6849',
             icon: 'success',

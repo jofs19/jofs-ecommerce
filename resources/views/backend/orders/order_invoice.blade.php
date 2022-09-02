@@ -58,7 +58,7 @@
         </td>
     </tr>
   </table>
-  <table width="100%" style="background:white; padding:2px;""></table>
+  <table width="100%" style="background:white; padding:2px;"></table>
   <table width="100%" style="background: #F7F7F7; padding:0 5 0 5px;" class="font">
     <tr>
         <td>

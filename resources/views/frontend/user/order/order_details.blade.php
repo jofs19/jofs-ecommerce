@@ -105,14 +105,29 @@
                      <tr>
                       <th> Order Total : </th>
                       
-                       <th>{{ $order->amount }} </th>
+                       <th>@if($order->amount >= 1000)
+                        ₱ {{ $order->amount }}
+
+                        @else
+                        ₱ {{ $order->amount + $order->shipping_charge }}
+
+                        @endif </th>
            
                     </tr>
         
                     <tr>
                       <th> Order : </th>
                        <th>   
-                        <span class="badge badge-pill badge-warning" style="background: #418DB9;">{{ $order->status }} </span> </th>
+                        <span class="badge badge-pill badge-warning" style="background: #418DB9;">
+                        
+                          @if ($order->status == 'reject'|| $order->status == 'confirm')
+                          {{ $order->status }}ed
+                          @else
+                          {{ $order->status }}
+                          @endif
+                          
+
+                        </span> </th>
                     </tr>
         
         
@@ -231,7 +246,41 @@
       
               </div> <!-- // END ORDER ITEM ROW -->
 
+              {{-- @if ($order->status == 'pending')
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header"><h4>Cancel Order</h4>
+                    </div>
+                    <hr>
+                    <div class="card-body" style="background: #E9EBEC;">
+                      <table class="table">
+                        <tr>
+                          <th>
+                            <label for="">Reason</label>
+                          </th>
+                          <th>
+                            <label for="">
+                              <textarea name="reason" id="reason" cols="30" rows="10" class="form-control" placeholder="Write your reason here..."></textarea>
+                            </label>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label for="">
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
+                            </label>
+                          </th>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                @endif --}}
 
+
+             
+             
               @if($order->status !== "delivered")
 
               @else
@@ -272,11 +321,20 @@
 
         @else
 
-        <span class="badge badge-pill badge-warning" style="background: red">You have sent return request for this product</span>
+       
+
+        <span class="badge badge-pill badge-warning" style="background: red">
+          
+          
+          You have sent return request for this product
+        
+        </span>
      
         @endif 
         
           @endif
+
+         
         <br><br>
 
 

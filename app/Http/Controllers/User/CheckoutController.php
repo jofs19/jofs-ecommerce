@@ -61,35 +61,56 @@ class CheckoutController extends Controller
 		// $save_url = 'upload/receipt/'.$name_gen;
 
 		$request->validate([
-            'receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
 		if ($request->file('receipt')) {
 			$image = $request->file('receipt');
 			$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-			Image::make($image)->resize(300,300)->save('upload/receipt/'.$name_gen);
+			Image::make($image)->resize(720,1253)->save('upload/receipt/'.$name_gen);
 			$save_url = 'upload/receipt/'.$name_gen;
-			$data['receipt'] = $save_url; 
+			$data = array();
+			$data['shipping_name'] = $request->shipping_name;
+			$data['shipping_email'] = $request->shipping_email;
+			$data['shipping_phone'] = $request->shipping_phone;
+			$data['shipping_address'] = $request->shipping_address;
+			$data['shipping_address2'] = $request->shipping_address2;
+			$data['post_code'] = $request->post_code;
+			$data['division_id'] = $request->division_id;
+			$data['district_id'] = $request->district_id;
+			$data['state_id'] = $request->state_id;
+			$data['shipping_charge'] = $request->shipping_charge;
+			$data['change_amount'] = $request->change_amount;
+			$data['notes'] = $request->notes;
+			$data['receipt'] = $save_url;
+			$cartTotal = Cart::total();
+
+		}else{
+
+			$data = array();
+			$data['shipping_name'] = $request->shipping_name;
+			$data['shipping_email'] = $request->shipping_email;
+			$data['shipping_phone'] = $request->shipping_phone;
+			$data['shipping_address'] = $request->shipping_address;
+			$data['shipping_address2'] = $request->shipping_address2;
+			$data['post_code'] = $request->post_code;
+			$data['division_id'] = $request->division_id;
+			$data['district_id'] = $request->district_id;
+			$data['state_id'] = $request->state_id;
+			$data['shipping_charge'] = $request->shipping_charge;
+			$data['change_amount'] = $request->change_amount;
+			$data['notes'] = $request->notes;
+			$data['receipt'] = '';
+			$cartTotal = Cart::total();
+
 		}
 
 		
             	// dd($request->all());
-    	$data = array();
-    	$data['shipping_name'] = $request->shipping_name;
-    	$data['shipping_email'] = $request->shipping_email;
-    	$data['shipping_phone'] = $request->shipping_phone;
-		$data['shipping_address'] = $request->shipping_address;
-
-    	$data['post_code'] = $request->post_code;
-    	$data['division_id'] = $request->division_id;
-    	$data['district_id'] = $request->district_id;
-    	$data['state_id'] = $request->state_id;
-    	$data['notes'] = $request->notes;
-		$data['receipt'] = $save_url;
 
 
 
-		$cartTotal = Cart::total();
+
 
 
     	if ($request->payment_method == 'stripe') {

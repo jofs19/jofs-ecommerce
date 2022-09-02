@@ -135,7 +135,7 @@
 </div><!-- /.gallery-holder -->       
 @php 
 	$reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-	$avarage = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+	$average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
 @endphp 			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
@@ -147,34 +147,34 @@
 								<div class="row"> 
 									<div class="col-sm-3">
 				
-				   @if($avarage == 0)
+				   @if($average == 0)
 				   No Rating Yet 
-				   @elseif($avarage == 1 || $avarage < 2)
+				   @elseif($average == 1 || $average < 2)
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
-				   @elseif($avarage == 2 || $avarage < 3)
+				   @elseif($average == 2 || $average < 3)
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
-				  @elseif($avarage == 3 || $avarage < 4)
+				  @elseif($average == 3 || $average < 4)
 				  <span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star"></span>
 				<span class="fa fa-star"></span>
 				
-				  @elseif($avarage == 4 || $avarage < 5)
+				  @elseif($average == 4 || $average < 5)
 				  <span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star"></span>
-				  @elseif($avarage == 5 || $avarage < 5)
+				  @elseif($average == 5 || $average < 5)
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
@@ -204,7 +204,10 @@
 									</div>
 									<div class="col-sm-9">
 										<div class="stock-box">
-											<span class="value">In Stock</span>
+											<span class="value">@if( $product->product_qty > 0) In Stock @else Out of Stock @endif</span>
+
+
+												</span>
 										</div>	
 									</div>
 								</div><!-- /.row -->	
@@ -302,17 +305,14 @@
 	<div class="row">
 
 		<div class="col-sm-2">
-			<span class="label">Qty :</span>
-		</div>
+			<label for="qty">Quantity</label>
+				</div>
 
 		<div class="col-sm-2">
 			<div class="cart-quantity">
 				<div class="quant-input">
-					<div class="arrows">
-					  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-					  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-					</div>
-					<input type="text" id="qty" value="1" min="1">			  
+					
+					<input type="number" class="form-control" id="qty" value="1" min="1" max="{{ $product->product_qty }}">
 				</div>
 			</div>
 		</div>
@@ -320,7 +320,11 @@
 		<input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
 
 		<div class="col-sm-7">
-			<button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>		
+			@if( $product->product_qty > 0 )   
+			<button type="submit" onclick="addToCart()" id="try" class="btn btn-primary" ><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+			@else
+			<button type="submit" class="btn btn-danger" disabled=""><i class="fa fa-shopping-cart inner-right-vs"></i> Out of Stock</button>
+			@endif
 		</div>
 
 
@@ -368,7 +372,8 @@
 
 
 @php
-$reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(5)->get();
+// $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(5)->get();
+$reviews = App\Models\Review::where('product_id',$product->id)->latest()->get();
 @endphp			
 
 	<div class="reviews">
@@ -437,6 +442,8 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 		 @endif
 	@endforeach
 	</div><!-- /.reviews -->
+
+
 
 
 		</div><!-- /.product-reviews -->
@@ -613,7 +620,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 							<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
 								<i class="fa fa-shopping-cart"></i>													
 							</button>
-							<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+							<button class="btn btn-primary cart-btn" id="try" type="button">Add to cart</button>
 													
 						</li>
 	                   
@@ -650,6 +657,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62f0967ac2e94b04"></script>
+
 
 
 

@@ -15,6 +15,10 @@ use App\Models\Brand;
 use App\Models\BlogPost;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
+use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
+use App\Models\Review;
+
 class IndexController extends Controller
 {
     public function index()
@@ -23,6 +27,9 @@ class IndexController extends Controller
         $products = Product::where('status',1)->orderBy('id','DESC')->limit(6)->get();
         $sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
     	$categories = Category::orderBy('category_name_en','ASC')->get();
+        // $reviews = Review::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+        $reviews = Review::where('status',1)->orderBy('id','DESC')->get();
+
     	$featured = Product::where('featured',1)->orderBy('id','DESC')->limit(6)->get();
         $hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();    	
         $special_offer = Product::where('special_offer',1)->orderBy('id','DESC')->limit(6)->get();
@@ -40,13 +47,17 @@ class IndexController extends Controller
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost'));
+    	return view('frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews'));
     }
 
     public function UserLogout()
     {
+
         Auth::logout();
+        // Session::flush();
+
         return redirect()->route('login');
+
     }
 
     public function UserProfile()
@@ -64,6 +75,33 @@ class IndexController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+
+    // $old_img = $request->old_image;
+        // if ($request->file('profile_photo_path')) {
+		// 	$file = $request->file('profile_photo_path');
+		// 	$name_gen = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+		// 	Image::make($file)->resize(720,1253)->save('upload/user_images/'.$name_gen);
+		// 	$save_url = 'upload/user_images/'.$name_gen;
+		// 	}
+        // if(file_exists($old_img)){
+            // unlink($old_img);
+            
+		// }
+
+        // $cat_id = $request->id;
+        // $old_img = $request->old_image;
+ 
+        // if ($request->file('post_image')) { 
+        // $image = $request->file('post_image'); 
+        
+        // $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        // Image::make($image)->resize(1303,906)->save('upload/blog/'.$name_gen);
+        // $save_url = 'upload/blog/'.$name_gen;
+ 
+        // if(file_exists($old_img)){
+        // unlink($old_img);
+        // }
+
 
         if ($request->file('profile_photo_path')) {
             $file = $request->file('profile_photo_path');

@@ -39,7 +39,16 @@
 						<tbody>
 	 @foreach($products as $item)
 	 <tr>
-		<td> <img src="{{ asset($item->product_thumbnail) }}" style="width: 60px; height: 50px;">  </td>
+		<td> 
+			
+
+			<a href="{{ asset($item->product_thumbnail) }}" data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $item->product_name_en }}"><img src="{{ asset($item->product_thumbnail) }}" class="all studio isotope-item" alt="gallery" style="width: 60px; height: 50px;"> </a>
+			
+			{{-- <img src="{{ asset($item->product_thumbnail) }}" style="width: 60px; height: 50px;">   --}}
+		
+		
+		
+		</td>
 		<td>{{ $item->product_name_en }}</td>
 		 <td>{{ $item->selling_price }} $</td>
 		 <td>{{ $item->product_qty }} pcs.</td>

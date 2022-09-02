@@ -19,7 +19,7 @@
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="table-responsive">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped  text-center">
                       <thead>
                           <tr>
                               <th>Category</th>
@@ -39,7 +39,7 @@
                               <td>{{ $item->subcategory_name_en }}</td>
                               <td>{{ $item->subcategory_name_fil }}</td>
 
-                              <td width="30%">
+                              <td width="100">
                                 
                                 <a href="{{  route('subcategory.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                 <a href="{{  route('subcategory.delete', $item->id) }}" class="btn btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i></a>

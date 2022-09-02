@@ -12,6 +12,7 @@
 
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
+	
 	  
 	<!-- Style-->  
 	<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
@@ -23,6 +24,7 @@
 		.ace-editor { 
 			min-height: 100px;
 		}
+		
 	</style>
   </head>
 
@@ -76,10 +78,30 @@
 	 <script src="{{ asset('../assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
 	 <script src="{{ asset('backend/js/pages/editor.js') }}"></script>
 
+	 {{-- Gallery --}}
+
+	 <script type="text/javascript" src="{{ asset('../assets/vendor_components/gallery/js/animated-masonry-gallery.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('../assets/vendor_components/gallery/js/jquery.isotope.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('../assets/vendor_components/lightbox-master/dist/ekko-lightbox.js') }}"></script>
+	<script src="{{ asset('backend/js/pages/gallery.js') }}"></script>
+	
+	{{-- Animation --}}
+	<script src="{{ asset('backend/js/pages/component-animations-css3.js') }}"></script>
+
 	{{-- Ace Editor --}}
 	<script src="{{ asset('../assets/vendor_plugins/ace-builds-master/src-min-noconflict/ace.js') }}" type="text/javascript" charset="utf-8"></script>
 	<script src="{{ asset('backend/js/pages/form-code-editor.js') }}"></script>
-	
+
+	{{-- Invoice --}}
+	<script src="{{ asset('../assets/vendor_plugins/JqueryPrintArea/demo/jquery.PrintArea.js') }}"></script>
+	<script src="{{ asset('backend/js/pages/invoice.js') }}"></script>
+
+	{{-- Toastr --}}
+	<script src="{{ asset('../assets/vendor_components/jquery-toast-plugin-master/src/jquery.toast.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/toastr.js')}}"></script>
+    <script src="{{ asset('backend/js/pages/notification.js')}}"></script>
+
+
 	<!-- JOFS Admin App -->
 	<script src="{{ asset('backend/js/template.js') }}"></script>
 	<script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>

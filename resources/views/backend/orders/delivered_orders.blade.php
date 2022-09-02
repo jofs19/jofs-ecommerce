@@ -40,7 +40,13 @@
 	 <tr>
 		<td> {{ $item->order_date }}  </td>
 		<td> {{ $item->invoice_no }}  </td>
-		<td>  {{ $item->amount }}  </td>
+		<td>  @if($item->amount >= 1000)
+			₱ {{ $item->amount }}
+
+			@else
+			₱ {{ $item->amount + $item->shipping_charge }}
+
+			@endif  </td>
 
 		<td> {{ $item->payment_method }}  </td>
 		<td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span>  </td>
@@ -50,6 +56,14 @@
  <a target="_blank" href="{{ route('invoice.download',$item->id) }}" class="btn btn-danger" title="Invoice Download">
     <i class="fa fa-download"></i></a>
 		</td>
+
+
+
+{{-- inserted --}}
+{{-- inserted --}}
+
+
+
 
 	 </tr>
 	  @endforeach

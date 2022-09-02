@@ -306,7 +306,109 @@ Vartouhi E-Commerce Website
                               
                               @if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif
                                           </a></h3>
-                            <div class="rating rateit-small"></div>
+
+
+
+
+                                  {{-- <span class="fa fa-star @if($product->rating >= 1) checked @endif"></span>
+                                  <span class="fa fa-star @if($product->rating >= 2) checked @endif"></span>
+                                  <span class="fa fa-star @if($product->rating >= 3) checked @endif"></span>
+                                  <span class="fa fa-star @if($product->rating >= 4) checked @endif"></span>
+                                  <span class="fa fa-star @if($product->rating >= 5) checked @endif"></span> --}}
+
+                                          @php
+                                            	$reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                              $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+
+                                        
+
+                                          @endphp
+
+                                          
+                                 
+                                  @if ($average == 0 || $average < 0)
+                                  
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="review">No Ratings yet</span>
+                                    </a>
+                                  </div>
+                                  @elseif($average == 1 || $average < 2)
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="review">{{ count($reviewcount) }} Review(s)</span>
+                                    </a>
+                                  </div>
+                                  @elseif ($average == 2 || $average < 3)
+
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="review">{{ count($reviewcount) }} Review(s)</span>
+                                    </a>
+                                  </div>
+                  
+                                  @elseif ($average == 3 || $average < 4)
+
+
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="review">{{ count($reviewcount) }} Review(s)</span>
+                                    </a>
+                                  </div>
+
+
+                                  @elseif ($average == 4 || $average < 5)
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star" style='color:#e3e1d4'></span>
+                                      <span class="review">{{ count($reviewcount) }} Review(s)</span>
+                                    </a>
+                                  </div>
+                                  @elseif ($average == 5 || $average < 5)
+                                  <div class="reviews">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="review">{{ count($reviewcount) }} Review(s)</span>
+                                    </a>
+                                  </div>
+                                   
+                                   @endif
+                                
+                                 
+                                 
+
+
+
+
+
                             <div class="description"></div>
 
 

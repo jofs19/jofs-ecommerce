@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Coupon;
+use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
 {
@@ -33,6 +35,8 @@ class OrderController extends Controller
     	return view('backend.orders.pending_orders_details',compact('order','orderItem'));
 
 	} // end method 
+
+
 
 
     	// Confirmed Orders 
@@ -78,7 +82,7 @@ class OrderController extends Controller
 
 				// Cancel Orders 
 	public function CancelOrders(){
-		$orders = Order::where('status','cancel')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','reject')->orderBy('id','DESC')->get();
 		return view('backend.orders.cancel_orders',compact('orders'));
 
 	} // end method 
@@ -97,6 +101,18 @@ class OrderController extends Controller
   
   
       } // end method
+
+	  public function RejectOrders($order_id){
+
+		Order::findOrFail($order_id)->update(['status' => 'reject']);
+
+		$notification = array(
+			'message' => 'Order Rejected Successfully',
+			'alert-type' => 'success'
+		);
+
+		return redirect()->back()->with($notification);
+	} // end method
 
 
       public function ConfirmToProcessing($order_id){

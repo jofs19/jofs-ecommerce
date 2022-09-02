@@ -19,7 +19,7 @@
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="table-responsive">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped text-center">
                       <thead>
                           <tr>
                               <th>Brand Name (Eng)</th>
@@ -36,8 +36,17 @@
                           <tr>
                               <td>{{ $item->brand_name_en }}</td>
                               <td>{{ $item->brand_name_fil }}</td>
-                              <td><img src="{{ asset($item->brand_image) }}" alt="brand-image" style="width: 70px" height="40px"></td>
                               <td>
+                                
+                                <a href="{{ asset($item->brand_image) }}" data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $item->brand_name_en }}"><img src="{{ asset($item->brand_image) }}" class="all studio isotope-item" alt="gallery" style="width: 70px" height="40px"> </a>
+
+
+                                {{-- <img src="{{ asset($item->brand_image) }}" alt="brand-image" style="width: 70px" height="40px"> --}}
+                              
+                              
+                              
+                              </td>
+                              <td width="100">
                                 
                                 <a href="{{  route('brand.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                 <a href="{{  route('brand.delete', $item->id) }}" class="btn btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i></a>

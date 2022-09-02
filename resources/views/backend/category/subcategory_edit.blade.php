@@ -81,6 +81,10 @@
                            
                        <div class="text-xs-right">
                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update" name="">
+                           <a href="{{ url('category/sub/view') }}">
+                            <input type="button" class="btn btn-rounded btn-danger mb-5 ml-5"
+                                value="Cancel">
+                        </a>
                        </div>
                    </form>
 

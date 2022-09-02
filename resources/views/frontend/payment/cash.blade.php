@@ -42,28 +42,56 @@ Cash On Delivery
 				<ul class="nav nav-checkout-progress list-unstyled">
 
 
-<hr>
 		 <li>
+
+			{{-- if order has coupon --}}
 		 	@if(Session::has('coupon'))
+			 <strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+			 ( {{ session()->get('coupon')['coupon_discount'] }} % )
+			  <hr>
 
-<strong>SubTotal: </strong> ${{ $cartTotal }} <hr>
+<strong>Total: </strong> ${{ $cartTotal }} <hr>
 
-<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
-( {{ session()->get('coupon')['coupon_discount'] }} % )
+
+
+ <strong>Coupon Discount : </strong> - ${{ session()->get('coupon')['discount_amount'] }} 
  <hr>
 
- <strong>Coupon Discount : </strong> ${{ session()->get('coupon')['discount_amount'] }} 
+ <strong>SubTotal: </strong> ${{ $total = (float)str_replace(',','',Cart::total()) - session()->get('coupon')['discount_amount'] }} <hr>
+
+
+ @if($total = (float)str_replace(',','',Cart::total())  >= 1000)
+ <strong>Shipping Fee: </strong> Free Shipping<hr>
+ <strong>Grand Total : </strong> ${{ session()->get('coupon')['total_amount'] }} 
  <hr>
+ @else
+ <strong>Shipping Fee: </strong> + {{ $data['shipping_charge'] }}<hr>
+<strong>Grand Total : </strong> ${{ session()->get('coupon')['total_amount'] + $data['shipping_charge']}} <hr>
 
-  <strong>Grand Total : </strong> ${{ session()->get('coupon')['total_amount'] }} 
- <hr>
+ @endif
 
 
+
+{{-- if session has no coupon --}}
 		 	@else
 
-<strong>SubTotal: </strong> ${{ $cartTotal }} <hr>
+<strong>SubTotal: </strong> ${{ $cartTotal }}<hr>
 
+@if($total = (float)str_replace(',','',Cart::total())  >= 1000)
+<strong>Shipping Fee: </strong> Free Shipping<hr>
 <strong>Grand Total : </strong> ${{ $cartTotal }} <hr>
+
+@else
+<strong>Shipping Fee: </strong> {{ $data['shipping_charge'] }}<hr>
+@php
+	
+	$convert = number_format($total = (float)str_replace(',','',Cart::total()) + $data['shipping_charge'], 2)
+
+@endphp
+<strong>Grand Total : </strong> ${{ $convert}} <hr>
+				
+@endif
+
 
 
 		 	@endif 
@@ -107,12 +135,15 @@ Cash On Delivery
       <input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
       <input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
 	  <input type="hidden" name="address" value="{{ $data['shipping_address'] }}">
+	  <input type="hidden" name="address2" value="{{ $data['shipping_address2'] }}">
       <input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
       <input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
       <input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
       <input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
       <input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
       <input type="hidden" name="receipt" value="{{ $data['receipt'] }}"> 
+      <input type="hidden" name="shipping_charge" value="{{ $data['shipping_charge'] }}"> 
+      <input type="hidden" name="change_amount" value="{{ $data['change_amount'] }}"> 
 
             </label>
 

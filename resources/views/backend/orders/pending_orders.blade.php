@@ -40,15 +40,23 @@
 	 <tr>
 		<td> {{ $item->order_date }}  </td>
 		<td> {{ $item->invoice_no }}  </td>
-		<td> ₱ {{ $item->amount }}  </td>
+		<td> @if($item->amount >= 1000)
+			₱ {{ $item->amount }}
+
+			@else
+			₱ {{ $item->amount + $item->shipping_charge }}
+
+			@endif  </td>
 
 		<td> {{ $item->payment_method }}  </td>
 		<td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span>  </td>
 
 		<td width="25%">
             <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info mr-5" title="View Data"><i class="fa fa-eye"></i> </a> 
-			<a href="{{ route('pending-confirm',$item->id) }}" class="btn btn-success fa fa-check" id="confirm"></a>
+			
 
+			<a href="{{ route('pending-confirm',$item->id) }}" class="btn btn-success fa fa-check" id="confirm"></a>
+			<a href="{{ route('reject-orders', $item->id) }}" class="btn btn-danger fa fa-times" id="reject"></a>
             
 
             

@@ -49,6 +49,22 @@
                                     </div>
                                 </div>
 
+                                
+
+                            </div> <!--end col md-6-->
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <h5>Admin Phone <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="tel" name="phone" class="form-control" required="" data-validation-required-message="This field is required" value="{{ $editData->phone }}"> 
+                                        
+                                    </div>
+                                </div>
+
+                                
+
                             </div> <!--end col md-6-->
 
                         </div> <!--end row -->
@@ -58,18 +74,20 @@
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <h5>Profile Image <span class="text-danger">*</span></h5>
+                                    <h5>Profile Image</h5>
                                     <div class="controls">
-                                        <input type="file" name="profile_photo_path" class="form-control" required=""  id="image"> 
+                                        <input type="file" name="profile_photo_path" class="form-control"  id="image"> 
                                         
                                     </div>
                                 </div>
+
+                                
 
                             </div> <!--end col md-6-->
 
                             <div class="col-md-6">
 
-                                <img src="{{ (!empty($editData->profile_photo_path))? url('upload/admin_images/'.$editData->profile_photo_path):url('upload/no_image.jpg') }}" alt="admin image" style="width: 100px; height:100px" id="showImage">
+                                <img src="{{ (!empty($editData->profile_photo_path))? url($editData->profile_photo_path):url('upload/no_image.jpg') }}" alt="admin image" style="width: 100px; height:100px" id="showImage">
 
                             </div> <!--end col md-6-->
 

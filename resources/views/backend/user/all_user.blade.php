@@ -23,7 +23,7 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="table-responsive">
-					  <table id="example1" class="table table-bordered table-striped">
+					  <table id="example1" class="table table-bordered table-striped text-center">
 						<thead>
 							<tr>
 								<th>Image </th>
@@ -38,7 +38,14 @@
 						<tbody>
 	 @foreach($users as $user)
 	 <tr>
-	 	<td><img src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" style="width: 50px; height: 50px;"> </td>
+	 	<td>
+
+			{{-- <a href="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $user->name }}"><img src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" class="all studio isotope-item" alt="gallery" style="width: 150px; height: 100px;"> </a> --}}
+			
+			<img src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" style="width: 150px; height: 100px;"> 
+		
+		
+		</td>
 		<td>{{ $user->name }}</td>
 		<td>{{ $user->email }}</td>
 		<td>{{ $user->phone }}</td>

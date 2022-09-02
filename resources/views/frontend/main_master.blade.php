@@ -14,8 +14,10 @@ $seo = App\Models\Seo::find(1);
 <meta name="robots" content="all">
 
 <!-- /// Google Analytics Code // -->
-
+<script>
     {{ $seo->google_analytics }}
+
+</script>
 <!-- /// Google Analytics Code // -->
 
 <title>@yield('title') </title>

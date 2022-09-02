@@ -101,16 +101,21 @@
 			</ul>
 		  </li>	
 		  
-		  @php
+		  {{-- @php
 			$adminData = DB::table('admins')->first();
-		  @endphp
+		  @endphp --}}
 
 
 	      <!-- User Account-->
           <li class="dropdown user user-menu">	
-			<a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown" title="User">
-				<img src="{{ (!empty($adminData->profile_photo_path))? url('upload/admin_images/'.$adminData->profile_photo_path):url('upload/no_image.jpg') }}" alt="admin profile image">
+			<a href="#" class="waves-effect  rounded dropdown-toggle p-0" data-toggle="dropdown" title="User">
+				<img src="https://www.svgrepo.com/show/13656/user.svg" alt="User SVG File" title="User SVG File" width="79" height="79">
 			</a>
+
+			{{-- <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown" title="User">
+				<i><span class="ti-user"></span></i> 
+			</a> --}}
+
 			<ul class="dropdown-menu animated flipInX">
 			  <li class="user-body">
 				 <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="ti-user text-muted mr-2"></i> Profile</a>

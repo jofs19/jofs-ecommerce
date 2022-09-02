@@ -131,6 +131,7 @@ Stripe Payment Page
 					<input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
 					<input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
 					<input type="hidden" name="address" value="{{ $data['shipping_address'] }}">
+					<input type="hidden" name="address2" value="{{ $data['shipping_address2'] }}">
 					<input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
 					<input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
 					<input type="hidden" name="district_id" value="{{ $data['district_id'] }}">

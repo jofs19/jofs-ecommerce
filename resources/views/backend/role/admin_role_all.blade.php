@@ -18,8 +18,8 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Total Admin User </h3>
-                  <a href="{{ route('add.admin') }}" class="btn btn-danger" style="float: right;">Add Admin User</a>
+				  <h3 class="box-title">E-Commerce Administrators </h3>
+                  <a href="{{ route('add.admin') }}" class="btn btn-success" style="float: right;">Add Admin User</a>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -38,7 +38,15 @@
 						<tbody>
 	 @foreach($adminuser as $item)
 	 <tr>
-		<td> <img src="{{ asset($item->profile_photo_path) }}" style="width: 80px; height: 80px;">  </td>
+		<td> 
+			
+			<a href="{{ asset($item->profile_photo_path) }}" data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $item->name }}"><img src="{{ asset($item->profile_photo_path) }}" class="all studio isotope-item" alt="gallery" style="width: 200px; height: 100px;"> </a>
+			
+			{{-- <img src="{{ asset($item->profile_photo_path) }}" style="width: 80px; height: 80px;">   --}}
+		
+		
+		
+		</td>
 		<td> {{ $item->name }}  </td>
 		<td>  {{ $item->email  }}  </td>
 

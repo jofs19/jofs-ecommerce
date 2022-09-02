@@ -66,7 +66,11 @@
 
 
 			 <div class="text-xs-right">
-	<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">					 
+	<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">	
+	<a href="{{ url('shipping/district/view') }}">
+		<input type="button" class="btn btn-rounded btn-danger mb-5 ml-5"
+			value="Cancel">
+	</a>				 
 						</div>
 					</form>
 

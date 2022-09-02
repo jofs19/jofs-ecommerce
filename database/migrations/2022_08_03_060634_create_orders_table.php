@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address')->nullable();
+            $table->string('address2')->nullable();
             $table->integer('post_code')->nullable();
             $table->text('notes')->nullable();
             $table->string('receipt')->nullable();
@@ -44,6 +45,8 @@ class CreateOrdersTable extends Migration
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
             $table->string('return_image')->nullable();
+            $table->integer('shipping_charge')->nullable();
+            $table->integer('change_amount')->nullable();
 
             $table->string('status');
             $table->timestamps();

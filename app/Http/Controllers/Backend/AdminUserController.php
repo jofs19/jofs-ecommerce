@@ -32,7 +32,7 @@ class AdminUserController extends Controller
 
     	$image = $request->file('profile_photo_path');
     	$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    	Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
+    	Image::make($image)->resize(917,1000)->save('upload/admin_images/'.$name_gen);
     	$save_url = 'upload/admin_images/'.$name_gen;
 
 	Admin::insert([
@@ -94,7 +94,7 @@ class AdminUserController extends Controller
     	unlink($old_img);
     	$image = $request->file('profile_photo_path');
     	$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    	Image::make($image)->resize(225,225)->save('upload/admin_images/'.$name_gen);
+    	Image::make($image)->resize(917,1000)->save('upload/admin_images/'.$name_gen);
     	$save_url = 'upload/admin_images/'.$name_gen;
 
 	Admin::findOrFail($admin_id)->update([

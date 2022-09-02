@@ -51,7 +51,17 @@
                 </td>
 
                 <td class="col-md-3">
-                  <label for=""> ₱{{ $order->amount }}</label>
+                  <label for=""> 
+                  
+                    @if($order->amount >= 1000)
+                                            ₱ {{ $order->amount }}
+
+                                            @else
+                                            ₱ {{ $order->amount + $order->shipping_charge }}
+
+                                            @endif
+
+                  </label>
                 </td>
 
 
@@ -83,13 +93,21 @@
                   @elseif($order->status == 'delivered')
                  <span class="badge badge-pill badge-warning" style="background: #008000;"> Delivered </span>
 
+                 
+          
+                    
+
+
                  @if($order->return_order == 1) 
                  <span class="badge badge-pill badge-warning" style="background:red;">Return Requested </span>
       
+                 @elseif($order->return_order == 2)
+                  <span class="badge badge-pill badge-warning" style="background: #FF0000;"> Returned </span>
+
                 @endif
         
                  @else
-          <span class="badge badge-pill badge-warning" style="background: #FF0000;"> Cancelled </span>
+          <span class="badge badge-pill badge-warning" style="background: #FF0000;"> Rejected </span>
         
               @endif
                     </label>

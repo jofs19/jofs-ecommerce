@@ -18,7 +18,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Cancel Orders List</h3>
+				  <h3 class="box-title">Rejected Orders</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -40,15 +40,20 @@
 	 <tr>
 		<td> {{ $item->order_date }}  </td>
 		<td> {{ $item->invoice_no }}  </td>
-		<td> ₱ {{ $item->amount }}  </td>
+		<td> @if($item->amount >= 1000)
+			₱ {{ $item->amount }}
+
+			@else
+			₱ {{ $item->amount + $item->shipping_charge }}
+
+			@endif  </td>
 
 		<td> {{ $item->payment_method }}  </td>
-		<td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span>  </td>
+		<td> <span class="badge badge-pill badge-danger">{{ $item->status }}ed </span>  </td>
 
 		<td width="25%">
- <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i> </a>
- <a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
- 	<i class="fa fa-trash"></i></a>
+ <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info btn-block" title="View Order">Order Details </a>
+ 	
 		</td>
 
 	 </tr>

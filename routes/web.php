@@ -73,25 +73,7 @@ Route::post('/admin/profile/store', [AdminProfileController::class, 'AdminProfil
 Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
 Route::post('/update/change/password', [AdminProfileController::class, 'AdminUpdateChangePassword'])->name('update.change.password');
 Route::get('/admin/calendar', [AdminProfileController::class, 'AdminCalendar'])->name('admin.calendar');
-});  // end Middleware admin
 
-
-
-//User-related routes
-
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    $id = Auth::user()->id;
-    $user = User::find($id);
-    return view('dashboard',compact('user'));
-    
-})->name('dashboard');          //GO TO DASHBOARD AFTER SIGN IN
-
-Route::get('/', [IndexController::class, 'index']); //GO TO HOME PAGE
-Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
-Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
-Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore'])->name('user.profile.store');
-Route::get('/user/change/password', [IndexController::class, 'UserChangePassword'])->name('change.password');
-Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
 
 //ADMIN Brand-related routes
@@ -160,105 +142,7 @@ Route::prefix('category')->group(function(){
 }); //end slider routes
 
 
-// Front-end related routed
-// Multi Language All Routes 
-
-Route::get('/language/filipino', [LanguageController::class, 'Filipino'])->name('filipino.language');
-
-Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
-
-//end language routes
-
-
-
-
-// Frontend Product Details Page url 
-Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
-
-// Frontend Product Tags Page 
-Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
-
-// Frontend SubCategory wise Data
-Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
-
-// Frontend Sub-SubCategory wise Data
-Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
-
-// Product View Modal with Ajax
-Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
-
-// Add to Cart Store Data
-Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
-
-// Get Data from mini cart
-Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
-
-// Remove mini cart
-Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
-
-// Add to Wishlist
-Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
-
-
-
-
-// Wishlist page 
-//  User Must Login  
-
-Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'User'],function(){
-
-Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
-
-Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
-
-Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
-
-//STRIPE
-
-Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
-
-// COD
-
-Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
-
-//My Orders (AllUserController Routes)
-
-Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
-
-Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
-
-Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
-
-Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
-
-Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
-
-Route::get('/cancel/orders', [AllUserController::class, 'CancelOrders'])->name('cancel.orders');
-
-/// Order Tracking Route 
-Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name('order.tracking');   
-
-// Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
-
-// Route::get('/get-cart-product', [CartPageController::class, 'GetCartProduct']);
-
-// Route::get('/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
-
-});
-
- // My Cart Page All Routes
- Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
-
- Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
- 
- Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
- 
- Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
-
- Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
-
-
- // Admin Coupons All Routes 
+// Admin Coupons All Routes 
 
 Route::prefix('coupons')->group(function(){
 
@@ -311,23 +195,33 @@ Route::prefix('shipping')->group(function(){
 });
 
 
-    // Frontend Coupon Option
+   // Admin Manage Review Routes 
+   Route::prefix('review')->group(function(){
 
-    Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
-    Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
-    Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+    Route::get('/pending', [ReviewController::class, 'PendingReview'])->name('pending.review');
+    
+    Route::get('/admin/approve/{id}', [ReviewController::class, 'ReviewApprove'])->name('review.approve');
+    
+    Route::get('/admin/all/request', [ReturnController::class, 'ReturnAllRequest'])->name('all.request');
+
+    Route::get('/publish', [ReviewController::class, 'PublishReview'])->name('publish.review');
+
+    Route::get('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete.review');
+    
+    });
 
 
-     // Checkout Routes 
+    // Admin Manage Stock Routes 
+    Route::prefix('stock')->group(function(){
 
-    Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
-    Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
-    Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
-    Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+    Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
+    
+    
+    });
 
 
  // Admin Order All Routes 
-Route::prefix('orders')->group(function(){
+ Route::prefix('orders')->group(function(){
     Route::get('/pending/orders', [OrderController::class, 'PendingOrders'])->name('pending-orders');
     Route::get('/pending/orders/details/{order_id}', [OrderController::class, 'PendingOrdersDetails'])->name('pending.order.details');
     Route::get('/confirmed/orders', [OrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
@@ -336,10 +230,10 @@ Route::prefix('orders')->group(function(){
     Route::get('/shipped/orders', [OrderController::class, 'ShippedOrders'])->name('shipped-orders');
     Route::get('/delivered/orders', [OrderController::class, 'DeliveredOrders'])->name('delivered-orders');
     Route::get('/cancel/orders', [OrderController::class, 'CancelOrders'])->name('cancel-orders');
-
     
     // Update Status 
     Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm');
+    Route::get('/reject/orders/{order_id}', [OrderController::class, 'RejectOrders'])->name('reject-orders');
     Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
     Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
     Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked.shipped');
@@ -409,6 +303,209 @@ Route::prefix('orders')->group(function(){
     
     });
 
+
+
+       // Admin Site Setting Routes 
+       Route::prefix('setting')->group(function(){
+
+        Route::get('/site', [SiteSettingController::class, 'SiteSetting'])->name('site.setting');
+        
+        Route::post('/site/update', [SiteSettingController::class, 'SiteSettingUpdate'])->name('update.sitesetting');
+    
+        Route::get('/seo', [SiteSettingController::class, 'SeoSetting'])->name('seo.setting'); 
+    
+        Route::post('/seo/update', [SiteSettingController::class, 'SeoSettingUpdate'])->name('update.seosetting');
+        
+        });
+    
+    
+        // Admin Return Order Routes 
+        Route::prefix('return')->group(function(){
+    
+        Route::get('/admin/request', [ReturnController::class, 'ReturnRequest'])->name('return.request');
+    
+        Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'ReturnRequestApprove'])->name('return.approve');
+        
+        Route::get('/admin/return/view/{order_id}', [ReturnController::class, 'ReturnRequestView'])->name('return.view');
+    
+        Route::get('/admin/all/request', [ReturnController::class, 'ReturnAllRequest'])->name('all.request');
+        
+        });
+
+
+
+
+           // Admin User Role Routes 
+    Route::prefix('adminuserrole')->group(function(){
+
+        Route::get('/all', [AdminUserController::class, 'AllAdminRole'])->name('all.admin.user');
+    
+        Route::get('/add', [AdminUserController::class, 'AddAdminRole'])->name('add.admin');
+    
+        Route::post('/store', [AdminUserController::class, 'StoreAdminRole'])->name('admin.user.store');
+    
+        Route::get('/edit/{id}', [AdminUserController::class, 'EditAdminRole'])->name('edit.admin.user');
+    
+        Route::post('/update', [AdminUserController::class, 'UpdateAdminRole'])->name('admin.user.update');
+        
+        Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdminRole'])->name('delete.admin.user');
+        
+        });
+
+
+        Route::get('/delete/user/{id}', [AdminProfileController::class, 'DeleteUser'])->name('delete.user');
+
+
+});  // end Middleware admin
+
+
+
+// Route::middleware(['auth:user'])->group(function(){
+
+// });
+
+    
+
+//User-related routes
+
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    $id = Auth::user()->id;
+    $user = User::find($id);
+    return view('dashboard',compact('user'));
+    
+})->name('dashboard');          //GO TO DASHBOARD AFTER SIGN IN
+
+Route::get('/', [IndexController::class, 'index']); //GO TO HOME PAGE
+Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
+Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
+Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore'])->name('user.profile.store');
+Route::get('/user/change/password', [IndexController::class, 'UserChangePassword'])->name('change.password');
+Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+
+
+
+
+// Front-end related routed
+// Multi Language All Routes 
+
+Route::get('/language/filipino', [LanguageController::class, 'Filipino'])->name('filipino.language');
+
+Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+//end language routes
+
+
+
+
+// Frontend Product Details Page url 
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+
+// Frontend Product Tags Page 
+Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+// Frontend SubCategory wise Data
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
+// Frontend Sub-SubCategory wise Data
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
+
+// Product View Modal with Ajax
+Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+// Add to Cart Store Data
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+
+// Get Data from mini cart
+Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+
+// Remove mini cart
+Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+
+// Add to Wishlist
+Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
+
+
+
+
+// Wishlist page 
+//  User Must Login  
+
+Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'User'],function(){
+
+Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
+
+Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
+
+Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
+
+//STRIPE
+
+Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+// COD
+
+Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
+
+
+
+//My Orders (AllUserController Routes)
+
+Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+
+Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
+
+Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
+
+Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
+
+Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
+
+Route::get('/cancel/orders', [AllUserController::class, 'CancelOrders'])->name('cancel.orders');
+
+/// Order Tracking Route 
+Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name('order.tracking');   
+
+// Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
+
+// Route::get('/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+
+// Route::get('/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
+
+});
+
+ // My Cart Page All Routes
+ Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
+
+ Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+ 
+ Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
+ 
+ Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
+
+ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
+
+
+ 
+
+
+    // Frontend Coupon Option
+
+    Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+    Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
+    Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
+     // Checkout Routes 
+
+    Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+    Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+    Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
+    Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+
+
     //  Frontend Blog Show Routes 
 
     Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
@@ -416,79 +513,17 @@ Route::prefix('orders')->group(function(){
     Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'HomeBlogCatPost']);
     
 
-    // Admin Site Setting Routes 
-    Route::prefix('setting')->group(function(){
-
-    Route::get('/site', [SiteSettingController::class, 'SiteSetting'])->name('site.setting');
-    
-    Route::post('/site/update', [SiteSettingController::class, 'SiteSettingUpdate'])->name('update.sitesetting');
-
-    Route::get('/seo', [SiteSettingController::class, 'SeoSetting'])->name('seo.setting'); 
-
-    Route::post('/seo/update', [SiteSettingController::class, 'SeoSettingUpdate'])->name('update.seosetting');
-    
-    });
-
-
-    // Admin Return Order Routes 
-    Route::prefix('return')->group(function(){
-
-    Route::get('/admin/request', [ReturnController::class, 'ReturnRequest'])->name('return.request');
-
-    Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'ReturnRequestApprove'])->name('return.approve');
-    
-    Route::get('/admin/return/view/{order_id}', [ReturnController::class, 'ReturnRequestView'])->name('return.view');
-
-    Route::get('/admin/all/request', [ReturnController::class, 'ReturnAllRequest'])->name('all.request');
-    
-    });
+ 
 
 
     /// Frontend Product Review Routes
 
     Route::post('/review/store', [ReviewController::class, 'ReviewStore'])->name('review.store');
 
-    // Admin Manage Review Routes 
-    Route::prefix('review')->group(function(){
-
-    Route::get('/pending', [ReviewController::class, 'PendingReview'])->name('pending.review');
-    
-    Route::get('/admin/approve/{id}', [ReviewController::class, 'ReviewApprove'])->name('review.approve');
-    
-    Route::get('/admin/all/request', [ReturnController::class, 'ReturnAllRequest'])->name('all.request');
-
-    Route::get('/publish', [ReviewController::class, 'PublishReview'])->name('publish.review');
-
-    Route::get('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete.review');
-    
-    });
+ 
 
 
-    // Admin Manage Stock Routes 
-    Route::prefix('stock')->group(function(){
-
-    Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
-    
-    
-    });
-
-
-    // Admin User Role Routes 
-    Route::prefix('adminuserrole')->group(function(){
-
-    Route::get('/all', [AdminUserController::class, 'AllAdminRole'])->name('all.admin.user');
-
-    Route::get('/add', [AdminUserController::class, 'AddAdminRole'])->name('add.admin');
-
-    Route::post('/store', [AdminUserController::class, 'StoreAdminRole'])->name('admin.user.store');
-
-    Route::get('/edit/{id}', [AdminUserController::class, 'EditAdminRole'])->name('edit.admin.user');
-
-    Route::post('/update', [AdminUserController::class, 'UpdateAdminRole'])->name('admin.user.update');
-    
-    Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdminRole'])->name('delete.admin.user');
-    
-    });
+ 
 
     /// Product Search Route 
     Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
@@ -502,4 +537,5 @@ Route::prefix('orders')->group(function(){
     Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
 
     //Delete User
-    Route::get('/delete/user/{id}', [AdminProfileController::class, 'DeleteUser'])->name('delete.user');
+
+
