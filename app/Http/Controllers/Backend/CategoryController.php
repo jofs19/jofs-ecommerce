@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
+use Intervention\Image\Facades\Image;
 
 
 class CategoryController extends Controller
@@ -29,6 +30,12 @@ class CategoryController extends Controller
             'category_name_en.required' => 'Input English Category Name',
             'category_name_fil.required' => 'Input Filipino Category Name',
         ]); //end validate
+
+
+        // $image = $request->file('category_image');
+        // $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        // Image::make($image)->resize(500, 500)->save('upload/category/'.$name_gen);
+        // $save_url = 'upload/category/'.$name_gen;
 
         Category::insert([
             'category_name_en' => $request->category_name_en,

@@ -23,9 +23,10 @@ class IndexController extends Controller
 {
     public function index()
     {
+        
         $blogpost = BlogPost::latest()->get();
-        $products = Product::where('status',1)->orderBy('id','DESC')->limit(6)->get();
-        $sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+        $products = Product::where('status',1)->orderBy('id','DESC')->limit(8)->get();
+        $sliders = Slider::where('status',1)->orderBy('id','DESC')->get();
     	$categories = Category::orderBy('category_name_en','ASC')->get();
         // $reviews = Review::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $reviews = Review::where('status',1)->orderBy('id','DESC')->get();
@@ -47,14 +48,14 @@ class IndexController extends Controller
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews'));
+    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews'));
     }
 
     public function UserLogout()
     {
 
         Auth::logout();
-        // Session::flush();
+        Session::flush();
 
         return redirect()->route('login');
 
@@ -65,7 +66,7 @@ class IndexController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        return view('frontend.profile.user_profile', compact('user'));
+        return view('frontendv2.profile.user_profile', compact('user'));
     }
 
     public function UserProfileStore(Request $request)
@@ -126,7 +127,7 @@ class IndexController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::find($id);
-        return view('frontend.profile.change_password', compact('user'));
+        return view('frontendv2.profile.change_password', compact('user'));
     }
 
 
@@ -149,7 +150,11 @@ class IndexController extends Controller
             //     'message' => 'Password Updated Successfully',
             //     'alert-type' => 'success'
             // );
-            return redirect()->route('user.logout');
+            $notification = array(
+                'message' => 'Password Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('user.logout')->with($notification);
         } else {
             $notification = array(
                 'message' => 'Old Password is incorrect',
@@ -187,7 +192,7 @@ class IndexController extends Controller
     public function TagWiseProduct($tag){
 		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag)->orderBy('id','DESC')->paginate(3);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
-		return view('frontend.tags.tags_view',compact('products','categories'));
+		return view('frontendv2.tags.tags_view',compact('products','categories'));
 	} //end method
 
 
@@ -199,15 +204,15 @@ class IndexController extends Controller
 
         		///  Load More Product with Ajax 
 		if ($request->ajax()) {
-            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+            $grid_view = view('frontendv2.product.grid_view_product',compact('products'))->render();
          
-            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
+            $list_view = view('frontendv2.product.list_view_product',compact('products'))->render();
              return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);	
          
                  }
                  ///  End Load More Product with Ajax 
 
-		return view('frontend.product.subcategory_view',compact('products','categories','breadsubcat'));
+		return view('frontendv2.product.subcategory_view',compact('products','categories','breadsubcat'));
 	} // end method
 
 
@@ -219,15 +224,15 @@ class IndexController extends Controller
 
         		///  Load More Product with Ajax 
 		if ($request->ajax()) {
-            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+            $grid_view = view('frontendv2.product.grid_view_product',compact('products'))->render();
          
-            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
+            $list_view = view('frontendv2.product.list_view_product',compact('products'))->render();
              return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);	
          
                  }
                  ///  End Load More Product with Ajax 
 
-		return view('frontend.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
+		return view('frontendv2.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
 	} //end method
 
 
@@ -241,11 +246,13 @@ class IndexController extends Controller
 		$size = $product->product_size_en;
 		$product_size = explode(',', $size);
 
+        $multiImage = MultiImg::where('product_id',$id)->get();
+
 		return response()->json(array(
 			'product' => $product,
 			'color' => $product_color,
 			'size' => $product_size,
-
+            'multiImag' => $multiImage,
 		));
 
 	} // end method 
@@ -258,7 +265,7 @@ class IndexController extends Controller
 		// echo "$item";
         $categories = Category::orderBy('category_name_en','ASC')->get();
 		$products = Product::where('product_name_en','LIKE',"%$item%")->get();
-		return view('frontend.product.search',compact('products','categories'));
+		return view('frontendv2.product.search',compact('products','categories'));
 
 	}
 
@@ -271,7 +278,7 @@ class IndexController extends Controller
 
 		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thumbnail','selling_price','id','product_slug_en')->limit(5)->get();
 
-        return view('frontend.product.search_product',compact('products'));
+        return view('frontendv2.product.search_product',compact('products'));
 
 	} // end method 
 
