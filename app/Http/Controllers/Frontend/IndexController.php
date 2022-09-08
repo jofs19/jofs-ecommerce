@@ -26,6 +26,7 @@ class IndexController extends Controller
         
         $blogpost = BlogPost::latest()->get();
         $products = Product::where('status',1)->orderBy('id','DESC')->limit(8)->get();
+        $products_category = Product::where('status',1)->orderBy('id','DESC')->get();
         $sliders = Slider::where('status',1)->orderBy('id','DESC')->get();
     	$categories = Category::orderBy('category_name_en','ASC')->get();
         // $reviews = Review::where('status',1)->orderBy('id','DESC')->limit(3)->get();
@@ -48,7 +49,7 @@ class IndexController extends Controller
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews'));
+    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category'));
     }
 
     public function UserLogout()
