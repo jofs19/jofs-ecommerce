@@ -189,7 +189,8 @@
                     New
                 </span> @else
                 <span class="badge bg-danger badge-shadow">
-                    Sale {{ round($discount) }}%
+                   
+                   <i class="ci-discount"></i> Sale {{ round($discount) }}%
                 </span>
                 @endif
 
@@ -234,6 +235,8 @@
                             @foreach($categories as $category)
 
                             @if($category->id == $product->category_id)
+
+                            
                             {{ $category->category_name_en }}
                             @endif
 
@@ -404,7 +407,7 @@
 
 
 {{-- Product Category Area --}}
-@include('frontendv2.common.category_carousel')
+@include('frontendv2.common.category_carousel_practice')
 {{-- End Product Category Area --}}
 
 
