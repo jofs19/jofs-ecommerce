@@ -8,15 +8,15 @@
               <div class="topbar-text dropdown disable-autohide">
 
                   @if(session()->get('language') == 'filipino')
-                  <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><img
+                  <a class="topbar-link dropdown-toggle d-sm-block text-xs" href="#" data-bs-toggle="dropdown"><img
                           alt="File:Flag of the Philippines.svg"
                           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/800px-Flag_of_the_Philippines.svg.png?20210924060643"
                           decoding="async" width="20"
                           srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1200px-Flag_of_the_Philippines.svg.png?20210924060643 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1600px-Flag_of_the_Philippines.svg.png?20210924060643 2x"
-                          data-file-width="1200" data-file-height="600" class="me-2">Pumili ng Wika</a>
+                          data-file-width="1200" data-file-height="600" class="me-2">Lengguwahe </a>
                   @else
                   <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><img alt="US Flag"
-                          src="{{ asset('frontendv2/assets/img/flags/en.png') }}" width="20" class="me-2">Select
+                          src="{{ asset('frontendv2/assets/img/flags/en.png') }}" width="20" class="me-2">
                       Language</a>
                   @endif
 
@@ -46,17 +46,20 @@
               </div>
               <div class="topbar-text text-nowrap d-none d-md-inline-block border-start border-light ps-3 ms-3"><span
                       class="text-muted me-1">Available 24/7 at</span><a class="topbar-link"
-                      href="tel:00331697720">(00) 33 169 7720</a></div>
+                      href="tel:00331697720">(+63) 947 5220 247</a></div>
           </div>
           <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#"
                   data-bs-toggle="dropdown">Wishlist / Compare / Track</a>
               <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="account-wishlist.html"><i
-                              class="ci-heart text-muted me-2"></i>Wishlist (3)</a></li>
+                              class="ci-heart text-muted me-2"></i>@if(session()->get('language') ==
+                              'filipino') Kagustuhan (3) @else Wishlist (3) @endif</a></li>
                   <li><a class="dropdown-item" href="comparison.html"><i
-                              class="ci-compare text-muted me-2"></i>Compare (3)</a></li>
+                              class="ci-compare text-muted me-2"></i>@if(session()->get('language') ==
+                              'filipino') Ikumpara (3) @else Compare (3) @endif </a></li>
                   <li><a class="dropdown-item" href="order-tracking.html"><i
-                              class="ci-location text-muted me-2"></i>Order tracking</a></li>
+                              class="ci-location text-muted me-2"></i>@if(session()->get('language') ==
+                              'filipino') Sundan ang Order @else Order Tracking @endif </a></li>
               </ul>
           </div>
           <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block"
@@ -73,8 +76,8 @@
           <div class="container">
               <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ url('/') }}">
                   <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="142" alt="Cartzilla"></a>
-              <a class="navbar-brand d-sm-none me-2" href="index.html">
-                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="74" alt="Cartzilla">
+              <a class="navbar-brand d-sm-none me-2" href="{{ url('/') }}">
+                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="100" alt="Cartzilla">
               </a>
               <!-- Search-->
               <div class="input-group d-none d-lg-flex flex-nowrap ms-3 me-4"><i
@@ -111,10 +114,10 @@
                   $user = App\Models\User::find($id);
                   @endphp
                   <div class="navbar-tool dropdown ms-2"><a class="navbar-tool-icon-box border dropdown-toggle"
-                          href="dashboard-sales.html"><img class="rounded-circle"
+                          href="{{ route('login') }}"><img class="rounded-circle"
                               src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}"
                               alt="User Profile"></a><a class="navbar-tool-text ms-n1"
-                          href="dashboard-sales.html"><small>User Account</small>{{ Auth::user()->name }}</a>
+                          href="{{ route('login') }}"><small>User Account</small>{{ Auth::user()->name }}</a>
                       <div class="dropdown-menu dropdown-menu-end">
                           <div style="min-width: 14rem;">
                               <h6 class="dropdown-header">Account</h6><a
@@ -156,7 +159,7 @@
                   <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
                           href="shop-cart.html"><span class="navbar-tool-label">4</span><i
                               class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text"
-                          href="shop-cart.html"><small>My Cart</small>$ 1000.00</a>
+                          href="shop-cart.html"><small>My Cart</small>₱ 1200.00</a>
                       <!-- Cart dropdown-->
                       <div class="dropdown-menu dropdown-menu-end">
                           <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
@@ -322,34 +325,6 @@
                                           
                                         @endforeach
 
-
-
-
-                                          {{-- <div class="mega-dropdown-column py-4 px-3">
-                                              <div class="widget widget-links">
-                                                  <h6 class="fs-base mb-3">Accessories</h6>
-                                                  <ul class="widget-list">
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Monitors</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Bags, Cases &amp; Sleeves</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Batteries</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Charges &amp; Adapters</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Cooling Pads</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Mounts</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Replacement Screens</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Security Locks</a></li>
-                                                      <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                              href="#">Stands</a></li>
-                                                  </ul>
-                                              </div>
-                                          </div> --}}
                                           <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
                                                   class="d-block mb-2" href="#"><img
                                                       src="{{ asset('frontendv2/assets/img/shop/departments/07.jpg') }}"
@@ -372,383 +347,48 @@
                   </ul>
                   <!-- Primary menu-->
                   <ul class="navbar-nav">
-                      <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown">@if(session()->get('language') == 'filipino') Home @else Home
-                              @endif</a>
-                          <ul class="dropdown-menu navbar-dark bg-light">
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item border-bottom py-2"
-                                      href="home-nft.html"><span class="d-block text-heading">NFT Marketplace<span
-                                              class="badge bg-danger ms-1">NEW</span></span><small
-                                          class="d-block text-muted">NFTs, Multi-vendor, Auctions</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-nft.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th08.jpg') }}"
-                                              alt="NFT Marketplace"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-fashion-store-v1.html"><span class="d-block text-heading">Fashion
-                                          Store v.1</span><small class="d-block text-muted">Classic shop
-                                          layout</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-fashion-store-v1.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th01.jpg') }}"
-                                              alt="Fashion Store v.1"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-electronics-store.html"><span
-                                          class="d-block text-heading">Electronics Store</span><small
-                                          class="d-block text-muted">Slider + Promo banners</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-electronics-store.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th03.jpg') }}"
-                                              alt="Electronics Store"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-marketplace.html"><span
-                                          class="d-block text-heading">Marketplace</span><small
-                                          class="d-block text-muted">Multi-vendor, digital goods</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-marketplace.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th04.jpg') }}"
-                                              alt="Marketplace"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-grocery-store.html"><span class="d-block text-heading">Grocery
-                                          Store</span><small class="d-block text-muted">Full width + Side
-                                          menu</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-grocery-store.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th06.jpg') }}"
-                                              alt="Grocery Store"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-food-delivery.html"><span class="d-block text-heading">Food Delivery
-                                          Service</span><small class="d-block text-muted">Food &amp; Beverages
-                                          delivery</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-food-delivery.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th07.jpg') }}"
-                                              alt="Food Delivery Service"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                                      href="home-fashion-store-v2.html"><span class="d-block text-heading">Fashion
-                                          Store v.2</span><small class="d-block text-muted">Slider + Featured
-                                          categories</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-fashion-store-v2.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th02.jpg') }}"
-                                              alt="Fashion Store v.2"></a></div>
-                              </li>
-                              <li class="dropdown position-static mb-0"><a class="dropdown-item py-2"
-                                      href="home-single-store.html"><span class="d-block text-heading">Single Product
-                                          Store</span><small class="d-block text-muted">Single product / mono
-                                          brand</small></a>
-                                  <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block"
-                                          href="home-single-store.html" style="width: 250px;"><img
-                                              src="{{ asset('frontendv2/assets/img/home/preview/th05.jpg') }}"
-                                              alt="Single Product / Brand Store"></a></div>
-                              </li>
-                          </ul>
+                      <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/') }}"> 
+                            <i class="ci-home align-middle mt-n1 me-2"></i> @if(session()->get('language') == 'filipino') Home @else Home
+                              @endif
+                        </a>
+                          
                       </li>
-                      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown">@if(session()->get('language') == 'filipino') Pamilihan @else
+
+                      <li class="nav-item {{ (request()->is('shop')) || (request()->is('product/tag/*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('shop.page') }}">
+                        <i class="ci-store align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Pamilihan @else
                               Shop @endif</a>
-                          <div class="dropdown-menu p-0 bg-light navbar-dark">
-                              <div class="d-flex flex-wrap flex-sm-nowrap px-2">
-                                  <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                      <div class="widget widget-links mb-4">
-                                          <h6 class="fs-base mb-3">Shop layouts</h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-grid-ls.html">Shop Grid - Left Sidebar</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-grid-rs.html">Shop Grid - Right Sidebar</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-grid-ft.html">Shop Grid - Filters on Top</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-list-ls.html">Shop List - Left Sidebar</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-list-rs.html">Shop List - Right Sidebar</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-list-ft.html">Shop List - Filters on Top</a></li>
-                                          </ul>
-                                      </div>
-                                      <div class="widget widget-links mb-4">
-                                          <h6 class="fs-base mb-3">Marketplace</h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="marketplace-category.html">Category Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="marketplace-single.html">Single Item Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="marketplace-vendor.html">Vendor Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="marketplace-cart.html">Cart</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="marketplace-checkout.html">Checkout</a></li>
-                                          </ul>
-                                      </div>
-                                      <div class="widget widget-links">
-                                          <h6 class="fs-base mb-3">Grocery store</h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="grocery-catalog.html">Product Catalog</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="grocery-single.html">Single Product Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="grocery-checkout.html">Checkout</a></li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                                  <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                      <div class="widget widget-links mb-4">
-                                          <h6 class="fs-base mb-3">Food Delivery</h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="food-delivery-category.html">Category Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="food-delivery-single.html">Single Item (Restaurant)</a>
-                                              </li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="food-delivery-cart.html">Cart (Your Order)</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="food-delivery-checkout.html">Checkout (Address &amp;
-                                                      Payment)</a></li>
-                                          </ul>
-                                      </div>
-                                      <div class="widget widget-links">
-                                          <h6 class="fs-base mb-3">NFT Marketplace<span
-                                                  class="badge bg-danger ms-1">NEW</span></h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-catalog-v1.html">Catalog v.1</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-catalog-v2.html">Catalog v.2</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-single-auction-live.html">Single Item - Auction
-                                                      Live</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-single-auction-ended.html">Single Item - Auction
-                                                      Ended</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-single-buy.html">Single Item - Buy Now</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-vendor.html">Vendor Page</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-connect-wallet.html">Connect Wallet</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="nft-create-item.html">Create New Item</a></li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                                  <div class="mega-dropdown-column pt-1 pt-lg-4 px-2 px-lg-3">
-                                      <div class="widget widget-links mb-4">
-                                          <h6 class="fs-base mb-3">Shop pages</h6>
-                                          <ul class="widget-list">
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-categories.html">Shop Categories</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-single-v1.html">Product Page v.1</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-single-v2.html">Product Page v.2</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="shop-cart.html">Cart</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="checkout-details.html">Checkout - Details</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="checkout-shipping.html">Checkout - Shipping</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="checkout-payment.html">Checkout - Payment</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="checkout-review.html">Checkout - Review</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="checkout-complete.html">Checkout - Complete</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="order-tracking.html">Order Tracking</a></li>
-                                              <li class="widget-list-item"><a class="widget-list-link"
-                                                      href="comparison.html">Product Comparison</a></li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                          
                       </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown" data-bs-auto-close="outside">@if(session()->get('language') ==
+
+
+                      {{-- <li class="nav-item dropdown">
+                        <a class="nav-link" href="#"
+                              data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-user-circle align-middle mt-n1 me-2"></i>@if(session()->get('language') ==
                               'filipino') Aking Account @else My Account @endif
                         </a>
-                          <ul class="dropdown-menu bg-light navbar-dark">
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Shop User Account</a>
-                                  <ul class="dropdown-menu ">
-                                      <li><a class="dropdown-item" href="account-orders.html">Orders History</a></li>
-                                      <li><a class="dropdown-item" href="account-profile.html">Profile Settings</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="account-address.html">Account Addresses</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="account-payment.html">Payment Methods</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="account-wishlist.html">Wishlist</a></li>
-                                      <li><a class="dropdown-item" href="account-tickets.html">My Tickets</a></li>
-                                      <li><a class="dropdown-item" href="account-single-ticket.html">Single Ticket</a>
-                                      </li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Vendor Dashboard</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="dashboard-settings.html">Settings</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-purchases.html">Purchases</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-favorites.html">Favorites</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-sales.html">Sales</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-products.html">Products</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-add-new-product.html">Add New
-                                              Product</a></li>
-                                      <li><a class="dropdown-item" href="dashboard-payouts.html">Payouts</a></li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">NFT Marketplace<span
-                                          class="badge bg-danger ms-1">NEW</span></a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="nft-account-settings.html">Profile
-                                              Settings</a></li>
-                                      <li><a class="dropdown-item" href="nft-account-payouts.html">Wallet &amp;
-                                              Payouts</a></li>
-                                      <li><a class="dropdown-item" href="nft-account-my-items.html">My Items</a></li>
-                                      <li><a class="dropdown-item" href="nft-account-my-collections.html">My
-                                              Collections</a></li>
-                                      <li><a class="dropdown-item" href="nft-account-favorites.html">Favorites</a>
-                                      </li>
-                                      <li><a class="dropdown-item"
-                                              href="nft-account-notifications.html">Notifications</a></li>
-                                  </ul>
-                              </li>
-                              <li><a class="dropdown-item" href="account-signin.html">Sign In / Sign Up</a></li>
-                              <li><a class="dropdown-item" href="account-password-recovery.html">Password Recovery</a>
-                              </li>
-                          </ul>
+                          
+                      </li> --}}
+
+                      <li class="nav-item"><a class="nav-link" href="#" data-bs-auto-close="outside">
+                        <i class="ci-briefcase align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Tungkol sa Amin @else
+                              About Us @endif</a>
+                          
                       </li>
-                      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown" data-bs-auto-close="outside">Pages</a>
-                          <ul class="dropdown-menu bg-light navbar-dark">
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Navbar Variants</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="navbar-1-level-light.html">1 Level Light</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="navbar-1-level-dark.html">1 Level Dark</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="navbar-2-level-light.html">2 Level Light</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="navbar-2-level-dark.html">2 Level Dark</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="navbar-3-level-light.html">3 Level Light</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="navbar-3-level-dark.html">3 Level Dark</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="home-electronics-store.html">Electronics
-                                              Store</a></li>
-                                      <li><a class="dropdown-item" href="home-marketplace.html">Marketplace</a></li>
-                                      <li><a class="dropdown-item" href="home-grocery-store.html">Side Menu
-                                              (Grocery)</a></li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                              <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Help Center</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="help-topics.html">Help Topics</a></li>
-                                      <li><a class="dropdown-item" href="help-single-topic.html">Single Topic</a></li>
-                                      <li><a class="dropdown-item" href="help-submit-request.html">Submit a
-                                              Request</a></li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">404 Not Found</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="404-simple.html">404 - Simple Text</a></li>
-                                      <li><a class="dropdown-item" href="404-illustration.html">404 - Illustration</a>
-                                      </li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="sticky-footer.html">Sticky Footer Demo</a></li>
-                          </ul>
+                      
+                      <li class="nav-item"><a class="nav-link" href="#" data-bs-auto-close="outside">
+                        <i class="ci-phone align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Kontakin kami @else
+                              Contact Us @endif</a>
+                          
                       </li>
-                      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown" data-bs-auto-close="outside">Blog</a>
-                          <ul class="dropdown-menu bg-light navbar-dark">
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Blog List Layouts</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="blog-list-sidebar.html">List with Sidebar</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="blog-list.html">List no Sidebar</a></li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Blog Grid Layouts</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="blog-grid-sidebar.html">Grid with Sidebar</a>
-                                      </li>
-                                      <li><a class="dropdown-item" href="blog-grid.html">Grid no Sidebar</a></li>
-                                  </ul>
-                              </li>
-                              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                      data-bs-toggle="dropdown">Single Post Layouts</a>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="blog-single-sidebar.html">Article with
-                                              Sidebar</a></li>
-                                      <li><a class="dropdown-item" href="blog-single.html">Article no Sidebar</a></li>
-                                  </ul>
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                              data-bs-toggle="dropdown">Docs / Components</a>
-                          <ul class="dropdown-menu bg-light navbar-dark">
-                              <li><a class="dropdown-item" href="docs/dev-setup.html">
-                                      <div class="d-flex">
-                                          <div class="lead text-muted pt-1"><i class="ci-book"></i></div>
-                                          <div class="ms-2"><span
-                                                  class="d-block text-heading">Documentation</span><small
-                                                  class="d-block text-muted">Kick-start customization</small></div>
-                                      </div>
-                                  </a></li>
-                              <li class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="components/typography.html">
-                                      <div class="d-flex">
-                                          <div class="lead text-muted pt-1"><i class="ci-server"></i></div>
-                                          <div class="ms-2"><span class="d-block text-heading">Components<span
-                                                      class="badge bg-info ms-2">40+</span></span><small
-                                                  class="d-block text-muted">Faster page building</small></div>
-                                      </div>
-                                  </a></li>
-                              <li class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="docs/changelog.html">
-                                      <div class="d-flex">
-                                          <div class="lead text-muted pt-1"><i class="ci-edit"></i></div>
-                                          <div class="ms-2"><span class="d-block text-heading">Changelog<span
-                                                      class="badge bg-success ms-2">v2.4.0</span></span><small
-                                                  class="d-block text-muted">Regular updates</small></div>
-                                      </div>
-                                  </a></li>
-                              <li class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="mailto:support@createx.studio">
-                                      <div class="d-flex">
-                                          <div class="lead text-muted pt-1"><i class="ci-help"></i></div>
-                                          <div class="ms-2"><span class="d-block text-heading">Support</span><small
-                                                  class="d-block text-muted">support@createx.studio</small></div>
-                                      </div>
-                                  </a></li>
-                          </ul>
+                      <li class="nav-item"><a class="nav-link" href="#">
+                        <i class="ci-image align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Talaan @else
+                              Blog @endif</a>
+                          
                       </li>
                   </ul>
               </div>
+              
           </div>
       </div>
   </div>

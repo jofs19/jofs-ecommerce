@@ -311,10 +311,8 @@
                                                 <div class="controls">
                                                     <input type="text" name="product_color_en" class="form-control"
                                                         value="{{ $products->product_color_en }}"
-                                                        data-role="tagsinput" required="">
-                                                    @error('product_color_en')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                        data-role="tagsinput">
+                                                    
                                                 </div>
                                             </div>
 
@@ -327,10 +325,8 @@
                                                 <div class="controls">
                                                     <input type="text" name="product_color_fil" class="form-control"
                                                         value="{{ $products->product_color_fil }}"
-                                                        data-role="tagsinput" required="">
-                                                    @error('product_color_fil')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                        data-role="tagsinput" >
+                                                   
                                                 </div>
                                             </div>
 

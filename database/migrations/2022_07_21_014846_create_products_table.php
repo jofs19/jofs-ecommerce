@@ -29,8 +29,8 @@ class CreateProductsTable extends Migration
             $table->string('product_tags_fil');
             $table->string('product_size_en')->nullable();
             $table->string('product_size_fil')->nullable();
-            $table->string('product_color_en');
-            $table->string('product_color_fil');
+            $table->string('product_color_en')->nullable();
+            $table->string('product_color_fil')->nullable();
             $table->string('selling_price');
             $table->string('discount_price')->nullable();
             $table->string('short_descp_en');

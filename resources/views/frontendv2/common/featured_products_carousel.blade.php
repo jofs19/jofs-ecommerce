@@ -1,13 +1,13 @@
-{{-- Product Category Area --}}
+{{-- Product Category Area / Featured Product--}}
 
 
 <section class="container pt-lg-3 mb-4 mb-sm-5">
 
-    <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+    {{-- <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
         <h2 class="h3 mb-0 pt-3 me-2">Shop by Category</h2>
         <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">More products<i
                     class="ci-arrow-right ms-1 me-n1"></i></a></div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <!-- Banner with controls-->
@@ -15,21 +15,10 @@
             <div class="d-flex flex-column h-100 overflow-hidden rounded-3" style="background-color: #f6f8fb;">
                 <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
                     <div>
-                        <h3 class="mb-3">Category Section</h3>
-                        {{-- <a class="fs-md" href="shop-grid-ls.html">Shop for women<i
-                                class="ci-arrow-right fs-xs align-middle ms-1"></i></a> --}}
-                        <!-- Widget: Tag cloud -->
-                        <div class="widget">
-                            <a href="#all" class="btn-tag active me-2 mb-2">All Categories</a>
-
-                            @foreach ($categories as $category)
-                            
-                            <a href="#category{{ $category->id }}"
-                                class="btn-tag me-2 mb-2">{{ $category->category_name_en }}</a>
-
-                            @endforeach
-                            ...
-                        </div>
+                        <h3 class="mb-3">Featured Products</h3>
+                        <a class="fs-md" href="shop-grid-ls.html">Shop now
+                            <i class="ci-arrow-right fs-xs align-middle ms-1"></i></a>
+                        
                     </div>
 
                     <div class="tns-carousel-controls" id="for-women">
@@ -37,21 +26,18 @@
                         <button type="button"><i class="ci-arrow-right"></i></button>
                     </div>
                 </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100"
-                        src="https://shorebeautyschool.edu/wp-content/uploads/2018/03/Skin-care-Model-large-1.png"
+                    src="{{ asset("frontendv2/assets/img/home/categories/cat-lg02.jpg") }}"
                         alt="For Women"></a>
             </div>
         </div>
         <!-- Product grid (carousel)-->
         <div class="col-md-7 pt-4 pt-md-0">
             <div class="tns-carousel">
+                <div class="tns-carousel-inner  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal"
+                    data-carousel-options='{"nav": false, "controlsContainer": "#for-women", "mode": "carousel", "gutter":20}' style="transition-duration: 0s; transform: translate3d(-33.3333%, 0px, 0px);">
 
 
-
-                <div class="tns-carousel-inner"
-                    data-carousel-options='{"nav": false, "controlsContainer": "#for-women", "mode": "carousel"}'>
-
-
-                    @foreach ($products_category->chunk(6) as $product)
+                    @foreach ($featured->chunk(6) as $product)
 
                     <!-- Carousel item-->
                     <div class="@if ($loop->first) active @endif">
@@ -78,8 +64,7 @@
                                                     <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
                                                         href="#quick-view-electro" data-bs-toggle="modal"
                                                         data-bs-target="#quick-view-electro" id="{{ $item->id }}"
-                                                        onclick="productView(this.id)">
-                                                        <i class="ci-eye"></i>
+                                                        onclick="productView(this.id)"> <i class="ci-eye"></i>
                                                     </a>
 
 

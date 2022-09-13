@@ -221,7 +221,7 @@
                                                 <h5>Product Color (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_color_en" class="form-control"
-                                                        value="red,Black,Amet" data-role="tagsinput" required="">
+                                                        value="red,Black,Amet" data-role="tagsinput">
                                                     @error('product_color_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -237,7 +237,7 @@
                                                 <h5>Product Size (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_size_en" class="form-control"
-                                                        value="Small, Medium, Large" data-role="tagsinput" required="">
+                                                        value="Small, Medium, Large" data-role="tagsinput">
                                                     @error('product_size_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -277,7 +277,7 @@
                                                 <h5>Product Color (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_color_fil" class="form-control"
-                                                        value="red,Black,Large" data-role="tagsinput" required="">
+                                                        value="red,Black,Large" data-role="tagsinput">
                                                     @error('product_color_fil')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -295,7 +295,7 @@
                                                 <h5>Product Size (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_size_fil" class="form-control"
-                                                        value="Small, Medium, Large" data-role="tagsinput" required="">
+                                                        value="Small, Medium, Large" data-role="tagsinput">
                                                     @error('product_size_fil')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -352,10 +352,8 @@
                                             <div class="form-group">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control" required="">
-                                                    @error('discount_price')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                    <input type="text" name="discount_price" class="form-control">
+                                                    
                                                 </div>
                                             </div>
 
@@ -401,9 +399,9 @@
                                             <div class="form-group">
                                                 <h5>Long Description (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea id="editor1" name="long_descp_en" rows="10" cols="80" required="">
-		Long Description (Eng)
-						</textarea>
+                                                    <textarea id="editor1" name="long_descp_en" rows="10" cols="80" required="" placeholder="Textarea text">
+
+                                                    </textarea>
                                                 </div>
                                             </div>
 
@@ -416,9 +414,9 @@
                                                 <h5>Long Description (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
 
-                                                    <textarea id="editor2" name="long_descp_fil" rows="10" cols="80" required="">
-		 Long Description (Fil)
-						</textarea>
+                                                    <textarea id="editor2" name="long_descp_fil" rows="10" cols="80" required="" placeholder="Textarea text">
+                                                        
+                                                    </textarea>
                                                 </div>
                                             </div>
 

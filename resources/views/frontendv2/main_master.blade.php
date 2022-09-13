@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Vartouhi | Beauty & Cosmetics Store</title>
+    <title>@yield('title') </title>
+
     <!-- SEO Meta Tags-->
     <meta name="description" content="JOFS E-Commerce">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,6 +25,10 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/tiny-slider/dist/tiny-slider.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/drift-zoom/dist/drift-basic.min.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
+    
+    <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.css') }}"/>
+    
+    
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/css/theme.min.css') }}">
 
@@ -172,7 +177,7 @@
                         <div class="modal-header">
                             
                     
-                            <h4 class="modal-title product-title"><a href="shop-single-v2.html" data-bs-toggle="tooltip"
+                            <h4 class="modal-title product-title"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="Go to product page">
                                     
                                     <strong><span id="pname"></span> </strong> 
@@ -241,10 +246,27 @@
                                                     <i class="star-rating-icon ci-star-filled active"></i>
                                                     <i class="star-rating-icon ci-star-filled active"></i>
                                                     <i class="star-rating-icon ci-star"></i>
-                                            </div><span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74
+                                            </div>
+                                            <span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74
                                                 Reviews</span>
                                         </div>
-                                        <div class="h3 fw-normal text-accent mb-3 me-1">$124.<small>99</small></div>
+
+                                        {{-- <div class="h3 fw-normal text-accent mb-3 me-1"><span id="oldprice"></span>.<small>00</small></div>
+                                        <del class="text-danger me-2" id="pprice">.<small>00</small></del><span id="pprice"></span>.<small>00</small> --}}
+
+                                        <div class="product-price">
+                                          <del class="fs-sm text-muted" id="oldprice">
+                                              <small>.00</small></del>
+                                          <span class="text-accent" id="pprice"> 
+                                              <small>.00</small></span>
+          
+                                      </div>
+
+                                      
+
+                                       
+
+
                                         <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span
                                                 class="text-muted" id="colorOptionText">Dark blue/Orange</span></div>
                                         <div class="position-relative me-n4 mb-3">
@@ -284,13 +306,10 @@
 
                                         </div>
                                         <div class="d-flex align-items-center pt-2 pb-4">
-                                            <select class="form-select me-3" style="width: 5rem;">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
+                                          
+                                          {{-- <input type="number" class="form-control" id="qty" value="0" min="1"> --}}
+                                          <input class="form-control me-3" type="number" id="qty" min="0" value="0"  max="{{ $product->product_qty }}" style="width: 6rem;">
+
                                             <button class="btn btn-primary btn-shadow d-block w-100" type="button" id="try"><i
                                                     class="ci-cart fs-lg me-2"></i>Add to Cart</button>
                                         </div>
@@ -305,21 +324,93 @@
                                                         class="ci-compare fs-lg me-2"></i>Compare</button>
                                             </div>
                                         </div>
-                                        <h5 class="h6 mb-3 py-2 border-bottom"><i
-                                                class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info
-                                        </h5>
-                                        <h6 class="fs-sm mb-2">General</h6>
-                                        <ul class="fs-sm pb-2">
-                                            <li><span class="text-muted">Model: </span>Amazfit Smartwatch</li>
-                                            <li><span class="text-muted">Gender: </span>Unisex</li>
-                                            <li><span class="text-muted">OS campitibility: </span>Android / iOS</li>
-                                        </ul>
-                                        <h6 class="fs-sm mb-2">Physical specs</h6>
-                                        <ul class="fs-sm pb-2">
-                                            <li><span class="text-muted">Shape: </span>Rectangular</li>
-                                            <li><span class="text-muted">Body material: </span>Plastics / Ceramics</li>
-                                            <li><span class="text-muted">Band material: </span>Silicone</li>
-                                        </ul>
+                                        
+                      <!-- Product panels-->
+                      <div class="accordion mb-4" id="productPanels">
+                        <div class="accordion-item">
+                          <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>General info</a></h3>
+                          <div class="accordion-collapse collapse" id="shippingOptions" data-bs-parent="#productPanels">
+                            <div class="accordion-body fs-sm">
+                              <div class="d-flex justify-content-between border-bottom pb-2">
+                                <div>
+                                  <div class="fw-semibold text-dark">Product Brand</div>
+                                  <div class="fs-sm text-muted"><span id="pbrand"></span></div>
+                                </div>
+                                <div>...</div>
+                              </div>
+                              <div class="d-flex justify-content-between border-bottom py-2">
+                                <div>
+                                  <div class="fw-semibold text-dark">Product Category</div>
+                                  <div class="fs-sm text-muted">
+                                    
+                                    @if(session()->get('language') == 'filipino')
+                                    <span id="pcategoryFil"></span>
+                                    @else
+                                    <span id="pcategoryEng"></span>
+                                    @endif
+
+
+
+                                  </div>
+                                </div>
+                                <div>...</div>
+                              </div>
+                              <div class="d-flex justify-content-between border-bottom py-2 ">
+                                <div>
+                                  <div class="fw-semibold text-dark">Product Tag</div>
+                                  <div class="fs-sm text-muted">
+
+                                    @if(session()->get('language') == 'filipino')
+                                    <span id="ptagsFil"></span>
+                                    @else
+                                    <span id="ptagsEng"></span>
+                                    @endif
+
+
+                                  </div>
+                                </div>
+                                <div>...</div>
+                              </div>
+                              <div class="d-flex justify-content-between pt-2">
+                                <div>
+                                  <div class="fw-semibold text-dark">Product Stock</div>
+                                  <div class="fs-sm text-muted"><span id="pquantity"></span></div>
+                                </div>
+                                <div>...</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-list text-muted fs-lg align-middle mt-n1 me-2"></i>Product Description</a></h3>
+                          <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
+                            <div class="accordion-body pt-3 pb-1">                            
+                                <dl>
+                                  <dt class="fw-semibold">
+                                    @if(session()->get('language') == 'filipino') 
+                                    <span id="shortDetailsFil" class="text"></span>
+                                    @else 
+                                    <span id="shortDetailsEng" class="text"></span>
+
+                                    @endif</dt>
+                                  <dd @if(session()->get('language') == 'filipino') 
+                                    id="longDetailsFil"
+                                    @else
+                                    id="longDetailsEng"
+                                    @endif
+                                    >
+
+
+
+
+                                  </dd>
+                                
+                                </dl>                                                        
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -369,6 +460,297 @@
       {{-- End Blog Area --}}
       {{-- End Blog + Instagram info cards --}}
 
+      {{-- Size chart Modal --}}
+      <div class="modal fade" id="size-chart">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header bg-secondary">
+              <ul class="nav nav-tabs card-header-tabs" role="tablist" style="margin-bottom: -1rem;">
+                <li class="nav-item"><a class="nav-link fw-medium active" href="#mens" data-bs-toggle="tab" role="tab" aria-controls="mens" aria-selected="true">Men's sizes</a></li>
+                <li class="nav-item"><a class="nav-link fw-medium" href="#womens" data-bs-toggle="tab" role="tab" aria-controls="womens" aria-selected="false">Women's sizes</a></li>
+              </ul>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="mens" role="tabpanel">
+                  <div class="table-responsive">
+                    <table class="table fs-sm text-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="align-middle bg-secondary">US<br>Sizes</th>
+                          <th class="align-middle">Euro<br>Sizes</th>
+                          <th class="align-middle">UK<br>Sizes</th>
+                          <th class="align-middle">Inches</th>
+                          <th class="align-middle">CM</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="bg-secondary fw-medium">6</td>
+                          <td>39</td>
+                          <td>5.5</td>
+                          <td>9.25"</td>
+                          <td>23.5</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">6.5</td>
+                          <td>39</td>
+                          <td>6</td>
+                          <td>9.5"</td>
+                          <td>24.1</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">7</td>
+                          <td>40</td>
+                          <td>6.5</td>
+                          <td>9.625"</td>
+                          <td>24.4</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">7.5</td>
+                          <td>40-41</td>
+                          <td>7</td>
+                          <td>9.75"</td>
+                          <td>24.8</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">8</td>
+                          <td>41</td>
+                          <td>7.5</td>
+                          <td>9.9375"</td>
+                          <td>25.4</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">8.5</td>
+                          <td>41-42</td>
+                          <td>8</td>
+                          <td>10.125"</td>
+                          <td>25.7</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">9</td>
+                          <td>42</td>
+                          <td>8.5</td>
+                          <td>10.25"</td>
+                          <td>26</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">9.5</td>
+                          <td>42-43</td>
+                          <td>9</td>
+                          <td>10.4375"</td>
+                          <td>26.7</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">10</td>
+                          <td>43</td>
+                          <td>9.5</td>
+                          <td>10.5625"</td>
+                          <td>27</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">10.5</td>
+                          <td>43-44</td>
+                          <td>10</td>
+                          <td>10.75"</td>
+                          <td>27.3</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">11</td>
+                          <td>44</td>
+                          <td>10.5</td>
+                          <td>10.9375"</td>
+                          <td>27.9</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">11.5</td>
+                          <td>44-45</td>
+                          <td>11</td>
+                          <td>11.125"</td>
+                          <td>28.3</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">12</td>
+                          <td>45</td>
+                          <td>11.5</td>
+                          <td>11.25"</td>
+                          <td>28.6</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">13</td>
+                          <td>46</td>
+                          <td>12.5</td>
+                          <td>11.5625"</td>
+                          <td>29.4</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">14</td>
+                          <td>47</td>
+                          <td>13.5</td>
+                          <td>11.875"</td>
+                          <td>30.2</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">15</td>
+                          <td>48</td>
+                          <td>14.5</td>
+                          <td>12.1875"</td>
+                          <td>31</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">16</td>
+                          <td>49</td>
+                          <td>15.5</td>
+                          <td>12.5"</td>
+                          <td>31.8</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="womens" role="tabpanel">
+                  <div class="table-responsive">
+                    <table class="table fs-sm text-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="align-middle bg-secondary">US<br>Sizes</th>
+                          <th class="align-middle">Euro<br>Sizes</th>
+                          <th class="align-middle">UK<br>Sizes</th>
+                          <th class="align-middle">Inches</th>
+                          <th class="align-middle">CM</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="bg-secondary fw-medium">4</td>
+                          <td>35</td>
+                          <td>2</td>
+                          <td>8.1875"</td>
+                          <td>20.8</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">4.5</td>
+                          <td>35</td>
+                          <td>2.5</td>
+                          <td>8.375"</td>
+                          <td>21.3</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">5</td>
+                          <td>35-36</td>
+                          <td>3</td>
+                          <td>8.5"</td>
+                          <td>21.6</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">5.5</td>
+                          <td>36</td>
+                          <td>3.5</td>
+                          <td>8.75"</td>
+                          <td>22.2</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">6</td>
+                          <td>36-37</td>
+                          <td>4</td>
+                          <td>8.875"</td>
+                          <td>22.5</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">6.5</td>
+                          <td>37</td>
+                          <td>4.5</td>
+                          <td>9.0625"</td>
+                          <td>23</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">7</td>
+                          <td>37-38</td>
+                          <td>5</td>
+                          <td>9.25"</td>
+                          <td>23.5</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">7.5</td>
+                          <td>38</td>
+                          <td>5.5</td>
+                          <td>9.375"</td>
+                          <td>23.8</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">8</td>
+                          <td>38-39</td>
+                          <td>6</td>
+                          <td>9.5"</td>
+                          <td>24.1</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">8.5</td>
+                          <td>39</td>
+                          <td>6.5</td>
+                          <td>9.6875"</td>
+                          <td>24.6</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">9</td>
+                          <td>39-40</td>
+                          <td>7</td>
+                          <td>9.875"</td>
+                          <td>25.1</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">9.5</td>
+                          <td>40</td>
+                          <td>7.5</td>
+                          <td>10"</td>
+                          <td>25.4</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">10</td>
+                          <td>40-41</td>
+                          <td>8</td>
+                          <td>10.1875"</td>
+                          <td>25.9</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">10.5</td>
+                          <td>41</td>
+                          <td>8.5</td>
+                          <td>10.3125"</td>
+                          <td>26.2</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">11</td>
+                          <td>41-42</td>
+                          <td>9</td>
+                          <td>10.5"</td>
+                          <td>26.7</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">11.5</td>
+                          <td>42</td>
+                          <td>9.5</td>
+                          <td>10.6875"</td>
+                          <td>27.1</td>
+                        </tr>
+                        <tr>
+                          <td class="bg-secondary fw-medium">12</td>
+                          <td>42-43</td>
+                          <td>10</td>
+                          <td>10.875"</td>
+                          <td>27.6</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- End Size chart Modal --}}
 
     </main>
     <!-- Footer-->
@@ -379,11 +761,22 @@
 
 
 
-    {{-- Mobile UI Area --}}
+    @if(request()->is('/') || request()->is('dashboard'))
+    {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
     {{-- End Mobile UI Area --}}
+
+    @elseif (request()->is('shop') || request()->is('product/tag/*') || request()->is('subcategory/*') || request()->is('subsubcategory/*'))
+
+    {{-- Mobile UI Area for Shop Page --}}
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    {{-- End Mobile UI Area for Shop Page --}}
+    @endif
+
 
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
 
@@ -400,6 +793,10 @@
     <script src="{{ asset('frontendv2/assets/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script src="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('frontendv2/assets/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.js') }}"></script>
+
+    
+
     <!-- Main theme script-->
     <script src="{{ asset('frontendv2/assets/js/theme.min.js') }}"></script>
     {{-- JQUERY CDN --}}
@@ -463,23 +860,34 @@
                 $('#pname').text(data.product.product_name_en);
                 $('#price').text(data.product.selling_price);
                 $('#pcode').text(data.product.product_code);
-                $('#pcategory').text(data.product.category.category_name_en);
+                $('#pcategoryEng').text(data.product.category.category_name_en);
+                $('#pcategoryFil').text(data.product.category.category_name_fil);
                 $('#pbrand').text(data.product.brand.brand_name_en);
                 $('#pimage').attr('src','/'+data.product.product_thumbnail);
                 $('#pimage').attr('data-zoom','/'+data.product.product_thumbnail);
                 $('#pgallery').attr('src','/'+data.product.product_thumbnail);
-                $('#pdetails').text(data.product.product_details_en);
-                
+                $('#shortDetailsEng').text(data.product.short_descp_en);
+                $('#shortDetailsFil').text(data.product.short_descp_fil);
+                $('#ptagsEng').text(data.product.product_tags_en);
+                $('#ptagsFil').text(data.product.product_tags_fil);
+
+
+                $('#longDetailsEng').html(data.product.long_descp_en);
+                $('#longDetailsFil').html(data.product.long_descp_fil);
+
+                $('#pquantity').text(data.product.product_qty);
+
+                               
                 $('#product_id').val(id);
                 $('#qty').val(1);
                 // Product Price 
                 if (data.product.discount_price == null) {
                     $('#pprice').text('');
                     $('#oldprice').text('');
-                    $('#pprice').text(data.product.selling_price);
+                    $('#pprice').html('₱'+data.product.selling_price+'<small>.00</small>');
                 }else{
-                    $('#pprice').text(data.product.discount_price);
-                    $('#oldprice').text(data.product.selling_price);
+                    $('#pprice').html('₱'+data.product.discount_price+'<small>.00</small>');
+                    $('#oldprice').html('₱'+data.product.selling_price+'<small>.00</small>');
                 } // end prodcut price 
                 // Start Stock opiton
                 if (data.product.product_qty > 0) {

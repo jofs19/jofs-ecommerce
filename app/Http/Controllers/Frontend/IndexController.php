@@ -32,13 +32,14 @@ class IndexController extends Controller
         // $reviews = Review::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $reviews = Review::where('status',1)->orderBy('id','DESC')->get();
 
-    	$featured = Product::where('featured',1)->orderBy('id','DESC')->limit(6)->get();
-        $hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();    	
-        $special_offer = Product::where('special_offer',1)->orderBy('id','DESC')->limit(6)->get();
-    	$special_deals = Product::where('special_deals',1)->orderBy('id','DESC')->limit(3)->get();
+    	$featured = Product::where('featured',1)->where('status',1)->orderBy('id','DESC')->get(); //done
+        $hot_deals = Product::where('hot_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = best seller	
+        $special_offer = Product::where('special_offer',1)->where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(1)->get();
+    	$special_deals = Product::where('special_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = trending products
+        $discounted_products = Product::where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done
         $skip_category_0 = Category::skip(3)->first();
     	$skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
-
+        
     	$skip_category_1 = Category::skip(1)->first();
     	$skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->get();
 
@@ -49,7 +50,7 @@ class IndexController extends Controller
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category'));
+    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category','discounted_products'));
     }
 
     public function UserLogout()
@@ -185,13 +186,13 @@ class IndexController extends Controller
         $cat_id = $product->category_id;
 		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
 
-	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_fil','product_size_en','product_size_fil','relatedProduct'));
+	 	return view('frontendv2.product.product_details',compact('product','multiImag','product_color_en','product_color_fil','product_size_en','product_size_fil','relatedProduct'));
 
 	} //end method
 
 
     public function TagWiseProduct($tag){
-		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag)->orderBy('id','DESC')->paginate(3);
+		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag)->orderBy('id','DESC')->paginate(6);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontendv2.tags.tags_view',compact('products','categories'));
 	} //end method
@@ -242,8 +243,9 @@ class IndexController extends Controller
 	public function ProductViewAjax($id){
         $product = Product::with('category','brand')->findOrFail($id);
 		$color = $product->product_color_en;
+        $detail = $product->product_details_en;
+        $product_detail_en = explode(',', $detail);
 		$product_color = explode(',', $color);
-
 		$size = $product->product_size_en;
 		$product_size = explode(',', $size);
 
@@ -254,6 +256,7 @@ class IndexController extends Controller
 			'color' => $product_color,
 			'size' => $product_size,
             'multiImag' => $multiImage,
+            'detail' => $product_detail_en
 		));
 
 	} // end method 

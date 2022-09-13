@@ -67,15 +67,15 @@
 
     {{-- Heading --}}
     <div class="d-flex flex-wrap mb-3">
-      <h2 class="h3 mb-0">Trending in&nbsp;</h2>
+      <h2 class="h3 mb-0">Products in&nbsp;</h2>
       <div class="dropdown d-inline-block" data-bs-toggle="select"><a class="dropdown-toggle h3 text-primary" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="dropdown-toggle-label">All categories</span></a>
         <input type="hidden" name="trending-category">
         <div class="dropdown-menu dropdown-menu-end" style="">
           <div class="nav nav-tabs">
 
-          <a class="dropdown-item nav-link active" data-bs-toggle="tab" role="tab" href="#all"><span class="dropdown-item-label">All categories</span></a>
+          <a class="dropdown-item active" data-bs-toggle="tab" role="tab" href="#all"><span class="dropdown-item-label">All categories</span></a>
           @foreach($categories as $category)
-          <a class="dropdown-item nav-link nav-item" data-bs-toggle="tab" role="tab" href="#category{{ $category->id }}">
+          <a class="dropdown-item nav-item" data-bs-toggle="tab" role="tab" href="#category{{ $category->id }}">
             <span class="dropdown-item-label">                  
               {{$category->category_name_en }}
             </span>
@@ -115,7 +115,8 @@
 
     <div class="tns-carousel tns-controls-static tns-controls-outside tns-dots-enabled pt-2">
         <div class="tns-carousel-inner"
-            data-carousel-options="{&quot;items&quot;: 2, &quot;gutter&quot;: 16, &quot;controls&quot;: true, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1}, &quot;480&quot;:{&quot;items&quot;:2}, &quot;720&quot;:{&quot;items&quot;:3}, &quot;991&quot;:{&quot;items&quot;:2}, &quot;1140&quot;:{&quot;items&quot;:3}, &quot;1300&quot;:{&quot;items&quot;:4}, &quot;1500&quot;:{&quot;items&quot;:5}}}">
+            {{-- data-carousel-options="{&quot;items&quot;: 2, &quot;gutter&quot;: 16, &quot;controls&quot;: true, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1}, &quot;480&quot;:{&quot;items&quot;:2}, &quot;720&quot;:{&quot;items&quot;:3}, &quot;991&quot;:{&quot;items&quot;:2}, &quot;1140&quot;:{&quot;items&quot;:3}, &quot;1300&quot;:{&quot;items&quot;:4}, &quot;1500&quot;:{&quot;items&quot;:5}}}"> --}}
+            data-carousel-options='{"nav":true, "responsive": {"0":{"items":1},"500":{"items":2, "gutter": 18},"768":{"items":3, "gutter": 20}, "1100":{"items":5, "gutter": 18}}}'>
 
 
 
@@ -140,7 +141,7 @@
                                     class="ci-cart"></i></button>
                         </div>
                         {{-- End Product Action --}}
-                        <a class="product-thumb-overlay" href="#"></a><img
+                        <a class="product-thumb-overlay" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"></a><img
                             src="{{ asset($product->product_thumbnail) }}" alt="Product">
                     </div>
                     {{-- End Product Thumbnail --}}
@@ -151,7 +152,7 @@
                         <div class="d-flex flex-wrap justify-content-between align-items-start pb-2">
                             {{-- Product Category --}}
                             <div class="text-muted fs-xs me-1">
-                                <a class="product-meta fw-medium" href="#">
+                                <a class="product-meta fw-medium" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                     @foreach ($categories as $category)
                                     @if ($category->id == $product->category_id)
 
@@ -265,7 +266,7 @@
                     @endphp
 
 
-                    <h3 class="product-title fs-sm mb-2"><a href="#">{{ $truncatedPname }}</a></h3>
+                    <h3 class="product-title fs-sm mb-2"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">{{ $truncatedPname }}</a></h3>
 
                   {{-- Product Name, Price, and Review count --}}
                   <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -333,7 +334,7 @@
           
           
             @php
-              $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderBy('id','DESC')->get(); 
+              $catwiseProduct = App\Models\Product::where('category_id',$category->id)->where('status',1)->orderBy('id','DESC')->get(); 
               
             @endphp
           
@@ -356,7 +357,7 @@
                                               class="ci-cart"></i></button>
                                   </div>
                                   {{-- End Product Action --}}
-                                  <a class="product-thumb-overlay" href="#"></a><img
+                                  <a class="product-thumb-overlay" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"></a><img
                                       src="{{ asset($product->product_thumbnail) }}" alt="Product">
                               </div>
                               {{-- End Product Thumbnail --}}
@@ -367,7 +368,7 @@
                                   <div class="d-flex flex-wrap justify-content-between align-items-start pb-2">
                                       {{-- Product Category --}}
                                       <div class="text-muted fs-xs me-1">
-                                          <a class="product-meta fw-medium" href="#">
+                                          <a class="product-meta fw-medium" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                               @foreach ($categories as $category)
                                               @if ($category->id == $product->category_id)
           
@@ -481,7 +482,7 @@
                               @endphp
           
           
-                              <h3 class="product-title fs-sm mb-2"><a href="#">{{ $truncatedPname }}</a></h3>
+                              <h3 class="product-title fs-sm mb-2"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">{{ $truncatedPname }}</a></h3>
           
                             {{-- Product Name, Price, and Review count --}}
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -522,7 +523,12 @@
                       </div>
                       @empty
                       
-                      <h5 class="text-danger">No Product Found</h5>
+                      <div class="alert alert-danger d-flex" role="alert">
+                        <div class="alert-icon">
+                          <i class="ci-close-circle"></i>
+                        </div>
+                        <div>No Product Found</div>
+                      </div>
 
                       @endforelse
                   <!-- End Product-->
