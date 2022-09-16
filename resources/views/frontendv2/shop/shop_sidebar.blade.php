@@ -79,12 +79,12 @@
                 <div class="range-slider-ui"></div>
                 <div class="d-flex pb-1">
                   <div class="w-50 pe-2 me-2">
-                    <div class="input-group input-group-sm"><span class="input-group-text">$</span>
+                    <div class="input-group input-group-sm"><span class="input-group-text">₱</span>
                       <input class="form-control range-slider-value-min" type="text">
                     </div>
                   </div>
                   <div class="w-50 ps-2">
-                    <div class="input-group input-group-sm"><span class="input-group-text">$</span>
+                    <div class="input-group input-group-sm"><span class="input-group-text">₱</span>
                       <input class="form-control range-slider-value-max" type="text">
                     </div>
                   </div>

@@ -50,9 +50,9 @@
 
                             @if($loop->iteration < 5) <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                                 <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                    {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                         data-bs-placement="left" title="Add to wishlist"><i
-                                            class="ci-heart"></i></button>
+                                            class="ci-heart"></i></button> --}}
                                     <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
                                         <!-- Product card alt (Downloadable) -->
                                         <div class="card product-card-alt">
@@ -226,8 +226,8 @@
 
 
                             <div class="card product-card card-static">
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>
+                                {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
                                 <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
                                     <!-- Product card alt (Downloadable) -->
                                     <div class="card product-card-alt">
@@ -406,8 +406,8 @@
 
 
                             <div class="card product-card card-static">
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>
+                                {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
                                 <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
                                     <!-- Product card alt (Downloadable) -->
                                     <div class="card product-card-alt">
@@ -422,8 +422,12 @@
                                                     onclick="productView(this.id)">
                                                     <i class="ci-eye"></i>
                                                 </a>
+
+
+                                                	<input type="hidden" id="product_id" value="{{ $item->id }}" min="1">
                                                 <button class="btn btn-light btn-icon btn-shadow fs-base mx-2"
-                                                    type="button">
+                                                    type="submit" 
+                    onclick="addToCart(this.id)" id="{{ $item->id }}">
                                                     <i class="ci-cart"></i>
                                                 </button>
                                             </div>
@@ -603,7 +607,13 @@
     </div>
     </div>
     </div>
+
+
+
+
 </section>
+
+
 
 
 {{-- End Product Category Area --}}

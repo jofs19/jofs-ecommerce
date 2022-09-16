@@ -317,9 +317,9 @@
 			</div>
 		</div>
 
-		<input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
 
-		<div class="col-sm-7">
+		<div class="col-sm-7">		
+			<input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
 			@if( $product->product_qty > 0 )   
 			<button type="submit" onclick="addToCart()" id="try" class="btn btn-primary" ><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
 			@else

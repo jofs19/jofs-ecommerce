@@ -33,7 +33,7 @@ class CartController extends Controller
     				'size' => $request->size,
     			],
     		]);
-    		return response()->json(['success' => 'Successfully Added on Your Cart']);
+    		return response()->json(['success' => 'Successfully Added to Cart']);
     		 
     	}else{
 
@@ -49,7 +49,7 @@ class CartController extends Controller
     				'size' => $request->size,
     			],
     		]);
-    		return response()->json(['success' => 'Successfully Added on Your Cart']);
+    		return response()->json(['success' => 'Successfully Added to Cart']);
     	}
     } // end mehtod 
 
@@ -73,7 +73,7 @@ class CartController extends Controller
 // remove mini cart 
     public function RemoveMiniCart($rowId){
     	Cart::remove($rowId);
-    	return response()->json(['success' => 'Product Removed from Cart']);
+    	return response()->json(['success' => 'Successfully Removed from Cart']);
 
     } // end mehtod 
 
@@ -92,7 +92,7 @@ class CartController extends Controller
 					'product_id' => $product_id, 
 					'created_at' => Carbon::now(), 
 				]);
-			   return response()->json(['success' => 'Successfully Added On Your Wishlist']);
+			   return response()->json(['success' => 'Successfully Added to Wishlist']);
 
 
             }else{
@@ -163,7 +163,7 @@ class CartController extends Controller
 			$cartTotal = Cart::total();
 			$divisions = ShipDivision::orderBy('division_name','ASC')->get();
 			
-			return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
+			return view('frontendv2.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
 
 				}else{
 	

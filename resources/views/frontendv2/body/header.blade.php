@@ -185,7 +185,7 @@
                                   {{-- End Mini Cart Item Area --}}
 
 
-                                  <div class="widget-cart-item py-2 border-bottom">
+                                  {{-- <div class="widget-cart-item py-2 border-bottom">
                                       <button class="btn-close text-danger" type="button" aria-label="Remove"><span
                                               aria-hidden="true">&times;</span></button>
                                       <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
@@ -232,7 +232,7 @@
                                                       class="text-muted">x 1</span></div>
                                           </div>
                                       </div>
-                                  </div>
+                                  </div> --}}
                               </div>
                               <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                                   <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span

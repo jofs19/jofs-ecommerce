@@ -7,6 +7,7 @@
     <!-- SEO Meta Tags-->
     <meta name="description" content="JOFS E-Commerce">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta name="color-scheme" content="dark"> --}}
 
     <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
     <meta name="author" content="John Oliver Santiago">
@@ -14,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/assets/img/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/assets/img/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/favicon-16x16.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -25,10 +26,16 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/tiny-slider/dist/tiny-slider.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/drift-zoom/dist/drift-basic.min.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
-    
+    <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/themes/prism.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css') }}"/>
+
+
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.css') }}"/>
     
-    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/css/theme.min.css') }}">
 
@@ -43,6 +50,16 @@
         color: #fff;
     }
 
+
+    body.modal-open .container{
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+    filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
+}
 		
 
 	</style>
@@ -55,7 +72,128 @@
   <!-- Body-->
   <body class="handheld-toolbar-enabled"></body>
 
-    <!-- Sign in / sign up modal-->
+
+
+
+
+            
+
+
+    <main class="page-wrapper">
+
+
+      <!-- Navbar Electronics Store-->
+
+      {{-- Header Area--}}
+      @include('frontendv2.body.header')
+      {{-- End Header Area--}}
+
+
+
+
+
+
+
+
+
+      <!-- Hero (Banners + Slider)-->
+      {{-- Slider Area --}}
+      {{-- Products grid Trending Products Area --}}
+      {{-- Promo Banner Area --}}
+      {{-- Brand Area --}}
+      {{-- Product Widgets Area --}}
+      {{-- Blog Area --}}
+      {{-- Blog + Instagram info cards --}}
+
+      @yield('content')
+
+      <!-- End Hero (Banners + Slider)-->
+      {{-- End Slider Area --}}
+      {{-- End Products grid Trending Products Area --}}
+      {{-- End Promo Banner Area --}}
+      {{-- End Brand Area --}}
+      {{-- End Product Widgets Area --}}
+      {{-- End Blog Area --}}
+      {{-- End Blog + Instagram info cards --}}
+
+      {{-- Size chart Modal --}}
+      
+      {{-- End Size chart Modal --}}
+
+    </main>
+    <!-- Footer-->
+
+    {{-- Footer Area --}}
+    @include('frontendv2.body.footer')
+    {{-- End Footer Area --}}
+
+
+
+    @if(request()->is('/') || request()->is('dashboard'))
+    {{-- Mobile UI Area for Home Page --}}
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    {{-- End Mobile UI Area --}}
+
+    @elseif (request()->is('shop') || request()->is('product/tag/*') || request()->is('subcategory/*') || request()->is('subsubcategory/*'))
+
+    {{-- Mobile UI Area for Shop Page --}}
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    {{-- End Mobile UI Area for Shop Page --}}
+    @endif
+
+
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    {{-- JQUERY CDN --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    {{-- VENDOR PLUGINS --}}
+    {{-- MAIN THEME JS --}}
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+    {{-- TOASTR + SWEETALERT --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    
+    {{-- TOASTR + SWEETALERT CDN --}}
+
+
+
+<script>
+  @if(Session::has('message'))
+  var type = "{{ Session::get('alert-type','info') }}"
+  switch(type){
+     case 'info':
+     toastr.info(" {{ Session::get('message') }} ");
+     break;
+     case 'success':
+     toastr.success(" {{ Session::get('message') }} ");
+     break;
+     case 'warning':
+     toastr.warning(" {{ Session::get('message') }} ");
+     break;
+     case 'error':
+     toastr.error(" {{ Session::get('message') }} ");
+     break; 
+  }
+  @endif  
+</script> 
+
+    {{-- <script src="{{ asset('frontendv2/assets/js/jquery-1.11.1.min.js') }}"></script>  --}}
+    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
+
+
     {{-- Sign-in/Sign-up Modal Area --}}
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -75,7 +213,7 @@
 
               <div class="mb-3">
                 <label class="form-label" for="si-email">Email address</label>
-                <input class="form-control" type="email" id="email" name="email" placeholder="johndoe@example.com" required>
+                <input class="form-control" type="email" id="email" name="email" placeholder="johnoliversantiago@example.com" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
               <div class="mb-3">
@@ -104,7 +242,7 @@
 
               <div class="mb-3">
                 <label class="form-label" for="su-name">Username</label>
-                <input class="form-control" type="text" id="name" name="name" placeholder="John Doe" required>
+                <input class="form-control" type="text" id="name" name="name" placeholder="John Oliver Santiago" required>
                 <div class="invalid-feedback">Please fill in your name.</div>
               </div>
               <div class="mb-3">
@@ -166,7 +304,8 @@
     </div>
     {{-- END SIGN-UP FORM --}}
 
-    {{-- Product Quick View Area --}}
+
+        {{-- Product Quick View Area --}}
 
             <!-- Quick View Modal Area-->
 
@@ -176,15 +315,15 @@
 
                         <div class="modal-header">
                             
-                    
-                            <h4 class="modal-title product-title"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}" data-bs-toggle="tooltip"
+
+                            <h4 class="modal-title product-title"><a id="plink" href="#" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="Go to product page">
                                     
                                     <strong><span id="pname"></span> </strong> 
                                     
 
                                     <i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
-                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" id="closeModel"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -219,11 +358,13 @@
                                                 <div class="image-zoom-pane"></div>
                                             </div>
                                         </div>
-                                        <div class="product-gallery-thumblist order-sm-1"><a
+                                        <div class="product-gallery-thumblist order-sm-1">
+                                          <a
                                                 class="product-gallery-thumblist-item active" href="#first"><img
                                                 id="pgallery"
 
-                                                    alt="Product thumb"></a><a class="product-gallery-thumblist-item"
+                                                    alt="Product thumb"></a>
+                                                    <a class="product-gallery-thumblist-item"
                                                 href="#second"><img
                                                     src="{{ asset('frontendv2/assets/img/shop/single/gallery/th06.jpg') }}"
                                                     alt="Product thumb"></a><a class="product-gallery-thumblist-item"
@@ -262,65 +403,92 @@
           
                                       </div>
 
-                                      
+                                      {{-- <label for="color">Choose Color</label>
+                                      <select class="form-control" id="color" name="color"> --}}
 
                                        
 
 
-                                        <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span
-                                                class="text-muted" id="colorOptionText">Dark blue/Orange</span></div>
+                                        {{-- <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span>
+                                          
+                                          <span class="text-muted" id="colorOptionText">Dark blue/Orange</span></div> --}}
                                         <div class="position-relative me-n4 mb-3">
-                                            <div class="form-check form-option form-check-inline mb-2">
-                                                <input class="form-check-input" type="radio" name="color" id="color1"
-                                                    data-bs-label="colorOptionText" value="Dark blue/Orange" checked>
-                                                <label class="form-option-label rounded-circle" for="color1"><span
-                                                        class="form-option-color rounded-circle"
-                                                        style="background-color: #f25540;"></span></label>
-                                            </div>
-                                            <div class="form-check form-option form-check-inline mb-2">
-                                                <input class="form-check-input" type="radio" name="color" id="color2"
-                                                    data-bs-label="colorOptionText" value="Dark gray/Green">
-                                                <label class="form-option-label rounded-circle" for="color2"><span
-                                                        class="form-option-color rounded-circle"
-                                                        style="background-color: #65805b;"></span></label>
-                                            </div>
-                                            <div class="form-check form-option form-check-inline mb-2">
-                                                <input class="form-check-input" type="radio" name="color" id="color3"
-                                                    data-bs-label="colorOptionText" value="White">
-                                                <label class="form-option-label rounded-circle" for="color3"><span
-                                                        class="form-option-color rounded-circle"
-                                                        style="background-color: #f5f5f5;"></span></label>
-                                            </div>
-                                            <div class="form-check form-option form-check-inline mb-2">
-                                                <input class="form-check-input" type="radio" name="color" id="color4"
-                                                    data-bs-label="colorOptionText" value="Black">
-                                                <label class="form-option-label rounded-circle" for="color4"><span
-                                                        class="form-option-color rounded-circle"
-                                                        style="background-color: #333;"></span></label>
-                                            </div>
+                                            
 
-                                            {{-- <div class="product-badge product-available mt-n1"><i
-                                                class="ci-security-check" ></i>Product available</div> --}}
+
+
+                                            
 
                                             <div id="aviable"></div>
+                                            <br>
+
+
+                                          {{-- </div>  <!-- // end form group -->
+                                          <div class="form-group" id="sizeArea">
+                                          <label for="size">Choose Size</label>
+                                          <select class="form-control" id="size" name="size">
+                                            <option>1</option>
+                                             
+                                          </select>
+                                        </div>  <!-- // end form group --> --}}
+                                                                              
 
                                         </div>
+
+                                        <div class="mb-3">
+                                          <label for="color" class="form-label">Choose Variant</label>
+                                          <select class="form-select" id="color" name="color" style="width:26rem">
+                                            <option class="bg-secondary" disabled>Choose option...</option>
+                                            
+                                          </select>
+                                        </div>
+
+                                        <div class="my-3" id="sizeArea">
+                                          <label for="size" class="form-label">Choose Size</label>
+                                          <select class="form-select" id="size" name="size">
+                                            
+                                            <option>1</option>
+                                                                                        
+                                          </select>
+                                        </div>
+
+
+
                                         <div class="d-flex align-items-center pt-2 pb-4">
                                           
                                           {{-- <input type="number" class="form-control" id="qty" value="0" min="1"> --}}
-                                          <input class="form-control me-3" type="number" id="qty" min="0" value="0"  max="{{ $product->product_qty }}" style="width: 6rem;">
+                                          <input class="form-control me-3" type="number" id="qty" min="0" value="0"   style="width: 6rem;">
 
-                                            <button class="btn btn-primary btn-shadow d-block w-100" type="button" id="try"><i
-                                                    class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                                         
+                                          
+                                          <input type="hidden" id="product_id">
+<button type="submit" id="try" class="btn btn-primary btn-shadow d-block w-100 btn-shadow" onclick="addToCart()" ><i class="ci-cart fs-lg me-1"></i>Add to Cart</button>
+
+                                              
                                         </div>
                                         <div class="d-flex mb-4">
                                             <div class="w-100 me-3">
-                                                <button class="btn btn-secondary d-block w-100" type="button"><i
-                                                        class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to
-                                                    </span>Wishlist</button>
+
+
+
+                                              {{-- <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
+
+                                              <input type="hidden" id="product_id">
+<button type="submit" id="try" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button> --}}
+
+                                              <input type="hidden" id="product_id">
+                                                <button class="btn btn-danger d-block w-100 btn-shadow" type="button" title="Add to Wishlist" onclick="addToWishList()"><i
+                                                        class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to</span> Wishlist</button>
+
+
+
+
+
+
+
                                             </div>
                                             <div class="w-100">
-                                                <button class="btn btn-secondary d-block w-100" type="button"><i
+                                                <button class="btn btn-accent d-block w-100 btn-shadow" type="button"><i
                                                         class="ci-compare fs-lg me-2"></i>Compare</button>
                                             </div>
                                         </div>
@@ -328,7 +496,7 @@
                       <!-- Product panels-->
                       <div class="accordion mb-4" id="productPanels">
                         <div class="accordion-item">
-                          <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>General info</a></h3>
+                          <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>General info</a></h3>
                           <div class="accordion-collapse collapse" id="shippingOptions" data-bs-parent="#productPanels">
                             <div class="accordion-body fs-sm">
                               <div class="d-flex justify-content-between border-bottom pb-2">
@@ -423,425 +591,6 @@
             {{-- End Quick View Modal Area --}}
 
 
-    <main class="page-wrapper">
-
-
-      <!-- Navbar Electronics Store-->
-
-      {{-- Header Area--}}
-      @include('frontendv2.body.header')
-      {{-- End Header Area--}}
-
-
-
-
-
-
-
-
-
-      <!-- Hero (Banners + Slider)-->
-      {{-- Slider Area --}}
-      {{-- Products grid Trending Products Area --}}
-      {{-- Promo Banner Area --}}
-      {{-- Brand Area --}}
-      {{-- Product Widgets Area --}}
-      {{-- Blog Area --}}
-      {{-- Blog + Instagram info cards --}}
-
-      @yield('content')
-
-      <!-- End Hero (Banners + Slider)-->
-      {{-- End Slider Area --}}
-      {{-- End Products grid Trending Products Area --}}
-      {{-- End Promo Banner Area --}}
-      {{-- End Brand Area --}}
-      {{-- End Product Widgets Area --}}
-      {{-- End Blog Area --}}
-      {{-- End Blog + Instagram info cards --}}
-
-      {{-- Size chart Modal --}}
-      <div class="modal fade" id="size-chart">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header bg-secondary">
-              <ul class="nav nav-tabs card-header-tabs" role="tablist" style="margin-bottom: -1rem;">
-                <li class="nav-item"><a class="nav-link fw-medium active" href="#mens" data-bs-toggle="tab" role="tab" aria-controls="mens" aria-selected="true">Men's sizes</a></li>
-                <li class="nav-item"><a class="nav-link fw-medium" href="#womens" data-bs-toggle="tab" role="tab" aria-controls="womens" aria-selected="false">Women's sizes</a></li>
-              </ul>
-              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-              <div class="tab-content">
-                <div class="tab-pane fade show active" id="mens" role="tabpanel">
-                  <div class="table-responsive">
-                    <table class="table fs-sm text-center mb-0">
-                      <thead>
-                        <tr>
-                          <th class="align-middle bg-secondary">US<br>Sizes</th>
-                          <th class="align-middle">Euro<br>Sizes</th>
-                          <th class="align-middle">UK<br>Sizes</th>
-                          <th class="align-middle">Inches</th>
-                          <th class="align-middle">CM</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="bg-secondary fw-medium">6</td>
-                          <td>39</td>
-                          <td>5.5</td>
-                          <td>9.25"</td>
-                          <td>23.5</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">6.5</td>
-                          <td>39</td>
-                          <td>6</td>
-                          <td>9.5"</td>
-                          <td>24.1</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">7</td>
-                          <td>40</td>
-                          <td>6.5</td>
-                          <td>9.625"</td>
-                          <td>24.4</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">7.5</td>
-                          <td>40-41</td>
-                          <td>7</td>
-                          <td>9.75"</td>
-                          <td>24.8</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">8</td>
-                          <td>41</td>
-                          <td>7.5</td>
-                          <td>9.9375"</td>
-                          <td>25.4</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">8.5</td>
-                          <td>41-42</td>
-                          <td>8</td>
-                          <td>10.125"</td>
-                          <td>25.7</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">9</td>
-                          <td>42</td>
-                          <td>8.5</td>
-                          <td>10.25"</td>
-                          <td>26</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">9.5</td>
-                          <td>42-43</td>
-                          <td>9</td>
-                          <td>10.4375"</td>
-                          <td>26.7</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">10</td>
-                          <td>43</td>
-                          <td>9.5</td>
-                          <td>10.5625"</td>
-                          <td>27</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">10.5</td>
-                          <td>43-44</td>
-                          <td>10</td>
-                          <td>10.75"</td>
-                          <td>27.3</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">11</td>
-                          <td>44</td>
-                          <td>10.5</td>
-                          <td>10.9375"</td>
-                          <td>27.9</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">11.5</td>
-                          <td>44-45</td>
-                          <td>11</td>
-                          <td>11.125"</td>
-                          <td>28.3</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">12</td>
-                          <td>45</td>
-                          <td>11.5</td>
-                          <td>11.25"</td>
-                          <td>28.6</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">13</td>
-                          <td>46</td>
-                          <td>12.5</td>
-                          <td>11.5625"</td>
-                          <td>29.4</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">14</td>
-                          <td>47</td>
-                          <td>13.5</td>
-                          <td>11.875"</td>
-                          <td>30.2</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">15</td>
-                          <td>48</td>
-                          <td>14.5</td>
-                          <td>12.1875"</td>
-                          <td>31</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">16</td>
-                          <td>49</td>
-                          <td>15.5</td>
-                          <td>12.5"</td>
-                          <td>31.8</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="womens" role="tabpanel">
-                  <div class="table-responsive">
-                    <table class="table fs-sm text-center mb-0">
-                      <thead>
-                        <tr>
-                          <th class="align-middle bg-secondary">US<br>Sizes</th>
-                          <th class="align-middle">Euro<br>Sizes</th>
-                          <th class="align-middle">UK<br>Sizes</th>
-                          <th class="align-middle">Inches</th>
-                          <th class="align-middle">CM</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="bg-secondary fw-medium">4</td>
-                          <td>35</td>
-                          <td>2</td>
-                          <td>8.1875"</td>
-                          <td>20.8</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">4.5</td>
-                          <td>35</td>
-                          <td>2.5</td>
-                          <td>8.375"</td>
-                          <td>21.3</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">5</td>
-                          <td>35-36</td>
-                          <td>3</td>
-                          <td>8.5"</td>
-                          <td>21.6</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">5.5</td>
-                          <td>36</td>
-                          <td>3.5</td>
-                          <td>8.75"</td>
-                          <td>22.2</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">6</td>
-                          <td>36-37</td>
-                          <td>4</td>
-                          <td>8.875"</td>
-                          <td>22.5</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">6.5</td>
-                          <td>37</td>
-                          <td>4.5</td>
-                          <td>9.0625"</td>
-                          <td>23</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">7</td>
-                          <td>37-38</td>
-                          <td>5</td>
-                          <td>9.25"</td>
-                          <td>23.5</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">7.5</td>
-                          <td>38</td>
-                          <td>5.5</td>
-                          <td>9.375"</td>
-                          <td>23.8</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">8</td>
-                          <td>38-39</td>
-                          <td>6</td>
-                          <td>9.5"</td>
-                          <td>24.1</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">8.5</td>
-                          <td>39</td>
-                          <td>6.5</td>
-                          <td>9.6875"</td>
-                          <td>24.6</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">9</td>
-                          <td>39-40</td>
-                          <td>7</td>
-                          <td>9.875"</td>
-                          <td>25.1</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">9.5</td>
-                          <td>40</td>
-                          <td>7.5</td>
-                          <td>10"</td>
-                          <td>25.4</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">10</td>
-                          <td>40-41</td>
-                          <td>8</td>
-                          <td>10.1875"</td>
-                          <td>25.9</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">10.5</td>
-                          <td>41</td>
-                          <td>8.5</td>
-                          <td>10.3125"</td>
-                          <td>26.2</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">11</td>
-                          <td>41-42</td>
-                          <td>9</td>
-                          <td>10.5"</td>
-                          <td>26.7</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">11.5</td>
-                          <td>42</td>
-                          <td>9.5</td>
-                          <td>10.6875"</td>
-                          <td>27.1</td>
-                        </tr>
-                        <tr>
-                          <td class="bg-secondary fw-medium">12</td>
-                          <td>42-43</td>
-                          <td>10</td>
-                          <td>10.875"</td>
-                          <td>27.6</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {{-- End Size chart Modal --}}
-
-    </main>
-    <!-- Footer-->
-
-    {{-- Footer Area --}}
-    @include('frontendv2.body.footer')
-    {{-- End Footer Area --}}
-
-
-
-    @if(request()->is('/') || request()->is('dashboard'))
-    {{-- Mobile UI Area for Home Page --}}
-    <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
-    </div>
-    {{-- End Mobile UI Area --}}
-
-    @elseif (request()->is('shop') || request()->is('product/tag/*') || request()->is('subcategory/*') || request()->is('subsubcategory/*'))
-
-    {{-- Mobile UI Area for Shop Page --}}
-    <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
-    </div>
-    {{-- End Mobile UI Area for Shop Page --}}
-    @endif
-
-
-    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
-
-
-    {{-- Validation js --}}
-    <script src="{{ asset('frontendv2/assets/js/validate.min.js') }}"></script>
-
-
-    <!-- Vendor scrits: js libraries and plugins-->
-    <script src="{{ asset('frontendv2/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/simplebar/dist/simplebar.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
-    <script src="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.js') }}"></script>
-
-    
-
-    <!-- Main theme script-->
-    <script src="{{ asset('frontendv2/assets/js/theme.min.js') }}"></script>
-    {{-- JQUERY CDN --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-    {{-- TOASTR + SWEETALERT --}}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-
-    {{-- <script>
-          
-        // Function to check Whether both passwords
-        // is same or not.
-        function checkPassword(form) {
-            password = form.password.value;
-            password_confirmation = form.password_confirmation.value;
-    
-            // If password not entered
-            if (password == '')
-                alert ("Please enter Password");
-                  
-            // If confirm password not entered
-            else if (password_confirmation == '')
-                alert ("Please enter confirm password");
-                  
-            // If Not same return False.    
-            else if (password != password_confirmation) {
-                alert ("\nPassword did not match: Please try again...")
-                return false;
-            }
-    
-            // If same return True.
-            else{
-                alert("Password Match: Welcome to GeeksforGeeks!")
-                return true;
-            }
-        }
-    </script> --}}
-
-
     <script type="text/javascript">
         $.ajaxSetup({
             headers:{
@@ -857,6 +606,8 @@
             dataType:'json',
             success:function(data){
                 // console.log(data)
+                $('#product_id').val(id);
+                $('#plink').attr('href','/product/details/'+data.product.id+'/'+data.product.product_slug_en);
                 $('#pname').text(data.product.product_name_en);
                 $('#price').text(data.product.selling_price);
                 $('#pcode').text(data.product.product_code);
@@ -870,15 +621,9 @@
                 $('#shortDetailsFil').text(data.product.short_descp_fil);
                 $('#ptagsEng').text(data.product.product_tags_en);
                 $('#ptagsFil').text(data.product.product_tags_fil);
-
-
                 $('#longDetailsEng').html(data.product.long_descp_en);
                 $('#longDetailsFil').html(data.product.long_descp_fil);
-
-                $('#pquantity').text(data.product.product_qty);
-
-                               
-                $('#product_id').val(id);
+                $('#pquantity').text(data.product.product_qty);                              
                 $('#qty').val(1);
                 // Product Price 
                 if (data.product.discount_price == null) {
@@ -893,36 +638,44 @@
                 if (data.product.product_qty > 0) {
                     $('#aviable').text('');
                     $('#stockout').text('');
-                    $('#aviable').html(`<div class="product-badge product-available mt-n1"><i
-                                                    class="ci-security-check" ></i>Product Available</div>`);
+                    $('#aviable').html(`<div class="product-badge product-available mt-n1"><i class="ci-security-check" ></i>Product Available</div>`);
                     $('#try').attr('disabled',false);
-                    $('#qty').attr('max',data.product.product_qty);
-    
-    
+                    $('#qty').attr('max',data.product.product_qty);  
                 }else{
                     $('#aviable').text('');
                     $('#stockout').text('');
-                    $('#aviable').html(`<div class="product-badge product-unavailable mt-n1"><i
+                    $('#aviable').html(`<div class="product-badge product-not-available mt-n1"><i
                                                     class="ci-security-close" ></i>Out of Stock</div>`);
                     $('#try').attr('disabled',true);
+
                     $('#qty').attr('max',data.product.product_qty);
     
                 } // end Stock Option 
-                // Color
+
+
+
+        // Color
         $('select[name="color"]').empty();        
-        $.each(data.color,function(key,value){
-            $('select[name="color"]').append('<option value=" '+value+' ">'+value+' </option>')
-        }) // end color
+    $.each(data.color,function(key,value){
+        $('select[name="color"]').append('<option value=" '+value+' ">'+value+' </option>')
+    }) // end color
+
+            
+
+
          // Size
-        $('select[name="size"]').empty();        
-        $.each(data.size,function(key,value){
-            $('select[name="size"]').append('<option value=" '+value+' ">'+value+' </option>')
-            if (data.size == "") {
-                $('#sizeArea').hide();
-            }else{
-                $('#sizeArea').show();
-            }
-        }) // end size
+    $('select[name="size"]').empty();        
+    $.each(data.size,function(key,value){
+        $('select[name="size"]').append('<option value=" '+value+' ">'+value+' </option>')
+        if (data.size == "") {
+            $('#sizeArea').hide();
+        }else{
+            $('#sizeArea').show();
+        }
+    }) // end size
+
+
+        
      
             }
         })
@@ -931,54 +684,54 @@
     // Eend Product View with Modal 
     
     
-    
-    
-     // Start Add To Cart Product 
-        function addToCart(){
-            var product_name = $('#pname').text();
-            var id = $('#product_id').val();
-            var color = $('#color option:selected').text();
-            var size = $('#size option:selected').text();
-            var quantity = $('#qty').val();
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                data:{
-                    color:color, size:size, quantity:quantity, product_name:product_name
-                },
-                url: "/cart/data/store/"+id,
-                success:function(data){
-    
-                  miniCart();
-    
-                    $('#closeModel').click();
-                    // console.log(data)
-                    // Start Message 
-                    const Toast = Swal.mixin({
-                          toast: true,
-                          position: 'top-end',
-                          icon: 'success',
-                          showConfirmButton: false,
-                          timer: 3000
-                        })
-                    if ($.isEmptyObject(data.error)) {
-                        Toast.fire({
-                            type: 'success',
-                            title: data.success
-                        })
-                    }else{
-                        Toast.fire({
-                            type: 'error',
-                            title: data.error
-                        })
-                    }
-                    // End Message 
+ // Start Add To Cart Product 
+    function addToCart(){
+        var product_name = $('#pname').text();
+        var id = $('#product_id').val();
+        var color = $('#color option:selected').text();
+        var size = $('#size option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data:{
+                color:color, size:size, quantity:quantity, product_name:product_name
+            },
+            url: "/cart/data/store/"+id,
+            success:function(data){
+
+              miniCart();
+
+                $('#closeModel').click();
+                // console.log(data)
+                // Start Message 
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    })
                 }
-            })
-        }
-      
-    // End Add To Cart Product 
-    </script>
+                // End Message 
+            }
+        })
+    }
+  
+// End Add To Cart Product 
+</script>
+
+
     
     
     <script type="text/javascript">
@@ -1446,134 +1199,35 @@
 
 
 
-    {{-- TOASTR + SWEETALERT CDN --}}
 
 
 
-<script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type','info') }}"
-    switch(type){
-       case 'info':
-       toastr.info(" {{ Session::get('message') }} ");
-       break;
-       case 'success':
-       toastr.success(" {{ Session::get('message') }} ");
-       break;
-       case 'warning':
-       toastr.warning(" {{ Session::get('message') }} ");
-       break;
-       case 'error':
-       toastr.error(" {{ Session::get('message') }} ");
-       break; 
-    }
-    @endif  
-</script> 
+    <!-- Vendor scrits: js libraries and plugins-->
+    <script src="{{ asset('frontendv2/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/simplebar/dist/simplebar.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
 
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/components/prism-core.min.j') }}s"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/components/prism-markup.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/components/prism-clike.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/components/prism-javascript.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/components/prism-pug.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js') }}"></script>
 
-
-
-<script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
-<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
-  <script type="text/javascript">
-    window.onload = function () {
-        var password = document.getElementById("password");
-        var password_confirmation = document.getElementById("password_confirmation");
-        password.onchange = ConfirmPassword;
-        password_confirmation.onkeyup = ConfirmPassword;
-        function ConfirmPassword() {
-            txtConfirmPassword.setCustomValidity("");
-            if (password.value !== password_confirmation.value) {
-                password_confirmation.setCustomValidity("Passwords do not match.");
-            }
-        }
-    }
-</script>
-
-<script>
-          
-
-	function checkPassword(form) {
-		password = form.password.value;
-		password_confirmation = form.password_confirmation.value;
-
-		
-			  
-		// If Not same return False.    
-		if (password != password_confirmation) {
-			// alert ("\nPassword did not match: Please try again...")
-			$('.confirm').removeClass();
-		}else{
-			$('#confirm').addClass('confirm');
-		}
-
-		// return false;
-
-	}
-</script>
-
-<script>
-
-	// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-
-  </script>
-
- 
- 
-{{-- //   
-    <script>
-    function checkPassword(form) {
-//             password = form.password.value;
-//             password_confirmation = form.password_confirmation.value;
-
-//             // If password not entered
-//             if (password == '')
-//                 alert ("Please enter Password");
-                  
-//             // If confirm password not entered
-//             else if (password_confirmation == '')
-//                 alert ("Please enter confirm password");
-                  
-//             // If Not same return False.    
-//             else if (password != password_confirmation) {
-//                 alert ("\nPassword did not match: Please try again...")
-//                 return false;
-//             }
-
-//             // If same return True.
-//             else{
-//                 alert("Password Match: Welcome to GeeksforGeeks!")
-//                 return true;
-//             }
-//         } --}}
-
-   
-
+    <script src="{{ asset('frontendv2/assets/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.js') }}"></script>
 
     
 
- 
+    <!-- Main theme script-->
+    <script src="{{ asset('frontendv2/assets/js/theme.min.js') }}"></script>
 
-
+  
 
 
 

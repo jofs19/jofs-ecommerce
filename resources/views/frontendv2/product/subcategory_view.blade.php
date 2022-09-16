@@ -61,7 +61,7 @@ Sub Category Product
                 <option>A - Z Order</option>
                 <option>Z - A Order</option>
                 
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
+              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 0 product(s)</span>
             </div>
           </div>
           <div class="d-flex pb-3">

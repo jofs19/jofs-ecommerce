@@ -239,12 +239,12 @@ class IndexController extends Controller
 
 
 
-        /// Product View With Ajax
+             /// Product View With Ajax
 	public function ProductViewAjax($id){
+        $product_id = Product::findOrFail($id);
         $product = Product::with('category','brand')->findOrFail($id);
 		$color = $product->product_color_en;
-        $detail = $product->product_details_en;
-        $product_detail_en = explode(',', $detail);
+
 		$product_color = explode(',', $color);
 		$size = $product->product_size_en;
 		$product_size = explode(',', $size);
@@ -256,7 +256,7 @@ class IndexController extends Controller
 			'color' => $product_color,
 			'size' => $product_size,
             'multiImag' => $multiImage,
-            'detail' => $product_detail_en
+            'product_id' => $product_id,
 		));
 
 	} // end method 

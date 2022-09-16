@@ -14,7 +14,7 @@
                 <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
                 <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.page') }}">Shop</a>
                 </li>
-                <li class="breadcrumb-item text-nowrap active" aria-current="page">@if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif</li>
+                <li class="breadcrumb-item text-nowrap active" aria-current="page"><span id="pname">@if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif</span></li>
               </ol>
             </nav>
           </div>
@@ -177,7 +177,7 @@
                                       
                         
                         
-                        @foreach ($product_color_en as $color)
+                        {{-- @foreach ($product_color_en as $color)
                           @if($color == null)
 
                           @else
@@ -187,43 +187,21 @@
                           Variant:
                           
                         </span>
-                        <span class="text-muted" id="colorOption">----</span>
+                        <span class="text-muted" id="color">----</span>
                     </div>
                     @endif
                           @endif
-                        @endforeach
+                        @endforeach --}}
                                         
 
-
+<br>
 
                       <div class="position-relative me-n4 mb-3">
 
-                        @foreach($product_color_en as $color)
-
-                        @if($color == null)
-                        <div class="form-check form-option form-check-inline mb-2">
-                        </div>
-                        @else
-
-                        <div class="form-check form-option form-check-inline mb-2">
-                          
-
-                          <input class="form-check-input" type="radio" name="color" id="{{ $color }}" data-bs-label="colorOption" value="{{ ucwords($color) }}">
-                                                                              
-                          <label class="form-option-label rounded-circle" for="{{ $color }}">
-
-                            <span class="form-option-color rounded-circle" style="background-color: {{ strtolower ($color) }};"></span>
-                            
-                        </label>
-
-
-                        </div>
-                        @endif
-
-                        @endforeach
+                        
 
                         @if($product->product_qty < 1)
-                        <div class="product-badge product-available mt-n1 bg-danger"><i class="ci-security-close"></i>Out of Stock</div>
+                        <div class="product-badge product-not-available mt-n1"><i class="ci-security-close"></i>Out of Stock</div>
 
                         @else
                         <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product available</div>
@@ -232,48 +210,89 @@
 
                       </div>
 
+                      <br>
 
 
+                      <!-- Select Color -->
+                      @if($product->product_color_en == NULL || $product->product_color_fil == NULL)
+
+                      @else
+
+                      <div class="mb-3">
+                        <label for="color" class="form-label">Product Options:</label>
+                        <select class="form-select" id="color">
+                          <option class="bg-secondary" selected disabled>Select variant...</option>
+
+                          @foreach($product_color_en as $color)
+                          <option value="{{ $color }}">{{ ucwords($color) }}</option>		 
+                          @endforeach
+                          
+                        </select>
+                      </div>
+
+                      @endif
 
                       @if($product->product_size_en == null)
 
                       @else	
                       <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center pb-1">
-                          <label class="form-label" for="product-size">Size:</label><a class="nav-link-style fs-sm" href="#size-chart" data-bs-toggle="modal"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
-                        </div>
-                        <select class="form-select" required="" id="product-size">
-                          <option value="" selected disabled class="bg-faded-dark">Select size</option>
+                        {{-- <div class="d-flex justify-content-between align-items-center pb-1">
+                          <label class="form-label" for="product-size">Choose Size:</label><a class="nav-link-style fs-sm" href="#size-chart" data-bs-toggle="modal"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
+                        </div> --}}
+                        <select class="form-select" id="size">
+                          <option selected disabled class="bg-faded-dark">Select size...</option>
                           @foreach($product_size_en as $size)
                           <option value="{{ $size }}">{{ ucwords($size) }}</option>		 
                           @endforeach
                         </select>
                       </div>
                       @endif
+
+                      {{-- <!-- Size options (radio buttons) -->
+<div class="form-check form-option form-check-inline mb-2">
+  <input type="radio" class="form-check-input" id="xl" name="size" checked>
+  <label for="xl" class="form-option-label">50 ML</label>
+</div>
+<div class="form-check form-option form-check-inline mb-2">
+  <input type="radio" class="form-check-input" id="l" name="size" checked>
+  <label for="l" class="form-option-label">100 ML</label>
+</div>
+<div class="form-check form-option form-check-inline mb-2">
+  <input type="radio" class="form-check-input" id="m" name="size" checked>
+  <label for="m" class="form-option-label">150 ML</label>
+</div> --}}
+
                       
                       
                       <div class="d-flex align-items-center pt-2 pb-4">
                         
                         @if($product->product_qty < 1)
-                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="0">                       
-                        <input class="form-control me-3" type="number" id="number-input" min="0" value="0"  max="{{ $product->product_qty }}" style="width: 6rem;">
+                        <input class="form-control me-3" type="number" id="qty" value="0" min="0"  max="0" style="width: 6rem;">
                         @else
-                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="0">                       
-                        <input class="form-control me-3" type="number" id="number-input" min="0" value="0"  max="{{ $product->product_qty }}" style="width: 6rem;">
+                        <input class="form-control me-3" type="number" id="qty" value="1" min="1"  max="{{ $product->product_qty }}" style="width: 6rem;">
                         @endif
 
+
                         @if($product->product_qty < 1)
+                        
                         <button class="btn btn-secondary btn-shadow d-block w-100" disabled type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
                         @else
-                        <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+
+           <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+			    <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow d-block w-100" ><i class="ci-cart fs-lg me-2"></i> ADD TO CART</button>
+
                         @endif
+
+
+
+
                       </div>
                       <div class="d-flex mb-4">
                         <div class="w-100 me-3">
-                          <button class="btn btn-secondary d-block w-100" type="button"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
+                          <button class="btn btn-danger btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
                         </div>
                         <div class="w-100">
-                          <button class="btn btn-secondary d-block w-100" type="button"><i class="ci-compare fs-lg me-2"></i>Compare</button>
+                          <button class="btn btn-accent btn-shadow d-block w-100" type="button"><i class="ci-compare fs-lg me-2"></i>Compare</button>
                         </div>
                       </div>
                       <!-- Product panels-->
@@ -338,78 +357,7 @@
               </div>
               <!-- End General info tab -->
 
-              {{-- <!-- Tech specs tab-->
-              <div class="tab-pane fade" id="specs" role="tabpanel">
-                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                  <div class="d-flex align-items-center me-md-3"><img src="img/shop/single/gallery/th05.jpg" width="90" alt="Product thumb">
-                    <div class="ps-3">
-                      <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
-                      <div class="h4 fw-normal text-accent">$124.<small>99</small></div>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center pt-3">
-                    <select class="form-select me-2" style="width: 5rem;">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                    <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button>
-                    <div class="me-2">
-                      <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ci-heart fs-lg"></i></button>
-                    </div>
-                    <div>
-                      <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="Compare"><i class="ci-compare fs-lg"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Specs table-->
-                <div class="row pt-2">
-                  <div class="col-lg-5 col-sm-6">
-                    <h3 class="h6">General specs</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Model:</span><span>Amazfit Smartwatch</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Gender:</span><span>Unisex</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Smartphone app:</span><span>Amazfit Watch</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">OS campitibility:</span><span>Android / iOS</span></li>
-                    </ul>
-                    <h3 class="h6">Physical specs</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Shape:</span><span>Rectangular</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Body material:</span><span>Plastics / Ceramics</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Band material:</span><span>Silicone</span></li>
-                    </ul>
-                    <h3 class="h6">Display</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display type:</span><span>Color</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display size:</span><span>1.28"</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Screen resolution:</span><span>176 x 176</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Touch screen:</span><span>No</span></li>
-                    </ul>
-                  </div>
-                  <div class="col-lg-5 col-sm-6 offset-lg-1">
-                    <h3 class="h6">Functions</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Phone calls:</span><span>Incoming call notification</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Monitoring:</span><span>Heart rate / Physical activity</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">GPS support:</span><span>Yes</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Sensors:</span><span>Heart rate, Gyroscope, Geomagnetic, Light sensor</span></li>
-                    </ul>
-                    <h3 class="h6">Battery</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Battery:</span><span>Li-Pol</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Battery capacity:</span><span>190 mAh</span></li>
-                    </ul>
-                    <h3 class="h6">Dimensions</h3>
-                    <ul class="list-unstyled fs-sm pb-2">
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Dimensions:</span><span>195 x 20 mm</span></li>
-                      <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Weight:</span><span>32 g</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- End Tech specs tab--> --}}
+              
 
               <!-- Reviews tab-->
               <div class="tab-pane fade" id="reviews" role="tabpanel">

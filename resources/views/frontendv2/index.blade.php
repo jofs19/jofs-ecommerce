@@ -206,8 +206,16 @@ Vartouhi | Beauty & Cosmetics Store
 
                 <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                         href="#"><i class="ci-compare me-1"></i>Compare</a>
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
+
+                        {{-- <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button> --}}
+
+                        
+
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
+
+
+
+
                 </div>
 
                 @if ($product->product_qty < 1)
@@ -375,12 +383,19 @@ Vartouhi | Beauty & Cosmetics Store
                     </div>
             </div>
             <div class="card-body card-body-hidden">
-                @if($product->product_qty < 1) <button class="btn btn-secondary btn-sm d-block w-100 mb-2" type="button"
-                    disabled><i class="ci-cart fs-sm me-1"></i>Out of Stock</button>
+               {{-- <input type="hidden" id="product_id" value="{{ $product->id }}" min="1"> --}}
+                @if($product->product_qty < 1) 
+                    <button class="btn btn-primary btn-sm d-block w-100 mb-2 btn-shadow" type="submit" 
+                    onclick="addToCart(this.id)" id="{{ $product->id }}"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
 
                     @else
-                    <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+
+                    {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button> --}}
+
+		            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                    <button class="btn btn-primary btn-sm d-block w-100 mb-2 btn-shadow" type="submit" 
+                    onclick="addToCart(this.id)" id="{{ $product->id }}"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+       
 
                     @endif
                     <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
