@@ -27,7 +27,11 @@
         <ul class="list-unstyled mb-0">
         <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('dashboard')) ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="ci-view-grid opacity-60 me-2"></i>Dashboard</a></li>
           <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/my/orders')) ? 'active' : '' }}" href="{{ route('my.orders') }}"><i class="ci-bag opacity-60 me-2"></i>Orders<span class="fs-sm text-muted ms-auto">1</span></a></li>
-          <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-wishlist.html"><i class="ci-heart opacity-60 me-2"></i>Wishlist<span class="fs-sm text-muted ms-auto">3</span></a></li>
+          <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/wishlist')) ? 'active' : '' }}" href="{{ route('wishlist') }}"><i class="ci-heart opacity-60 me-2"></i>Wishlist<span class="fs-sm text-muted ms-auto">
+
+            <span class="badge rounded-pill bg-danger wishlistQty"></span>
+
+            </span></a></li>
           <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-tickets.html"><i class="ci-reply opacity-60 me-2"></i>Returned Orders<span class="fs-sm text-muted ms-auto">1</span></a></li>
         </ul>
         <div class="bg-secondary px-4 py-3">

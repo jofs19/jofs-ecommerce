@@ -51,9 +51,9 @@
           <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#"
                   data-bs-toggle="dropdown">Wishlist / Compare / Track</a>
               <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="account-wishlist.html"><i
+                  <li><a class="dropdown-item" href="{{ route('wishlist') }}"><i
                               class="ci-heart text-muted me-2"></i>@if(session()->get('language') ==
-                              'filipino') Kagustuhan (3) @else Wishlist (3) @endif</a></li>
+                              'filipino') Kagustuhan (<span class="wishlistQty"></span>) @else Wishlist (<span class="wishlistQty"></span>) @endif</a></li>
                   <li><a class="dropdown-item" href="comparison.html"><i
                               class="ci-compare text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Ikumpara (3) @else Compare (3) @endif </a></li>
@@ -63,7 +63,7 @@
               </ul>
           </div>
           <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block"
-                  href="account-wishlist.html"><i class="ci-heart mt-n1"></i>Wishlist (3)</a><a
+            href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>Wishlist (<span class="wishlistQty"></span>)</a><a
                   class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                   href="comparison.html"><i class="ci-compare mt-n1"></i>Compare (3)</a><a
                   class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
@@ -117,7 +117,22 @@
                           href="{{ route('login') }}"><img class="rounded-circle"
                               src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}"
                               alt="User Profile"></a><a class="navbar-tool-text ms-n1"
-                          href="{{ route('login') }}"><small>User Account</small>{{ Auth::user()->name }}</a>
+                          href="{{ route('login') }}"><small>User Account</small> 
+                        @php
+                            $truncate = Auth::user()->name;
+                            $numOfChars = strlen($truncate);
+                            if ($numOfChars > 11) {
+                                $truncate = substr($truncate, 0, 11).'...';
+                            }else{
+                                $truncate = substr($truncate, 0, 11);
+                            }
+                        @endphp
+
+                        
+                          {{ $truncate }}
+                        
+                        
+                        </a>
                       <div class="dropdown-menu dropdown-menu-end">
                           <div style="min-width: 14rem;">
                               <h6 class="dropdown-header">Account</h6><a
@@ -156,99 +171,43 @@
 
 
                   {{-- My Cart Area --}}
-                  <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
-                          href="shop-cart.html"><span class="navbar-tool-label">4</span><i
-                              class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text"
-                          href="shop-cart.html"><small>My Cart</small>₱ 1200.00</a>
+                <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{{ route('mycart') }}"> <!-- Outer -->
+                          <span class="navbar-tool-label cartQty" ></span><i class="navbar-tool-icon ci-cart"></i></a>
+                              <a class="navbar-tool-text" href="{{ route('mycart') }}"><small>My Cart</small><span id="cartSubTotal"></span>  </a>
                       <!-- Cart dropdown-->
                       <div class="dropdown-menu dropdown-menu-end">
                           <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
-                              <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+                              <div style="height: 13rem;" data-simplebar data-simplebar-auto-hide="false">
 
-                                  {{-- Mini Cart Item Area --}}
-                                  <div class="widget-cart-item pb-2 border-bottom">
-                                      <button class="btn-close text-danger" type="button" aria-label="Remove"><span
-                                              aria-hidden="true">&times;</span></button>
-                                      <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
-                                              href="shop-single-v2.html"><img
-                                                  src="{{ asset('frontendv2/assets/img/shop/cart/widget/05.jpg') }}"
-                                                  width="64" alt="Product"></a>
-                                          <div class="ps-2">
-                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">Bluetooth
-                                                      Headphones</a></h6>
-                                              <div class="widget-product-meta"><span
-                                                      class="text-accent me-2">$259.<small>00</small></span><span
-                                                      class="text-muted">x 1</span></div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  {{-- End Mini Cart Item Area --}}
+   
+                                  
+                                  <div id="miniCart"></div>
 
+                                      
 
-                                  {{-- <div class="widget-cart-item py-2 border-bottom">
-                                      <button class="btn-close text-danger" type="button" aria-label="Remove"><span
-                                              aria-hidden="true">&times;</span></button>
-                                      <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
-                                              href="shop-single-v2.html"><img
-                                                  src="{{ asset('frontendv2/assets/img/shop/cart/widget/06.jpg') }}"
-                                                  width="64" alt="Product"></a>
-                                          <div class="ps-2">
-                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">Cloud
-                                                      Security Camera</a></h6>
-                                              <div class="widget-product-meta"><span
-                                                      class="text-accent me-2">$122.<small>00</small></span><span
-                                                      class="text-muted">x 1</span></div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="widget-cart-item py-2 border-bottom">
-                                      <button class="btn-close text-danger" type="button" aria-label="Remove"><span
-                                              aria-hidden="true">&times;</span></button>
-                                      <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
-                                              href="shop-single-v2.html"><img
-                                                  src="{{ asset('frontendv2/assets/img/shop/cart/widget/07.jpg') }}"
-                                                  width="64" alt="Product"></a>
-                                          <div class="ps-2">
-                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">Android
-                                                      Smartphone S10</a></h6>
-                                              <div class="widget-product-meta"><span
-                                                      class="text-accent me-2">$799.<small>00</small></span><span
-                                                      class="text-muted">x 1</span></div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="widget-cart-item py-2 border-bottom">
-                                      <button class="btn-close text-danger" type="button" aria-label="Remove"><span
-                                              aria-hidden="true">&times;</span></button>
-                                      <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
-                                              href="shop-single-v2.html"><img
-                                                  src="{{ asset('frontendv2/assets/img/shop/cart/widget/08.jpg') }}"
-                                                  width="64" alt="Product"></a>
-                                          <div class="ps-2">
-                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">Android
-                                                      Smart TV Box</a></h6>
-                                              <div class="widget-product-meta"><span
-                                                      class="text-accent me-2">$67.<small>00</small></span><span
-                                                      class="text-muted">x 1</span></div>
-                                          </div>
-                                      </div>
-                                  </div> --}}
+                                  
                               </div>
                               <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
-                                  <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span
-                                          class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a
-                                      class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i
+                                  <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span> <span
+                                          class="text-accent fs-base ms-1" id="cartSubTotal"></span></div>
+                                          <a class="btn btn-outline-secondary btn-sm checkoutMe" href="{{ route('mycart') }}">Expand cart<i
                                           class="ci-arrow-right ms-1 me-n1"></i></a>
-                              </div><a class="btn btn-primary btn-sm d-block w-100" href="checkout-details.html"><i
+                              </div>
+                              
+                              <a class="btn btn-primary btn-sm d-block w-100 checkoutMe" href="checkout-details.html"><i
                                       class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+
                           </div>
                       </div>
-                  </div>
+                      <!-- End Cart dropdown-->
+
+                  </div><!-- End Outer -->
                   {{-- End My Cart Area --}}
 
-
-
               </div>
+              
+
+
           </div>
       </div>
       <div class="navbar navbar-expand-lg navbar-dark bg-darker navbar-stuck-menu mt-n3 pt-0 pb-2">

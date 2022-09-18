@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class CartPageController extends Controller
 {
     public function MyCart(){
-    	return view('frontend.wishlist.view_mycart');
+    	return view('frontendv2.wishlist.view_mycart');
 
     }
 
@@ -20,12 +21,12 @@ class CartPageController extends Controller
         $carts = Cart::content();
     	$cartQty = Cart::count();
     	$cartTotal = Cart::total();
+        
 
     	return response()->json(array(
     		'carts' => $carts,
     		'cartQty' => $cartQty,
     		'cartTotal' => $cartTotal,
-
     	));
 
     } //end method 
@@ -46,7 +47,9 @@ class CartPageController extends Controller
      // Cart Increment 
      public function CartIncrement($rowId){
         $row = Cart::get($rowId);
+        
         Cart::update($rowId, $row->qty + 1);
+
 
         if (Session::has('coupon')) {
 

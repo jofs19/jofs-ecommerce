@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 use App\Models\ShipDivision;
+use Stripe\Price;
 
 class CartController extends Controller
 {
@@ -42,12 +43,13 @@ class CartController extends Controller
     			'name' => $request->product_name, 
     			'qty' => $request->quantity, 
     			'price' => $product->discount_price,
-    			'weight' => 1, 
+    			'weight' => 1, 				
     			'options' => [
     				'image' => $product->product_thumbnail,
     				'color' => $request->color,
     				'size' => $request->size,
     			],
+				
     		]);
     		return response()->json(['success' => 'Successfully Added to Cart']);
     	}
@@ -85,6 +87,7 @@ class CartController extends Controller
 			if (Auth::check()) {
 	
 				$exists = Wishlist::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+				$wishlistQty = Wishlist::where('user_id',Auth::id())->count();
 	
 				if (!$exists) {
 					Wishlist::insert([					
@@ -92,7 +95,12 @@ class CartController extends Controller
 					'product_id' => $product_id, 
 					'created_at' => Carbon::now(), 
 				]);
-			   return response()->json(['success' => 'Successfully Added to Wishlist']);
+				return response()->json(array(
+					
+					'wishlistQty' => $wishlistQty + 1,
+					'success' => 'Successfully Added to Wishlist',
+					
+				));
 
 
             }else{
@@ -136,6 +144,7 @@ class CartController extends Controller
 					'coupon_discount' => session()->get('coupon')['coupon_discount'],
 					'discount_amount' => session()->get('coupon')['discount_amount'],
 					'total_amount' => session()->get('coupon')['total_amount'],
+					'total_value' => floor(str_replace(',', '', Cart::Subtotal()))
 				));
 			}else{
 				return response()->json(array(

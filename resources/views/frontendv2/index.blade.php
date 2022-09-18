@@ -392,9 +392,9 @@ Vartouhi | Beauty & Cosmetics Store
 
                     {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button> --}}
 
-		            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+		            {{-- <input type="hidden" id="product_id" value="{{ $product->id }}" min="1"> --}}
                     <button class="btn btn-primary btn-sm d-block w-100 mb-2 btn-shadow" type="submit" 
-                    onclick="addToCart(this.id)" id="{{ $product->id }}"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                    href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}" onclick="productView(this.id)"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
        
 
                     @endif

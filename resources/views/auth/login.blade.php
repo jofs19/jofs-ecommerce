@@ -237,7 +237,7 @@
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="password">Password</label>
-              <input class="form-control" type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password must contain: Minimum of 8 characters; atleast 1 Alphabet and 1 Number">
+              <input class="form-control" type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" data-bs-toggle="tooltip" data-bs-placement="right" title="Password must contain: Minimum of 8 characters; atleast 1 Alphabet and 1 Number.">
 			  @error('password')
 			  <span class="invalid-feedback" role="alert">
 				<div class="invalid-feedback">{{ $message }}</div>

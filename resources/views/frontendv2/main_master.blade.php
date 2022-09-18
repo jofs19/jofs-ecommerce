@@ -34,7 +34,6 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.css') }}"/>
     
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/css/theme.min.css') }}">
@@ -51,7 +50,19 @@
     }
 
 
-    body.modal-open .container{
+    .modal-open .container {
+    -webkit-filter: blur(5px) grayscale(90%);
+    filter: blur(5px) grayscale(90%);
+    }
+
+    .center{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 80px 0;
+    }
+
+    /* body.modal-open .container{
     -webkit-filter: blur(4px);
     -moz-filter: blur(4px);
     -o-filter: blur(4px);
@@ -59,7 +70,7 @@
     filter: blur(4px);
     filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
-}
+    } */
 		
 
 	</style>
@@ -128,11 +139,11 @@
     {{-- End Footer Area --}}
 
 
-
-    @if(request()->is('/') || request()->is('dashboard'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart'))
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span>
+      </span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
     </div>
     {{-- End Mobile UI Area --}}
 
@@ -140,7 +151,7 @@
 
     {{-- Mobile UI Area for Shop Page --}}
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
     </div>
     {{-- End Mobile UI Area for Shop Page --}}
     @endif
@@ -163,7 +174,8 @@
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+
     {{-- TOASTR + SWEETALERT CDN --}}
 
 
@@ -264,9 +276,9 @@
               </div>
 
 
-              <div class="mb-3">
+              <div class="mb-2">
 				<label class="form-label" for="password">Enter password</label>
-				<input class="form-control" type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+				<input class="form-control" type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" data-bs-toggle="tooltip" data-bs-placement="right" title="Password must contain: Minimum of 8 characters; atleast 1 Alphabet and 1 Number.">
 
                 @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -274,11 +286,11 @@
                 </span>
                 @enderror
                 
-				<div class="form-text"><strong>Password must contain:</strong> Minimum of <strong>8</strong> characters; atleast <strong>1</strong> Alphabet and <strong>1</strong> Number.</div>
+				{{-- <div class="form-text"><strong>Password must contain:</strong> Minimum of <strong>8</strong> characters; atleast <strong>1</strong> Alphabet and <strong>1</strong> Number.</div> --}}
 				<div class="invalid-feedback">Please provide valid password.</div>
 			  </div>
 
-			  <div class="mb-3">
+			  <div class="mb-0">
 				<label class="form-label" for="password_confirmation">Confirm password</label>
 				<input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
 
@@ -741,27 +753,37 @@
                 url: '/product/mini/cart',
                 dataType:'json',
                 success:function(response){
-                  $('span[id="cartSubTotal"]').text(response.cartTotal);
-                    $('#cartQty').text(response.cartQty);
+                  $('span[id="cartSubTotal"]').text('₱ '+response.cartTotal);
+                    $('.cartQty').text(response.cartQty);
                   var miniCart = ""
                     $.each(response.carts, function(key,value){
-                        miniCart += `<div class="cart-item product-summary">
-                          <div class="row">
-                <div class="col-xs-4">
-                  <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
-                </div>
-                <div class="col-xs-7">
-                  <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                  <div class="price"> ${value.price} * ${value.qty} </div>
-                </div>
-                <div class="col-xs-1 action"> 
-                <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>          
-                </div>
-            </div>
-            <!-- /.cart-item -->
-            <div class="clearfix"></div>
-            <hr>`
-            });
+                      
+                        miniCart += `<div class="widget-cart-item pb-2 border-bottom">
+                                      <button class="btn-close text-danger pt-1" type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)" aria-label="Remove"><span
+                                              aria-hidden="true">&times;</span></button>
+                                      <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
+                                              href="shop-single-v2.html"><img
+                                                  src="/${value.options.image}" width="64" alt="Product" class="pt-1"></a>
+                                          <div class="ps-2">
+                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">${value.name}</a></h6>
+                                              <div class="widget-product-meta"><span
+                                                      class="text-accent me-2"> ₱ ${value.price}.<small>00</small></span><span
+                                                      class="text-muted">x ${value.qty}</span></div>
+                                          </div>
+                                      </div>
+                                  </div>`
+                    });
+                    
+                    if(response.cartQty < 1){
+                        miniCart += `<div class="d-flex justify-content-center align-items-center py-3">
+                          <p class="fs-sm text-muted mb-0">Your cart is currently empty...</p>
+                          
+                                        
+                                    </div>`
+                      $('.checkoutMe').addClass('disabled',true);
+                    }else{
+                      $('.checkoutMe').removeClass('disabled',false);
+                    }
                     
                     $('#miniCart').html(miniCart);
                 }
@@ -815,7 +837,7 @@
               dataType: 'json',
               url: "/add-to-wishlist/"+product_id,
               success:function(data){
-    
+                
                     // Start Message 
                     const Toast = Swal.mixin({
                     toast: true,
@@ -839,6 +861,8 @@
                       })
                   }
                     // End Message 
+                    $('.wishlistQty').text(data.wishlistQty);
+
     
               }
           })
@@ -856,29 +880,27 @@
                url: '/user/get-wishlist-product',           
                dataType:'json',
                success:function(response){
+                $('.wishlistQty').text(response.wishlistQty);
                    var rows = ""
-                   $.each(response, function(key,value){
-                       rows += `<tr>
-                       <td class="col-md-2"><img src="/${value.product.product_thumbnail} " alt="imga"></td>
-                       <td class="col-md-7">
-                           <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
-                            
-                           <div class="price">
-                           ${value.product.discount_price == null
-                               ? `${value.product.selling_price}`
-                               :
-                               `${value.product.discount_price} <span>${value.product.selling_price}</span>`
-                           }
-                               
-                           </div>
-                       </td>
-           <td class="col-md-2">
-               <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="${value.product_id}" onclick="productView(this.id)"> Add to Cart </button>
-           </td>
-           <td class="col-md-1 close-btn">
-            <button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>       
-          </td>
-                   </tr>`
+                   $.each(response.wishlist, function(key,value){
+                       rows += ` 
+        <div class="d-sm-flex justify-content-between my-4 mt-lg-4 pb-3 pb-sm-4 border-bottom">
+          <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="/${value.product.product_thumbnail}" alt="Product"></a>
+            <div class="pt-2">
+              <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">${value.product.product_name_en}</a></h3>
+              <div class="fs-sm"><span class="text-muted me-2">Sizes:</span>${value.product.product_size_en != null ? `${value.product.product_size_en}` : `----`}</div>
+              <div class="fs-sm"><span class="text-muted me-2">Variants:</span>${value.product.product_color_en != null ? `${value.product.product_color_en}` : `----`} </div>
+              <div class="fs-lg text-accent pt-2">${value.product.discount_price == null ? `₱ ${value.product.selling_price}` : `<del class="text-muted fs-lg me-1">₱ ${value.product.selling_price}.<small>00</small></del> <span> ₱ ${value.product.discount_price}</span>`}.<small>00</small></div>
+            </div>
+          </div>
+          <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
+            
+            <button class="btn btn-outline-primary btn-sm" type="submit" href="#quick-view-electro"
+                            data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
+                            onclick="productView(${value.product_id})"><i class="ci-cart me-2"></i>Add to Cart</button>
+            <button class="btn btn-outline-danger btn-sm" type="submit" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="ci-trash me-2"></i>Remove</button>
+          </div>
+        </div>`
            });
                    
                    $('#wishlist').html(rows);
@@ -938,50 +960,66 @@
              url: '/user/get-cart-product',
              dataType:'json',
              success:function(response){
+              // $('.product_max_qty').attr('max',response.product_max_qty);
+
+              
      var rows = ""
      $.each(response.carts, function(key,value){
-         rows += `<tr>
-          <td class="col-md-2 text-center"><img src="/${value.options.image} " alt="imga" style="width:100px; height:100px;"></td>
-            
-            <td class="col-md-2">
-             <div class="product-name text-center"><a href="#">${value.name}</a></div>
-              
-             <div class="price text-center"> 
-                            ₱ ${value.price}
-                         </div>
-                     </td>
-    
-    
-    
-              <td class="col-md-2 text-center">
-                <strong>${value.options.color} </strong> 
-                </td>
-             <td class="col-md-2 text-center">
-              ${value.options.size == null
-                ? `<span> .... </span>`
-                :
-              `<strong>${value.options.size} </strong>` 
-              }           
-                </td>
-               <td class="col-md-2 text-center">
-                ${value.qty > 1
-                ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
-                : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
-                }
-            <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >  
-             <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartIncrement(this.id)" >+</button> 
-                </td>
-                 <td class="col-md-2 text-center">
-                <strong>$${value.subtotal} </strong> 
-                </td>
-    
-                     
-          
-         <td class="col-md-1 close-btn text-center">
-          <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
-         </td>
-                 </tr>`
+         rows += `
+         <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
+          <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="/${value.options.image}" width="160" alt="Product"></a>
+            <div class="pt-2">
+              <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">${value.name}</a></h3>
+              <div class="fs-sm"><span class="text-muted me-2">Size:</span>${value.options.size == null ? `---`:`${value.options.size}`}</div>
+              <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div>
+              <div class="fs-lg text-accent pt-2"> <span class="fs-ms text-dark">₱ ${value.price}.<small>00</small> x <strong>${value.qty}</strong> = </span>   
+                ₱ ${value.subtotal}.<small>00</small></div>
+            </div>
+          </div>
+          <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 10rem;">
+            <label class="form-label" for="quantity2">Quantity</label>
+              <div class="input-group">
+
+                ${value.qty > 1 ?
+
+                `<button class="btn btn-secondary btn-sm fw-small btn-shadow" type="submit" id="${value.rowId}" onclick="cartDecrement(this.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="decrement">-</button>` :
+
+                `<button class="btn btn-secondary btn-sm fw-small btn-shadow disabled" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="decrement">-</button>`
+              }
+
+                <input class="form-control text-center" type="text" placeholder="..." readonly value="${value.qty}" min="1">
+                
+
+
+
+                <button class="btn btn-secondary btn-sm fw-small btn-shadow stop" type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="increment">+</button>
+
+              </div>
+
+
+            <button class="btn btn-link px-0 text-danger" type="submit" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="ci-close-circle me-2"></i><span class="fs-sm">Remove</span></button>
+          </div>
+        </div>`
+        
+
          });
+         
+        if(response.cartQty < 1){
+          rows += `<div class="container py-4 mb-lg-3">
+    <div class="row justify-content-center pt-lg-4 text-center">
+      <div class="col-lg-5 col-md-7 col-sm-9"><img class="d-block mx-auto mb-5" src="{{ asset('frontendv2/assets/img/pages/404.png') }}" width="340"
+          alt="404 Error">
+        <h1 class="h2">Your Cart is Empty</h1>
+      <a href="{{ url('/') }}">
+        <p class="fs-md mb-4">
+          <u>Add more products to Cart</u>
+        </p>
+      </a>
+      </div>
+    </div>
+    
+  </div>`
+        }
                  
                  $('#cartPage').html(rows);
              }
@@ -1116,36 +1154,50 @@
     
                 if (data.total) {
                     $('#couponCalField').html(
-                        `<tr>
-                    <th>
-                        <div class="cart-sub-total">
-                            Subtotal<span class="inner-left-md">$ ${data.total}</span>
-                        </div>
-                        <div class="cart-grand-total">
-                            Grand Total<span class="inner-left-md">$ ${data.total}</span>
-                        </div>
-                    </th>
-                </tr>`
+                        `<div class="widget mb-3">
+              <h2 class="widget-title text-center">Subtotal</h2>
+              <h3 class="fw-normal text-center my-4">₱ ${data.total}</h3>
+
+    
+            </div>
+            <ul class="list-unstyled fs-sm pb-2 border-bottom">
+              <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">₱ ${data.total}</span></li>
+              <li class="d-flex justify-content-between align-items-center"><span class="me-2">Discount:</span><span class="text-end">—</span></li>
+            </ul>
+
+              <ul class="list-unstyled fs-lead pb-2 ">
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2 fw-bold">Grand Total:</span><span class="text-end">₱ ${data.total}</span></li>
+            </ul>`
                 )
                 }else{
+                  @php
+                    $total = floor(str_replace(',', '', Cart::Subtotal()));
+                    
+                  @endphp
                      $('#couponCalField').html(
-                        `<tr>
-            <th>
-                <div class="cart-sub-total">
-                    Subtotal<span class="inner-left-md">$ ${data.subtotal}</span>
-                </div>
-                <div class="cart-sub-total">
-                    Coupon<span class="inner-left-md">$ ${data.coupon_name}</span>
-                    <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i>  </button>
-                </div>
-                 <div class="cart-sub-total">
-                    Discount Amount<span class="inner-left-md">$ ${data.discount_amount}</span>
-                </div>
-                <div class="cart-grand-total">
-                    Grand Total<span class="inner-left-md">$ ${data.total_amount}</span>
-                </div>
-            </th>
-                </tr>`
+                        `<div class="widget mb-3">
+              <h2 class="widget-title text-center">Subtotal</h2>
+              <h3 class="fw-normal text-center my-4">₱ ${data.subtotal}</h3>
+
+    
+            </div>
+            <ul class="list-unstyled fs-sm pb-2 border-bottom">
+              <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">₱ ${data.subtotal}</span></li>
+              <li class="d-flex justify-content-between align-items-center"><span class="me-2">Discount:</span><span class="text-end">-₱ ${data.discount_amount}<small>.00</small></span></li>
+            </ul>
+
+              <ul class="list-unstyled fs-lead pb-2 ">
+                <li class="d-flex justify-content-between align-items-center"><span class="me-2 fw-bold">Grand Total:</span><span class="text-end">₱ ${data.total_amount}<small>.00</small></span></li>
+            </ul>
+            
+<div class="alert alert-accent d-flex text-center alert-dismissible fade show" role="alert">
+  <div class="alert-icon"> 
+    <i class="ci-discount me-1"></i><small>${Math.floor((data.discount_amount / data.total_value)*100)}</small> 
+  </div>
+  <div class="text-center">${data.coupon_name.length < 16 ? `${data.coupon_name.substring(0, 16)}`:`${data.coupon_name.substring(0, 16)}...`}   <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="couponRemove()"></button>
+</div>
+  
+</div> `
                 )
                 }
             }

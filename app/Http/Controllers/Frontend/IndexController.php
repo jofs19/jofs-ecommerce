@@ -236,7 +236,7 @@ class IndexController extends Controller
 
 		return view('frontendv2.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
 	} //end method
-
+   
 
 
              /// Product View With Ajax
