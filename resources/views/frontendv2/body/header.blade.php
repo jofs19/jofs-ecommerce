@@ -53,7 +53,7 @@
               <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{{ route('wishlist') }}"><i
                               class="ci-heart text-muted me-2"></i>@if(session()->get('language') ==
-                              'filipino') Kagustuhan (<span class="wishlistQty"></span>) @else Wishlist (<span class="wishlistQty"></span>) @endif</a></li>
+                              'filipino') Kagustuhan (<span class="wishlistQty">0</span>) @else Wishlist (<span class="wishlistQty">0</span>) @endif</a></li>
                   <li><a class="dropdown-item" href="comparison.html"><i
                               class="ci-compare text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Ikumpara (3) @else Compare (3) @endif </a></li>
@@ -63,7 +63,7 @@
               </ul>
           </div>
           <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block"
-            href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>Wishlist (<span class="wishlistQty"></span>)</a><a
+            href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>Wishlist (<span class="wishlistQty">0</span>)</a><a
                   class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                   href="comparison.html"><i class="ci-compare mt-n1"></i>Compare (3)</a><a
                   class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
@@ -194,7 +194,7 @@
                                           class="ci-arrow-right ms-1 me-n1"></i></a>
                               </div>
                               
-                              <a class="btn btn-primary btn-sm d-block w-100 checkoutMe" href="checkout-details.html"><i
+                              <a class="btn btn-primary btn-sm d-block w-100 checkoutMe" href="{{ route('checkout') }}"><i
                                       class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
 
                           </div>

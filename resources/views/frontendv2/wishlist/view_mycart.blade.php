@@ -81,7 +81,7 @@ Vartouhi | My Cart
                 </div>
             @endif
             
-            <a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="checkout-details.html"><i class="ci-card fs-lg me-2"></i>Proceed to Checkout</a>
+            <a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="{{ route('checkout') }}"><i class="ci-card fs-lg me-2"></i>Proceed to Checkout</a>
           </div>
         </div>
       </aside>

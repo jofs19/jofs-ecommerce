@@ -33,6 +33,13 @@ Checkout Page
 			 <div class="col-md-6 col-sm-6 already-registered-login">
 		 <h4 class="checkout-subtitle"><b>Shipping Address</b></h4>
 
+
+
+
+
+
+
+	{{-- ANCHOR start form --}}
 	<form class="register-form" action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 
@@ -335,7 +342,25 @@ Checkout Page
 
 
 
-</form>
+</form> <!-- ANCHOR // end form  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div><!-- /.row -->
 		</div><!-- /.checkout-box -->
 		<!-- === ===== BRANDS CAROUSEL ==== ======== -->

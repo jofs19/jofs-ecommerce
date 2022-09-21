@@ -139,11 +139,11 @@
     {{-- End Footer Area --}}
 
 
-    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout'))
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span>
-      </span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span>
+      </span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
     </div>
     {{-- End Mobile UI Area --}}
 
@@ -151,7 +151,7 @@
 
     {{-- Mobile UI Area for Shop Page --}}
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
     </div>
     {{-- End Mobile UI Area for Shop Page --}}
     @endif
@@ -252,25 +252,25 @@
                 @csrf
                 {{-- <div class="container scroll-me"> --}}
 
-              <div class="mb-3">
+              <div class="mb-2">
                 <label class="form-label" for="su-name">Username</label>
                 <input class="form-control" type="text" id="name" name="name" placeholder="John Oliver Santiago" required>
                 <div class="invalid-feedback">Please fill in your name.</div>
               </div>
-              <div class="mb-3">
-                <label for="su-email">Email address</label>
+              <div class="mb-2">
+                <label for="su-email" class="form-label">Email address</label>
                 <input class="form-control" type="email" id="email" name="email" placeholder="jofs@example.com" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
 
-              <div class="mb-3">
-                <label for="su-address">Street address</label>
+              <div class="mb-2">
+                <label for="su-address" class="form-label">Street address</label>
                 <input class="form-control" type="text" id="address" name="address" placeholder="(e.g. Padilla St. West)" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
 
-              <div class="mb-3">
-                <label for="su-email">Phone number</label>
+              <div class="mb-2">
+                <label for="su-email" class="form-label">Phone number</label>
                 <input class="form-control" type="tel" id="phone" name="phone" placeholder="+(63)-012-3456-789" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
@@ -280,30 +280,32 @@
 				<label class="form-label" for="password">Enter password</label>
 				<input class="form-control" type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" data-bs-toggle="tooltip" data-bs-placement="right" title="Password must contain: Minimum of 8 characters; atleast 1 Alphabet and 1 Number.">
 
-                @error('password')
+                {{-- @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror
+                @enderror --}}
                 
 				{{-- <div class="form-text"><strong>Password must contain:</strong> Minimum of <strong>8</strong> characters; atleast <strong>1</strong> Alphabet and <strong>1</strong> Number.</div> --}}
 				<div class="invalid-feedback">Please provide valid password.</div>
 			  </div>
 
-			  <div class="mb-0">
+			  <div class="mb-4">
 				<label class="form-label" for="password_confirmation">Confirm password</label>
 				<input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+
+        @error('password_confirmation')
+        <span class="invalid-feedback" role="alert">
+          <div class="invalid-feedback">{{ $message }}</div>
+      </span>	  
+          
+        @enderror
 
                 {{-- <div class="invalid-feedback">Password does not match!</div> --}}
 
                 <div class="confirm" id="confirm"><small><span class="text-danger"> Password does not match!</span></small></div>
                
-                @error('password_confirmation')
-                <span class="invalid-feedback" role="alert">
-                  <div class="invalid-feedback">{{ $message }}</div>
-              </span>	  
-                  
-                @enderror
+                
 			  </div>
 
               <button class="btn btn-primary btn-shadow d-block w-100" type="submit" id="sign-up">Sign up</button>
@@ -1192,7 +1194,7 @@
             
 <div class="alert alert-accent d-flex text-center alert-dismissible fade show" role="alert">
   <div class="alert-icon"> 
-    <i class="ci-discount me-1"></i><small>${Math.floor((data.discount_amount / data.total_value)*100)}</small> 
+    <i class="ci-discount me-1"></i><small>${Math.round((data.discount_amount / data.total_value)*100)}</small> 
   </div>
   <div class="text-center">${data.coupon_name.length < 16 ? `${data.coupon_name.substring(0, 16)}`:`${data.coupon_name.substring(0, 16)}...`}   <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="couponRemove()"></button>
 </div>
@@ -1248,6 +1250,60 @@
            });
         }
     </script>
+
+<script type="text/javascript">
+  window.onload = function () {
+      var password = document.getElementById("password");
+      var password_confirmation = document.getElementById("password_confirmation");
+      password.onchange = ConfirmPassword;
+      password_confirmation.onkeyup = ConfirmPassword;
+      function ConfirmPassword() {
+          txtConfirmPassword.setCustomValidity("");
+          if (password.value !== password_confirmation.value) {
+              password_confirmation.setCustomValidity("Passwords do not match.");
+          }
+      }
+  }
+</script>
+
+<script>
+        
+function checkPassword(form) {
+  password = form.password.value;
+  password_confirmation = form.password_confirmation.value;
+  
+      
+  // If Not same return False.    
+  if (password != password_confirmation) {
+    // alert ("\nPassword did not match: Please try again...")
+    $('.confirm').removeClass();
+  }else{
+    $('#confirm').addClass('confirm');
+  }
+  // return false;
+}
+</script>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+'use strict'
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+var forms = document.querySelectorAll('.needs-validation')
+// Loop over them and prevent submission
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+
 
 
 

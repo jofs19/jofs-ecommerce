@@ -177,7 +177,7 @@ class CartController extends Controller
 				}else{
 	
 				$notification = array(
-				'message' => 'Choose a product before checking out!',
+				'message' => 'Add atleast one product...',
 				'alert-type' => 'error'
 			);
 	
