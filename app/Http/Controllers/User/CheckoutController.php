@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ShipDivision;
 use App\Models\ShipDistrict;
 use App\Models\ShipState;
+use App\Models\Product;
+
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
@@ -34,6 +36,8 @@ class CheckoutController extends Controller
 
 
     public function CheckoutStore(Request $request){
+
+		// $products = Product::whereIn('id', Cart::instance('cart')->content()->pluck('id'))->get();
 		// dd(	$request->all());
 		// $request->validate([
         //     'receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -59,6 +63,13 @@ class CheckoutController extends Controller
 		// $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
 		// Image::make($image)->resize(917,1000)->save('upload/receipt/'.$name_gen);
 		// $save_url = 'upload/receipt/'.$name_gen;
+
+		$carts = Cart::content();
+    	$cartQty = Cart::count();
+    	$cartTotal = Cart::total();
+		// $products = Product::where('status',1)->orderBy('id','DESC')->get();
+		
+
 
 		$request->validate([
             'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -105,24 +116,63 @@ class CheckoutController extends Controller
 
 		}
 
-		
-            	// dd($request->all());
-
-
-
-
 
 
     	if ($request->payment_method == 'stripe') {
-			return view('frontend.payment.stripe',compact('data','cartTotal'));    	
-		}elseif ($request->payment_method == 'card') {
-    		return 'card';
+			return view('frontend.payment.stripe',compact('data','cartTotal', 'carts', 'cartQty'));    	
+		}elseif ($request->payment_method == 'online') {
+			return view('frontendv2.payment.online_payment',compact('data','cartTotal', 'carts', 'cartQty'));    	
     	}else{
-            return view('frontend.payment.cash',compact('data','cartTotal'));    	
+            return view('frontendv2.payment.cash',compact('data','cartTotal', 'carts', 'cartQty'));    	
 		}
 
 
 		// return view('frontendv2.paymentPage',compact('data','cartTotal'));
 
     }// end method. 
+
+
+
+
+
+
+	public function PaymentStore(Request $request){
+
+		$carts = Cart::content();
+		$cartQty = Cart::count();
+		
+		$request->validate([
+			'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+		]);
+
+		if ($request->file('receipt')) {
+			$image = $request->file('receipt');
+			$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+			Image::make($image)->resize(720,1253)->save('upload/receipt/'.$name_gen);
+			$save_url = 'upload/receipt/'.$name_gen;
+			$data = array();
+			$data['receipt'] = $save_url;
+			$cartTotal = Cart::total();
+			
+		}else{
+			
+			$data = array();			
+			$cartTotal = Cart::total();
+			
+		}
+
+		 return view('frontendv2.payment.online_review',compact('data','cartTotal','carts','cartQty'));
+
+
+	}
+
+
+
+
+
+
+
+
+
+
 }

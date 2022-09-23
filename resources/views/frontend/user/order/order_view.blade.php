@@ -54,12 +54,12 @@
                   <label for=""> 
                   
                     @if($order->amount >= 1000)
-                                            ₱ {{ $order->amount }}
+                    ₱ {{ $order->amount }}
 
-                                            @else
-                                            ₱ {{ $order->amount + $order->shipping_charge }}
+                    @else
+                    ₱ {{ $order->amount + $order->shipping_charge }}
 
-                                            @endif
+                    @endif
 
                   </label>
                 </td>

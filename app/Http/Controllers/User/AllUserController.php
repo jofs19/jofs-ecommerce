@@ -25,10 +25,21 @@ class AllUserController extends Controller
 {
     public function MyOrders(){
 
-    	$orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+    	$orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->paginate(10);
     	return view('frontendv2.user.order.order_view',compact('orders'));
 
     } //end method
+
+    // public function ProductViewAjax($order_id){
+    //     $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+    //     $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();  
+
+    //     return response()->json(array(
+    //         'order' => $order,
+    //         'orderItem' => $orderItem,
+    //     ));
+		
+	// } // end method 
     
 
     public function OrderDetails($order_id){
@@ -90,8 +101,8 @@ class AllUserController extends Controller
 
     public function ReturnOrderList(){
 
-        $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
-        return view('frontend.user.order.return_order_view',compact('orders'));
+        $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->paginate(5);
+        return view('frontendv2.user.order.return_order_view',compact('orders'));
 
     } // end method 
 
@@ -99,7 +110,7 @@ class AllUserController extends Controller
     public function CancelOrders(){
 
         $orders = Order::where('user_id',Auth::id())->where('status','cancel')->orderBy('id','DESC')->get();
-        return view('frontend.user.order.cancel_order_view',compact('orders'));
+        return view('frontendv2.user.order.cancel_order_view',compact('orders'));
 
     } // end method 
 
@@ -117,7 +128,7 @@ class AllUserController extends Controller
                 // echo "<pre>";
                 // print_r($track);
     
-            return view('frontend.traking.track_order',compact('track'));
+            return view('frontendv2.traking.track_order',compact('track'));
     
             }else{
     

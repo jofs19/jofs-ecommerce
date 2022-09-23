@@ -35,9 +35,9 @@ Checkout Details
             <div class="step-label"><i class="ci-user-circle"></i>Details</div></a><a class="step-item" href="{{ route('checkout') }}">
             {{-- <div class="step-progress"><span class="step-count">3</span></div>
             <div class="step-label"><i class="ci-package"></i>Shipping</div></a><a class="step-item" href="checkout-payment.html"> --}}
+            {{-- <div class="step-progress"><span class="step-count">3</span></div>
+            <div class="step-label"><i class="ci-card"></i>Payment</div></a><a class="step-item" href="checkout-review.html"> --}}
             <div class="step-progress"><span class="step-count">3</span></div>
-            <div class="step-label"><i class="ci-card"></i>Payment</div></a><a class="step-item" href="checkout-review.html">
-            <div class="step-progress"><span class="step-count">4</span></div>
             <div class="step-label"><i class="ci-check-circle"></i>Review</div></a></div>
         <!-- Autor info-->
         @php
@@ -56,7 +56,7 @@ Checkout Details
        
 
         <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Shipping address</h2>
-        <form class="needs-validation" novalidate action="{{ route('checkout.store') }}" method="POST">
+        <form class="needs-validation" action="{{ route('checkout.store') }}" method="POST" novalidate enctype="multipart/form-data">
             @csrf
             
         <div class="row">
@@ -101,12 +101,12 @@ Checkout Details
             </div>
           </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-12 mb-4">
                 <label class="form-label mb-3" for="fd-comments"><span class="badge bg-info fs-xs me-2">Note</span>Additional comments</label>
                 <textarea class="form-control" rows="5" id="fd-comments" name="notes" placeholder="Write a note... (optional)"></textarea>
               </div>
-        </div>
+        </div> --}}
         {{-- <div class="row">
           <div class="col-sm-6">
             <div class="mb-3">
@@ -121,11 +121,139 @@ Checkout Details
             </div>
           </div>
         </div> --}}
-        <div class="mb-2 py-2 border-bottom"></div>
+        <h6 class="mb-3 py-3 border-bottom">Select Mode of Payment</h6>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="accordion accordio-flush shadow-sm rounded-3 mb-1" id="payment-methods">
+              <div class="accordion-item border-bottom">
+                <div class="accordion-header py-3 px-3">
+                  <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#cash" aria-expanded="false">
+                    <input class="form-check-input" type="radio" name="payment_method" value="cash" id="payment-cash" checked="">
+                    <label class="form-check-label fw-medium text-dark" for="payment-cash">Cash on delivery<i class="ci-wallet text-muted fs-lg align-middle mt-n1 ms-2"></i></label>
+                  </div>
+                </div>
+                <div class="collapse show" id="cash" data-bs-parent="#payment-methods" style="">
+                  <div class="accordion-body pt-2">
+                    <div class="d-flex align-items-center">
+                      <label class="form-label fw-semibold text-nowrap me-3 mb-0" for="fd-change">I need change from <span class="text-muted"><small>(optional)</small></span> </label>
+                      <div class="input-group flex-nowrap" style="width: 9rem;"><span class="input-group-text">₱</span>
+                        <input class="form-control bg-none pe-3" type="text" id="fd-change" name="change_amount">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header py-3 px-3">
+                  <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#paypal" aria-expanded="false">
+                    <input class="form-check-input" type="radio" name="payment_method" value="online" id="payment-paypal">
+                    <label class="form-check-label fw-medium text-dark" for="payment-paypal">Pay with GCash<i class="ci-mobile text-muted fs-base align-middle mt-n1 ms-1"></i></label>
+                  </div>
+                </div>
+                <div class="collapse" id="paypal" data-bs-parent="#payment-methods" style="">
+                  <div class="accordion-body">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <!-- Toggle first element -->
+                            <a href="#multiCollapseExample1" class="btn btn-info btn-shadow d-block w-100 collapsed fw-semibold" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                              <span class="fw-bold">Via QR Code</span>  
+                            </a>
+                        </div>
+
+                        <div class="col-6">
+                            <!-- Toggle second element -->
+                            <button type="button" class="btn btn-accent btn-shadow d-block w-100 collapsed fw-semibold" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+                              <span class="fw-bold">Pay manually</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <!-- Collapse 1 -->
+                            <div class="multi-collapse collapse" id="multiCollapseExample1" style="">
+                                <div class="card card-body mb-2">
+                                    <center>
+                                        <img src="https://1.bp.blogspot.com/-Qr453VqCHB4/YKZvu20gXbI/AAAAAAAAAhc/mkP88PM_4qg0PEUaQjIvAbooUehTCPpQACNcBGAsYHQ/s447/187137836_4066479340104143_2611949824001093430_n.jpg" alt="" width="250"></center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <!-- Collapse 2 -->
+                            <div class="multi-collapse collapse" id="multiCollapseExample2" style="">
+                                <div class="card card-body mb-2">
+                                    <p class="fs-sm">Account Username:&nbsp;&nbsp; <strong>John Oliver
+                                            Santiago</strong> </p>
+                                    <p class="fs-sm">Account number:&nbsp;&nbsp; <strong>09475220247</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="credit-card-wrapper"></div>
+                    <div class="mb-md-5 mb-4 pb-md-0 pb-2">
+                        <h2 class="h5 mb-2 pb-1">Upload Receipt of Purchase <small><span class="ci-announcement" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload a valid receipt."></span></small></h2>
+                        <p class="mb-4 fs-sm">File types supported: PNG, JPG/JPEG, & GIF. Max size:
+                            2mb.</p>
+                        <!-- Drag and drop file upload-->
+                        {{-- <form action="http://127.0.0.1:8000/user/cash/order" method="post" id="payment-form" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="N6hL7uwLl5QvxPWkZbVYmceqy6Vm2UlvRZWG5eL0">                                    
+                            <input type="hidden" name="receipt" value=""> --}}
+
+
+
+                            <div class="file-drop-area">
+                                <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and drop here to upload</span>
+                                <input class="file-drop-input" type="file" name="receipt">
+                                <button class="file-drop-btn btn btn-outline-accent" type="button">Or select
+                                    file</button>
+                            </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="accordion-item border-bottom">
+                <div class="accordion-header py-3 px-3">
+                  <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#credit-card" aria-expanded="false">
+                    <input class="form-check-input" type="radio" name="payment_method" value="stripe" id="payment-card">
+                    <label class="form-check-label fw-medium text-dark" for="payment-card">Credit card<i class="ci-card text-muted fs-lg align-middle mt-n1 ms-2"></i></label>
+                  </div>
+                </div>
+                <div class="collapse" id="credit-card" data-bs-parent="#payment-methods" style="">
+                  <div class="accordion-body py-2">
+                    <input class="form-control bg-image-none mb-3" type="text" placeholder="Card number">
+                    <div class="row">
+                      <div class="col-6 mb-3">
+                        <input class="form-control bg-image-none" type="text" placeholder="MM/YY">
+                      </div>
+                      <div class="col-6 mb-3">
+                        <input class="form-control bg-image-none" type="text" placeholder="CVC">
+                      </div>
+                    </div>
+                  </div> <!--end body-->
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+        
+        </div>
+
+        
         
         <!-- Navigation (desktop)-->
         <div class="d-none d-lg-flex pt-4 mt-3">
-          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="shop-cart.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Cart</span><span class="d-inline d-sm-none">Back</span></a></div>
+          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{ route('mycart') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Cart</span><span class="d-inline d-sm-none">Back</span></a></div>
           <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Proceed to Payment</span><span class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
         </div>
       </section>
@@ -135,7 +263,7 @@ Checkout Details
           <div class="py-2 px-xl-2">
             <div class="widget mb-3">
               <h2 class="widget-title text-center">Order summary</h2>
-              <div style="height: 12.5rem;" data-simplebar data-simplebar-auto-hide="false">
+              <div style="height: 14.5rem;" data-simplebar data-simplebar-auto-hide="false">
 
                 @foreach ($carts as $item)
                     
@@ -230,7 +358,7 @@ Checkout Details
             <div class="accordion accordio-flush shadow-sm rounded-3 mb-4" id="order-options">
                 
                 <div class="accordion-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Field is required">
-                  <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shipping-estimates" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Shipping estimates </a></h3>
+                  <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shipping-estimates" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Select Local Area </a></h3>
                   <div class="accordion-collapse collapse show" id="shipping-estimates" data-bs-parent="#order-options" style="">
                     <div class="accordion-body">
                         <div class="mb-3">
@@ -270,57 +398,12 @@ Checkout Details
 
           </div>
 
-          <div class="accordion accordio-flush shadow-sm rounded-3 mb-1" id="payment-methods">
-            <div class="accordion-item border-bottom">
-              <div class="accordion-header py-3 px-3">
-                <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#cash" aria-expanded="false">
-                  <input class="form-check-input" type="radio" name="payment_method" value="cash" id="payment-cash" checked="">
-                  <label class="form-check-label fw-medium text-dark" for="payment-cash">Cash on delivery<i class="ci-wallet text-muted fs-lg align-middle mt-n1 ms-2"></i></label>
-                </div>
-              </div>
-              <div class="collapse" id="cash" data-bs-parent="#payment-methods" style="">
-                <div class="accordion-body pt-2">
-                  <p class="fs-sm mb-0">I will pay with cash to the courier on delivery.</p>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <div class="accordion-header py-3 px-3">
-                <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#paypal" aria-expanded="false">
-                  <input class="form-check-input" type="radio" name="payment_method" value="online" id="payment-paypal">
-                  <label class="form-check-label fw-medium text-dark" for="payment-paypal">GCash/Paymaya<i class="ci-mobile text-muted fs-base align-middle mt-n1 ms-1"></i></label>
-                </div>
-              </div>
-              <div class="collapse" id="paypal" data-bs-parent="#payment-methods" style="">
-                <div class="accordion-body pt-2">
-                  <p class="fs-sm mb-0">Pay online with GCash and Paymaya.</p>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-bottom">
-              <div class="accordion-header py-3 px-3">
-                <div class="form-check d-table collapsed" data-bs-toggle="collapse" data-bs-target="#credit-card" aria-expanded="false">
-                  <input class="form-check-input" type="radio" name="payment_method" value="stripe" id="payment-card">
-                  <label class="form-check-label fw-medium text-dark" for="payment-card">Credit card<i class="ci-card text-muted fs-lg align-middle mt-n1 ms-2"></i></label>
-                </div>
-              </div>
-              <div class="collapse" id="credit-card" data-bs-parent="#payment-methods" style="">
-                <div class="accordion-body py-2">
-                  <input class="form-control bg-image-none mb-3" type="text" placeholder="Card number">
-                  <div class="row">
-                    <div class="col-6 mb-3">
-                      <input class="form-control bg-image-none" type="text" placeholder="MM/YY">
-                    </div>
-                    <div class="col-6 mb-3">
-                      <input class="form-control bg-image-none" type="text" placeholder="CVC">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            
+          <div class="mb-3 mb-4">
+            <label class="form-label mb-3" for="fd-comments"><span class="badge bg-info fs-xs me-2">Note</span>Additional comments</label>
+            <textarea class="form-control" rows="5" id="fd-comments" name="notes" placeholder="Write a note... (optional)"></textarea>
           </div>
+
+
 
 
         </div>
@@ -330,7 +413,7 @@ Checkout Details
     <div class="row d-lg-none">
       <div class="col-lg-8">
         <div class="d-flex pt-4 mt-3">
-          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="shop-cart.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Cart</span><span class="d-inline d-sm-none">Back</span></a></div>
+          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{ route('mycart') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Cart</span><span class="d-inline d-sm-none">Back</span></a></div>
           <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Proceed to Payment</span><span class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
         </div>
       </div>
@@ -340,252 +423,7 @@ Checkout Details
 </form>
 
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('select[name="division_id"]').on('change', function(){
-          var division_id = $(this).val();
-          if(division_id) {
 
-               $.ajax({
-                  url: "{{  url('/district-get/ajax') }}/"+division_id,
-                  type:"GET",
-                  dataType:"json",
-                  success:function(data) {
-                      $('select[name="state_id"]').empty(); 
-                     var d =$('select[name="district_id"]').empty();
-                        $.each(data, function(key, value){
-                            $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name + '</option>');
-                        });
-                  },
-              });
-          } else {
-              alert('danger');
-          }
-      });
-$('select[name="district_id"]').on('change', function(){
-          var district_id = $(this).val();
-          if(district_id) {
-              $.ajax({
-                  url: "{{  url('/state-get/ajax') }}/"+district_id,
-                  type:"GET",
-                  dataType:"json",
-                  success:function(data) {
-                     var d =$('select[name="state_id"]').empty();
-                        $.each(data, function(key, value){
-                            $('select[name="state_id"]').append('<option value="'+ value.id +'">' + value.state_name + '</option>');
-
-                                // If Session has coupon
-                  @if(Session::has('coupon'))
-
-                      if(value.state_name == 'Luzon'){
-                          if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 65.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 65,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(65);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-                          
-
-                              
-                      }else if(value.state_name == 'Metro Manila'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 75.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 75,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(75);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-
-                      }else if(value.state_name == 'Visayas'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 85.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 85,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(85);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-                      }else if(value.state_name == 'BANGSAMORO'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 95.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 95,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(95);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-                      }else if(value.state_name == 'Mindanao'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 100.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 100,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(100);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-                      }
-
-
-                          // If Session has no coupon
-                          @else 
-
-                          // If order is below 1000 and state is region I
-                          if(value.state_name == 'Luzon'){
-                              if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 65.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 65,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(65);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-
-
-                          }else if(value.state_name == 'Metro Manila'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 75.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 75,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(75);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-                          }else if(value.state_name == 'Visayas'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 85.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 85,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(85);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-                          }else if(value.state_name == 'BANGSAMORO'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 95.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 95,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(95);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-                          }else if(value.state_name == 'Mindanao'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 100.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 100,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(100);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-                          }
-
-
-                          @endif
-
-
-
-                            
-                        });
-                  },
-              });
-          } else {
-              alert('danger');
-          }
-
-          
-
-      });
-
-  });
-  </script>
 
 
   @endsection

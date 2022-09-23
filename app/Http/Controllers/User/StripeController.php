@@ -77,7 +77,7 @@ class StripeController extends Controller
          $invoice = Order::findOrFail($order_id);
      	$data = [
      		'invoice_no' => $invoice->invoice_no,
-     		'amount' => $total_amount,
+     		'amount' => $total_amount + $request->shipping_charge,
      		'name' => $invoice->name,
      	    'email' => $invoice->email,
      	];

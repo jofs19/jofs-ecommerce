@@ -29,6 +29,8 @@ use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CashController;
+use App\Http\Controllers\User\OnlinePaymentController;
+
 use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\Frontend\ShopController;
@@ -447,6 +449,10 @@ Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('st
 
 Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
+// ANCHOR Online payment
+Route::post('/online/order', [OnlinePaymentController::class, 'OnlineOrder'])->name('online.order');
+
+
 
 
 
@@ -503,6 +509,11 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
     Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
     Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
     Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+    //Payment Route
+    Route::post('/payment/store', [CheckoutController::class, 'PaymentStore'])->name('payment.store');
+
+
 
 
 
