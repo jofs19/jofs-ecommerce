@@ -57,7 +57,7 @@
                   <li><a class="dropdown-item" href="comparison.html"><i
                               class="ci-compare text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Ikumpara (3) @else Compare (3) @endif </a></li>
-                  <li><a class="dropdown-item" href="order-tracking.html"><i
+                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i
                               class="ci-location text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Sundan ang Order @else Order Tracking @endif </a></li>
               </ul>
@@ -67,7 +67,7 @@
                   class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                   href="comparison.html"><i class="ci-compare mt-n1"></i>Compare (3)</a><a
                   class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
-                  href="order-tracking.html"><i class="ci-location mt-n1"></i>Order tracking</a></div>
+                  data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i class="ci-location mt-n1"></i>Order tracking</a></div>
       </div>
   </div>
   <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
@@ -351,4 +351,37 @@
           </div>
       </div>
   </div>
+
+
+
+  <div class="modal fade" id="modalLarge" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Track your Order</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+    <form class="needs-validation" novalidate autocomplete="off" method="post" action="{{ route('order.tracking') }}">
+        @csrf
+        <div class="modal-body">
+
+            <div>
+                <input class="form-control form-control-lg" name="code" required type="text" id="large-input" placeholder="Enter Invoice #">
+            </div>  
+                    
+            </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary btn-shadow btn-sm" type="submit">Track now</button>
+        </div>
+    </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
 </header>

@@ -119,16 +119,19 @@ class AllUserController extends Controller
 
         public function OrderTraking(Request $request){
 
+
+
             $invoice = $request->code;
+            
+
     
             $track = Order::where('invoice_no',$invoice)->first();
-    
             if ($track) {
     
                 // echo "<pre>";
                 // print_r($track);
-    
-            return view('frontendv2.traking.track_order',compact('track'));
+            
+            return view('frontendv2.tracking.track_order',compact('track'));
     
             }else{
     
