@@ -21,7 +21,7 @@ Vartouhi | {{  $order->invoice_no }}
                     </li>
                     <li class="breadcrumb-item text-nowrap"><a href="#">Account</a>
                     </li>
-                    <li class="breadcrumb-item text-nowrap active" aria-current="page">Wishlist</li>
+                    <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ $order->invoice_no }}</li>
                 </ol>
             </nav>
         </div>
@@ -61,20 +61,22 @@ Vartouhi | {{  $order->invoice_no }}
                     <div class="col-sm-6">
                         <h4 class="h6">Shipping to:</h4>
                         <ul class="list-unstyled fs-sm">
-                            <li><span class="text-muted">Client:&nbsp;</span>{{ $order->name }}</li>
-                            
+                            <li><span class="text-muted">Recipient:&nbsp;</span>{{ $order->name }}</li>
+                            <li><span class="text-muted">Email Address:&nbsp;</span>{{ $order->email }}</li>
                             <li><span class="text-muted">Phone:&nbsp;</span>{{ $order->phone }}</li>
                             <li><span class="text-muted">Address 1:&nbsp;</span>{{ $order->address }}</li>
                             @if($order->address2 != NULL)
                             <li><span class="text-muted">Address 2:&nbsp;</span>{{ $order->address2 }}</li>
                             @endif
-                            <li><span class="text-muted">Local Area:&nbsp;</span>{{ $order->division->division_name }}, {{ $order->district->district_name }}, {{ $order->state->state_name }}</li>
+                            <li><span class="text-muted">Local Area:&nbsp;</span>{{ $order->division->division_name }}, {{ $order->district->district_name }}, {{ $order->state->state_name }} [{{ $order->post_code }}] </li>
 
                         </ul>
                     </div>
                     <div class="col-sm-6">
                         <h4 class="h6">Order Details:</h4>
                         <ul class="list-unstyled fs-sm">
+                            <li><span class="text-muted">Invoice #:&nbsp;</span>{{ $order->invoice_no }}</li>
+
                             @if($order->payment_method == 'Cash On Delivery')
                             <li><span class="text-muted">Payment Method:&nbsp;</span>{{ $order->payment_method }}</li>
                             @else
@@ -82,7 +84,10 @@ Vartouhi | {{  $order->invoice_no }}
                             @endif
                         
 
-                                        
+                            <li><span class="text-muted">Date of Purchase:&nbsp;</span>{{ $order->order_date }}</li>
+                            @if($order->payment_method == 'Stripe')
+                            <li><span class="text-muted">Transaction ID:&nbsp;</span>{{ $order->order_date }}</li>
+                            @endif      
 
                 @if($order->status == 'delivered')
 
@@ -121,6 +126,10 @@ Vartouhi | {{  $order->invoice_no }}
                     
 
                 @endif
+
+                
+
+
 
             </ul>
 

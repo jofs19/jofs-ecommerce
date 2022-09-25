@@ -102,8 +102,12 @@ class CashController extends Controller
 			'alert-type' => 'success'
 		);
 
-		return redirect()->route('dashboard')->with($notification);
+		$order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();  
 
+		return view('frontendv2.checkout.checkout_complete',compact('order', 'orderItem'))->with($notification);
+
+	
 
     } // end method 
 

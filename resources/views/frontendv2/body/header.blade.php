@@ -340,7 +340,7 @@
                               Contact Us @endif</a>
                           
                       </li>
-                      <li class="nav-item"><a class="nav-link" href="#">
+                      <li class="nav-item"><a class="nav-link" href="{{ route('home.blog') }}">
                         <i class="ci-image align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Talaan @else
                               Blog @endif</a>
                           

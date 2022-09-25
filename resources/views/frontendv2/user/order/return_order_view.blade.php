@@ -9,12 +9,12 @@
             <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
             <li class="breadcrumb-item text-nowrap"><a href="#">Account</a>
             </li>
-            <li class="breadcrumb-item text-nowrap active" aria-current="page">Support tickets</li>
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">Returned Orders</li>
           </ol>
         </nav>
       </div>
       <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Support tickets</h1>
+        <h1 class="h3 text-light mb-0">Returned Orders</h1>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
                 <th>Date of Purchase</th>
                 <th>Amount</th>
                 <th>M.O.P.</th>
-                <th>Return status</th>
+                <th>Request status</th>
                 <th>View</th>
               </tr>
             </thead>

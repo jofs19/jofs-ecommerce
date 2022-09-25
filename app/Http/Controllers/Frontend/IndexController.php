@@ -24,7 +24,7 @@ class IndexController extends Controller
     public function index()
     {
         
-        $blogpost = BlogPost::latest()->get();
+        $blogpost = BlogPost::latest()->limit(4)->get();
         $products = Product::where('status',1)->orderBy('id','DESC')->limit(8)->get();
         $products_category = Product::where('status',1)->orderBy('id','DESC')->get();
         $sliders = Slider::where('status',1)->orderBy('id','DESC')->get();

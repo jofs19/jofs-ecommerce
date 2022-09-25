@@ -189,7 +189,7 @@ Checkout Details
                             <!-- Collapse 2 -->
                             <div class="multi-collapse collapse" id="multiCollapseExample2" style="">
                                 <div class="card card-body mb-2">
-                                    <p class="fs-sm">Account Username:&nbsp;&nbsp; <strong>John Oliver
+                                    <p class="fs-sm">Username:&nbsp;&nbsp; <strong>John Oliver
                                             Santiago</strong> </p>
                                     <p class="fs-sm">Account number:&nbsp;&nbsp; <strong>09475220247</strong>
                                     </p>

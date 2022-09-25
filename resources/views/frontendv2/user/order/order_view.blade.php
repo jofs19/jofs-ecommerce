@@ -184,7 +184,11 @@
               <td class="py-3">
                 
                 {{-- <a class="nav-link-style fs-ms text-accent action" target="_blank" href="{{ url('user/order_details/'.$order->id ) }}"><i class="ci-eye align-middle me-1"></i>View</a> --}}
-                <a class="nav-link-style fs-normal text-info action" target="_blank" href="{{ url('user/invoice_download/'.$order->id ) }}"><i class="ci-download align-middle me-1"></i>Invoice</a>  
+                {{-- <a class="nav-link-style fs-normal text-info action" target="_blank" href="{{ url('user/invoice_download/'.$order->id ) }}"><i class="ci-download align-middle me-1"></i>Invoice</a>   --}}
+
+                <a class="btn btn-outline-dark rounded-pill btn-icon btn-sm" href="{{ url('user/invoice_download/'.$order->id ) }}" target="_blank">
+                  <i class="ci-download"></i>
+                </a>
                 
                 <!-- Toolbar example -->
               

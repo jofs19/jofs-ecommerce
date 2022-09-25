@@ -542,63 +542,46 @@ Vartouhi | Beauty & Cosmetics Store
 
 
                 <div class="bg-secondary p-5 text-center"><img class="d-block mb-4 mx-auto"
-                        src="{{ asset('frontendv2/assets/img/home/yt-logo.png') }}" width="120" alt="YouTube">
+                        src="https://clipart.info/images/ccovers/1509135295Facebook-Logo-Png.png" width="150" alt="Facebook">
                     <div class="d-flex justify-content-center align-items-center mb-4"><img class="me-2"
                             src="{{ asset('frontendv2/assets/img/home/yt-subscribers.png') }}" width="126"
-                            alt="YouTube Subscribers"><span class="fs-sm">250k+</span></div><a
-                        class="btn btn-primary border-0 btn-sm mb-3" href="#" style="background-color: #ff0000;"><i
-                            class="ci-add-user me-2"></i>Subscribe*</a>
-                    <p class="fs-sm mb-0">*View latest gadgets reviews available for purchase in our store.</p>
+                            alt="Facebook Followers"><span class="fs-sm">4.2k+</span></div><a
+                        class="btn btn-primary border-0 btn-sm mb-3" href="https://www.facebook.com/VartouhiOfficial" style="background-color: #4267B2;" target="_blank"><i
+                            class="ci-thumb-up me-2"></i>Like/Follow*</a>
+                    <p class="fs-sm mb-0">*View our Facebook page.</p>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 pb-2">
-                    <h2 class="h4 mb-3">Latest videos from Cartzilla channel</h2><a
-                        class="btn btn-outline-accent btn-sm mb-3" href="#">More videos<i
+                    <h2 class="h4 mb-3">Latest Blogs from Vartouhi</h2><a
+                        class="btn btn-outline-accent btn-sm mb-3" href="{{ route('home.blog') }}">More Blogs<i
                             class="ci-arrow-right fs-xs ms-1 me-n1"></i></a>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-4 col-6 mb-3"><a class="d-block text-decoration-0 px-2"
-                            href="https://www.youtube.com/embed/vS93u75NnPo" data-bs-toggle="video">
+                @foreach($blogpost as $blog)
+
+                @if($loop->last)
+                    <div class="col-lg-4 col-6 mb-3 d-lg-none">
+                @else
+
+                    <div class="col-lg-4 col-6 mb-3">
+
+                @endif
+                        
+                        
+                        <a class="d-block text-decoration-0 px-2"
+                            href="{{ route('post.details', $blog->id) }}" data-bs-toggle="video">
 
 
                             <div class="position-relative mb-2"><span
-                                    class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:16</span><img
-                                    class="w-100" src="{{ asset('frontendv2/assets/img/home/video/cover01.jpg') }}"
+                                    class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">{{ Carbon\Carbon::parse($blog->created_at)->diffForHumans()  }}</span><img
+                                    class="w-100" src="{{ asset($blog->post_image) }}"
                                     alt="Video cover"></div>
-                            <h6 class="fs-sm pt-1">5 New Cool Gadgets You Must See on Cartzilla - Cheap Budget</h6>
-                        </a></div>
-                    <div class="col-lg-4 col-6 mb-3"><a class="d-block text-decoration-0 px-2"
-                            href="https://www.youtube.com/embed/B6LaYgGogf0" data-bs-toggle="video">
-
-
-                            <div class="position-relative mb-2"><span
-                                    class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">7:27</span><img
-                                    class="w-100" src="{{ asset('frontendv2/assets/img/home/video/cover02.jpg') }}"
-                                    alt="Video cover"></div>
-                            <h6 class="fs-sm pt-1">5 Super Useful Gadgets on Cartzilla You Must Have in 2020</h6>
-                        </a></div>
-                    <div class="col-lg-4 col-6 mb-3"><a class="d-block text-decoration-0 px-2"
-                            href="https://www.youtube.com/embed/kB-ROfRS9V4" data-bs-toggle="video">
-
-
-                            <div class="position-relative mb-2"><span
-                                    class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:20</span><img
-                                    class="w-100" src="{{ asset('frontendv2/assets/img/home/video/cover03.jpg') }}"
-                                    alt="Video cover"></div>
-                            <h6 class="fs-sm pt-1">Top 5 New Amazing Gadgets on Cartzilla You Must See</h6>
-                        </a></div>
-                    <div class="col-lg-4 col-6 mb-3 d-lg-none"><a class="d-block text-decoration-0 px-2"
-                            href="https://www.youtube.com/embed/sJK67XXE_Rg" data-bs-toggle="video">
-
-
-                            <div class="position-relative mb-2"><span
-                                    class="badge bg-dark position-absolute bottom-0 end-0 mb-2 me-2">6:11</span><img
-                                    class="w-100" src="{{ asset('frontendv2/assets/img/home/video/cover04.jpg') }}"
-                                    alt="Video cover"></div>
-                            <h6 class="fs-sm fw-bold pt-1">5 Amazing Construction Inventions and Working Tools
-                                Available...</h6>
-                        </a></div>
+                            <h6 class="fs-sm pt-1">@if(session()->get('language') == 'filipino') {{ $blog->post_title_fil }} @else {{ $blog->post_title_en }} @endif</h6>
+                        </a>
+                    </div>
+                               
+                    @endforeach
                 </div>
             </div>
         </div>

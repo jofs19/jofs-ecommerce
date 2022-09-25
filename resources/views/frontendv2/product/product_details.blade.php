@@ -85,7 +85,7 @@
                 $convertAverage = number_format($average, 0, '.', '');
               @endphp
               <span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">               
-               ({{ $convertAverage }} out of 5)
+               ({{ number_format($average,1) }} out of 5)
               
               
               </span>
@@ -221,7 +221,7 @@
                       <div class="mb-3">
                         <label for="color" class="form-label">Product Options:</label>
                         <select class="form-select" id="color">
-                          <option class="bg-secondary" selected disabled>Select variant...</option>
+                          <option class="bg-secondary" disabled>Select variant...</option>
 
                           @foreach($product_color_en as $color)
                           <option value="{{ $color }}">{{ ucwords($color) }}</option>		 
@@ -240,7 +240,7 @@
                           <label class="form-label" for="product-size">Choose Size:</label><a class="nav-link-style fs-sm" href="#size-chart" data-bs-toggle="modal"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
                         </div> --}}
                         <select class="form-select" id="size">
-                          <option selected disabled class="bg-faded-dark">Select size...</option>
+                          <option disabled class="bg-faded-dark">Select size...</option>
                           @foreach($product_size_en as $size)
                           <option value="{{ $size }}">{{ ucwords($size) }}</option>		 
                           @endforeach
@@ -279,7 +279,7 @@
                         @else
 
            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
-			    <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow d-block w-100" ><i class="ci-cart fs-lg me-2"></i> ADD TO CART</button>
+			    <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow d-block w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg me-2"></i> ADD TO CART</button>
 
                         @endif
 
@@ -289,10 +289,10 @@
                       </div>
                       <div class="d-flex mb-4">
                         <div class="w-100 me-3">
-                          <button class="btn btn-danger btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
+                          <button class="btn btn-danger btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="bottom" onclick="addToWishList(this.id)" title="Add to Wishlist"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
                         </div>
                         <div class="w-100">
-                          <button class="btn btn-accent btn-shadow d-block w-100" type="button"><i class="ci-compare fs-lg me-2"></i>Compare</button>
+                          <button class="btn btn-accent btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Compare"><i class="ci-compare fs-lg me-2"></i>Compare</button>
                         </div>
                       </div>
                       <!-- Product panels-->
@@ -362,76 +362,172 @@
               <!-- Reviews tab-->
               <div class="tab-pane fade" id="reviews" role="tabpanel">
                 <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                  <div class="d-flex align-items-center me-md-3"><img src="img/shop/single/gallery/th05.jpg" width="90" alt="Product thumb">
+                  <div class="d-flex align-items-center me-md-3"><img src="{{ asset($product->product_thumbnail) }}" width="90" alt="Product thumb">
                     <div class="ps-3">
-                      <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
-                      <div class="h4 fw-normal text-accent">$124.<small>99</small></div>
+                      <h6 class="fs-base mb-2">@if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif</h6>
+
+                      @if ($product->discount_price == NULL)
+                      <div class="h4 fw-normal text-accent">₱ {{ number_format($product->selling_price,2) }}</div>
+                      @else
+ 
+                      <div class="mb-3">
+                        <del class="text-muted fs-lg me-3">₱ {{ number_format($product->selling_price,2) }}</del>
+
+                        <span class="h3 fw-normal text-accent me-1">₱ {{ number_format($product->discount_price,2) }}</span>
+                        
+                        <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                      </div>
+
+                      
+                      @endif
+
+                      {{-- <div class="h4 fw-normal text-accent">$124.<small>99</small></div> --}}
+
+
+
+
                     </div>
                   </div>
                   <div class="d-flex align-items-center pt-3">
-                    <select class="form-select me-2" style="width: 5rem;">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                    <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button>
+                    {{-- @if($product->product_qty < 1)
+                        <input class="form-control me-3" type="number" id="qty" value="0" min="0"  max="0" style="width: 6rem;">
+                        @else
+                        <input class="form-control me-3" type="number" id="qty" value="1" min="1"  max="{{ $product->product_qty }}" style="width: 6rem;">
+                      @endif --}}
+
+
+                      @if($product->product_qty < 1)
+                        
+                        <button class="btn btn-secondary btn-shadow me-2" disabled type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button>
+                        @else
+
+                      <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                      <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add to Cart" style="width: 15rem"><i class="ci-cart fs-lg me-sm-2"></i> <span class="d-none d-sm-inline">Add to Cart</span></button>
+
+                        @endif
+                        
+
+                    {{-- <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button> --}}
                     <div class="me-2">
-                      <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ci-heart fs-lg"></i></button>
+                      <button class="btn btn-danger btn-icon" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="top" onclick="addToWishList(this.id)" title="Add to Wishlist"><i class="ci-heart fs-lg"></i></button>
                     </div>
                     <div>
-                      <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="Compare"><i class="ci-compare fs-lg"></i></button>
+                      <button class="btn btn-accent btn-icon" type="button" data-bs-placement="top" data-bs-toggle="tooltip" title="Compare"><i class="ci-compare fs-lg"></i></button>
                     </div>
                   </div>
                 </div>
                 <!-- Reviews-->
+
+                @php
+                // $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(5)->get();
+                $reviews = App\Models\Review::where('product_id',$product->id)->latest()->get();
+                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                $onestar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',1)->count();
+                $twostar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',2)->count();
+                $threestar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',3)->count();
+                $fourstar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',4)->count();
+                $fivestar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',5)->count();
+
+                $onestarpercent = ($onestar / $reviews->count()) * 100;
+                $twostarpercent = ($twostar / $reviews->count()) * 100;
+                $threestarpercent = ($threestar / $reviews->count()) * 100;
+                $fourstarpercent = ($fourstar / $reviews->count()) * 100;
+                $fivestarpercent = ($fivestar / $reviews->count()) * 100;
+
+                $fivepercent = round($fivestarpercent);
+
+                @endphp		
+
                 <div class="row pt-2 pb-3">
                   <div class="col-lg-4 col-md-5">
-                    <h2 class="h3 mb-4">74 Reviews</h2>
-                    <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star fs-sm text-muted me-1"></i></div><span class="d-inline-block align-middle">4.1 Overall rating</span>
-                    <p class="pt-3 fs-sm text-muted">58 out of 74 (77%)<br>Customers recommended this product</p>
+                    <h2 class="h3 mb-4">{{ count($reviewcount) }} Reviews </h2>
+                    
+                    <div class="star-rating me-2">
+                      @if($average == 0)
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      @elseif($average == 1 || $average < 2)
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      @elseif($average == 2 || $average < 3)
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                     @elseif($average == 3 || $average < 4)
+                     <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                   
+                     @elseif($average == 4 || $average < 5)
+                     <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star fs-sm text-muted me-1"></i>
+                     @elseif($average == 5 || $average < 5)
+                   <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
+                      @endif
+                    </div>
+
+                      
+
+                    <span class="d-inline-block align-middle"> {{ number_format($average,1) }} Overall rating</span>
+                    <p class="pt-3 fs-sm text-muted">{{ $fivestar }} out of {{ count($reviewcount) }} ({{ $fivepercent }}%)<br>Customers recommended this product</p>
                   </div>
                   <div class="col-lg-8 col-md-7">
                     <div class="d-flex align-items-center mb-2">
                       <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">5</span><i class="ci-star-filled fs-xs ms-1"></i></div>
                       <div class="w-100">
-                        <div class="progress" style="height: 4px;">
-                          <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 12px;">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: {{ round($fivestarpercent) }}%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div><span class="text-muted ms-3">43</span>
+                      </div><span class="text-muted ms-3">{{ $fivestar }}</span>
                     </div>
                     <div class="d-flex align-items-center mb-2">
                       <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">4</span><i class="ci-star-filled fs-xs ms-1"></i></div>
                       <div class="w-100">
-                        <div class="progress" style="height: 4px;">
-                          <div class="progress-bar" role="progressbar" style="width: 27%; background-color: #a7e453;" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 12px;">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ round($fourstarpercent) }}%; background-color: #a7e453;" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div><span class="text-muted ms-3">16</span>
+                      </div><span class="text-muted ms-3">{{ $fourstar }}</span>
                     </div>
                     <div class="d-flex align-items-center mb-2">
                       <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">3</span><i class="ci-star-filled fs-xs ms-1"></i></div>
                       <div class="w-100">
-                        <div class="progress" style="height: 4px;">
-                          <div class="progress-bar" role="progressbar" style="width: 17%; background-color: #ffda75;" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 12px;">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ round($threestarpercent) }}%; background-color: #ffda75;" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div><span class="text-muted ms-3">9</span>
+                      </div><span class="text-muted ms-3">{{ $threestar }}</span>
                     </div>
                     <div class="d-flex align-items-center mb-2">
                       <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">2</span><i class="ci-star-filled fs-xs ms-1"></i></div>
                       <div class="w-100">
-                        <div class="progress" style="height: 4px;">
-                          <div class="progress-bar" role="progressbar" style="width: 9%; background-color: #fea569;" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 12px;">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ round($twostarpercent) }}%; background-color: #fea569;" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div><span class="text-muted ms-3">4</span>
+                      </div><span class="text-muted ms-3">{{ $twostar }}</span>
                     </div>
                     <div class="d-flex align-items-center">
                       <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">1</span><i class="ci-star-filled fs-xs ms-1"></i></div>
                       <div class="w-100">
-                        <div class="progress" style="height: 4px;">
-                          <div class="progress-bar bg-danger" role="progressbar" style="width: 4%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 12px;">
+                          <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ round($onestarpercent) }}%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div><span class="text-muted ms-3">2</span>
+                      </div><span class="text-muted ms-3">{{ $onestar }}</span>
                     </div>
                   </div>
                 </div>
@@ -451,102 +547,159 @@
                         </select>
                       </div>
                     </div>
+                    @foreach($reviews as $item)
+                    @if($item->status == 0)
+                
+                    @else
                     <!-- Review-->
                     <div class="product-review pb-4 mb-4 border-bottom">
                       <div class="d-flex mb-3">
-                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="img/shop/reviews/01.jpg" width="50" alt="Rafael Marquez">
+                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="50" alt="User">
                           <div class="ps-3">
-                            <h6 class="fs-sm mb-0">Rafael Marquez</h6><span class="fs-ms text-muted">June 28, 2019</span>
+                            <h6 class="fs-sm mb-0">{{ $item->name }}</h6><span class="fs-ms text-muted">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
                           </div>
                         </div>
                         <div>
-                          <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                          <div class="star-rating">
+
+
+                            @if($item->rating == NULL)
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+
+                            @elseif($item->rating == 1)
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            @elseif($item->rating == 2)
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-"></i>
+                            <i class="star-rating-icon ci-star-"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                             
+                            @elseif($item->rating == 3)
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                             
+                            @elseif($item->rating == 4)
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            @elseif($item->rating == 5)
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                            <i class="star-rating-icon ci-star-filled active"></i>
+                             
+                             @endif
+
+                             <small>
+                            @if ($item->user_id == Auth::id())
+                            <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" href="{{ route('delete.review', $item->id) }}" data-scroll><i class="ci-trash"></i></a>
+                            @endif
+                            </small>
                           </div>
-                          <div class="fs-ms text-muted">83% of users found this review helpful</div>
+
+                          
+
+                          <div class="fs-ms text-muted">
+                            
+                            @if($item->rating == 1)
+                            Unsatisfied
+                            @elseif($item->rating == 2)
+                            Not Bad
+                            @elseif($item->rating == 3)
+                            Satisfied
+                            @elseif($item->rating == 4)
+                            Very Good
+                            @elseif($item->rating == 5)
+                            Excellent
+                            @else
+                            No Rating
+                            @endif
+
+                            
+                          
+                          </div>
+
+
+                            
+
+
+
                         </div>
                       </div>
-                      <p class="fs-md mb-2">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est...</p>
-                      <ul class="list-unstyled fs-ms pt-1">
-                        <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>Consequuntur magni, voluptatem sequi, tempora</li>
-                        <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>Architecto beatae, quis autem</li>
-                      </ul>
-                      <div class="text-nowrap">
+                      <dl>
+                        <dt>{{ $item->summary }}</dt>
+                        <dd>{{ $item->comment }}</dd>
+                        
+                      </dl>
+
+                      @if($item->image != NULL)
+                      <div class="gallery">
+                        <a href="{{ asset($item->image) }}" class="gallery-item rounded-3" data-sub-html='<h6 class="fs-sm text-light">Gallery image caption</h6>'>
+                          {{-- <img src="{{ asset($item->image) }}" style="width: 50%;height: 50%" alt="Gallery thumbnail"> --}}
+                          <!-- Block outline button -->
+
+<button type="button" class="btn btn-secondary d-block w-100">View Image</button>
+                        </a>
+                      </div>
+                      @endif
+
+                      {{-- <img src="{{ asset($item->image) }}" alt="" srcset=""> --}}
+                      {{-- <div class="text-nowrap">
                         <button class="btn-like" type="button">15</button>
                         <button class="btn-dislike" type="button">3</button>
-                      </div>
+                      </div> --}}
                     </div>
-                    <!-- Review-->
-                    <div class="product-review pb-4 mb-4 border-bottom">
-                      <div class="d-flex mb-3">
-                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="img/shop/reviews/02.jpg" width="50" alt="Barbara Palson">
-                          <div class="ps-3">
-                            <h6 class="fs-sm mb-0">Barbara Palson</h6><span class="fs-ms text-muted">May 17, 2019</span>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
-                          </div>
-                          <div class="fs-ms text-muted">99% of users found this review helpful</div>
-                        </div>
-                      </div>
-                      <p class="fs-md mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      <ul class="list-unstyled fs-ms pt-1">
-                        <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>Consequuntur magni, voluptatem sequi, tempora</li>
-                        <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>Architecto beatae, quis autem</li>
-                      </ul>
-                      <div class="text-nowrap">
-                        <button class="btn-like" type="button">34</button>
-                        <button class="btn-dislike" type="button">1</button>
-                      </div>
-                    </div>
-                    <!-- Review-->
-                    <div class="product-review pb-4 mb-4 border-bottom">
-                      <div class="d-flex mb-3">
-                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="img/shop/reviews/03.jpg" width="50" alt="Daniel Adams">
-                          <div class="ps-3">
-                            <h6 class="fs-sm mb-0">Daniel Adams</h6><span class="fs-ms text-muted">May 8, 2019</span>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                          </div>
-                          <div class="fs-ms text-muted">75% of users found this review helpful</div>
-                        </div>
-                      </div>
-                      <p class="fs-md mb-2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.</p>
-                      <ul class="list-unstyled fs-ms pt-1">
-                        <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>Consequuntur magni, voluptatem sequi</li>
-                        <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>Architecto beatae,  quis autem, voluptatem sequ</li>
-                      </ul>
-                      <div class="text-nowrap">
-                        <button class="btn-like" type="button">26</button>
-                        <button class="btn-dislike" type="button">9</button>
-                      </div>
-                    </div>
+                    <!-- End Review-->
+                    @endif
+                    @endforeach
+                    
                     <div class="text-center">
                       <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load more reviews</button>
                     </div>
+
+                    
+
                   </div>
                   <!-- Leave review form-->
                   <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
                     <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
                       <h3 class="h4 pb-2">Write a review</h3>
-                      <form class="needs-validation" method="post" novalidate>
+                      <form class="needs-validation" method="post" action="{{ route('review.store') }}" novalidate enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">	
+
+                        
+
                         <div class="mb-3">
                           <label class="form-label" for="review-name">Your name<span class="text-danger">*</span></label>
-                          <input class="form-control" type="text" required id="review-name">
+                          <input class="form-control" name="name" type="text" required id="review-name" @guest @else  value="{{ Auth::user()->name }}" @endguest >
                           <div class="invalid-feedback">Please enter your name!</div><small class="form-text text-muted">Will be displayed on the comment.</small>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="review-email">Your email<span class="text-danger">*</span></label>
-                          <input class="form-control" type="email" required id="review-email">
+                          <input class="form-control" type="email" name="email" required id="review-email" @guest @else  value="{{ Auth::user()->email }}" @endguest>
                           <div class="invalid-feedback">Please provide valid email address!</div><small class="form-text text-muted">Authentication only - we won't spam you.</small>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="review-rating">Rating<span class="text-danger">*</span></label>
-                          <select class="form-select" required id="review-rating">
-                            <option value="">Choose rating</option>
-                            <option value="5">5 stars</option>
+                          <select class="form-select" required id="review-rating" name="quality">
+                            <option value="" disabled class="bg-secondary" selected>Choose rating</option>
+                            <option  value="5">5 stars</option>
                             <option value="4">4 stars</option>
                             <option value="3">3 stars</option>
                             <option value="2">2 stars</option>
@@ -555,19 +708,31 @@
                           <div class="invalid-feedback">Please choose rating!</div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="review-text">Review<span class="text-danger">*</span></label>
-                          <textarea class="form-control" rows="6" required id="review-text"></textarea>
-                          <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review must be at least 50 characters.</small>
+                          <label class="form-label" for="review-text">Summary<span class="text-danger">*</span></label>
+                          <textarea class="form-control" rows="2" required id="review-text" name="summary"></textarea>
+                          <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review must be at least 10 characters.</small>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="review-pros">Pros</label>
-                          <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-pros"></textarea>
+                          <label class="form-label" for="review-text">Review<span class="text-danger">*</span></label>
+                          <textarea class="form-control" rows="6" required id="review-text" name="comment"></textarea>
+                          <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review must be at least 50 characters.</small>
                         </div>
+                        
                         <div class="mb-4">
-                          <label class="form-label" for="review-cons">Cons</label>
-                          <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-cons"></textarea>
+                          <label class="form-label" for="review-cons">Upload image <span class="text-muted fs-xs">(optional)</span></label>
+                          <!-- Drag and drop file upload -->
+                          <div class="file-drop-area">
+                            <div class="file-drop-icon ci-cloud-upload"></div>
+                            <span class="file-drop-message">Drag and drop here to upload</span>
+                            <input type="file" class="file-drop-input" name="image">
+                            <button type="button" class="file-drop-btn btn btn-primary btn-sm">Or select file</button>
+                          </div>
                         </div>
+                        @guest
+                        <button class="btn btn-primary btn-shadow d-block w-100 disabled" type="submit">Login your account first</button>
+                        @else
                         <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a Review</button>
+                        @endguest
                       </form>
                     </div>
                   </div>
