@@ -279,7 +279,7 @@
                         @else
 
            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
-			    <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow d-block w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg me-2"></i> ADD TO CART</button>
+			    <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow d-block w-100 shimmer-btn placeholder-wave" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg me-2"></i> ADD TO CART</button>
 
                         @endif
 
@@ -402,7 +402,7 @@
                         @else
 
                       <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
-                      <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add to Cart" style="width: 15rem"><i class="ci-cart fs-lg me-sm-2"></i> <span class="d-none d-sm-inline">Add to Cart</span></button>
+                      <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow me-2 shimmer-btn placeholder-wave" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add to Cart" style="width: 15rem"><i class="ci-cart fs-lg me-sm-2"></i> <span class="d-none d-sm-inline">Add to Cart</span></button>
 
                         @endif
                         
@@ -428,11 +428,37 @@
                 $fourstar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',4)->count();
                 $fivestar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',5)->count();
 
-                $onestarpercent = ($onestar / $reviews->count()) * 100;
-                $twostarpercent = ($twostar / $reviews->count()) * 100;
-                $threestarpercent = ($threestar / $reviews->count()) * 100;
-                $fourstarpercent = ($fourstar / $reviews->count()) * 100;
-                $fivestarpercent = ($fivestar / $reviews->count()) * 100;
+                $zerostar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',0)->count();
+                
+                if($onestar != null){
+                  $onestarpercent = ($onestar / $reviews->count()) * 100;
+                }else{
+                  $onestarpercent = 0;
+                }
+
+                if($twostar != null){
+                  $twostarpercent = ($twostar / $reviews->count()) * 100;
+                }else{
+                  $twostarpercent = 0;
+                }
+
+                if($threestar != null){
+                  $threestarpercent = ($threestar / $reviews->count()) * 100;
+                }else{
+                  $threestarpercent = 0;
+                }
+
+                if($fourstar != null){
+                  $fourstarpercent = ($fourstar / $reviews->count()) * 100;
+                }else{
+                  $fourstarpercent = 0;
+                }
+
+                if($fivestar != null){
+                  $fivestarpercent = ($fivestar / $reviews->count()) * 100;
+                }else{
+                  $fivestarpercent = 0;
+                }
 
                 $fivepercent = round($fivestarpercent);
 
@@ -649,7 +675,7 @@
 
                       @if($item->image != NULL)
                       <div class="gallery">
-                        <a href="{{ asset($item->image) }}" class="gallery-item rounded-3" data-sub-html='<h6 class="fs-sm text-light">Gallery image caption</h6>'>
+                        <a href="{{ asset($item->image) }}" class="gallery-item rounded-3" data-sub-html='<h6 class="fs-sm text-light">{{ $item->summary }}</h6>'>
                           {{-- <img src="{{ asset($item->image) }}" style="width: 50%;height: 50%" alt="Gallery thumbnail"> --}}
                           <!-- Block outline button -->
 

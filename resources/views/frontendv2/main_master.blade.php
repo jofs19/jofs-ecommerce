@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vartouhi-logo-shorten.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vartouhi-logo-shorten.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -44,9 +44,9 @@
 
     <style>
 
-		.confirm{
-			visibility: collapse;
-		}
+      @include('frontendv2.partials.animation');
+
+
 
         .product-badge.product-unavailable {
         background-color: #dc3545;
@@ -66,6 +66,23 @@
       padding: 80px 0;
     }
 
+    .shimmer-btn{
+      background-image: linear-gradient(
+        -60deg,
+        transparent, transparent 40%,
+        #ffffff44 40%, #ffffff44 60%,
+        transparent 60%, transparent 100%
+      );
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
+      background-position-x: 150%;
+    }
+
+    .shimmer-btn:hover{
+      background-position-x: -150%;
+      transition: background-position-x 1s ease-in-out;
+    }
+
     /* body.modal-open .container{
     -webkit-filter: blur(4px);
     -moz-filter: blur(4px);
@@ -75,7 +92,18 @@
     filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
     } */
-		
+
+    @media (min-width: 767px) {
+      .showCart{
+        display: none;
+      }
+    }
+
+
+		.confirm{
+			visibility: collapse;
+		}
+		/* if problem persisted, just put this css in first */
 
 	</style>
 
@@ -88,9 +116,16 @@
   <body class="handheld-toolbar-enabled"></body>
 
 
+  <div id="loader-wrapper">
+  	<div> 
+      <img src="{{ asset('frontendv2/assets/img/my-loader.svg') }}" alt="" srcset="" width="80" height="80" style="text-align: center; display:inline-block; margin-top:calc(50vh - 20px);
+      ">  
+    </div>
+  </div>
 
-
-
+  {{-- <div id="loader-wrapper">
+  	<div class="loader"></div>
+  </div> --}}
             
 
 
@@ -302,6 +337,7 @@
 				<div class="invalid-feedback">Please provide valid password.</div>
 			  </div>
 
+        {{-- ANCHOR CONFIRM PASSWORD --}}
 			  <div class="mb-4">
 				<label class="form-label" for="password_confirmation">Confirm password</label>
 				<input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
@@ -316,6 +352,8 @@
                 {{-- <div class="invalid-feedback">Password does not match!</div> --}}
 
                 <div class="confirm" id="confirm"><small><span class="text-danger"> Password does not match!</span></small></div>
+
+                
                
                 
 			  </div>
@@ -463,7 +501,7 @@
 
                                         <div class="mb-3">
                                           <label for="color" class="form-label">Choose Variant</label>
-                                          <select class="form-select" id="color" name="color" style="width:26rem">
+                                          <select class="form-select" id="color" name="color">
                                             {{-- <option class="bg-secondary" disabled>Choose option...</option> --}}
                                             
                                           </select>
@@ -492,8 +530,8 @@
 
                                               
                                         </div>
-                                        <div class="d-flex mb-4">
-                                            <div class="w-100 me-3">
+                                        {{-- <div class="d-flex mb-4"> <!--START-->
+                                            <div class="w-100 me-3"> --}}
 
 
 
@@ -502,9 +540,9 @@
                                               <input type="hidden" id="product_id">
 <button type="submit" id="try" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button> --}}
 
-                                              <input type="hidden" id="product_id">
-                                                <button class="btn btn-danger d-block w-100 btn-shadow" type="button" title="Add to Wishlist" onclick="addToWishList()"><i
-                                                        class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to</span> Wishlist</button>
+          {{-- <input type="hidden" id="product_id">
+            <button class="btn btn-danger d-block w-100 btn-shadow" type="submit" onclick="addToWishList()">
+              <i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to</span> Wishlist</button> --}}
 
 
 
@@ -512,12 +550,12 @@
 
 
 
-                                            </div>
-                                            <div class="w-100">
+                                            {{-- </div> --}}
+                                            {{-- <div class="w-100">
                                                 <button class="btn btn-accent d-block w-100 btn-shadow" type="button"><i
                                                         class="ci-compare fs-lg me-2"></i>Compare</button>
-                                            </div>
-                                        </div>
+                                            </div> --}}
+                                        {{-- </div> --}} <!--END-->
                                         
                       <!-- Product panels-->
                       <div class="accordion mb-4" id="productPanels">
@@ -773,7 +811,7 @@
                     $.each(response.carts, function(key,value){
                       
                         miniCart += `<div class="widget-cart-item pb-2 border-bottom">
-                                      <button class="btn-close text-danger pt-1" type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)" aria-label="Remove"><span
+                                      <button class="btn-close text-danger pt-1" type="button" id="${value.rowId}" onclick="miniCartRemove(this.id)" aria-label="Remove"><span
                                               aria-hidden="true">&times;</span></button>
                                       <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
                                               href="shop-single-v2.html"><img
@@ -789,6 +827,7 @@
                     });
                     
                     if(response.cartQty < 1){
+                      $("#mcart").removeClass("jello-horizontal");
                         miniCart += `<div class="d-flex justify-content-center align-items-center py-3">
                           <p class="fs-sm text-muted mb-0">Your cart is currently empty...</p>
                           
@@ -796,6 +835,7 @@
                                     </div>`
                       $('.checkoutMe').addClass('disabled',true);
                     }else{
+                      $("#mcart").addClass("jello-horizontal");
                       $('.checkoutMe').removeClass('disabled',false);
                     }
                     
@@ -1165,6 +1205,12 @@
             url: "{{ url('/coupon-calculation') }}",
             dataType: 'json',
             success:function(data){
+
+              if(data.total == 0){
+                $(".applyCpn").attr("disabled", true);
+              }else{
+                $(".applyCpn").attr("disabled", false);
+              }
     
                 if (data.total) {
                     $('#couponCalField').html(
@@ -1263,6 +1309,25 @@
         }
     </script>
 
+<script>
+        
+  function checkPassword(form) {
+    password = form.password.value;
+    password_confirmation = form.password_confirmation.value;
+    
+        
+    // If Not same return False.    
+    if (password != password_confirmation) {
+      // alert ("\nPassword did not match: Please try again...")
+      $('.confirm').removeClass();
+      
+    }else{
+      $('#confirm').addClass('confirm');
+    }
+    // return false;
+  }
+  </script>
+
 <script type="text/javascript">
   window.onload = function () {
       var password = document.getElementById("password");
@@ -1278,23 +1343,7 @@
   }
 </script>
 
-<script>
-        
-function checkPassword(form) {
-  password = form.password.value;
-  password_confirmation = form.password_confirmation.value;
-  
-      
-  // If Not same return False.    
-  if (password != password_confirmation) {
-    // alert ("\nPassword did not match: Please try again...")
-    $('.confirm').removeClass();
-  }else{
-    $('#confirm').addClass('confirm');
-  }
-  // return false;
-}
-</script>
+
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -1564,6 +1613,17 @@ $('select[name="district_id"]').on('change', function(){
   });
   </script>
 
+  <script type="text/javascript">
+    $(window).on('load', function() {
+      $("#loader-wrapper").fadeOut(700);
+    });
+  </script>
+
+      {{-- <script>
+         setTimeout(function(){
+            window.location.href = 'https://www.tutorialspoint.com/javascript/';
+         }, 3000);
+      </script> --}}
 
 
 

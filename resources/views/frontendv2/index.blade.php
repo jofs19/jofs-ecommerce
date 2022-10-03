@@ -15,6 +15,30 @@ Vartouhi | Beauty & Cosmetics Store
             filter: grayscale(0%);
         }
 
+        @keyframes rotation {
+      0% {
+        transform: rotate(0deg); }
+      100% {
+        transform: rotate(360deg); } }
+    #loader-wrapper {
+      background-color: #FFFFFF;
+      position: fixed;
+      z-index: 999;
+      width: 100%;
+      height: 100%;
+      text-align: center; }
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 5px solid #000000;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      margin-top:calc(50vh - 20px);
+      display: inline-block;
+      box-sizing: border-box;
+      -webkit-animation: rotation 1s linear infinite;
+      animation: rotation 1s linear infinite; }
+
     </style>
 </head>
 
@@ -122,7 +146,7 @@ Vartouhi | Beauty & Cosmetics Store
                 </div>
             </div>
             <!-- Banner group-->
-            <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0">
+            <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0 tilt-in-fwd-tr">
                 <div class="table-responsive" data-simplebar>
                     <div class="d-flex d-xl-block"><a
                             class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
@@ -184,8 +208,8 @@ Vartouhi | Beauty & Cosmetics Store
         @foreach($products as $product)
 
         <!-- Product-->
-        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-            <div class="card product-card">
+        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" >
+            <div class="card product-card cardProduct" >
 
                 @php
                 $amount = $product->selling_price - $product->discount_price;
@@ -210,8 +234,11 @@ Vartouhi | Beauty & Cosmetics Store
                         {{-- <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button> --}}
 
                         
+                        
+                    <button class="btn-wishlist btn-sm heartbeat me-1 showCart" type="submit" 
+                    href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}" onclick="productView(this.id)"><i class="ci-cart"></i></button>
 
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
+                    <button class="btn-wishlist btn-sm heartbeat" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
 
 
 
@@ -616,3 +643,4 @@ Vartouhi | Beauty & Cosmetics Store
 
 
 @endsection
+

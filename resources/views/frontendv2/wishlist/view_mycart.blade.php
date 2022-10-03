@@ -74,7 +74,7 @@ Vartouhi | My Cart
                           <input class="form-control" type="text" placeholder="Promo code" required id="coupon_name">
                           <div class="invalid-feedback">Please provide promo code.</div>
                         </div>
-                        <button class="btn btn-outline-primary d-block w-100" type="submit" onclick="applyCoupon()">Apply promo code</button>
+                        <button class="btn btn-outline-primary d-block w-100 applyCpn" type="submit" onclick="applyCoupon()">Apply promo code</button>
                     </div>
                   </div>
                   

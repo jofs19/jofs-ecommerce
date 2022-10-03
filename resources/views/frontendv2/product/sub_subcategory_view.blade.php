@@ -61,13 +61,10 @@ Sub/Sub Category Product
               </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
             </div>
           </div>
-          <div class="d-flex pb-3">
-          <a class="nav-link-style nav-link-light me-3" href="#">
-            <i class="ci-arrow-left"></i>
-          </a><span class="fs-md text-light">1 / 5</span>
-          <a class="nav-link-style nav-link-light ms-3" href="#">
-            <i class="ci-arrow-right"></i></a>
-          </div>
+
+          {{ $products->links('vendor.pagination.top_nav') }}
+
+
           <div class="d-none d-sm-flex pb-3">
 
             <ul class="nav" role="tablist">
@@ -125,7 +122,7 @@ Sub/Sub Category Product
                 </span>
                 @endif
 
-              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt="Product"></a>
+              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt="Product"></a>
               <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">{{ $product->category->category_name_en }}</a>
                 <h3 class="product-title fs-sm"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif </a></h3>
                 <div class="d-flex justify-content-between">

@@ -39,7 +39,7 @@ Vartouhi | COD
       <!-- Order details-->
       <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Review your order</h2>
 
-      <div style="height: 24rem;" data-simplebar data-simplebar-auto-hide="false">
+      <div style="height: 24.5rem;" data-simplebar data-simplebar-auto-hide="false">
 
       @foreach ($carts as $item)
       <!-- Item-->

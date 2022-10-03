@@ -1,105 +1,4 @@
-@extends('frontendv2.main_master')
-@section('content')
-@section('title')
-Shop
-@endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-<div class="page-title-overlap bg-dark pt-4">
-    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-      <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ url('/') }}"><i class="ci-home"></i>Home</a></li>
-            <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.page') }}">Shop</a>
-            </li>
-
-            {{-- <li class="breadcrumb-item text-nowrap active" aria-current="page">Shop</li> --}}
-
-            
-          </ol>
-        </nav>
-      </div>
-      <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Shop Page</h1>
-      </div>
-    </div>
-  </div>
-  <div class="container pb-5 mb-2 mb-md-4">
-    <div class="row">
-
-    {{-- Shop Sidebar --}}
-    @include('frontendv2.shop.shop_sidebar')
-    {{-- End Shop Sidebar --}}
-
-      <!-- Content  -->
-      <section class="col-lg-8">
-        <!-- Toolbar-->
-        <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
-          <div class="d-flex flex-wrap">
-            <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-              <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
-              <select class="form-select" id="sorting">
-                <option>Popularity</option>
-                <option>Low - Hight Price</option>
-                <option>High - Low Price</option>
-                <option>Average Rating</option>
-                <option>A - Z Order</option>
-                <option>Z - A Order</option>
-                
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
-            </div>
-          </div>
-
-          {{-- <div class="d-flex pb-3">
-          <a class="nav-link-style nav-link-light me-3" href="#">
-            <i class="ci-arrow-left"></i>
-          </a><span class="fs-md text-light">1 / 5</span>
-          <a class="nav-link-style nav-link-light ms-3" href="#">
-            <i class="ci-arrow-right"></i></a>
-          </div> --}}
-
-          {{ $products->links('vendor.pagination.top_nav') }}
-
-          <div class="d-none d-sm-flex pb-3">
-
-            <ul class="nav" role="tablist">
-
-                <li class="nav-item">
-            {{-- Grid view --}}
-            <a class="btn btn-icon nav-link-style nav-link-light me-2" href="#grid" 
-            class="nav-link active" data-bs-toggle="tab" role="tab" id="gridT">
-
-            {{-- btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2 --}}
-
-                <i class="ci-view-grid"></i>
-            </a>
-            {{-- End Grid view --}}
-                </li>
-
-                <li class="nav-item">
-
-            {{-- List view --}}
-            <a class="btn btn-icon nav-link-style nav-link-light" href="#list" class="nav-link" data-bs-toggle="tab" role="tab" id="listT">
-                <i class="ci-view-list"></i>
-            </a>
-            {{-- End List view --}}
-                </li>
-
-            </ul> <!-- End of nav tabs -->
-
-        </div>
-        </div>
-
-        <div class="tab-content">
-
-        <div class="tab-pane fade show active" id="grid" role="tabpanel">
-            
-        <!-- Products grid-->
-        <div class="row mx-n2">
-          <!-- Product-->
-          @forelse ($products as $product)
+@forelse ($products as $product)
               
           <div class="col-md-4 col-sm-6 px-2 mb-4">
             <div class="card product-card">
@@ -119,7 +18,7 @@ Shop
                 </span>
                 @endif
 
-              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt="Product"></a>
+              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt="Product"></a>
               <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">{{ $product->category->category_name_en }}</a>
                 <h3 class="product-title fs-sm"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'filipino') {{ $product->product_name_fil }} @else {{ $product->product_name_en }} @endif </a></h3>
                 <div class="d-flex justify-content-between">
@@ -278,75 +177,9 @@ Shop
             @endif --}}
 
           @empty
-          <div class="col-md-12">
-            <div class="alert alert-danger text-center" role="alert">
-              No Product Found
-            </div>
+          @include('frontendv2.product.not_found')
+
 
 
 
           @endforelse
-          <!-- End Product-->
-
-        </div>{{-- End Row --}}
-        <!-- End Products grid-->
-        </div> <!-- End Tab Pane -->
-
-        <div class="tab-pane fade show" id="list" role="tabpanel">
-            
-        <!-- Products list -->
-        @include('frontendv2.tags.tags_list_view')
-        <!-- End Products list -->
-        </div> <!-- End Tab Pane -->
-
-        </div> <!-- End Tab Content -->
-        
-        <hr class="my-3">
-        {{ $products->appends($_GET)->links('vendor.pagination.grid_paginate') }}
-
-        </div>
-        <!-- Pagination-->
-        {{-- <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#"><i class="ci-arrow-left me-2"></i>Prev</a></li>
-          </ul>
-          <ul class="pagination">
-            <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
-            <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">4</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">5</a></li>
-          </ul>
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next<i class="ci-arrow-right ms-2"></i></a></li>
-          </ul>
-        </nav> --}}
-        
-
-
-
-      </section>
-    </div>
-  </div>
-
-  {{-- <script>
-
-    $('#listT').on('click',function(){
-
-        $('#listT').addClass('btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2');
-
-    })
-
-    $('#gridT').on('click',function(){
-
-        $('#listT').removeClass();
-        $('#gridT').addClass('btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2');
-
-    })
-
-    
-
-  </script> --}}
-
-  @endsection

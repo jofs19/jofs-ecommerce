@@ -1,7 +1,7 @@
 @extends('frontendv2.main_master')
 @section('content')
 @section('title')
-Shop
+Vartouhi | Search
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -15,14 +15,14 @@ Shop
             <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.page') }}">Shop</a>
             </li>
 
-            {{-- <li class="breadcrumb-item text-nowrap active" aria-current="page">Shop</li> --}}
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Tags</li>
 
             
           </ol>
         </nav>
       </div>
       <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Shop Page</h1>
+        <h1 class="h3 text-light mb-0">Product Tags</h1>
       </div>
     </div>
   </div>
@@ -59,9 +59,7 @@ Shop
           <a class="nav-link-style nav-link-light ms-3" href="#">
             <i class="ci-arrow-right"></i></a>
           </div> --}}
-
-          {{ $products->links('vendor.pagination.top_nav') }}
-
+          
           <div class="d-none d-sm-flex pb-3">
 
             <ul class="nav" role="tablist">
@@ -278,10 +276,8 @@ Shop
             @endif --}}
 
           @empty
-          <div class="col-md-12">
-            <div class="alert alert-danger text-center" role="alert">
-              No Product Found
-            </div>
+          @include('frontendv2.product.not_found')
+
 
 
 
@@ -300,11 +296,17 @@ Shop
         </div> <!-- End Tab Pane -->
 
         </div> <!-- End Tab Content -->
-        
-        <hr class="my-3">
-        {{ $products->appends($_GET)->links('vendor.pagination.grid_paginate') }}
+
+{{-- <div class="ajax-loadmore-product text-center">
+    <img src="{{ asset('frontendv2/assets/img/loader4.svg') }}"
+ alt="loader" style="width: 80px; height:80px">
+</div> --}}
+
+
+<hr class="my-3">
 
         </div>
+        
         <!-- Pagination-->
         {{-- <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
           <ul class="pagination">
@@ -323,7 +325,7 @@ Shop
           </ul>
         </nav> --}}
         
-
+        {{-- {{ $products->appends($_GET)->links('vendor.pagination.search_paginate') }} --}}
 
 
       </section>
@@ -348,5 +350,35 @@ Shop
     
 
   </script> --}}
+
+  <script>
+    function loadmoreProduct(page){
+      $.ajax({
+        type: "get",
+        url: "?page="+page,
+        beforeSend: function(response){
+          $('.ajax-loadmore-product').show();
+        }
+      })
+      .done(function(data){
+        if (data.grid_view == " " || data.list_view == " ") {
+          return;
+        }
+         $('.ajax-loadmore-product').hide();
+         $('#grid_view_product').append(data.grid_view);
+         $('#list_view_product').append(data.list_view);
+      })
+      .fail(function(){
+        alert('Something Went Wrong');
+      })
+    }
+    var page = 1;
+    $(window).scroll(function (){
+      if ($(window).scrollTop() +$(window).height() >= $(document).height()){
+        page ++;
+        loadmoreProduct(page);
+      }
+    });
+</script>
 
   @endsection

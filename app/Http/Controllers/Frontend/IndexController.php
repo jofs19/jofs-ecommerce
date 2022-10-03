@@ -194,7 +194,9 @@ class IndexController extends Controller
     public function TagWiseProduct($tag){
 		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag)->orderBy('id','DESC')->paginate(6);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
-		return view('frontendv2.tags.tags_view',compact('products','categories'));
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
+
+		return view('frontendv2.tags.tags_view',compact('products','categories','brands'));
 	} //end method
 
 
@@ -203,6 +205,7 @@ class IndexController extends Controller
         $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);		
         $categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
 
         		///  Load More Product with Ajax 
 		if ($request->ajax()) {
@@ -214,7 +217,7 @@ class IndexController extends Controller
                  }
                  ///  End Load More Product with Ajax 
 
-		return view('frontendv2.product.subcategory_view',compact('products','categories','breadsubcat'));
+		return view('frontendv2.product.subcategory_view',compact('products','categories','breadsubcat','brands'));
 	} // end method
 
 
@@ -223,7 +226,7 @@ class IndexController extends Controller
 		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
-
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
         		///  Load More Product with Ajax 
 		if ($request->ajax()) {
             $grid_view = view('frontendv2.product.grid_view_product',compact('products'))->render();
@@ -234,7 +237,7 @@ class IndexController extends Controller
                  }
                  ///  End Load More Product with Ajax 
 
-		return view('frontendv2.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
+		return view('frontendv2.product.sub_subcategory_view',compact('products','categories','breadsubsubcat','brands'));
 	} //end method
    
 
@@ -269,7 +272,9 @@ class IndexController extends Controller
 		// echo "$item";
         $categories = Category::orderBy('category_name_en','ASC')->get();
 		$products = Product::where('product_name_en','LIKE',"%$item%")->get();
-		return view('frontendv2.product.search',compact('products','categories'));
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
+
+		return view('frontendv2.product.search',compact('products','categories','brands'));
 
 	}
 

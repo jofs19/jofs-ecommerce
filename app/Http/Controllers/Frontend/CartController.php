@@ -103,11 +103,11 @@ class CartController extends Controller
 				));
 
 
-            }else{
+				}else{
 
-                return response()->json(['error' => 'This product was already added on your Wishlist']);
+					return response()->json(['error' => 'This product was already added on your Wishlist']);
 
-            }  
+				}  
 	
 			}else{
 	

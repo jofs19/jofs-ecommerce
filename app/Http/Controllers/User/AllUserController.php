@@ -26,6 +26,30 @@ class AllUserController extends Controller
     public function MyOrders(){
 
     	$orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->paginate(10);
+
+        // if(isset($_GET['sort']) && !empty($_GET['sort'])){
+        //     if($_GET['sort'] == 'pending'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','pending')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'confirmed'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','confirm')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'processed'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','processing')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'picked'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','picked')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'shipped'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','shipped')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'delivered'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','delivered')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'rejected'){
+        //         $orders = Order::where('user_id',Auth::id())->where('status','cancel')->orderBy('id','DESC')->paginate(10);
+        //     }elseif($_GET['sort'] == 'returned'){
+        //         $orders = Order::where('user_id',Auth::id())->where('return_order',1)->orderBy('id','DESC')->paginate(10);
+        //     }else{
+        //         $orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->paginate(10);
+        //     }
+
+        // }
+
     	return view('frontendv2.user.order.order_view',compact('orders'));
 
     } //end method

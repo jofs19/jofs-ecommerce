@@ -14,11 +14,15 @@
         color: #fff;
         
       }
+
+     
+
     
 
   </style>
 
 </head>
+
 
 <div class="page-title-overlap bg-dark pt-4">
   <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
@@ -53,16 +57,24 @@
       <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
         <div class="d-flex align-items-center">
           <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
+          {{-- <form name="sortProducts" id="sortProducts"> --}}
           <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
-          <select class="form-select" id="order-sort">
-            <option>All</option>
-            <option>Delivered</option>
-            <option>In Progress</option>
-            <option>Delayed</option>
-            <option>Canceled</option>
+          <select class="form-select" id="sort" name="sort">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="processed">Processed</option>
+            <option value="picked">Picked</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="rejected">Rejected</option>
           </select>
+        {{-- </form> --}}
         </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i class="ci-sign-out me-2"></i>Sign out</a>
       </div>
+
+
+
       <!-- Orders list-->
       <div class="table-responsive fs-md mb-4">
         <table class="table table-hover mb-0 text-center">
@@ -200,6 +212,7 @@
           </tbody>
         </table>
       </div>
+      <!-- End orders list-->
       <!-- Pagination-->
       {{-- <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
         <ul class="pagination">
