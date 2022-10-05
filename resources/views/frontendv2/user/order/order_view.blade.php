@@ -210,6 +210,22 @@
             @endforeach
             
           </tbody>
+
+          <tfoot>
+
+            <tr>
+              <th>#</th>
+              <th>Invoice No.</th>
+              <th>Date Purchased</th>
+              <th>M.O.P.</th>
+              <th>Amount</th>
+              <th>Order Status</th>
+
+              <th>Action</th>
+            </tr>
+
+          </tfoot>
+
         </table>
       </div>
       <!-- End orders list-->

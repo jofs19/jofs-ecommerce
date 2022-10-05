@@ -605,8 +605,8 @@
                             @elseif($item->rating == 2)
                             <i class="star-rating-icon ci-star-filled active"></i>
                             <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-"></i>
-                            <i class="star-rating-icon ci-star-"></i>
+                            <i class="star-rating-icon ci-star"></i>
+                            <i class="star-rating-icon ci-star"></i>
                             <i class="star-rating-icon ci-star"></i>
                              
                             @elseif($item->rating == 3)
