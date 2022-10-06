@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col-sm-6 text-center text-sm-start">
-        <h2 class="pb-4">Choose your style!!!!</h2>
+        <h2 class="pb-4">Choose style!!!!</h2>
         <div class="mb-3"><span class="fs-sm text-heading fw-medium me-1" id="colorOptionText">Rose Gold</span><span>&nbsp;&mdash;&nbsp; $329.<small>99</small></span></div>
         <div class="mb-4 pb-2">
           <div class="form-check form-option form-check-inline mb-2">
