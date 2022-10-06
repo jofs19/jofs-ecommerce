@@ -9,16 +9,16 @@
           <div class="radio-tab-pane" id="color-3" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option03.jpg') }}" alt="Color 1"></div>
           <div class="radio-tab-pane" id="color-4" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option04.jpg') }}" alt="Color 1"></div>
           <div class="radio-tab-pane" id="color-5" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option05.jpg') }}" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-6" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option06.jpg') }}" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-6" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option0.jpg') }}" alt="Color 1"></div>
         </div>
       </div>
       <div class="col-sm-6 text-center text-sm-start">
-        <h2 class="pb-4">Choose your style</h2>
+        <h2 class="pb-4">Choose your style!!!</h2>
         <div class="mb-3"><span class="fs-sm text-heading fw-medium me-1" id="colorOptionText">Rose Gold</span><span>&nbsp;&mdash;&nbsp; $329.<small>99</small></span></div>
         <div class="mb-4 pb-2">
           <div class="form-check form-option form-check-inline mb-2">
             <input class="form-check-input" type="radio" name="color" id="color1" data-bs-label="colorOptionText" value="Rose Gold" checked>
-            <label class="form-option-label rounded-circle" for="color1" data-bs-toggle="radioTab" data-bs-target="#color-1" data-bs-parent="#colorOptions"><span class="form-option-color rounded-circle" style="background-color: rgb(194, 39, 22)/span></label>
+            <label class="form-option-label rounded-circle" for="color1" data-bs-toggle="radioTab" data-bs-target="#color-1" data-bs-parent="#colorOptions"><span class="form-option-color rounded-circle" style="background-color: #e8c4c0;"></span></label>
           </div>
           <div class="form-check form-option form-check-inline mb-2">
             <input class="form-check-input" type="radio" name="color" id="color2" data-bs-label="colorOptionText" value="Satin Silver">
