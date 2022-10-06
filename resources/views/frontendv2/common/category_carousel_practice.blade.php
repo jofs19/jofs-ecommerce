@@ -66,12 +66,12 @@
 <section class="container pt-lg-3 mb-4 mb-sm-5">
 
     {{-- Heading --}}
-    <div class="d-flex flex-wrap mb-3">
+<div class="d-flex flex-wrap mb-3">
       <h2 class="h3 mb-0">Products in&nbsp;</h2>
-      <div class="dropdown d-inline-block" data-bs-toggle="select"><a class="dropdown-toggle h3 text-primary" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="dropdown-toggle-label">All categories</span></a>
+    <div class="dropdown d-inline-block" data-bs-toggle="select"><a class="dropdown-toggle h3 text-primary" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="dropdown-toggle-label">All categories</span></a>
         <input type="hidden" name="trending-category">
         <div class="dropdown-menu dropdown-menu-end" style="">
-          <div class="nav nav-tabs">
+          <div class="nav">
 
           <a class="dropdown-item active" data-bs-toggle="tab" role="tab" href="#all"><span class="dropdown-item-label">All categories</span></a>
           @foreach($categories as $category)
@@ -81,11 +81,11 @@
             </span>
           </a>
           @endforeach
-        </div>
+          </div>
 
         </div>
-      </div>
     </div>
+</div>
     {{-- End Heading --}}
 
             <!-- Nav tabs -->

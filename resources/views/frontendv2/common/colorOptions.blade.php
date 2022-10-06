@@ -5,11 +5,11 @@
       <div class="col-sm-6">
         <div class="mb-5 mb-sm-0 text-center text-sm-start" id="colorOptions">
           <div class="radio-tab-pane active" id="color-1" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option01.jpg') }}" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-2" role="tabpanel"><img class="d-block mx-auto" src="img/home/mono-product/colors/color-option02.jpg" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-3" role="tabpanel"><img class="d-block mx-auto" src="img/home/mono-product/colors/color-option03.jpg" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-4" role="tabpanel"><img class="d-block mx-auto" src="img/home/mono-product/colors/color-option04.jpg" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-5" role="tabpanel"><img class="d-block mx-auto" src="img/home/mono-product/colors/color-option05.jpg" alt="Color 1"></div>
-          <div class="radio-tab-pane" id="color-6" role="tabpanel"><img class="d-block mx-auto" src="img/home/mono-product/colors/color-option06.jpg" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-2" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option02.jpg') }}" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-3" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option03.jpg') }}" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-4" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option04.jpg') }}" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-5" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option05.jpg') }}" alt="Color 1"></div>
+          <div class="radio-tab-pane" id="color-6" role="tabpanel"><img class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/home/mono-product/colors/color-option06.jpg') }}" alt="Color 1"></div>
         </div>
       </div>
       <div class="col-sm-6 text-center text-sm-start">

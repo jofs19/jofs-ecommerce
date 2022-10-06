@@ -23,7 +23,7 @@ class ReviewController extends Controller
     	]);
 
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if($request->file('image')){

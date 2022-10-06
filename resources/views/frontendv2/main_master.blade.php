@@ -110,18 +110,15 @@
   </head>
 
 
-
-  
-  <!-- Body-->
-  <body class="handheld-toolbar-enabled"></body>
-
-
   <div id="loader-wrapper">
   	<div> 
       <img src="{{ asset('frontendv2/assets/img/my-loader.svg') }}" alt="" srcset="" width="80" height="80" style="text-align: center; display:inline-block; margin-top:calc(50vh - 20px);
       ">  
     </div>
   </div>
+  
+  <!-- Body-->
+  <body class="handheld-toolbar-enabled"></body>
 
   {{-- <div id="loader-wrapper">
   	<div class="loader"></div>

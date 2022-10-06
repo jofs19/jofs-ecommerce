@@ -52,6 +52,7 @@ Vartouhi | Beauty & Cosmetics Store
 {{-- src="https://www.naturallashandbronze.com/wp-content/uploads/revslider/main_slider/slider_layer_2.png" --}}
 
 
+
 <section class="bg-secondary py-4 pt-md-5">
     <div class="container py-xl-2">
         <div class="row">

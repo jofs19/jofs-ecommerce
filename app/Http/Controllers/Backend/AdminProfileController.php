@@ -74,7 +74,7 @@ class AdminProfileController extends Controller
         // $data->address = $request->address;   
 
         $request->validate([
-            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg',
 
         ]);
 

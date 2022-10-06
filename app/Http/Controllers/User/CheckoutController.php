@@ -72,7 +72,7 @@ class CheckoutController extends Controller
 
 
 		$request->validate([
-            'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
 		if ($request->file('receipt')) {
@@ -142,7 +142,7 @@ class CheckoutController extends Controller
 		$cartQty = Cart::count();
 		
 		$request->validate([
-			'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'receipt' => 'image|mimes:jpeg,png,jpg,gif,svg',
 		]);
 
 		if ($request->file('receipt')) {
