@@ -18,7 +18,7 @@
         <div class="mb-4 pb-2">
           <div class="form-check form-option form-check-inline mb-2">
             <input class="form-check-input" type="radio" name="color" id="color1" data-bs-label="colorOptionText" value="Rose Gold" checked>
-            <label class="form-option-label rounded-circle" for="color1" data-bs-toggle="radioTab" data-bs-target="#color-1" data-bs-parent="#colorOptions"><span class="form-option-color rounded-circle" style="background-color: #e8c4c0;"></span></label>
+            <label class="form-option-label rounded-circle" for="color1" data-bs-toggle="radioTab" data-bs-target="#color-1" data-bs-parent="#colorOptions"><span class="form-option-color rounded-circle" style="background-color: rgb(194, 39, 22)/span></label>
           </div>
           <div class="form-check form-option form-check-inline mb-2">
             <input class="form-check-input" type="radio" name="color" id="color2" data-bs-label="colorOptionText" value="Satin Silver">
