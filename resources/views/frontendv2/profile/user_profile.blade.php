@@ -42,7 +42,8 @@
 
 
           <div class="bg-secondary rounded-3 p-4 mb-4">
-            <div class="d-flex align-items-center"><img class="rounded" src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" width="90" alt="Susan Gardner">
+            <div class="d-flex align-items-center"><img class="rounded" 
+              src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" width="90" alt="User">
               <div class="ps-3">
 
 

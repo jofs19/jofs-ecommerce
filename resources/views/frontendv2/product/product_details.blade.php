@@ -580,7 +580,7 @@
                     <!-- Review-->
                     <div class="product-review pb-4 mb-4 border-bottom">
                       <div class="d-flex mb-3">
-                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="50" alt="User">
+                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="{{ (!empty($item->user->profile_photo_path)) ? asset($item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="50" alt="User">
                           <div class="ps-3">
                             <h6 class="fs-sm mb-0">{{ $item->name }}</h6><span class="fs-ms text-muted">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
                           </div>
@@ -801,7 +801,7 @@
             @foreach($relatedProduct as $product)
             <!-- Product-->
             <div>
-              <div class="card product-card card-static">
+              <div class="card product-card card-static slide-in-bck-center">
                 @php
                 $amount = $product->selling_price - $product->discount_price;
                 $discount = ($amount/$product->selling_price) * 100;
@@ -941,7 +941,7 @@
         </div>
       </div>
       <!-- Product bundles carousel (Cheaper together)-->
-      <div class="container pt-lg-1 pb-5 mb-md-3">
+      {{-- <div class="container pt-lg-1 pb-5 mb-md-3">
         <div class="card card-body pt-5">
           <h2 class="h3 text-center pb-4">Cheaper together</h2>
           <div class="tns-carousel">
@@ -1017,8 +1017,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
 
+      
+{{-- Color Options --}}
+@include('frontendv2.common.colorOptions')
+{{-- End Color Options --}}
 
       
 

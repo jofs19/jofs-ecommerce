@@ -37,7 +37,7 @@
   <div class="topbar topbar-dark bg-dark">
       <div class="container">
           <div>
-              <div class="topbar-text dropdown disable-autohide">
+              <div class="topbar-text language-dropdown dropdown disable-autohide">
 
                   @if(session()->get('language') == 'filipino')
                   <a class="topbar-link dropdown-toggle d-sm-block text-xs" href="#" data-bs-toggle="dropdown"><img
@@ -163,7 +163,7 @@
 
                   <div class="navbar-tool dropdown ms-2"><a class="navbar-tool-icon-box border dropdown-toggle"
                           href="{{ route('login') }}"><img class="rounded-circle"
-                              src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}"
+                          src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}"
                               alt="User Profile"></a><a class="navbar-tool-text ms-n1"
                           href="{{ route('login') }}"><small>User Account</small> 
                         @php

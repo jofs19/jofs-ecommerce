@@ -5,7 +5,7 @@
 
 
 <div class="col-md-2"><br> 
-				<img class="card-img-top" style="border-radius: 50%" src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" height="100%" width="100%"><br><br>
+				<img class="card-img-top" style="border-radius: 50%" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" height="100%" width="100%"><br><br>
 
 				<ul class="list-group list-group-flush">
 <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>

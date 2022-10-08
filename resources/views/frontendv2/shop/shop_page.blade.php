@@ -48,7 +48,15 @@ Shop
                 <option>A - Z Order</option>
                 <option>Z - A Order</option>
                 
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
+              </select>
+              
+              {{-- Product count --}}
+              @php
+              $product_count = App\Models\Product::where('status',1)->count();
+              @endphp
+              {{-- End Product count --}}
+
+              <span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of {{ $product_count }} products</span>
             </div>
           </div>
 

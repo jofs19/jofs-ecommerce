@@ -1,4 +1,8 @@
-      <!-- Sidebar-->
+
+
+
+
+<!-- Sidebar-->
       <aside class="col-lg-4">
         <!-- Sidebar-->
         <div class="offcanvas offcanvas-collapse bg-white w-100 rounded-3 shadow-lg py-1" id="shop-sidebar" style="max-width: 22rem;">
@@ -181,7 +185,7 @@
             </div> --}}
 
             {{-- Product Tags --}}
-
+            
             @include('frontendv2.common.product_tags')
 
             {{-- End Product Tags --}}

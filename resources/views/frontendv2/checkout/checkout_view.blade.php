@@ -46,7 +46,9 @@ Checkout Details
         @endphp
         <div class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
           <div class="d-flex align-items-center">
-            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0"><span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span><img class="rounded-circle" src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" width="90" alt="User Image"></div>
+            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0">
+              {{-- <span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span> --}}
+              <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" width="90" alt="User Image"></div>
             <div class="ps-3">
               <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm">{{ Auth::user()->email }}</span>
             </div>

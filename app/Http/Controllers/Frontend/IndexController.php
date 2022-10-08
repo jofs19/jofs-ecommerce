@@ -105,14 +105,26 @@ class IndexController extends Controller
         // unlink($old_img);
         // }
 
+        $request->validate([
+			'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg',
+		]);
 
-        if ($request->file('profile_photo_path')) {
-            $file = $request->file('profile_photo_path');
-            @unlink(public_path('upload/user_images/'.$data->profile_photo_path));
-            $filename = date('YmdHi').$file->getClientOriginalExtension();
-            $file->move(public_path('upload/user_images'), $filename);
-            $data['profile_photo_path'] = $filename;
-        }
+		if ($request->file('profile_photo_path')) {
+			$image = $request->file('profile_photo_path');
+			$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+			Image::make($image)->resize(300,300)->save('upload/user_images/'.$name_gen);
+			$save_url = 'upload/user_images/'.$name_gen;
+			$data['profile_photo_path'] = $save_url;			
+		}
+
+
+        // if ($request->file('profile_photo_path')) {
+        //     $file = $request->file('profile_photo_path');
+        //     @unlink(public_path('upload/user_images/'.$data->profile_photo_path));
+        //     $filename = date('YmdHi').$file->getClientOriginalExtension();
+        //     $file->move(public_path('upload/user_images'), $filename);
+        //     $data['profile_photo_path'] = $filename;
+        // }
         $data->save();
 
         $notification = array(

@@ -5,7 +5,7 @@
 	<div class="row justify-content-center pt-lg-4 text-center">
 	  <div class="col-lg-5 col-md-7 col-sm-9"><h1 class="display-404 py-lg-3">404</h1>
 		<h1 class="h3">Page Not Found</h1>
-		<h3 class="h5 fw-normal mb-4">We can't seem to find the page you are looking for.</h3>
+		<h3 class="h5 fw-normal mb-4">The page is still under construction.</h3>
 		<p class="fs-md mb-4">
 		  <u>Here are some helpful links instead:</u>
 		</p>
@@ -23,7 +23,7 @@
 				</div>
 			  </div>
 			</a></div>
-		  <div class="col-sm-4 mb-3"><a class="card h-100 border-0 shadow-sm" href="#">
+		  <div class="col-sm-4 mb-3"><a class="card h-100 border-0 shadow-sm" href="search">
 			  <div class="card-body">
 				<div class="d-flex align-items-center"><i class="ci-search text-success h4 mb-0"></i>
 				  <div class="ps-3">

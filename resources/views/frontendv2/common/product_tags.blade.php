@@ -1,3 +1,25 @@
+<head>
+
+    <style>
+    
+      .tagfield{
+        visibility: hidden;
+      }
+    
+      .tagfield > *{
+        visibility: visible;
+        transition: opacity 200ms;
+      }
+    
+      .tagfield:hover > :not(:hover){
+        opacity: 0.5;
+      }
+    
+    </style>
+    
+    </head>
+
+
 
                           {{-- Tag Cloud --}}
                 @php
@@ -8,6 +30,7 @@
 
                         <h3 class="widget-title">Product Tags</h3>
 
+                    <div class=" tagfield">
 
                         @if(session()->get('language') == 'filipino') 
 
@@ -24,7 +47,8 @@
                         @endforeach
 
                         @endif
-
+                        
+                    </div>
 
                         
                     </div>

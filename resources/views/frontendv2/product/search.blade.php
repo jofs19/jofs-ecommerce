@@ -381,4 +381,10 @@ Vartouhi | Search
     });
 </script>
 
+<script>
+
+  $(".language-dropdown").hide();
+
+</script>
+
   @endsection

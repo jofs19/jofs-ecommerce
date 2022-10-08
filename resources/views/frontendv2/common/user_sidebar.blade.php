@@ -12,7 +12,9 @@
     <div class="bg-white rounded-3 shadow-lg pt-1 mb-5 mb-lg-0">
       <div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
         <div class="d-md-flex align-items-center">
-          <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width: 6.375rem;"><span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span><img class="rounded-circle" src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" alt="Susan Gardner"></div>
+          <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width: 6.375rem;">
+            {{-- <span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span> --}}
+            <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" alt="Susan Gardner"></div>
           <div class="ps-md-3">
             <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ Auth::user()->email }}">{{ Auth::user()->email }}</span> <br>
             <span class="text-accent fs-ms">{{ Auth::user()->phone }}</span>

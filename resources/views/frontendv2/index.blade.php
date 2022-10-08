@@ -187,9 +187,6 @@ Vartouhi | Beauty & Cosmetics Store
 {{-- End Slider Area --}}
 
 
-{{-- Color Options --}}
-@include('frontendv2.common.colorOptions')
-{{-- End Color Options --}}
 
 
 {{-- Trending Products Area --}}
@@ -483,7 +480,7 @@ Vartouhi | Beauty & Cosmetics Store
 <section class="container mt-1 mb-grid-gutter">
     <div class="bg-faded-info rounded-3 py-4">
         <div class="row align-items-center">
-            <div class="col-md-5">
+            <div class="col-md-8">
                 <div class="px-4 pe-sm-0 ps-sm-5"><span class="badge bg-danger">Limited Offer</span>
                     <h3 class="mt-4 mb-1 text-body fw-light">All new</h3>
                     <h2 class="mb-1">Last Gen iPad Pro</h2>
@@ -503,7 +500,7 @@ Vartouhi | Beauty & Cosmetics Store
 
                 @foreach ($special_offer as $product)
                 
-            <div class="col-md-7"><img src="{{ asset($product->product_thumbnail) }}" alt="iPad Pro"></div>
+            <div class="col-md-4"><img src="{{ asset($product->product_thumbnail) }}" alt="iPad Pro"></div>
 
 
                 @endforeach
