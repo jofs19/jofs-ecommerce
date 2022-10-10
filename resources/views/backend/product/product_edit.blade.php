@@ -24,18 +24,19 @@
 
                             <div class="row">
                                 <div class="col-12">
+
+
                                     <div class="row">
                                         <!-- start 1st row  -->
                                         <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Brand Select <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="brand_id" class="form-control" required="">
-                                                        <option value="" selected="" disabled="">Select Brand</option>
+                                                        <option value="" selected="" disabled>Select Brand</option>
                                                         @foreach($brands as $brand)
-                                                            <option value="{{ $brand->id }}"
-                                                                {{ $brand->id == $products->brand_id ? 'selected': '' }}>
-                                                                {{ $brand->brand_name_en }}</option>
+                                                        <option value="{{ $brand->id }}" {{ $brand->id == $products->brand_id ? 'selected': '' }} >{{ $brand->brand_name_en }}</option>	
                                                         @endforeach
                                                     </select>
                                                     @error('brand_id')
@@ -45,17 +46,17 @@
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
                                         <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Category Select <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="category_id" class="form-control" required="">
-                                                        <option value="" selected="" disabled="">Select Category
+                                                        <option value="" selected="" disabled>Select Category
                                                         </option>
                                                         @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}"
-                                                                {{ $category->id == $products->category_id ? 'selected': '' }}>
-                                                                {{ $category->category_name_en }}</option>
+                                                        <option value="{{ $category->id }}" {{ $category->id == $products->category_id ? 'selected': '' }} >{{ $category->category_name_en }}</option>	
                                                         @endforeach
                                                     </select>
                                                     @error('category_id')
@@ -65,19 +66,20 @@
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
+
                                         <div class="col-md-4">
+
                                             <div class="form-group">
-                                                <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                                <h5>Select Sub Category <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="subcategory_id" class="form-control" required="">
-                                                        <option value="" selected="" disabled="">Select SubCategory
+                                                        <option value="" selected="" disabled>Select Sub Category
                                                         </option>
-
                                                         @foreach($subcategory as $sub)
-                                                            <option value="{{ $sub->id }}"
-                                                                {{ $sub->id == $products->subcategory_id ? 'selected': '' }}>
-                                                                {{ $sub->subcategory_name_en }}</option>
+                                                        <option value="{{ $sub->id }}" {{ $sub->id == $products->subcategory_id ? 'selected': '' }} >{{ $sub->subcategory_name_en }}</option>	
                                                         @endforeach
+
                                                     </select>
                                                     @error('subcategory_id')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -88,20 +90,21 @@
                                         </div> <!-- end col md 4 -->
 
                                     </div> <!-- end 1st row  -->
+
+
+
                                     <div class="row">
                                         <!-- start 2nd row  -->
                                         <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>SubSubCategory Select <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="subsubcategory_id" class="form-control" required="">
-                                                        <option value="" selected="" disabled="">Select SubSubCategory
+                                                        <option value="" selected="" disabled>Select Sub- Sub Category
                                                         </option>
-
                                                         @foreach($subsubcategory as $subsub)
-                                                            <option value="{{ $subsub->id }}"
-                                                                {{ $subsub->id == $products->subsubcategory_id ? 'selected': '' }}>
-                                                                {{ $subsub->subsubcategory_name_en }}</option>
+                                                        <option value="{{ $subsub->id }}" {{ $subsub->id == $products->subsubcategory_id ? 'selected': '' }} >{{ $subsub->subsubcategory_name_en }}</option>	
                                                         @endforeach
                                                     </select>
                                                     @error('subsubcategory_id')
@@ -111,207 +114,255 @@
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
                                         <div class="col-md-4">
+
                                             <div class="form-group">
-                                                <h5>Product Name (Eng) <span class="text-danger">*</span></h5>
+                                                <h5>Product Name En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_name_en" class="form-control"
-                                                        required="" value="{{ $products->product_name_en }}">
+                                                    <input type="text" name="product_name_en" class="form-control" required=""  value="{{ $products->product_name_en }}">
                                                     @error('product_name_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
+
                                         <div class="col-md-4">
+
+
+
                                             <div class="form-group">
                                                 <h5>Product Name (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_name_fil" class="form-control"
-                                                        required="" value="{{ $products->product_name_fil }}">
+                                                    <input type="text" name="product_name_fil" class="form-control"   value="{{ $products->product_name_fil }}">
                                                     @error('product_name_fil')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
 
                                     </div> <!-- end 2nd row  -->
+
+
+
                                     <div class="row">
                                         <!-- start 3RD row  -->
                                         <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Product Code <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_code" class="form-control"
-                                                        required="" value="{{ $products->product_code }}">
+                                                    <input type="text" name="product_code" class="form-control" required="" value="{{ $products->product_code }}">
                                                     @error('product_code')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
                                         <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Product Quantity <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_qty" class="form-control"
-                                                        required="" value="{{ $products->product_qty }}">
+                                                    <input type="text" name="product_qty" class="form-control" required="" value="{{ $products->product_qty }}">
                                                     @error('product_qty')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
                                         <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $products->selling_price }}">
+                                                    @error('selling_price')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+
+                                    </div> <!-- end 3RD row  -->
+
+
+
+                                    <div class="row">
+                                        <!-- start 4th row  -->
+
+                                        <div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Product Tags (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_tags_en" class="form-control"
-                                                        value="{{ $products->product_tags_en }}" data-role="tagsinput"
-                                                        required="">
+                                                    value="{{ $products->product_tags_en }}" data-role="tagsinput" required="" >
                                                     @error('product_tags_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
 
-                                    </div> <!-- end 3RD row  -->
-                                    <div class="row">
-                                        <!-- start 4th row  -->
-                                        <div class="col-md-4">
+										<div class="col-md-4">
+
                                             <div class="form-group">
-                                                <h5>Product Tags (Fil) <span class="text-danger">*</span></h5>
+                                                <h5>Product Variant (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_tags_fil" class="form-control"
-                                                        value="{{ $products->product_tags_fil }}"
-                                                        data-role="tagsinput" required="">
-                                                    @error('product_tags_fil')
+                                                    <input type="text" name="product_color_en" class="form-control"
+                                                    value="{{ $products->product_color_en }}" data-role="tagsinput" >
+                                                    @error('product_color_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
-                                        <div class="col-md-4">
+
+
+										<div class="col-md-4">
+
                                             <div class="form-group">
                                                 <h5>Product Size (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_size_en" class="form-control"
-                                                        value="{{ $products->product_size_en }}" data-role="tagsinput">
+                                                    value="{{ $products->product_size_en }}" data-role="tagsinput" >
                                                     @error('product_size_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-
-
-
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <h5>Product Size (Fil) <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="product_size_fil" class="form-control"
-                                                        value="{{ $products->product_size_fil }}"
-                                                        data-role="tagsinput">
-                                                    @error('product_size_fil')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
 
 
-
-
-
-
-
-
-
-                                                </div>
-                                            </div>
-
-                                        </div> <!-- end col md 4 -->
 
                                     </div> <!-- end 4th row  -->
 
 
+
+
                                     <div class="row">
                                         <!-- start 5th row  -->
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Product Color (Eng) <span class="text-danger">*</span></h5>
+                                                <h5>Product Tags (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_en" class="form-control"
-                                                        value="{{ $products->product_color_en }}"
-                                                        data-role="tagsinput">
+
+                                                    <input type="text" name="product_tags_fil" class="form-control"
+                                                    value="{{ $products->product_tags_fil }}" data-role="tagsinput" required="">
+                                                    @error('product_tags_fil')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Product Variant (Fil) <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="product_color_fil" class="form-control"
+                                                    value="{{ $products->product_color_fil }}" data-role="tagsinput">
+                                                    @error('product_color_fil')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+
+
+
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Product Size (Fil) <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="product_size_fil" class="form-control"
+                                                    value="{{ $products->product_size_fil }}" data-role="tagsinput">
+                                                    @error('product_size_fil')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+                                    </div> <!-- end 5th row  -->
+
+
+                                    <div class="row">
+                                        <!-- start 6th row  -->
+
+
+                                        {{-- <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Main Thumbnail <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="file" name="product_thumbnail" class="form-control" onChange="mainThumUrl(this)" required="">
+                                                    @error('product_thumbnail')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    <br>
+                                                    <img src="" id="mainThmb">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div> <!-- end col md 4 --> --}}
+
+
+                                        {{-- <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Multiple Image <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" required="">
+                                                    @error('multi_img')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    <br>
+                                                    <div class="row ml-lg-2" id="preview_img"></div>
+                                                </div>
+                                            </div>
+
+
+                                        </div> <!-- end col md 4 --> --}}
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group ">
+                                                <h5>Product Discount Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    {{-- <input type="text" name="discount_price" class="form-control"> --}}
+
+                                                    <div class="input-group ">
+                                                        <span class="input-group-addon">
+                                                          <input type="checkbox" id="addon_Checkbox_1" class="discount_price">
+                                                          <label for="addon_Checkbox_1" style="padding-left: 20px;height: 13px;"></label>
+                                                        </span>
+                                                        <input type="text" name="discount_price" class="form-control" value="{{ $products->discount_price }}">
+                                                    </div>
                                                     
                                                 </div>
                                             </div>
@@ -320,62 +371,22 @@
 
                                         <div class="col-md-6">
 
-                                            <div class="form-group">
-                                                <h5>Product Color (Fil) <span class="text-danger">*</span></h5>
+                                            <div class="form-group sale_duration">
+                                                <h5>Sale Duration <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_fil" class="form-control"
-                                                        value="{{ $products->product_color_fil }}"
-                                                        data-role="tagsinput" >
-                                                   
-                                                </div>
-                                            </div>
+                                                    
 
-                                        </div> <!-- end col md 6 -->
+                                                    <input class="form-control" type="date" name="sale_time" min="{{ Carbon\Carbon::now()->format('m/y/d') }}" value="{{ $products->sale_time }}">
 
-
-
-                                    </div> <!-- end 5th row  -->
-
-
-
-
-                                    <div class="row">
-                                        <!-- start 6th row  -->
-
-
-
-                                        <div class="col-md-6">
-
-                                            <div class="form-group">
-                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control"
-                                                        required="" value="{{ $products->selling_price }}">
-                                                    @error('selling_price')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-
-                                        </div> <!-- end col md 6 -->
-
-
-                                        <div class="col-md-6">
-
-                                            <div class="form-group">
-                                                <h5>Product Discount Price <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control" value="{{ $products->discount_price }}">
-                                                    @error('discount_price')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                    
+                                                    
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 6 -->
 
                                     </div> <!-- end 6th row  -->
+
 
 
 
@@ -461,7 +472,7 @@
 
                                     <hr>
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
 
@@ -470,12 +481,12 @@
                                                         <input type="checkbox" id="checkbox_2" name="hot_deals"
                                                             value="1"
                                                             {{ $products->hot_deals == 1 ? 'checked': '' }}>
-                                                        <label for="checkbox_2">Hot Deals</label>
+                                                        <label for="checkbox_2">Best Seller</label>
                                                     </fieldset>
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_3" name="featured" value="1"
                                                             {{ $products->featured == 1 ? 'checked': '' }}>
-                                                        <label for="checkbox_3">Featured</label>
+                                                        <label for="checkbox_3">Featured Products</label>
                                                     </fieldset>
                                                 </div>
 
@@ -498,7 +509,7 @@
                                                         <input type="checkbox" id="checkbox_5" name="special_deals"
                                                             value="1"
                                                             {{ $products->special_deals == 1 ? 'checked': '' }}>
-                                                        <label for="checkbox_5">Special Deals</label>
+                                                        <label for="checkbox_5">Trending Products</label>
                                                     </fieldset>
                                                 </div>
 
@@ -507,6 +518,61 @@
 
 
 
+
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <input type="checkbox" id="checkbox_2" name="hot_deals"
+                                                            value="1" {{ $products->hot_deals == 1 ? 'checked': '' }}>
+                                                        <label for="checkbox_2">Best Seller</label> <!--HOT DEALS-->
+                                                    </fieldset>
+                                                    
+                                                    <fieldset>
+                                                        <input type="checkbox" id="checkbox_4" name="special_offer"
+                                                            value="1" class="special_offer" {{ $products->special_offer == 1 ? 'checked': '' }}>
+                                                        <label for="checkbox_4">Special Offers</label>
+                                                    </fieldset>
+
+                                                    <fieldset class="show_time">
+                                                        
+                                                        <input class="form-control" type="date" name="so_saletime" min="{{ Carbon\Carbon::now()->format('m/y/d') }}" value="{{ $products->so_saletime }}">
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <input type="checkbox" id="checkbox_3" name="featured"
+                                                            value="1" {{ $products->featured == 1 ? 'checked': '' }}>
+                                                        <label for="checkbox_3">Featured Products</label> <!--FEATURED PRODUCTS-->
+                                                    </fieldset>
+
+                                                    
+                                                    
+                                                    <fieldset>
+                                                        <input type="checkbox" id="checkbox_5" name="special_deals"
+                                                            value="1" {{ $products->special_deals == 1 ? 'checked': '' }}>
+                                                        <label for="checkbox_5">Trending Products</label><!--Special Deals-->
+                                                    </fieldset>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -788,4 +854,31 @@
     });
 
 </script>
+
+
+<script>
+
+    $(".show_time").hide();
+    $(".special_offer").click(function(){
+        if($(this).is(":checked")){
+            $(".show_time").show(300);
+        }else{
+            $(".show_time").hide(300);
+        }
+    });
+
+
+    $(".sale_duration").hide();
+    $(".discount_price").click(function(){
+        if($(this).is(":checked")){
+            $(".sale_duration").show(300);
+        }else{
+            $(".sale_duration").hide(300);
+        }
+    });
+
+
+
+
+  </script>
 @endsection

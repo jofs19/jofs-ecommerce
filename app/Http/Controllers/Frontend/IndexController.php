@@ -29,6 +29,8 @@ class IndexController extends Controller
         $products_category = Product::where('status',1)->orderBy('id','DESC')->get();
         $sliders = Slider::where('status',1)->orderBy('id','DESC')->get();
     	$categories = Category::orderBy('category_name_en','ASC')->get();
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
+
         // $reviews = Review::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $reviews = Review::where('status',1)->orderBy('id','DESC')->get();
 
@@ -50,7 +52,7 @@ class IndexController extends Controller
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category','discounted_products'));
+    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category','discounted_products','brands'));
     }
 
     public function UserLogout()

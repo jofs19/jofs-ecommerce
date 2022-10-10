@@ -50,6 +50,21 @@
 
                             @if($loop->iteration < 5) <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                                 <div class="card product-card card-static">
+
+                                                    @php
+                $amount = $item->selling_price - $item->discount_price;
+                $discount = ($amount/$item->selling_price) * 100;
+                @endphp
+
+                @if($item->discount_price == NULL)
+                <span class="badge bg-success badge-shadow">
+                    New
+                </span> @else
+                <span class="badge bg-danger badge-shadow">
+                   
+                   <i class="ci-discount"></i> Sale {{ round($discount) }}% 
+                </span>
+                @endif
                                     {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                         data-bs-placement="left" title="Add to wishlist"><i
                                             class="ci-heart"></i></button> --}}
@@ -62,15 +77,14 @@
                                                 </button>
                                                 <div class="product-card-actions">
                                                     <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
-                                                        href="#quick-view-electro" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-electro" id="{{ $item->id }}"
-                                                        onclick="productView(this.id)"> <i class="ci-eye"></i>
+                                                    type="button" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
                                                     </a>
 
-
+                                                    
 
                                                     <button class="btn btn-light btn-icon btn-shadow fs-base mx-2"
-                                                        type="button">
+                                                    type="submit" 
+                                                    href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $item->id }}" onclick="productView(this.id)">
                                                         <i class="ci-cart"></i>
                                                     </button>
                                                 </div>
@@ -226,6 +240,20 @@
 
 
                             <div class="card product-card card-static">
+                                @php
+                                $amount = $item->selling_price - $item->discount_price;
+                                $discount = ($amount/$item->selling_price) * 100;
+                                @endphp
+                
+                                @if($item->discount_price == NULL)
+                                <span class="badge bg-success badge-shadow">
+                                    New
+                                </span> @else
+                                <span class="badge bg-danger badge-shadow">
+                                   
+                                   <i class="ci-discount"></i> Sale {{ round($discount) }}% 
+                                </span>
+                                @endif
                                 {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
                                 <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
@@ -237,13 +265,11 @@
                                             </button>
                                             <div class="product-card-actions">
                                                 <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
-                                                    href="#quick-view-electro" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view-electro" id="{{ $item->id }}"
-                                                    onclick="productView(this.id)">
-                                                    <i class="ci-eye"></i>
+                                                type="button" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
                                                 </a>
                                                 <button class="btn btn-light btn-icon btn-shadow fs-base mx-2"
-                                                    type="button">
+                                                type="submit" 
+                                                href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $item->id }}" onclick="productView(this.id)">
                                                     <i class="ci-cart"></i>
                                                 </button>
                                             </div>
@@ -406,6 +432,20 @@
 
 
                             <div class="card product-card card-static">
+                                @php
+                                $amount = $item->selling_price - $item->discount_price;
+                                $discount = ($amount/$item->selling_price) * 100;
+                                @endphp
+                
+                                @if($item->discount_price == NULL)
+                                <span class="badge bg-success badge-shadow">
+                                    New
+                                </span> @else
+                                <span class="badge bg-danger badge-shadow">
+                                   
+                                   <i class="ci-discount"></i> Sale {{ round($discount) }}% 
+                                </span>
+                                @endif
                                 {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
                                 <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">

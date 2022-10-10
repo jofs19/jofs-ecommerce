@@ -25,6 +25,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeBlogController;
 
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
@@ -427,7 +428,8 @@ Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMi
 // Add to Wishlist
 Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
 
-
+// Add to Compare
+Route::post('/add-to-compare/{product_id}', [CartController::class, 'AddToCompare']);
 
 
 // Wishlist page 
@@ -440,6 +442,11 @@ Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wish
 Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
 
 Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
+
+// COMPARE PAGE
+Route::get('/compare', [CompareController::class, 'ViewCompare'])->name('compare');
+Route::get('/get-compare-product', [CompareController::class, 'GetCompareProduct']);
+Route::get('/compare-remove/{id}', [CompareController::class, 'RemoveCompareProduct']);
 
 //STRIPE
 

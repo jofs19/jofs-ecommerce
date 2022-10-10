@@ -5,7 +5,7 @@
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href="#">www.vartouhi.com</a>
+			<a class="nav-link" href="#">www.vartouhi-ecommerce.com</a>
 		  </li>
 		</ul>
     </div>

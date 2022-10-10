@@ -42,8 +42,9 @@
 
 			{{-- <a href="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $user->name }}"><img src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" class="all studio isotope-item" alt="gallery" style="width: 150px; height: 100px;"> </a> --}}
 			
-			<img src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" style="width: 150px; height: 100px;"> 
+			<img src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" style="width: 150px; height: 100px;"> 
 		
+			
 		
 		</td>
 		<td>{{ $user->name }}</td>

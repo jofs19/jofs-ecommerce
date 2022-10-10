@@ -218,10 +218,10 @@
 										<div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Product Color (Eng) <span class="text-danger">*</span></h5>
+                                                <h5>Product Variant (Eng) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_color_en" class="form-control"
-                                                        value="red,Black,Amet" data-role="tagsinput">
+                                                        value="Red,Black,Amet" data-role="tagsinput">
                                                     @error('product_color_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -274,10 +274,10 @@
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Product Color (Fil) <span class="text-danger">*</span></h5>
+                                                <h5>Product Variant (Fil) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="product_color_fil" class="form-control"
-                                                        value="red,Black,Large" data-role="tagsinput">
+                                                        value="Red,Black,Large" data-role="tagsinput">
                                                     @error('product_color_fil')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -311,7 +311,7 @@
                                         <!-- start 6th row  -->
 
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
 
                                             <div class="form-group">
                                                 <h5>Main Thumbnail <span class="text-danger">*</span></h5>
@@ -330,7 +330,7 @@
                                         </div> <!-- end col md 4 -->
 
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
 
                                             <div class="form-group">
                                                 <h5>Multiple Image <span class="text-danger">*</span></h5>
@@ -347,7 +347,7 @@
 
                                         </div> <!-- end col md 4 -->
 
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
 
                                             <div class="form-group">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
@@ -357,9 +357,50 @@
                                                 </div>
                                             </div>
 
-                                        </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 4 --> --}}
 
                                     </div> <!-- end 6th row  -->
+                                    <div class="form-group row">
+ 
+                                        
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group ">
+                                                <h5>Product Discount Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    {{-- <input type="text" name="discount_price" class="form-control"> --}}
+
+                                                    <div class="input-group ">
+                                                        <span class="input-group-addon">
+                                                          <input type="checkbox" id="addon_Checkbox_1" class="discount_price">
+                                                          <label for="addon_Checkbox_1" style="padding-left: 20px;height: 13px;"></label>
+                                                        </span>
+                                                        <input type="text" name="discount_price" class="form-control">
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group sale_duration">
+                                                <h5>Sale Duration <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    
+
+                                                    <input class="form-control" type="date" name="sale_time" min="{{ Carbon\Carbon::now()->format('m/y/d') }}">
+
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 6 -->
+                                        
+                                    </div>
 
 
                                     <div class="row">
@@ -438,12 +479,18 @@
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_2" name="hot_deals"
                                                             value="1">
-                                                        <label for="checkbox_2">Hot Deals</label>
+                                                        <label for="checkbox_2">Best Seller</label> <!--HOT DEALS-->
                                                     </fieldset>
+                                                    
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_3" name="featured"
-                                                            value="1">
-                                                        <label for="checkbox_3">Featured Products</label>
+                                                        <input type="checkbox" id="checkbox_4" name="special_offer"
+                                                            value="1" class="special_offer">
+                                                        <label for="checkbox_4">Special Offers</label>
+                                                    </fieldset>
+
+                                                    <fieldset class="show_time">
+                                                        
+                                                        <input class="form-control" type="date" name="so_saletime" min="{{ Carbon\Carbon::now()->format('m/y/d') }}">
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -456,20 +503,25 @@
 
                                                 <div class="controls">
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_4" name="special_offer"
+                                                        <input type="checkbox" id="checkbox_3" name="featured"
                                                             value="1">
-                                                        <label for="checkbox_4">Special Offers</label>
+                                                        <label for="checkbox_3">Featured Products</label> <!--FEATURED PRODUCTS-->
                                                     </fieldset>
+
+                                                    
+                                                    
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_5" name="special_deals"
                                                             value="1">
-                                                        <label for="checkbox_5">Special Deals</label>
+                                                        <label for="checkbox_5">Trending Products</label><!--Special Deals-->
                                                     </fieldset>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
+
+                                    
 
                                     {{-- <div class="col-md-6"> --}}
 
@@ -587,6 +639,32 @@ $('select[name="subcategory_id"]').on('change', function(){
    });
   });
    
+  </script>
+
+  <script>
+
+    $(".show_time").hide();
+    $(".special_offer").click(function(){
+        if($(this).is(":checked")){
+            $(".show_time").show(300);
+        }else{
+            $(".show_time").hide(300);
+        }
+    });
+
+
+    $(".sale_duration").hide();
+    $(".discount_price").click(function(){
+        if($(this).is(":checked")){
+            $(".sale_duration").show(300);
+        }else{
+            $(".sale_duration").hide(300);
+        }
+    });
+
+
+
+
   </script>
 
 

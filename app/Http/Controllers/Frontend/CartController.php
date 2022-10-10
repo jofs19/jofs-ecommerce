@@ -6,6 +6,7 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
+use App\Models\Compare;
 use Carbon\Carbon;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
@@ -194,6 +195,46 @@ class CartController extends Controller
 			);
 	
 			return redirect()->route('login')->with($notification);
+	
+			}
+	
+		} // end method 
+
+
+		public function AddToCompare(Request $request, $product_id){
+
+			if (Auth::check()) {
+	
+				$exists = Compare::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+				$compareQty = Compare::where('user_id',Auth::id())->count();
+	
+				if (!$exists && $compareQty < 3) {
+					Compare::insert([					
+					'user_id' => Auth::id(), 
+					'product_id' => $product_id, 
+					'created_at' => Carbon::now(), 
+				]);
+				return response()->json(array(
+					
+					'compareQty' => $compareQty + 1,
+					'success' => 'Successfully Added to Compare Section',
+					
+				));
+
+
+				}else{
+
+					if($exists){
+						return response()->json(['error' => 'This product was already added on your Compare section!']);
+					}else{
+						return response()->json(['error' => 'You can only add 3 products to compare']);
+
+					}
+				}  
+	
+			}else{
+	
+				return response()->json(['error' => 'Login Your Account First!']);
 	
 			}
 	

@@ -86,7 +86,7 @@
                   <li><a class="dropdown-item" href="{{ route('wishlist') }}"><i
                               class="ci-heart text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Kagustuhan (<span class="wishlistQty">0</span>) @else Wishlist (<span class="wishlistQty">0</span>) @endif</a></li>
-                  <li><a class="dropdown-item" href="comparison.html"><i
+                  <li><a class="dropdown-item" href="{{ route('compare') }}"><i
                               class="ci-compare text-muted me-2"></i>@if(session()->get('language') ==
                               'filipino') Ikumpara (3) @else Compare (3) @endif </a></li>
                   <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i
@@ -97,7 +97,7 @@
           <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block"
             href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>Wishlist (<span class="wishlistQty">0</span>)</a><a
                   class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
-                  href="comparison.html"><i class="ci-compare mt-n1"></i>Compare (3)</a><a
+                  href="{{ route('compare') }}"><i class="ci-compare mt-n1"></i>Compare (<span class="compareQty">0</span>)</a><a
                   class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
                   data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i class="ci-location mt-n1"></i>Order tracking</a></div>
       </div>
@@ -111,9 +111,9 @@
       <div class="navbar navbar-expand-lg navbar-dark bg-darker py-0 my-0">
           <div class="container">
               <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0 flicker-in-1" href="{{ url('/') }}">
-                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="142" alt="Cartzilla"></a>
+                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="142" alt="Vartouhi"></a>
               <a class="navbar-brand d-sm-none me-2 flicker-in-1" href="{{ url('/') }}">
-                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="100" alt="Cartzilla">
+                  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" width="100" alt="Vartouhi">
               </a>
              
               {{-- <div class="input-group d-none d-lg-flex flex-nowrap ms-3 me-4">
@@ -358,12 +358,27 @@
                                         @endforeach
 
                                           <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
-                                                  class="d-block mb-2" href="#"><img
-                                                      src="{{ asset('frontendv2/assets/img/shop/departments/07.jpg') }}"
-                                                      alt="Computers &amp; Accessories"></a>
-                                              <div class="fs-sm mb-3">Starting from <span
-                                                      class='fw-medium'>$149.<small>80</small></span></div><a
-                                                  class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
+                                                  class="d-block mb-2" href="#">
+
+                                            @php
+                                              $productss = App\Models\Product::where('subcategory_id',$subcategory->id)->orderBy('id','DESC')->first();
+                                              $lowest_price = App\Models\Product::where('subcategory_id',$subcategory->id)->min('selling_price');
+                                            @endphp
+
+                                                  
+                                                    
+                                                  <img src="{{ $productss->product_thumbnail }}"
+                                                      alt="product" width="200" class="pb-2 mb-2">
+
+                                                   
+
+                                                    
+                                                    </a>
+                                              {{-- <div class="fs-sm mb-3">Starting from <span
+                                                      class='fw-medium'>{{ $lowest_price }}.<small>00</small></span>
+                                              </div> --}}
+                                                      <a
+                                                  class="btn btn-primary btn-shadow btn-sm" href="{{ route('shop.page') }}">See offers<i
                                                       class="ci-arrow-right fs-xs ms-1"></i></a>
                                           </div>
                                       </div>
@@ -414,7 +429,7 @@
                           
                       </li>
                       <li class="nav-item"><a class="nav-link" href="{{ route('home.blog') }}">
-                        <i class="ci-image align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Talaan @else
+                        <i class="ci-hangouts align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Talaan @else
                               Blog @endif</a>
                           
                       </li>

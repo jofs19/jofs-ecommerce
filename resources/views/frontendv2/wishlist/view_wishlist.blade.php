@@ -41,7 +41,7 @@ Vartouhi | My Wishlist
           <h6 class="fs-base text-light mb-0">List of items you added to wishlist:</h6><a class="btn btn-primary btn-sm" href="account-signin.html"><i class="ci-sign-out me-2"></i>Sign out</a>
         </div>
         <!-- Wishlist-->
-        <div style="height: 30rem;" data-simplebar data-simplebar-auto-hide="false">
+        <div style="height: 33rem;" data-simplebar data-simplebar-auto-hide="false">
 
         {{-- <!-- Item-->
         <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">

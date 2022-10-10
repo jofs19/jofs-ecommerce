@@ -23,7 +23,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped text-center">
                                 <thead>
                                     <tr>
                                         <th>Image </th>
@@ -63,6 +63,9 @@
                                                     @endphp
                                                     <span class="badge badge-pill badge-dark">{{ round($discount) }}
                                                         %</span>
+                                                    <br>valid until 
+                                                    {{ $item->sale_time }}
+                                                    
                                                 @endif
 
 
@@ -80,9 +83,9 @@
 
 
                                             <td width="30%">
-                                                <a href="{{ route('product.edit',$item->id) }}"
+                                                {{-- <a href="{{ route('product.edit',$item->id) }}"
                                                     class="btn btn-primary" title="Product Details Data"><i
-                                                        class="fa fa-eye"></i> </a>
+                                                        class="fa fa-eye"></i> </a> --}}
 
                                                 <a href="{{ route('product.edit',$item->id) }}"
                                                     class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i>

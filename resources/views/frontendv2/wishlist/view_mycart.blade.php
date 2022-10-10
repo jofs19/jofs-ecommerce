@@ -27,7 +27,7 @@ Vartouhi | My Cart
       <!-- List of items-->
       <section class="col-lg-8">
         <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
-          <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-arrow-left me-2"></i>Continue shopping</a>
+          <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm ps-2" href="{{ route('shop.page') }}"><i class="ci-arrow-left me-2"></i>Continue shopping</a>
         </div>
         <div style="height: 30rem;" data-simplebar data-simplebar-auto-hide="false">
 

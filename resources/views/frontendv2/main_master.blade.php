@@ -105,6 +105,36 @@
 		}
 		/* if problem persisted, just put this css in first */
 
+    @media screen and (min-width: 1024px) {
+      div .wrap{
+      width: 280px;
+      word-wrap: break-word;
+
+    }
+
+    }
+
+
+    @media screen and (max-width: 767px) {
+      div .wrap{
+      width: 158px;
+      word-wrap: break-word;
+
+    }
+
+    }
+
+
+    
+    @media screen and (min-width: 767px) and (max-width: 1024px) {
+      div .wrap{
+      width: 210px;
+      word-wrap: break-word;
+
+    }
+  }
+
+
 	</style>
 
   </head>
@@ -175,7 +205,7 @@
     {{-- End Footer Area --}}
 
 
-    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare'))
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span>
@@ -419,7 +449,7 @@
                                                 <div class="image-zoom-pane"></div>
                                             </div>
                                         </div>
-                                        <div class="product-gallery-thumblist order-sm-1">
+                                        {{-- <div class="product-gallery-thumblist order-sm-1">
                                           <a
                                                 class="product-gallery-thumblist-item active" href="#first"><img
                                                 id="pgallery"
@@ -435,13 +465,13 @@
                                                 href="#fourth"><img
                                                     src="{{ asset('frontendv2/assets/img/shop/single/gallery/th08.jpg') }}"
                                                     alt="Product thumb"></a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <!-- Product details-->
                                 <div class="col-lg-5 pt-4 pt-lg-0 image-zoom-pane">
                                     <div class="product-details ms-auto pb-3">
-                                        <div class="mb-2">
+                                        {{-- <div class="mb-2">
                                             <div class="star-rating">
                                                     <i class="star-rating-icon ci-star-filled active"></i>
                                                     <i class="star-rating-icon ci-star-filled active"></i>
@@ -451,18 +481,20 @@
                                             </div>
                                             <span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74
                                                 Reviews</span>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="h3 fw-normal text-accent mb-3 me-1"><span id="oldprice"></span>.<small>00</small></div>
                                         <del class="text-danger me-2" id="pprice">.<small>00</small></del><span id="pprice"></span>.<small>00</small> --}}
 
                                         <div class="product-price">
-                                          <del class="fs-sm text-muted" id="oldprice">
+                                          <del class="fs-lg text-muted" id="oldprice">
                                               <small>.00</small></del>
-                                          <span class="text-accent" id="pprice"> 
+                                          <span class=" fs-lg text-accent" id="pprice"> 
                                               <small>.00</small></span>
           
                                       </div>
+
+                                      
 
                                       {{-- <label for="color">Choose Color</label>
                                       <select class="form-control" id="color" name="color"> --}}
@@ -557,8 +589,8 @@
                       <!-- Product panels-->
                       <div class="accordion mb-4" id="productPanels">
                         <div class="accordion-item">
-                          <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>General info</a></h3>
-                          <div class="accordion-collapse collapse" id="shippingOptions" data-bs-parent="#productPanels">
+                          <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>General info</a></h3>
+                          <div class="accordion-collapse collapse show" id="shippingOptions" data-bs-parent="#productPanels">
                             <div class="accordion-body fs-sm">
                               <div class="d-flex justify-content-between border-bottom pb-2">
                                 <div>
@@ -1000,6 +1032,240 @@
     </script> 
         
     <!-- /// End Load Wish list Data  -->
+
+
+
+
+
+
+    
+
+        <!--  /// Start Add Compare Page  //// -->
+    
+        <script type="text/javascript">
+        
+          function addToCompare(product_id){
+              $.ajax({
+                  type: "POST",
+                  dataType: 'json',
+                  url: "/add-to-compare/"+product_id,
+                  success:function(data){
+                    
+                        // Start Message 
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+        
+                      if ($.isEmptyObject(data.error)) {
+                          Toast.fire({
+                              type: 'success',
+                              icon: 'success',
+                              title: data.success
+                          })
+                      }else{
+                          Toast.fire({
+                              type: 'error',
+                              icon: 'error',
+                              title: data.error
+                          })
+                      }
+                        // End Message 
+                        $('.compareQty').text(data.compareQty);
+    
+        
+                  }
+              })
+          }
+        
+          </script>
+        
+           <!--  /// End Add Compare Page  ////   -->
+        
+        
+           <script type="text/javascript">
+            function compare(){
+               $.ajax({
+                   type: 'GET',
+                   url: '/user/get-compare-product',           
+                   dataType:'json',
+                   success:function(response){
+                    $('.compareQty').text(response.compareQty);
+                       var rows = ""
+                       var tname = ""
+                       var description = ""
+                       var brand = ""
+                       var sizes = ""
+                       var variants = ""
+                       var stock = ""
+                       var price_rating = ""
+                       var buttons = ""
+
+                $.each(response.compare, function(key,value){
+                           rows += ` 
+                           
+                           <td class="text-center px-4 pb-4">
+                         
+                            <a class="btn btn-sm d-block w-100 text-danger mb-2 reload" type="submit" id="${value.id}" onclick="compareRemove(this.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="ci-trash me-1"></i>Remove</a>
+                            
+                            <a class="d-inline-block mb-3" href="shop-single-v2.html"><img src="/${value.product.product_thumbnail}" width="100" alt="Apple iPhone Xs Max"></a>
+                  <h3 class="product-title fs-sm"><a href="shop-single-v2.html">${value.product.product_name_en}</a></h3>
+                  <button class="btn btn-icon btn-primary btn-sm" type="submit" href="#quick-view-electro"
+                            data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
+                            onclick="productView(${value.product_id})" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg"></i></button>
+                  
+                  <button class="btn btn-sm btn-danger btn-icon" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" id="${value.id}" onclick="addToWishList(this.id)" ><i class="ci-heart fs-lg"></i></button>
+
+                  </td>
+                `
+               });
+                       
+                       $('#compareTable .table-header').append(rows);
+                       $('.reload').on('click', function(){
+                        window.location.reload();
+                       }); 
+
+              $.each(response.compare, function(key,value){
+                        tname += `<td class="text-center"><span class="text-dark fw-medium text-dark">${value.product.product_name_en}</span></td>`
+
+               });
+                       
+                       $('#compareTable .tname').append(tname);
+
+
+
+              $.each(response.compare, function(key,value){
+                description += `<td class="text-center">
+
+                  <dl>
+                  
+                    <dt>
+                      <div class="wrap">
+                    ${value.product.short_descp_en}
+                      </div>
+                    </dt>
+
+                    <dd>
+                      <div class="wrap">
+
+                      ${value.product.long_descp_en}
+                      
+                    </div>
+
+                      </dd>
+
+                  </dl>
+                   
+                  
+                  </td>
+                
+                
+                `
+
+      });
+              
+              $('#compareTable .description').append(description);
+
+
+
+              $.each(response.compare, function(key,value){
+                        sizes += `<td class="text-center">${value.product.product_size_en}</td>`
+
+                });
+                        
+                        $('#compareTable .sizes').append(sizes);
+
+
+
+              $.each(response.compare, function(key,value){
+              variants += `<td class="text-center">${value.product.product_color_en}</td>`
+
+                });
+                        
+                        $('#compareTable .variants').append(variants);
+
+
+              $.each(response.compare, function(key,value){
+              stock += `<td class="text-center">${value.product.product_qty}</td>`
+
+                });
+                        
+                        $('#compareTable .stock').append(stock);
+
+
+              $.each(response.compare, function(key,value){
+                price_rating += `<td class="text-center">${value.product.discount_price == null ? `₱ ${value.product.selling_price}` : `<del class="text-muted fs-lg me-1">₱ ${value.product.selling_price}.<small>00</small></del> <span> ₱ ${value.product.discount_price}</span>`}.<small>00</small> </td>`
+
+                });
+                        
+                        $('#compareTable .price_rating').append(price_rating);
+
+
+              $.each(response.compare, function(key,value){
+                buttons += `<td>
+                  <button class="btn btn-primary d-block w-100" type="submit" href="#quick-view-electro"
+                            data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
+                            onclick="productView(${value.product_id})">Add to Cart</button>
+                </td>`
+
+                });
+                        
+                        $('#compareTable .buttons').append(buttons);
+
+
+
+
+
+
+                       
+                   }
+               })
+            }
+        compare();
+        
+        
+         ///  Compare remove Start 
+         function compareRemove(id){
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/compare-remove/'+id,            
+                    dataType:'json',
+                    success:function(data){
+                    compare();
+                     // Start Message 
+                        const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              
+                              showConfirmButton: false,
+                              timer: 3000
+                            })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        }else{
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message 
+                    }
+                });
+            }
+         // End Compare remove   
+        
+        
+        </script> 
+            
+        <!-- /// End Load Compare Data  -->
     
     
     <!-- /// Load My Cart /// -->
@@ -1621,6 +1887,7 @@ $('select[name="district_id"]').on('change', function(){
             window.location.href = 'https://www.tutorialspoint.com/javascript/';
          }, 3000);
       </script> --}}
+      
 
 
 

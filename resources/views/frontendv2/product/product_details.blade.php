@@ -163,9 +163,28 @@
                       <div class="mb-3">
                         <del class="text-muted fs-lg me-3">₱ {{ $product->selling_price }}.<small>00</small></del>
 
-                        <span class="h3 fw-normal text-accent me-1">₱ {{ $product->discount_price }}.<small>00</small></span>
+                        <span class="h4 fw-normal text-accent me-1">₱ {{ $product->discount_price }}.<small>00</small></span>
                         
                         <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                      </div>
+
+                      <span class="text-lead pb-2 mb-2 fw-semibold">Sales End at: </span> <div class="countdown h6 pt-2" data-countdown="{{ Carbon\Carbon::parse($product->sale_time)->format('m/d/Y') }}">
+                        <div class="countdown-days shadow rounded p-3">
+                          <span class="countdown-value">0</span>
+                          <span class="countdown-label text-muted">d</span>
+                        </div>
+                        <div class="countdown-hours shadow rounded p-3">
+                          <span class="countdown-value">0</span>
+                          <span class="countdown-label text-muted">h</span>
+                        </div>
+                        <div class="countdown-minutes shadow rounded p-3">
+                          <span class="countdown-value">0</span>
+                          <span class="countdown-label text-muted">m</span>
+                        </div>
+                        <div class="countdown-seconds shadow rounded p-3">
+                          <span class="countdown-value">0</span>
+                          <span class="countdown-label text-muted">s</span>
+                        </div>
                       </div>
 
                       

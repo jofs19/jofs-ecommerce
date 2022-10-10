@@ -72,6 +72,9 @@ class ProductController extends Controller
       	'special_offer' => $request->special_offer,
       	'special_deals' => $request->special_deals,
 
+		'sale_time' => $request->sale_time,
+		'so_saletime' => $request->so_saletime,
+
       	'product_thumbnail' => $save_url,
       	'status' => 1,
       	'created_at' => Carbon::now(),   	 

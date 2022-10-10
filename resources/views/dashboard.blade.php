@@ -1,7 +1,7 @@
 @extends('frontendv2.main_master')
 @section('content')
 
-<head>
+{{-- <head>
     <style>
         .btn-primary {
             background-color: #CCAC00;
@@ -16,7 +16,7 @@
         }
 
     </style>
-</head>
+</head> --}}
 
 <div class="page-title-overlap bg-dark pt-4">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
@@ -56,7 +56,7 @@
                         class="ci-sign-out me-2"></i>Sign out</a>
             </div>
             <!-- Contacts card: Shadow -->
-            <div class="card border-0 shadow">
+            {{-- <div class="card border-0 shadow">
                 <div class="card-img-top overflow-hidden">
                     <!-- Google map embed iframe goes here -->
                 </div>
@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
 
 
             

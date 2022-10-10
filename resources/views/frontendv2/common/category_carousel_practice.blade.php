@@ -126,18 +126,36 @@
             @foreach($products_category as $product)
             <div>
                 <div class="card product-card-alt">
+                    @php
+                    $amount = $product->selling_price - $product->discount_price;
+                    $discount = ($amount/$product->selling_price) * 100;
+                    @endphp
+    
+                    @if($product->discount_price == NULL)
+                    <span class="badge bg-success badge-shadow mt-2">
+                        New
+                    </span> @else
+                    <span class="badge bg-danger badge-shadow mt-2">
+                       
+                       <i class="ci-discount"></i> Sale {{ round($discount) }}% 
+                    </span>
+                    @endif
+                    
 
                     {{-- Product Thumbnail --}}
                     <div class="product-thumb">
+
+                        
+
                         <button class="btn-wishlist btn-sm" type="button"><i class="ci-heart"></i></button>
+                        
                         {{-- Product Actions --}}
                         <div class="product-card-actions">
-                            <a class="btn btn-light btn-icon btn-shadow fs-base mx-2" href="#quick-view-electro"
-                                data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}"
-                                onclick="productView(this.id)">
-                                <i class="ci-eye"></i>
+                            
+                            <a class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="button" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
                             </a>
-                            <button class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="button"><i
+                            <button class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="submit" 
+                            href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}" onclick="productView(this.id)"><i
                                     class="ci-cart"></i></button>
                         </div>
                         {{-- End Product Action --}}
@@ -342,18 +360,30 @@
                       @forelse($catwiseProduct as $product)
                       <div>
                           <div class="card product-card-alt">
+                            @php
+                            $amount = $product->selling_price - $product->discount_price;
+                            $discount = ($amount/$product->selling_price) * 100;
+                            @endphp
+            
+                            @if($product->discount_price == NULL)
+                            <span class="badge bg-success badge-shadow mt-2">
+                                New
+                            </span> @else
+                            <span class="badge bg-danger badge-shadow mt-2">
+                               
+                               <i class="ci-discount"></i> Sale {{ round($discount) }}% 
+                            </span>
+                            @endif
           
                               {{-- Product Thumbnail --}}
                               <div class="product-thumb">
                                   <button class="btn-wishlist btn-sm" type="button"><i class="ci-heart"></i></button>
                                   {{-- Product Actions --}}
                                   <div class="product-card-actions">
-                                      <a class="btn btn-light btn-icon btn-shadow fs-base mx-2" href="#quick-view-electro"
-                                          data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}"
-                                          onclick="productView(this.id)">
-                                          <i class="ci-eye"></i>
+                                      <a class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="button" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
                                       </a>
-                                      <button class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="button"><i
+                                      <button class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="submit" 
+                                      href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}" onclick="productView(this.id)"><i
                                               class="ci-cart"></i></button>
                                   </div>
                                   {{-- End Product Action --}}

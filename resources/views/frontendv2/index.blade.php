@@ -134,7 +134,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 
                                     <div class="d-table scale-up delay-4 mx-auto mx-md-0"><a
-                                            class="btn btn-primary btn-shadow" href="shop-grid-ls.html">Shop Now<i
+                                            class="btn btn-primary btn-shadow" href="{{ route('shop.page') }}">Shop Now<i
                                                 class="ci-arrow-right ms-2 me-n1"></i></a></div>
                                 </div>
                             </div>
@@ -151,31 +151,34 @@ Vartouhi | Beauty & Cosmetics Store
                 <div class="table-responsive" data-simplebar>
                     <div class="d-flex d-xl-block"><a
                             class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
-                            href="#" style="min-width: 16rem;"><img
-                                src="{{ asset('frontendv2/assets/img/home/banners/banner-sm01.png') }}" width="125"
+                            href="{{ route('shop.page') }}" style="min-width: 16rem;"><img
+                                src="{{ asset('upload/skinn-soap.png') }}" width="125"
                                 alt="Banner">
                             <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>Video <span
-                                        class="fw-light">with</span><br>360 Cam</h5>
+                                <h5 class="mb-2"><span class="fw-light">Variants of</span><br>Vartouhi -<span
+                                        class="fw-light"></span><br>Cream!</h5>
                                 <div class="text-info fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                             </div>
                         </a><a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
-                            href="#" style="min-width: 16rem;"><img
-                                src="{{ asset('frontendv2/assets/img/home/banners/banner-sm02.png') }}" width="125"
+                            href="{{ route('shop.page') }}" style="min-width: 16rem;"><img
+                                src="{{ asset('upload/prem-soap.png') }}" width="125"
                                 alt="Banner">
                             <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">Top Rated</span><br>Gadgets<br><span
-                                        class="fw-light">are on </span>Sale</h5>
-                                <div class="text-warning fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
+                                <h5 class="mb-2"><span class="fw-light">Our Newest</span><br>Premium<br><span
+                                        class="fw-light">7in1 </span>Soap!</h5>
+                                <div class="text-warning fs-ms">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                             </div>
-                        </a><a class="d-flex align-items-center bg-faded-success rounded-3 pt-2 ps-2 mb-4" href="#"
+                        </a><a class="d-flex align-items-center bg-faded-primary rounded-3 pt-2 ps-2 mb-4" href="{{ route('shop.page') }}"
                             style="min-width: 16rem;"><img
-                                src="{{ asset('frontendv2/assets/img/home/banners/banner-sm03.png') }}" width="125"
+                                src="{{ asset('upload/summ-soap.png') }}" width="125"
                                 alt="Banner">
                             <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">Catch Big</span><br>Deals <span
-                                        class="fw-light">on</span><br>Earbuds</h5>
-                                <div class="text-success fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
+                                <h5 class="mb-2"><span class="fw-light">All Natural</span><br>Skincare <span
+                                        class="fw-light"></span><br>Products!</h5>
+                                <div class="text-primary fs-sm">
+                                    Shop now<i class="ci-arrow-right fs-xs ms-1"></i> 
+                                
+                                </div>
                             </div>
                         </a></div>
                 </div>
@@ -220,14 +223,13 @@ Vartouhi | Beauty & Cosmetics Store
                 </span> @else
                 <span class="badge bg-danger badge-shadow">
                    
-                   <i class="ci-discount"></i> Sale {{ round($discount) }}%
+                   <i class="ci-discount"></i> Sale {{ round($discount) }}% 
                 </span>
                 @endif
 
 
 
-                <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                        href="#"><i class="ci-compare me-1"></i>Compare</a>
+                <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" type="button" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>Compare</a>
 
                         {{-- <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button> --}}
 
@@ -423,10 +425,10 @@ Vartouhi | Beauty & Cosmetics Store
        
 
                     @endif
-                    <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
+                    {{-- <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
                             data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}"
                             onclick="productView(this.id)">
-                            <i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                            <i class="ci-eye align-middle me-1"></i>Quick view</a></div> --}}
 
             </div>
         </div>
@@ -478,14 +480,45 @@ Vartouhi | Beauty & Cosmetics Store
 {{-- Promo Banner Area --}}
 
 <section class="container mt-1 mb-grid-gutter">
+    @forelse ($special_offer as $product)
+
     <div class="bg-faded-info rounded-3 py-4">
         <div class="row align-items-center">
-            <div class="col-md-8">
-                <div class="px-4 pe-sm-0 ps-sm-5"><span class="badge bg-danger">Limited Offer</span>
-                    <h3 class="mt-4 mb-1 text-body fw-light">All new</h3>
-                    <h2 class="mb-1">Last Gen iPad Pro</h2>
+            <div class="col-md-6">
+                <div class="px-4 pe-sm-0 ps-sm-5"><span class="badge bg-danger badge-shadow">Limited Offer</span>
+                    <h3 class="mt-4 mb-1 text-body fw-light">All New</h3>
+                    
+                {{-- {{ date('h.i A', $timestamp) }} --}}
+
+
+                    
+                
+
+
+
+                    <h2 class="mb-1">{{ $product->product_name_en }}</h2>
                     <p class="h5 text-body fw-light">at discounted price. Hurry up!</p>
-                    <div class="countdown py-2 h4" data-countdown="07/01/2023 07:00:00 PM">
+
+                    @if ($product->discount_price == NULL)
+                    <div class="h4 fw-normal text-accent">₱ {{ number_format($product->selling_price,2) }}</div>
+                    @else
+
+                    <div class="mb-3">
+                      <del class="text-muted fs-lg me-3">₱ {{ number_format($product->selling_price,2) }}</del>
+
+                      <span class="h3 fw-normal text-accent me-1">₱ {{ number_format($product->discount_price,2) }}</span>
+                      
+                      <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                    </div>
+
+                    
+                    @endif
+
+                    {{-- {{ Carbon\Carbon::parse($product_offer->sale_time)->format('m/d/Y H:i:s A') }} --}}
+                    <div class="countdown py-2 h4" data-countdown="{{ Carbon\Carbon::parse($product->so_saletime)->format('m/d/Y') }}">
+
+                    
+    
                         <div class="countdown-days"><span class="countdown-value"></span><span
                                 class="countdown-label text-muted">d</span></div>
                         <div class="countdown-hours"><span class="countdown-value"></span><span
@@ -494,20 +527,24 @@ Vartouhi | Beauty & Cosmetics Store
                                 class="countdown-label text-muted">m</span></div>
                         <div class="countdown-seconds"><span class="countdown-value"></span><span
                                 class="countdown-label text-muted">s</span></div>
-                    </div><a class="btn btn-accent" href="#">View offers<i class="ci-arrow-right fs-ms ms-1"></i></a>
+                    </div><a class="btn btn-accent"type="submit" 
+                    href="#quick-view-electro" data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}" onclick="productView(this.id)">Add to Cart<i class="ci-cart fs-ms ms-2"></i></a>
                 </div>
             </div>
 
-                @foreach ($special_offer as $product)
                 
-            <div class="col-md-4"><img src="{{ asset($product->product_thumbnail) }}" alt="iPad Pro"></div>
+            <div class="col-md-6 pt-3 mt-3"><img src="{{ asset($product->product_thumbnail) }}" alt="iPad Pro"></div>
+
+                @empty
 
 
-                @endforeach
+
 
             
         </div>
     </div>
+    @endforelse
+
 </section>
 
 {{-- End Promo Banner Area --}}
@@ -519,10 +556,15 @@ Vartouhi | Beauty & Cosmetics Store
     <div class="tns-carousel border-end">
         <div class="tns-carousel-inner"
             data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
-            <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                        class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/shop/brands/13.png') }}"
-                        style="width: 165px;" alt="Brand"></a></div>
-            <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
+
+            @foreach ($brands as $item)
+                
+            <div><a class="d-block bg-white border py-3 py-sm-4 px-0" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{{ asset('upload/placeholder.jpg') }}" width="210" alt="vartouhi"></a></div>
+
+            @endforeach
+
+
+            {{-- <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
                         class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/shop/brands/14.png') }}"
                         style="width: 165px;" alt="Brand"></a></div>
             <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
@@ -540,7 +582,7 @@ Vartouhi | Beauty & Cosmetics Store
             <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
                         class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/shop/brands/19.png') }}"
                         style="width: 165px;" alt="Brand"></a></div>
-            <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
+            <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img --}}
                         class="d-block mx-auto" src="{{ asset('frontendv2/assets/img/shop/brands/20.png') }}"
                         style="width: 165px;" alt="Brand"></a></div>
         </div>
@@ -620,16 +662,17 @@ Vartouhi | Beauty & Cosmetics Store
 <section class="container-fluid px-0">
     <div class="row g-0">
         <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
-                href="blog-list-sidebar.html">
+                href="{{ route('home.blog') }}">
                 <div class="card-body text-center"><i class="ci-edit h3 mt-2 mb-4 text-primary"></i>
                     <h3 class="h5 mb-1">Read the blog</h3>
-                    <p class="text-muted fs-sm">Latest store, fashion news and trends</p>
+                    <p class="text-muted fs-sm">Latest store, news and trends!</p>
                 </div>
             </a></div>
-        <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" href="#">
-                <div class="card-body text-center"><i class="ci-instagram h3 mt-2 mb-4 text-accent"></i>
-                    <h3 class="h5 mb-1">Follow on Instagram</h3>
-                    <p class="text-muted fs-sm">#ShopWithCartzilla</p>
+        <div class="col-md-6 "><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" href="https://www.facebook.com/VartouhiOfficial">
+                <div class="card-body text-center"><img class="d-block mx-auto"
+                    src="https://clipart.info/images/ccovers/1509135295Facebook-Logo-Png.png" width="150" alt="Facebook">
+                    <h3 class="h5 mb-1 mt-3">Follow us on Facebook!</h3>
+                    <p class="text-muted fs-sm">#ShopWithVartouhi</p>
                 </div>
             </a></div>
     </div>

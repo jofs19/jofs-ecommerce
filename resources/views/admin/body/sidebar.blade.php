@@ -13,19 +13,19 @@
     <section class="sidebar">	
 		
         <div class="user-profile">
-			<div class="ulogo">
+			<div class="ulogo mb-0 pb-0">
 				 <a href="{{ url('admin/dashboard') }}">
 				  <!-- logo for regular state and mobile devices -->
-					 <div class="d-flex align-items-center justify-content-center">					 	
-						  <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
-						  <h3><b>Vartouhi</b> Admin</h3>
+					 <div class="d-flex align-items-center justify-content-center pt-2 mt-2 pb-0 mb-0">					 	
+						  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" alt="" width="155">
+						  {{-- <h3><b>Vartouhi</b> Admin</h3> --}}
 					 </div>
 				</a>
 			</div>
         </div>
       
       <!-- sidebar menu-->
-      <ul class="sidebar-menu" data-widget="tree">  
+      <ul class="sidebar-menu mt-1 pt-1" data-widget="tree">  
 		  
 		<li class="{{ ($route == 'dashboard')? 'active':'' }}">
           <a href="{{ url('admin/dashboard') }}">

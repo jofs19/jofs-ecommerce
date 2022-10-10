@@ -53,7 +53,7 @@
         <ul class="list-unstyled mb-0">
           <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/profile')) ? 'active' : '' }}" href="{{ route('user.profile') }}"><i class="ci-user opacity-60 me-2"></i>Profile information</a></li>
           <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/change/password')) ? 'active' : '' }}" href="{{ route('change.password') }}"><i class="ci-security-check opacity-60 me-2"></i>Update Password</a></li>
-          <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-payment.html"><i class="ci-help opacity-60 me-2"></i>Help Center</a></li>
+          <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="under_construction"><i class="ci-help opacity-60 me-2"></i>Help Center</a></li>
           <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('user.logout') }}"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a></li>
         </ul>
       </div>
