@@ -1432,7 +1432,7 @@
               success:function(data){
                 couponCalculation();
                 if (data.validity == true) {
-                    $('#couponField').hide();
+                    $('#couponField').hide(500);
                 }
     
                 // Start Message 
@@ -1543,7 +1543,7 @@
                dataType: 'json',
                success:function(data){
                    couponCalculation();
-                   $('#couponField').show();
+                   $('#couponField').show(500);
                    $('#coupon_name').val('');
                     // Start Message 
                    const Toast = Swal.mixin({
@@ -1668,6 +1668,46 @@ $('select[name="district_id"]').on('change', function(){
 
                       if(value.state_name == 'Luzon'){
                           if({{ session()->get('coupon')['total_amount'] }} < 1000){
+                              $('.shipping_fee').html(`+₱ 35.00 `);
+                              
+                              
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 35,2)}} 
+                              
+                              `);
+                          $('#shipping_form').val(35);
+                          }else{
+                              $('.shipping_fee').html(` Free Shipping `);
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
+                              
+                              `);
+                          $('#shipping_form').val(0);
+
+                          }
+                          
+
+                              
+                      }else if(value.state_name == 'Metro Manila'){
+                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
+                              $('.shipping_fee').html(`+₱ 45.00 `);
+                              
+                              
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 45,2)}} 
+                              
+                              `);
+                          $('#shipping_form').val(45);
+                          }else{
+                              $('.shipping_fee').html(` Free Shipping `);
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
+                              
+                              `);
+                          $('#shipping_form').val(0);
+
+                          }
+
+                      }else if(value.state_name == 'Visayas'){
+                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 65.00 `);
                               
                               
@@ -1684,10 +1724,7 @@ $('select[name="district_id"]').on('change', function(){
                           $('#shipping_form').val(0);
 
                           }
-                          
-
-                              
-                      }else if(value.state_name == 'Metro Manila'){
+                      }else if(value.state_name == 'BANGSAMORO'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 75.00 `);
                               
@@ -1705,53 +1742,16 @@ $('select[name="district_id"]').on('change', function(){
                           $('#shipping_form').val(0);
 
                           }
-
-                      }else if(value.state_name == 'Visayas'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 85.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 85,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(85);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
-                      }else if(value.state_name == 'BANGSAMORO'){
-                        if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 95.00 `);
-                              
-                              
-
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 95,2)}} 
-                              
-                              `);
-                          $('#shipping_form').val(95);
-                          }else{
-                              $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
-                              `);
-                          $('#shipping_form').val(0);
-
-                          }
                       }else if(value.state_name == 'Mindanao'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
-                              $('.shipping_fee').html(`+₱ 100.00 `);
+                              $('.shipping_fee').html(`+₱ 80.00 `);
                               
                               
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 100,2)}} 
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 80,2)}} 
                               
                               `);
-                          $('#shipping_form').val(100);
+                          $('#shipping_form').val(80);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
                               $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
@@ -1769,6 +1769,42 @@ $('select[name="district_id"]').on('change', function(){
                           // If order is below 1000 and state is region I
                           if(value.state_name == 'Luzon'){
                               if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
+                                  $('.shipping_fee').html(`+₱ 35.00 `);
+
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 35,2) }} 
+                              
+                              `);
+
+                              $('#shipping_form').val(35);
+                              }else{
+                                  $('.shipping_fee').html(` Free Shipping `);
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
+                                  
+                                  `);
+                                  $('#shipping_form').val(0);
+
+                              }
+
+
+                          }else if(value.state_name == 'Metro Manila'){
+                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
+                                  $('.shipping_fee').html(`+₱ 45.00 `);
+
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 45,2) }} 
+                              
+                              `);
+
+                              $('#shipping_form').val(45);
+                              }else{
+                                  $('.shipping_fee').html(` Free Shipping `);
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
+                                  
+                                  `);
+                                  $('#shipping_form').val(0);
+
+                              }
+                          }else if(value.state_name == 'Visayas'){
+                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 65.00 `);
 
                               $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 65,2) }} 
@@ -1784,9 +1820,7 @@ $('select[name="district_id"]').on('change', function(){
                                   $('#shipping_form').val(0);
 
                               }
-
-
-                          }else if(value.state_name == 'Metro Manila'){
+                          }else if(value.state_name == 'BANGSAMORO'){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 75.00 `);
 
@@ -1803,49 +1837,15 @@ $('select[name="district_id"]').on('change', function(){
                                   $('#shipping_form').val(0);
 
                               }
-                          }else if(value.state_name == 'Visayas'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 85.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 85,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(85);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
-                          }else if(value.state_name == 'BANGSAMORO'){
-                            if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 95.00 `);
-
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 95,2) }} 
-                              
-                              `);
-
-                              $('#shipping_form').val(95);
-                              }else{
-                                  $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
-                                  `);
-                                  $('#shipping_form').val(0);
-
-                              }
                           }else if(value.state_name == 'Mindanao'){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
-                                  $('.shipping_fee').html(`+₱ 100.00 `);
+                                  $('.shipping_fee').html(`+₱ 80.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 100,2) }} 
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 80,2) }} 
                               
                               `);
 
-                              $('#shipping_form').val(100);
+                              $('#shipping_form').val(80);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
                                   $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
