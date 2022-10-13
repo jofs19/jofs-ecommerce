@@ -46,6 +46,17 @@
             @endphp
             
           <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/return/order/list')) ? 'active' : '' }}" href="{{ route('return.order.list') }}"><i class="ci-reply opacity-60 me-2"></i>Returned Orders<span class="fs-sm text-muted ms-auto"><span class="badge rounded-pill bg-accent ">{{ count($returned) }}</span></span></a></li>
+
+          @php
+            // cancelled orders count
+
+            $cancelledOrders_count = App\Models\Order::where('user_id',Auth::id())->where('status','cancel_order')->orderBy('id','DESC')->get();
+
+          @endphp
+
+          <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/cancel/orders/list')) ? 'active' : '' }}" href="{{ route('cancel.orders.list') }}"><i class="ci-trash
+            opacity-60 me-2"></i>Cancelled Orders<span class="fs-sm text-muted ms-auto"><span class="badge rounded-pill bg-accent ">{{ count($cancelledOrders_count) }}</span></span></a></li>
+
         </ul>
         <div class="bg-secondary px-4 py-3">
           <h3 class="fs-sm mb-0 text-muted">More settings</h3>

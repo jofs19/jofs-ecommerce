@@ -477,7 +477,7 @@ Route::get('/cancel/order/{order_id}', [AllUserController::class, 'CancelOrder']
 
 Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
 
-Route::get('/cancel/orders', [AllUserController::class, 'CancelOrderList'])->name('cancel.orders');
+Route::get('/cancel/orders/list', [AllUserController::class, 'CancelOrderList'])->name('cancel.orders.list'); //new
 
 /// Order Tracking Route 
 Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name('order.tracking');   
