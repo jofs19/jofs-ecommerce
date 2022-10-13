@@ -173,6 +173,10 @@
 
                 <span class="badge bg-success m-0">Delivered</span>
 
+                @elseif($order->status == 'cancel_order')
+
+                <span class="badge bg-danger m-0">Cancelled</span>
+
 
                 @if($order->return_order == 1) 
 

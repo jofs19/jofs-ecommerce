@@ -49,15 +49,32 @@
 			@endif  </td>
 
 		<td> {{ $item->payment_method }}  </td>
-		<td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span>  </td>
+		<td> 
+			@if ($item->status == 'pending')
+
+			<span class="badge badge-pill badge-primary">{{ $item->status }}</span>
+
+			@else
+
+			<span class="badge badge-pill badge-danger"> cancelled </span>		
+
+			@endif
+				
+		 </td>
 
 		<td width="25%">
+			@if ($item->status == 'pending')				
+
             <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info mr-5" title="View Data"><i class="fa fa-eye"></i> </a> 
 			
-
 			<a href="{{ route('pending-confirm',$item->id) }}" class="btn btn-success fa fa-check" id="confirm"></a>
 			<a href="{{ route('reject-orders', $item->id) }}" class="btn btn-danger fa fa-times" id="reject"></a>
-            
+
+			@else
+
+			<a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-info mr-5" title="View Data"><i class="fa fa-eye"></i> </a> 
+			
+			@endif
 
             
 		</td>

@@ -205,7 +205,8 @@
     {{-- End Footer Area --}}
 
 
-    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password'))
+    
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span>

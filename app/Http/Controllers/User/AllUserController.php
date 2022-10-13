@@ -123,6 +123,22 @@ class AllUserController extends Controller
 
     } // end method 
 
+
+    public function CancelOrder($order_id){
+
+        Order::findOrFail($order_id)->update([
+            'status' => 'cancel_order',
+        ]);
+
+        $notification = array(
+            'message' => 'Order Cancel Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('my.orders')->with($notification);
+
+    } // end method
+
     public function ReturnOrderList(){
 
         $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->paginate(5);
@@ -131,7 +147,7 @@ class AllUserController extends Controller
     } // end method 
 
 
-    public function CancelOrders(){
+    public function CancelOrderList(){
 
         $orders = Order::where('user_id',Auth::id())->where('status','cancel')->orderBy('id','DESC')->get();
         return view('frontendv2.user.order.cancel_order_view',compact('orders'));

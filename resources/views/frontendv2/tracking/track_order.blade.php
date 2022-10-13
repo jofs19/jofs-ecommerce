@@ -76,11 +76,11 @@ Vartouhi | Track {{  $track->invoice_no }}
     <div class="card border-0 shadow-lg">
 
         <div class="card-body pb-2">
-    <div class="tns-carousel-inner" data-carousel-options='{"items": 4, "nav": true, "loop": false, "responsive": {"0":{"items":1},"500":{"items":3, "gutter": 18},"768":{"items":4, "gutter": 20}, "1100":{"gutter": 24}}}'>
+    <div class="tns-carousel-inner" data-carousel-options='{"items": 4, "nav": true, "loop": false, "responsive": {"0":{"items":1},"500":{"items":2, "gutter": 18},"768":{"items":4, "gutter": 20}, "1100":{"gutter": 24}}}'>
         
 
         {{-- Order placed --}}
-        <div class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Your order has been placed.">
+        <div class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Order details has been submitted.">
             <div class="nav-link completed">
                 <div class="d-flex align-items-center">
                     <div class="media-tab-media"><i class="ci-bag"></i></div>
@@ -95,7 +95,7 @@ Vartouhi | Track {{  $track->invoice_no }}
         @if($track->status == 'pending')
 
         {{-- Pending --}}
-        <div class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title="You order was placed on the queue">
+        <div class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title="You order was placed on queue.">
             <div class="nav-link active">
                 <div class="d-flex align-items-center">
                     <div class="media-tab-media"><i class="ci-eye-off"></i></div>
@@ -114,7 +114,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                     <div class="media-tab-media"><i class="ci-thumb-up"></i></div>
                     <div class="ps-3">
                         <div class="media-tab-subtitle text-muted fs-xs mb-1">Third step</div>
-                        <h6 class="media-tab-title text-nowrap mb-0">Confirming Order</h6>
+                        <h6 class="media-tab-title text-nowrap mb-0">Confirming</h6>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                     <div class="media-tab-media"><i class="ci-settings"></i></div>
                     <div class="ps-3">
                         <div class="media-tab-subtitle text-muted fs-xs mb-1">Fourth step</div>
-                        <h6 class="media-tab-title text-nowrap mb-0">Processing Order</h6>
+                        <h6 class="media-tab-title text-nowrap mb-0">Processing</h6>
                     </div>
                 </div>
             </div>
@@ -207,7 +207,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                                     <div class="media-tab-media"><i class="ci-settings"></i></div>
                                     <div class="ps-3">
                                         <div class="media-tab-subtitle text-muted fs-xs mb-1">Fourth step</div>
-                                        <h6 class="media-tab-title text-nowrap mb-0">Processing Order</h6>
+                                        <h6 class="media-tab-title text-nowrap mb-0">Processing</h6>
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                             <div class="media-tab-media"><i class="ci-thumb-up"></i></div>
                             <div class="ps-3">
                                 <div class="media-tab-subtitle text-muted fs-xs mb-1">Third step</div>
-                                <h6 class="media-tab-title text-nowrap mb-0">Confirming Order</h6>
+                                <h6 class="media-tab-title text-nowrap mb-0">Confirming</h6>
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                             <div class="media-tab-media"><i class="ci-settings"></i></div>
                             <div class="ps-3">
                                 <div class="media-tab-subtitle text-muted fs-xs mb-1">Fourth step</div>
-                                <h6 class="media-tab-title text-nowrap mb-0">Processing Order</h6>
+                                <h6 class="media-tab-title text-nowrap mb-0">Processing</h6>
                             </div>
                         </div>
                     </div>
@@ -380,7 +380,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                             <div class="media-tab-media"><i class="ci-settings"></i></div>
                             <div class="ps-3">
                                 <div class="media-tab-subtitle text-muted fs-xs mb-1">Fourth step</div>
-                                <h6 class="media-tab-title text-nowrap mb-0">Processing Order</h6>
+                                <h6 class="media-tab-title text-nowrap mb-0">Processing</h6>
                             </div>
                         </div>
                     </div>

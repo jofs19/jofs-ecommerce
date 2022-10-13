@@ -120,6 +120,8 @@ Vartouhi | {{  $order->invoice_no }}
                 <li><span class="text-muted">Order Status:&nbsp;</span> <span class="badge bg-primary m-0"> Shipped </span></li>
                 @elseif($order->status == 'delivered')
                 <li><span class="text-muted">Order Status:&nbsp;</span> <span class="badge bg-success m-0"> Delivered </span></li>
+                @elseif($order->status == 'cancel_order')
+                <li><span class="text-muted">Order Status:&nbsp;</span> <span class="badge bg-danger m-0"> Cancelled </span></li>
                 @else
                 <li><span class="text-muted">Order Status:&nbsp;</span> <span class="badge bg-danger m-0"> Rejected </span></li>
                 @endif
@@ -248,6 +250,14 @@ $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',NUL
 
             @if($order->status !== "delivered")
 
+            @if ($order->status == "pending")
+
+            <div class="text-end pt-2">
+              <a class="btn btn-danger btn-sm" href="{{ route("cancel.order", $order->id) }}"><i class="ci-reply me-2"></i>Cancel Order</a>
+              </div>
+              
+            @endif
+
             @else
             
             @php 
@@ -258,7 +268,7 @@ $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',NUL
             @if($order)
             
             <div class="text-end pt-2">
-            <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#open-ticket"><i class="ci-reply me-2"></i>Return Order</a>
+            <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#open-ticket"><i class="ci-reply me-2"></i>Return Order</a>
             </div>
 
         </section>

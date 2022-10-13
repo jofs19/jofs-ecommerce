@@ -21,7 +21,7 @@ class OrderController extends Controller
 
 	// Pending Orders 
 	public function PendingOrders(){
-		$orders = Order::where('status','pending')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','pending')->orWhere('status','cancel_order')->orderBy('id','DESC')->get();
 		return view('backend.orders.pending_orders',compact('orders'));
 
 	} // end method 

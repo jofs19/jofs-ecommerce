@@ -473,9 +473,11 @@ Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDo
 
 Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
 
+Route::get('/cancel/order/{order_id}', [AllUserController::class, 'CancelOrder'])->name('cancel.order'); //new
+
 Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
 
-Route::get('/cancel/orders', [AllUserController::class, 'CancelOrders'])->name('cancel.orders');
+Route::get('/cancel/orders', [AllUserController::class, 'CancelOrderList'])->name('cancel.orders');
 
 /// Order Tracking Route 
 Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name('order.tracking');   
