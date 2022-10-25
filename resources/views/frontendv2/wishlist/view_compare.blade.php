@@ -35,7 +35,7 @@ Vartouhi | Compare Product
                     <option value="sizes">Sizes</option>
                     <option value="variants">Variants</option>
                     <option value="stock">Stock</option>
-                    <option value="price_rating">Price &amp; rating</option>
+                    <option value="price_rating">Price</option>
                   </select>
                   <div class="form-text">* Choose criteria to filter table below.</div>
                   

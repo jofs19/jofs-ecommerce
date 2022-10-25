@@ -14,7 +14,11 @@
         <div class="d-md-flex align-items-center">
           <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width: 6.375rem;">
             {{-- <span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span> --}}
-            <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" alt="Susan Gardner"></div>
+            <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" alt="Susan Gardner">
+          
+            {{-- <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"> --}}
+
+          </div>
           <div class="ps-md-3">
             <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ Auth::user()->email }}">{{ Auth::user()->email }}</span> <br>
             <span class="text-accent fs-ms">{{ Auth::user()->phone }}</span>
@@ -55,16 +59,16 @@
           @endphp
 
           <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/cancel/orders/list')) ? 'active' : '' }}" href="{{ route('cancel.orders.list') }}"><i class="ci-trash
-            opacity-60 me-2"></i>Cancelled Orders<span class="fs-sm text-muted ms-auto"><span class="badge rounded-pill bg-accent ">{{ count($cancelledOrders_count) }}</span></span></a></li>
+            opacity-60 me-2"></i>Cancelled Orders<span class="fs-sm text-muted ms-auto"><span class="badge rounded-pill bg-warning ">{{ count($cancelledOrders_count) }}</span></span></a></li>
 
         </ul>
         <div class="bg-secondary px-4 py-3">
-          <h3 class="fs-sm mb-0 text-muted">More settings</h3>
+          <h3 class="fs-sm mb-0 text-muted"> More settings</h3>
         </div>
         <ul class="list-unstyled mb-0">
           <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/profile')) ? 'active' : '' }}" href="{{ route('user.profile') }}"><i class="ci-user opacity-60 me-2"></i>Profile information</a></li>
           <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('user/change/password')) ? 'active' : '' }}" href="{{ route('change.password') }}"><i class="ci-security-check opacity-60 me-2"></i>Update Password</a></li>
-          <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="under_construction"><i class="ci-help opacity-60 me-2"></i>Help Center</a></li>
+          <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ (request()->is('help')) ? 'active' : '' }}" href="{{ url("/help") }}"><i class="ci-help opacity-60 me-2"></i>Help Center</a></li>
           <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('user.logout') }}"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a></li>
         </ul>
       </div>

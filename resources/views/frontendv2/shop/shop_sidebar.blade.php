@@ -1,6 +1,4 @@
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- Sidebar-->
       <aside class="col-lg-4">
@@ -76,30 +74,42 @@
 
               </div>
             </div>
+
+            
+
+            <form action="{{ route('shop.filter') }}" method="post">
+              @csrf
             <!-- Price range-->
             <div class="widget mb-4 pb-4 border-bottom">
               <h3 class="widget-title">Price</h3>
-              <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0" data-max="1000" data-step="1">
+              <div class="range-slider" id="slider-range" data-start-min="500" data-start-max="1500" data-min="0" data-max="2000" data-step="1">
                 <div class="range-slider-ui"></div>
                 <div class="d-flex pb-1">
                   <div class="w-50 pe-2 me-2">
                     <div class="input-group input-group-sm"><span class="input-group-text">₱</span>
-                      <input class="form-control range-slider-value-min" type="text">
+                      <input type="hidden" class="price_range" name="price_range" value="">
+                      <input class="form-control range-slider-value-min" type="text" id="amount" value="₱0 - ₱2000" readonly="">
                     </div>
                   </div>
                   <div class="w-50 ps-2">
                     <div class="input-group input-group-sm"><span class="input-group-text">₱</span>
-                      <input class="form-control range-slider-value-max" type="text">
+                      <input type="hidden" class="price_range" name="price_range" value="">
+                      <input class="form-control range-slider-value-max" type="text" readonly>
                     </div>
                   </div>
                 </div>
+
               </div>
+              <br>
+              <div class="text-center">
+              <button type="submit" class="btn btn-accent btn-sm text-center btn-shadow">Filter Price</button>
+              </div>
+
             </div>
 
             <!-- Filter by Category-->
 
-            <form action="{{ route('shop.filter') }}" method="post">
-              @csrf
+
             
             {{-- <div class="widget widget-filter mb-4 pb-4 border-bottom">
               <h3 class="widget-title">Shop by Category</h3>
@@ -194,3 +204,25 @@
           </div>
         </div>
       </aside>
+
+      <script type="text/javascript">
+    
+        $(document).ready(function (){
+            if ($('#slider-range').length > 0) {
+                const max_price = parseInt($('#slider-range').data('max'));
+                const min_price = parseInt($('#slider-range').data('min'));
+                let price_range = min_price+"-"+max_price;
+                let price = price_range.split('-');
+                    $("#slider-range").slider({
+                        range: true, 
+                        min: min_price,
+                        max: max_price,
+                        values: price,  
+                    slide: function (event, ui) { 
+                    $("#amount").val('$'+ui.values[0]+"-"+'$'+ui.values[1]);
+                    $(".price_range").val(ui.values[0]+"-"+ui.values[1]);
+                    }
+                    });  
+            }
+        })
+    </script>

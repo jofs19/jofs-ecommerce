@@ -40,6 +40,9 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Http\Controllers\Auth\FacebookController;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -209,7 +212,6 @@ Route::prefix('shipping')->group(function(){
 
     Route::get('/publish', [ReviewController::class, 'PublishReview'])->name('publish.review');
 
-    Route::get('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete.review');
     
     });
 
@@ -386,7 +388,27 @@ Route::get('/user/change/password', [IndexController::class, 'UserChangePassword
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
 
+// SOCIAL LOGIN ROUTES
+/** GOOGLE **/
+Route::get('login/google', [IndexController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [IndexController::class, 'handleGoogleCallback']);
 
+/** FACEBOOK **/
+Route::get('login/facebook', [IndexController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [IndexController::class, 'handleFacebookCallback']);
+
+/** GITHUB **/
+Route::get('login/github', [IndexController::class, 'redirectToGithub'])->name('login.github');
+Route::get('login/github/callback', [IndexController::class, 'handleGithubCallback']);
+
+
+Route::get('/auth/facebook/redirect', [FacebookController::class, 'handleFacebookRedirect']);
+
+
+
+Route::get('/contact', [IndexController::class, 'ContactPage']);
+Route::get('/about', [IndexController::class, 'AboutPage']);
+Route::get('/help', [AllUserController::class, 'HelpCenter']);
 
 
 // Front-end related routed
@@ -539,6 +561,7 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
     /// Frontend Product Review Routes
 
     Route::post('/review/store', [ReviewController::class, 'ReviewStore'])->name('review.store');
+    Route::get('/delete/review/{id}', [ReviewController::class, 'DeleteReviews'])->name('delete.reviews');
 
  
 

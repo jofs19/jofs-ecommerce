@@ -42,7 +42,7 @@
             <thead>
               <tr>
                 <th>Invoice</th>
-                <th>Date of Purchase</th>
+                <th>Date of Return</th>
                 <th>Amount</th>
                 <th>M.O.P.</th>
                 <th>Request status</th>

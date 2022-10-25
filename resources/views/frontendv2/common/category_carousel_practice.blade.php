@@ -147,7 +147,7 @@
 
                         
 
-                        <button class="btn-wishlist btn-sm" type="button"><i class="ci-heart"></i></button>
+                        <button class="btn-wishlist btn-sm heartbeat" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
                         
                         {{-- Product Actions --}}
                         <div class="product-card-actions">
@@ -377,7 +377,7 @@
           
                               {{-- Product Thumbnail --}}
                               <div class="product-thumb">
-                                  <button class="btn-wishlist btn-sm" type="button"><i class="ci-heart"></i></button>
+                                <button class="btn-wishlist btn-sm heartbeat" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
                                   {{-- Product Actions --}}
                                   <div class="product-card-actions">
                                       <a class="btn btn-light btn-icon btn-shadow fs-base mx-2" type="button" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>

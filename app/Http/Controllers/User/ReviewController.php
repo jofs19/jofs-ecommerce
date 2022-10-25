@@ -105,7 +105,7 @@ class ReviewController extends Controller
     
     
     
-        public function DeleteReview($id){
+        public function DeleteReviews($id){
     
             Review::findOrFail($id)->delete();
     

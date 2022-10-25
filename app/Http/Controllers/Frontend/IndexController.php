@@ -18,7 +18,10 @@ use App\Models\SubSubCategory;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 use App\Models\Review;
+use Exception;
 
+use Laravel\Jetstream\Events\AddingTeam;
+use Laravel\Socialite\Facades\Socialite;
 class IndexController extends Controller
 {
     public function index()
@@ -39,21 +42,22 @@ class IndexController extends Controller
         $special_offer = Product::where('special_offer',1)->where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(1)->get();
     	$special_deals = Product::where('special_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = trending products
         $discounted_products = Product::where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done
-        $skip_category_0 = Category::skip(3)->first();
-    	$skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
+        // $skip_category_0 = Category::skip(3)->first();
+    	// $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
         
-    	$skip_category_1 = Category::skip(1)->first();
-    	$skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->get();
+    	// $skip_category_1 = Category::skip(1)->first();
+    	// $skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->get();
 
-    	$skip_brand_1 = Brand::skip(1)->first();
-    	$skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
+    	// $skip_brand_1 = Brand::skip(1)->first();
+    	// $skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
 
 
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','blogpost','reviews', 'products_category','discounted_products','brands'));
+    	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','blogpost','reviews', 'products_category','discounted_products','brands'));
     }
+
 
     public function UserLogout()
     {
@@ -272,7 +276,7 @@ class IndexController extends Controller
 			'product' => $product,
 			'color' => $product_color,
 			'size' => $product_size,
-            'multiImag' => $multiImage,
+            'multiImage' => $multiImage,
             'product_id' => $product_id,
 		));
 
@@ -304,6 +308,60 @@ class IndexController extends Controller
         return view('frontendv2.product.search_product',compact('products'));
 
 	} // end method 
+
+    public function ContactPage(Request $request){
+		
+        return view('frontendv2.home.contact');
+
+	} // end method 
+
+    public function AboutPage(Request $request){
+		
+        return view('frontendv2.home.about');
+
+	} // end method 
+
+
+
+
+
+
+        //Google login
+        public function redirectToGoogle()
+        {
+            return Socialite::driver('google')->redirect();
+        }
+    
+        //Google callback
+        public function handleGoogleCallback()
+        {
+            
+                
+                $user = Socialite::driver('google')->user();
+            
+                $this->_registerOrLoginUser($user);
+    
+                return redirect()->route('dashboard');
+                
+        }
+
+        protected function _registerOrLoginUser($data)
+        {
+            $user = User::where('email', '=', $data->email)->first();
+    
+            if (!$user) {
+                $user = new User();
+                $user->name = $data->name;
+                $user->email = $data->email;
+                $user->provider_id = $data->id;
+                $user->profile_photo_path = $data->avatar;
+                $user->save();
+            }
+    
+            Auth::login($user);
+    
+            // return $user;
+        }
 
 
 }

@@ -18,16 +18,16 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">District List</h3>
+				  <h3 class="box-title">Province List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="table-responsive">
-					  <table id="example1" class="table table-bordered table-striped">
+					  <table id="example1" class="table table-bordered table-striped text-center">
 						<thead>
 							<tr>
-								<th>Division Name </th> 
-								<th>District Name </th>
+								<th>Province Name </th> 
+								<th>Province Name </th>
 								<th>Action</th>
 
 							</tr>
@@ -67,7 +67,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Add District </h3>
+				  <h3 class="box-title">Add Province </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -80,10 +80,10 @@
 
 
 <div class="form-group">
-	<h5>Division Select <span class="text-danger">*</span></h5>
+	<h5>Select Province <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Division</option>
+			<option value="" selected="" disabled="">Select Province</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}">{{ $div->division_name }}</option>	
 			@endforeach
@@ -97,7 +97,7 @@
 
 
 	 <div class="form-group">
-		<h5>District Name  <span class="text-danger">*</span></h5>
+		<h5>Province Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="district_name" class="form-control" > 
 	 @error('district_name') 

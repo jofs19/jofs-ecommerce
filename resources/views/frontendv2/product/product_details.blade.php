@@ -311,7 +311,7 @@
                           <button class="btn btn-danger btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="bottom" onclick="addToWishList(this.id)" title="Add to Wishlist"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to </span>Wishlist</button>
                         </div>
                         <div class="w-100">
-                          <button class="btn btn-accent btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Compare"><i class="ci-compare fs-lg me-2"></i>Compare</button>
+                          <button class="btn btn-accent btn-shadow d-block w-100" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Compare" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare fs-lg me-2"></i>Compare</button>
                         </div>
                       </div>
                       <!-- Product panels-->
@@ -431,7 +431,7 @@
                       <button class="btn btn-danger btn-icon" type="button" data-bs-toggle="tooltip" id="{{ $product->id }}" data-bs-placement="top" onclick="addToWishList(this.id)" title="Add to Wishlist"><i class="ci-heart fs-lg"></i></button>
                     </div>
                     <div>
-                      <button class="btn btn-accent btn-icon" type="button" data-bs-placement="top" data-bs-toggle="tooltip" title="Compare"><i class="ci-compare fs-lg"></i></button>
+                      <button class="btn btn-accent btn-icon" type="button" data-bs-placement="top" data-bs-toggle="tooltip" title="Compare" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="ci-compare fs-lg"></i></button>
                     </div>
                   </div>
                 </div>
@@ -652,7 +652,8 @@
 
                              <small>
                             @if ($item->user_id == Auth::id())
-                            <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" href="{{ route('delete.review', $item->id) }}" data-scroll><i class="ci-trash"></i></a>
+                            <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" 
+                            href="{{ route('delete.reviews', $item->id) }}" id="removeComment" data-scroll><i class="ci-trash"></i></a>
                             @endif
                             </small>
                           </div>

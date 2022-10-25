@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vartouhi-logo-shorten.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vartouhi-logo-shorten.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogos.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vlogos.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -200,12 +200,14 @@
     </main>
     <!-- Footer-->
 
+    
+
     {{-- Footer Area --}}
     @include('frontendv2.body.footer')
     {{-- End Footer Area --}}
 
 
-    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password') || request()->is('help') || request()->is('about') || request()->is('contact'))
     
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
@@ -231,6 +233,8 @@
 
     @endif
 
+ 
+
 
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
     {{-- JQUERY CDN --}}
@@ -253,7 +257,7 @@
 
     {{-- TOASTR + SWEETALERT CDN --}}
 
-
+    <script src="{{ asset('frontendv2/assets/js/code2.js') }}"></script>
 
 <script>
   @if(Session::has('message'))
@@ -529,6 +533,8 @@
 
                                         </div>
 
+
+                                        
                                         <div class="mb-3">
                                           <label for="color" class="form-label">Choose Variant</label>
                                           <select class="form-select" id="color" name="color">
@@ -844,10 +850,10 @@
                                       <button class="btn-close text-danger pt-1" type="button" id="${value.rowId}" onclick="miniCartRemove(this.id)" aria-label="Remove"><span
                                               aria-hidden="true">&times;</span></button>
                                       <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
-                                              href="shop-single-v2.html"><img
+                                              href="#"><img
                                                   src="/${value.options.image}" width="64" alt="Product" class="pt-1"></a>
-                                          <div class="ps-2">
-                                              <h6 class="widget-product-title"><a href="shop-single-v2.html">${value.name}</a></h6>
+                                          <div class="ps-2"> 
+                                              <h6 class="widget-product-title"><a href="#">${value.name}</a></h6>
                                               <div class="widget-product-meta"><span
                                                       class="text-accent me-2"> ₱ ${value.price}.<small>00</small></span><span
                                                       class="text-muted">x ${value.qty}</span></div>
@@ -955,7 +961,9 @@
       </script>
     
        <!--  /// End Add Wishlist Page  ////   -->
-    
+        {{-- var id = value.product_id; --}}
+        {{-- var slug = value.product.product_slug_en; --}}
+        {{-- {{ url('product/details/'.$product->id.'/'.$product->product_slug_en') }} --}}
     
        <script type="text/javascript">
         function wishlist(){
@@ -967,11 +975,12 @@
                 $('.wishlistQty').text(response.wishlistQty);
                    var rows = ""
                    $.each(response.wishlist, function(key,value){
+                    
                        rows += ` 
         <div class="d-sm-flex justify-content-between my-4 mt-lg-4 pb-3 pb-sm-4 border-bottom">
-          <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="/${value.product.product_thumbnail}" alt="Product"></a>
+          <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="/product/details/${value.product_id}/${value.product.product_slug_en}" style="width: 10rem;"><img src="/${value.product.product_thumbnail}" alt="Product"></a>
             <div class="pt-2">
-              <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">${value.product.product_name_en}</a></h3>
+              <h3 class="product-title fs-base mb-2"><a href="/product/details/${value.product_id}/${value.product.product_slug_en}">${value.product.product_name_en}</a></h3>
               <div class="fs-sm"><span class="text-muted me-2">Sizes:</span>${value.product.product_size_en != null ? `${value.product.product_size_en}` : `----`}</div>
               <div class="fs-sm"><span class="text-muted me-2">Variants:</span>${value.product.product_color_en != null ? `${value.product.product_color_en}` : `----`} </div>
               <div class="fs-lg text-accent pt-2">${value.product.discount_price == null ? `₱ ${value.product.selling_price}` : `<del class="text-muted fs-lg me-1">₱ ${value.product.selling_price}.<small>00</small></del> <span> ₱ ${value.product.discount_price}</span>`}.<small>00</small></div>
@@ -1112,8 +1121,8 @@
                          
                             <a class="btn btn-sm d-block w-100 text-danger mb-2 reload" type="submit" id="${value.id}" onclick="compareRemove(this.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="ci-trash me-1"></i>Remove</a>
                             
-                            <a class="d-inline-block mb-3" href="shop-single-v2.html"><img src="/${value.product.product_thumbnail}" width="100" alt="Apple iPhone Xs Max"></a>
-                  <h3 class="product-title fs-sm"><a href="shop-single-v2.html">${value.product.product_name_en}</a></h3>
+                            <a class="d-inline-block mb-3" href="/product/details/${value.product_id}/${value.product.product_slug_en}"><img src="/${value.product.product_thumbnail}" width="100" alt="Apple iPhone Xs Max"></a>
+                  <h3 class="product-title fs-sm"><a href="/product/details/${value.product_id}/${value.product.product_slug_en}">${value.product.product_name_en}</a></h3>
                   <button class="btn btn-icon btn-primary btn-sm" type="submit" href="#quick-view-electro"
                             data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
                             onclick="productView(${value.product_id})" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg"></i></button>
@@ -1144,13 +1153,13 @@
                   <dl>
                   
                     <dt>
-                      <div class="wrap">
+                      <div class="mx-auto wrap">
                     ${value.product.short_descp_en}
                       </div>
                     </dt>
 
                     <dd>
-                      <div class="wrap">
+                      <div class="mx-auto wrap">
 
                       ${value.product.long_descp_en}
                       
@@ -1285,9 +1294,9 @@
      $.each(response.carts, function(key,value){
          rows += `
          <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
-          <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="/${value.options.image}" width="160" alt="Product"></a>
+          <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="/${value.options.image}" width="160" alt="Product"></a>
             <div class="pt-2">
-              <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">${value.name}</a></h3>
+              <h3 class="product-title fs-base mb-2"><a href="#">${value.name}</a></h3>
               <div class="fs-sm"><span class="text-muted me-2">Size:</span>${value.options.size == null ? `---`:`${value.options.size}`}</div>
               <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div>
               <div class="fs-lg text-accent pt-2"> <span class="fs-ms text-dark">₱ ${value.price}.<small>00</small> x <strong>${value.qty}</strong> = </span>   

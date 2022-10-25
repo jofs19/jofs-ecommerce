@@ -99,10 +99,10 @@
                     <div class="col-12">
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="form-check">
+                        {{-- <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="subscribe_me" checked>
                         <label class="form-check-label" for="subscribe_me">Subscribe me to Newsletter</label>
-                        </div>
+                        </div> --}}
                         <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Update profile</button>
                     </div>
                     </div>

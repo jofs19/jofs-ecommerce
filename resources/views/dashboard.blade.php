@@ -90,6 +90,41 @@
                 </div>
             </div> --}}
 
+            {{-- <div class="row">
+
+                <div class="col-lg-4 col-sm-6">
+            <div class="card text-white bg-danger">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                  <h5 class="card-title text-white">Dark card title</h5>
+                  <p class="card-text fs-sm">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>
+
+              <div class="col-lg-4 col-sm-6">
+
+              <div class="card text-white bg-accent">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                  <h5 class="card-title text-white">Dark card title</h5>
+                  <p class="card-text fs-sm">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>
+
+              <div class="col-lg-4 col-sm-6">
+
+              <div class="card text-white bg-success">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                  <h5 class="card-title text-white">Dark card title</h5>
+                  <p class="card-text fs-sm">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>--}}
+
+            </div> 
 
             
 

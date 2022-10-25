@@ -412,8 +412,8 @@ Vartouhi | Beauty & Cosmetics Store
             <div class="card-body card-body-hidden">
                {{-- <input type="hidden" id="product_id" value="{{ $product->id }}" min="1"> --}}
                 @if($product->product_qty < 1) 
-                    <button class="btn btn-primary btn-sm d-block w-100 mb-2 btn-shadow" type="submit" 
-                    onclick="addToCart(this.id)" id="{{ $product->id }}"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                    <button class="btn btn-secondary btn-sm d-block w-100 mb-2 btn-shadow disabled"  type="submit" 
+                    onclick="addToCart(this.id)" id="{{ $product->id }}"><i class="ci-cart fs-sm me-1"></i>Out of Stock</button>
 
                     @else
 
@@ -551,7 +551,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 
 {{-- Brand Area --}}
-
+<!--
 <section class="container mb-5">
     <div class="tns-carousel border-end">
         <div class="tns-carousel-inner"
@@ -559,7 +559,7 @@ Vartouhi | Beauty & Cosmetics Store
 
             @foreach ($brands as $item)
                 
-            <div><a class="d-block bg-white border py-3 py-sm-4 px-0" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{{ asset('upload/placeholder.jpg') }}" width="210" alt="vartouhi"></a></div>
+            <div><a class="d-block bg-white border py-3 py-sm-4 px-2" href="#" style="margin-right: -.0625rem;"><img class="d-block mx-auto" src="{{ asset('upload/placeholder.jpg') }}" width="210" alt="vartouhi"></a></div>
 
             @endforeach
 
@@ -588,7 +588,7 @@ Vartouhi | Beauty & Cosmetics Store
         </div>
     </div>
 </section>
-
+-->
 {{-- End Brand Area --}}
 
 
@@ -681,7 +681,44 @@ Vartouhi | Beauty & Cosmetics Store
 {{-- End Container Blog + Instagram Area --}}
 
 
+   <!-- Messenger Chat Plugin Code -->
+<div class="hide-me">
+   <div id="fb-root"></div>
 
+   <!-- Your Chat Plugin code -->
+   <div id="fb-customer-chat" class="fb-customerchat">
+   </div>
+</div>
+
+   <script>
+     var chatbox = document.getElementById('fb-customer-chat');
+     chatbox.setAttribute("page_id", "112003815025035");
+     chatbox.setAttribute("attribution", "biz_inbox");
+   </script>
+
+   <!-- Your SDK code -->
+   <script>
+     window.fbAsyncInit = function() {
+       FB.init({
+         xfbml            : true,
+         version          : 'v15.0'
+       });
+     };
+
+     (function(d, s, id) {
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+       js = d.createElement(s); js.id = id;
+       js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+   </script>
+
+   {{-- <script>
+    $('.navbar-tool-icon .ci-user').on('click', function(){
+        $('.hide-me').toggle();
+    });
+   </script> --}}
 
 @endsection
 

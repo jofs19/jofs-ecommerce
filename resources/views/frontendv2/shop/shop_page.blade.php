@@ -26,6 +26,7 @@ Shop
       </div>
     </div>
   </div>
+  
   <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
 
@@ -260,12 +261,14 @@ Shop
                     <label class="form-option-label" for="s-90">9</label>
                   </div>
                 </div> --}}
-                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                <div class="text-center">
+                <a class="btn btn-primary btn-sm d-block w-100 mb-2" href="#quick-view-electro"
+                data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}"
+                onclick="productView(this.id)"><i class="ci-cart fs-sm me-1"></i>Add to Cart</a>
+                {{-- <div class="text-center">
                     <a class="nav-link-style fs-ms" href="#quick-view-electro"
                     data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="{{ $product->id }}"
                     onclick="productView(this.id)"><i class="ci-eye align-middle me-1"></i>Quick view</a>
-                </div>
+                </div> --}}
               </div>
             </div>
             @if($loop->last)

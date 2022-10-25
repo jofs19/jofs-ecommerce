@@ -39,6 +39,8 @@ Vartouhi | My Cart
         
 
         </div>  
+
+        
         
         <button class="btn btn-outline-accent d-block w-100 mt-4" type="button"><i class="ci-loading fs-base me-2"></i>Update cart</button>
       </section>
@@ -87,5 +89,9 @@ Vartouhi | My Cart
       </aside>
     </div>
   </div>
+
+  <script>
+
+  </script>
 
   @endsection

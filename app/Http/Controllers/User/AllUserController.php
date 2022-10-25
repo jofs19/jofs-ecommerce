@@ -131,7 +131,7 @@ class AllUserController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Order Cancel Successfully',
+            'message' => 'Order Cancelled Successfully',
             'alert-type' => 'success'
         );
 
@@ -187,5 +187,11 @@ class AllUserController extends Controller
         } // end method 
 
 
+
+        public function HelpCenter(){
+
+            return view('frontendv2.partials.help');
+    
+        } // end method 
 
 }

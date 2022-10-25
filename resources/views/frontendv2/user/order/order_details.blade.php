@@ -148,10 +148,10 @@ Vartouhi | {{  $order->invoice_no }}
                 <!-- Item-->
                 <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
                     <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a
-                            class="d-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"
+                            class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}"
                             style="width: 10rem;"><img src="{{ asset($item->product->product_thumbnail) }}" alt="Product"></a>
                         <div class="pt-2">
-                            <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">{{ $item->product->product_name_en }}</a></h3>
+                            <h3 class="product-title fs-base mb-2"><a href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{ $item->product->product_name_en }}</a></h3>
                             <div class="fs-sm"><span class="text-muted me-2">Size:</span>{{ $item->size }}</div>
                             <div class="fs-sm"><span class="text-muted me-2">Variant:</span>{{ $item->color }}</div>
                             <div class="fs-lg text-accent pt-2">₱ {{ $item->price }}.<small>00</small> x <strong>{{ $item->qty }}</strong> = </span>   
@@ -253,7 +253,7 @@ $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',NUL
             @if ($order->status == "pending")
 
             <div class="text-end pt-2">
-              <a class="btn btn-danger btn-sm" href="{{ route("cancel.order", $order->id) }}"><i class="ci-reply me-2"></i>Cancel Order</a>
+              <a class="btn btn-danger btn-sm removeOrder" href="{{ route("cancel.order", $order->id) }}"><i class="ci-reply me-2"></i>Cancel Order</a>
               </div>
               
             @endif

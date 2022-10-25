@@ -684,6 +684,87 @@ Vartouhi | Track {{  $track->invoice_no }}
         </div>
 
 
+
+        @elseif ($track->status == 'cancel_order')
+        {{-- Pending --}}
+        <div class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title="You cancelled your order.">
+            <div class="nav-link active">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-close"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Second step</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Cancelled Order</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Confirmed --}}
+        <div class="nav-item">
+            <div class="nav-link">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-thumb-up"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Third step</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Confirming</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Processed --}}
+        <div class="nav-item">
+            <div class="nav-link">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-settings"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Fourth step</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Processing</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Picked --}}
+        <div class="nav-item">
+            <div class="nav-link">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-package"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Fifth step</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Picking Order</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Shipped --}}
+        <div class="nav-item">
+            <div class="nav-link">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-delivery"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Sixth step</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Shipping Order</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Delivered --}}
+        <div class="nav-item">
+            <div class="nav-link">
+                <div class="d-flex align-items-center">
+                    <div class="media-tab-media"><i class="ci-check"></i></div>
+                    <div class="ps-3">
+                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Order Completed</div>
+                        <h6 class="media-tab-title text-nowrap mb-0">Delivered</h6>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+
         @endif
 
 

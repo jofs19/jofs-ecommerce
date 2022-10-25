@@ -68,13 +68,11 @@
                                     {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                         data-bs-placement="left" title="Add to wishlist"><i
                                             class="ci-heart"></i></button> --}}
-                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
+                                    <a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
                                         <!-- Product card alt (Downloadable) -->
                                         <div class="card product-card-alt">
                                             <div class="product-thumb">
-                                                <button class="btn-wishlist btn-sm" type="button">
-                                                    <i class="ci-heart"></i>
-                                                </button>
+                                                <button class="btn-wishlist btn-sm heartbeat" style="z-index: 5" type="button" data-bs-toggle="tooltip" id="{{ $item->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
                                                 <div class="product-card-actions">
                                                     <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
                                                     type="button" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
@@ -107,7 +105,7 @@
 
 
                                         <h3 class="product-title fs-sm"><a
-                                                href="shop-single-v1.html">{{$item->product_name_en}}</a></h3>
+                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
                                         <div class="d-flex justify-content-between">
                                             <div class="product-price">
 
@@ -256,13 +254,11 @@
                                 @endif
                                 {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
-                                <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
+                                <a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
                                     <!-- Product card alt (Downloadable) -->
                                     <div class="card product-card-alt">
                                         <div class="product-thumb">
-                                            <button class="btn-wishlist btn-sm" type="button">
-                                                <i class="ci-heart"></i>
-                                            </button>
+                                            <button class="btn-wishlist btn-sm heartbeat" style="z-index: 5"  type="button" data-bs-toggle="tooltip" id="{{ $item->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
                                             <div class="product-card-actions">
                                                 <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
                                                 type="button" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="ci-compare me-1"></i>
@@ -291,7 +287,7 @@
 
 
                                     <h3 class="product-title fs-sm"><a
-                                            href="shop-single-v1.html">{{$item->product_name_en}}</a></h3>
+                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price">
 
@@ -448,13 +444,11 @@
                                 @endif
                                 {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button> --}}
-                                <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
+                                <a class="card-img-top d-block overflow-hidden" href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
                                     <!-- Product card alt (Downloadable) -->
                                     <div class="card product-card-alt">
                                         <div class="product-thumb">
-                                            <button class="btn-wishlist btn-sm" type="button">
-                                                <i class="ci-heart"></i>
-                                            </button>
+                                            <button class="btn-wishlist btn-sm heartbeat" style="z-index: 5"  type="button" data-bs-toggle="tooltip" id="{{ $item->id }}" data-bs-placement="left" onclick="addToWishList(this.id)"><i class="ci-heart"></i></button>
                                             <div class="product-card-actions">
                                                 <a class="btn btn-light btn-icon btn-shadow fs-base mx-2"
                                                     href="#quick-view-electro" data-bs-toggle="modal"
@@ -489,7 +483,7 @@
 
 
                                     <h3 class="product-title fs-sm"><a
-                                            href="shop-single-v1.html">{{$item->product_name_en}}</a></h3>
+                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price">
 

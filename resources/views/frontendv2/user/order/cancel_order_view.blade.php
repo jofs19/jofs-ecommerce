@@ -9,12 +9,12 @@
             <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
             <li class="breadcrumb-item text-nowrap"><a href="#">Account</a>
             </li>
-            <li class="breadcrumb-item text-nowrap active" aria-current="page">Returned Orders</li>
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">Cancelled Orders</li>
           </ol>
         </nav>
       </div>
       <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Returned Orders</h1>
+        <h1 class="h3 text-light mb-0">Cancelled Orders</h1>
       </div>
     </div>
   </div>
@@ -42,11 +42,10 @@
             <thead>
               <tr>
                 <th>Invoice</th>
-                <th>Date of Purchase</th>
+                <th>Date of Cancel</th>
                 <th>Amount</th>
                 <th>M.O.P.</th>
                 <th>Request status</th>
-                <th>View</th>
               </tr>
             </thead>
             <tbody>
@@ -76,21 +75,7 @@
                 
                 </td>
 
-                <td class="py-3">
-
-                  <div class="gallery">
-                    <a href="{{ asset($order->return_image) }}" class="gallery-item rounded-3" data-sub-html='<pre class="fs-sm">{{ $order->return_reason }}</pre>'>
-                      <!-- Secondary solid icon button -->
-                    <button type="button" class="btn btn-secondary btn-icon">
-                      <i class="ci-eye"></i>
-                    </button>
-                      <span class="gallery-item-caption">...</span>
-                    </a>
-                  </div>
-                  
                 
-                
-                </td>
               </tr>
 
               @endforeach

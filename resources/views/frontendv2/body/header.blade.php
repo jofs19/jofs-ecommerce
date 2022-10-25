@@ -185,7 +185,7 @@
                             <div style="min-width: 14rem;">
                                 <h6 class="dropdown-header">Account</h6><a
                                     class="dropdown-item d-flex align-items-center {{ (request()->is('dashboard')) ? 'active' : '' }}" href="{{ route('login') }}"><i
-                                        class="ci-settings opacity-60 me-2"></i>Dashboard</a>
+                                        class="ci-view-grid opacity-60 me-2"></i>Dashboard</a>
   
             @php
               $order = App\Models\Order::where('user_id',Auth::id())->orderBy('id','DESC')->get();
@@ -213,8 +213,8 @@
                                         class="ci-user opacity-60 me-2"></i>Profile Information</a>
                                         <a class="dropdown-item d-flex align-items-center {{ (request()->is('user/change/password')) ? 'active' : '' }}" href="{{ route('change.password') }}"><i
                                         class="ci-security-check opacity-60 me-2"></i>Update Password</a><a
-                                    class="dropdown-item d-flex align-items-center"
-                                    href="dashboard-add-new-product.html"><i
+                                    class="dropdown-item d-flex align-items-center {{ (request()->is('help')) ? 'active' : '' }}"
+                                    href="{{ url('/help') }}"><i
                                         class="ci-help opacity-60 me-2"></i>Help Center</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item d-flex align-items-center"
                                     href="{{ route('user.logout') }}"><i class="ci-sign-out opacity-60 me-2"></i>Sign
@@ -367,8 +367,8 @@
   
                                                     
                                                       
-                                                    <img src="{{ $productss->product_thumbnail }}"
-                                                        alt="product" width="200" class="pb-2 mb-2">
+                                                    {{-- <img src="{{ asset($productss->product_thumbnail) }}"
+                                                        alt="product" width="200" class="pb-2 mb-2"> --}}
   
                                                      
   
@@ -417,13 +417,13 @@
                             
                         </li> --}}
   
-                        <li class="nav-item"><a class="nav-link" href="#" data-bs-auto-close="outside">
+                        <li class="nav-item"><a class="nav-link" href="{{ url("/about") }}" data-bs-auto-close="outside">
                           <i class="ci-briefcase align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Tungkol sa Amin @else
                                 About Us @endif</a>
                             
                         </li>
                         
-                        <li class="nav-item"><a class="nav-link" href="#" data-bs-auto-close="outside">
+                        <li class="nav-item"><a class="nav-link" href="{{ url("/contact") }}" data-bs-auto-close="outside">
                           <i class="ci-phone align-middle mt-n1 me-2"></i>@if(session()->get('language') == 'filipino') Kontakin kami @else
                                 Contact Us @endif</a>
                             
