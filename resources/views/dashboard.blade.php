@@ -55,6 +55,63 @@
                 </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="{{ route('user.logout') }}"><i
                         class="ci-sign-out me-2"></i>Sign out</a>
             </div>
+
+
+            @php
+                $total_spent = App\Models\Order::where('user_id', Auth::user()->id)->where('status', 'delivered')->sum('amount');
+                $total_orders = App\Models\Order::where('user_id', Auth::user()->id)->where('status', 'delivered')->count();
+                $total_wishlist = App\Models\Wishlist::where('user_id', Auth::user()->id)->count();
+                $total_reviews = App\Models\Review::where('user_id', Auth::user()->id)->count();
+
+                $total_return = App\Models\Order::where('user_id', Auth::user()->id)->where('status', 'return')->count();
+
+                $created_at = App\Models\User::where('id', Auth::user()->id)->first()->created_at->format('d M Y');
+                $account_created = App\Models\User::where('id', Auth::user()->id)->first()->created_at->format('d M Y');
+                $current_date = Carbon\Carbon::now()->format('d M Y');
+                $updated_at = App\Models\User::where('id', Auth::user()->id)->first()->updated_at->format('d M Y');
+
+            @endphp
+
+            <h2 class="h3 py-2 text-center text-sm-start">Your total spent / orders</h2>
+
+            <div class="row mx-n2 pt-2">
+                <div class="col-md-4 col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">Total spent</h3>
+                    <p class="h2 mb-2">₱{{ $total_spent-$total_return }}.<small>00</small> </p>
+
+                    
+                    <p class="fs-ms text-muted mb-0">
+                        @if ($account_created == $current_date)
+
+                        {{ $account_created }}
+                        
+                        @else
+
+                        {{ $account_created }} - {{ $current_date }}
+
+                        @endif
+                        
+                        
+                        
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">Delivered Orders</h3>
+                    <p class="h2 mb-2">{{ $total_orders }}</p>
+                    <a class="fs-ms text-muted mb-0" href="{{ route('shop.page') }}"><u>Shop now</u></a>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 px-2 mb-4">
+                  <div class="bg-secondary h-100 rounded-3 p-4 text-center">
+                    <h3 class="fs-sm text-muted">Returned Orders</h3>
+                    <p class="h2 mb-2">{{ $total_return }}</p>
+                    <a class="fs-ms text-muted mb-0" href="{{ route('return.order.list') }}"><u>View Returned Orders</u></a>
+                  </div>
+                </div>
+              </div>
             <!-- Contacts card: Shadow -->
             {{-- <div class="card border-0 shadow">
                 <div class="card-img-top overflow-hidden">

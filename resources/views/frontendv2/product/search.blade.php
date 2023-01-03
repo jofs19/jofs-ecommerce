@@ -22,7 +22,7 @@ Vartouhi | Search
         </nav>
       </div>
       <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Product Tags</h1>
+        <h1 class="h3 text-light mb-0">Searched Products</h1>
       </div>
     </div>
   </div>
@@ -39,19 +39,32 @@ Vartouhi | Search
         <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
           <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-              <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
-              <select class="form-select" id="sorting">
-                <option>Popularity</option>
-                <option>Low - Hight Price</option>
-                <option>High - Low Price</option>
-                <option>Average Rating</option>
-                <option>A - Z Order</option>
-                <option>Z - A Order</option>
-                
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
+              {{-- <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
+              <form name="sortProducts" id="sortProducts">
+
+              <select name="sort" class="form-select sort-product" id="sorting">
+                <option selected="">Select options</option>
+                <option value="product_latest">Latest</option>
+                <option value="product_oldest">Oldest</option>
+                <option value="price_lowest">Low - Hight Price</option>
+                <option value="price_highest">High - Low Price</option>
+                <option value="name_a_z">A - Z Order</option>
+                <option value="name_z_a">Z - A Order</option> 
+              </select>
+
+              </form> --}}
+              
+              {{-- Product count --}}
+              @php
+              $product_count = App\Models\Product::where('status',1)->count();
+              @endphp
+              {{-- End Product count --}}
+
+              {{-- <span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of {{ $product_count }} products</span> --}}
             </div>
           </div>
 
+          {{-- Sort product --}}
           {{-- <div class="d-flex pb-3">
           <a class="nav-link-style nav-link-light me-3" href="#">
             <i class="ci-arrow-left"></i>
@@ -59,7 +72,9 @@ Vartouhi | Search
           <a class="nav-link-style nav-link-light ms-3" href="#">
             <i class="ci-arrow-right"></i></a>
           </div> --}}
-          
+
+          {{-- {{ $products->links('vendor.pagination.top_nav') }} --}}
+
           <div class="d-none d-sm-flex pb-3">
 
             <ul class="nav" role="tablist">
@@ -98,8 +113,20 @@ Vartouhi | Search
         <div class="row mx-n2">
           <!-- Product-->
           @forelse ($products as $product)
+
+          {{-- num of products found --}}
+
+
+          {{-- end num of products found --}}
+
+          {{-- display product found --}}
+
+
+
               
           <div class="col-md-4 col-sm-6 px-2 mb-4">
+
+
             <div class="card product-card">
 
                 @php

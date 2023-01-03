@@ -53,20 +53,40 @@ Sub Category Product
           <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
               <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
-              <select class="form-select" id="sorting">
-                <option>Popularity</option>
-                <option>Low - Hight Price</option>
-                <option>High - Low Price</option>
-                <option>Average Rating</option>
-                <option>A - Z Order</option>
-                <option>Z - A Order</option>
-                
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 0 product(s)</span>
+              <form name="sortProducts" id="sortProducts">
+
+              <select name="sort" class="form-select sort-product" id="sorting">
+                <option selected="">Select options</option>
+                <option value="product_latest" @if (isset($_GET['sort']) && $_GET['sort'] == 'product_latest') selected="" @endif>Latest</option>
+                <option value="product_oldest" @if (isset($_GET['sort']) && $_GET['sort'] == 'product_oldest') selected="" @endif>Oldest</option>
+                <option value="price_lowest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_lowest') selected="" @endif>Low - Hight Price</option>
+                <option value="price_highest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_highest') selected="" @endif>High - Low Price</option>
+                <option value="name_a_z" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_a_z') selected="" @endif>A - Z Order</option>
+                <option value="name_z_a" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_z_a') selected="" @endif>Z - A Order</option>
+              </select>
+
+              </form>
+              
+              {{-- Product count --}}
+              @php
+              $product_count = App\Models\Product::where('status',1)->count();
+              @endphp
+              {{-- End Product count --}}
+
+              <span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of {{ $product_count }} products</span>
             </div>
           </div>
 
-          {{ $products->links('vendor.pagination.top_nav') }}
+          {{-- Sort product --}}
+          {{-- <div class="d-flex pb-3">
+          <a class="nav-link-style nav-link-light me-3" href="#">
+            <i class="ci-arrow-left"></i>
+          </a><span class="fs-md text-light">1 / 5</span>
+          <a class="nav-link-style nav-link-light ms-3" href="#">
+            <i class="ci-arrow-right"></i></a>
+          </div> --}}
 
+          {{ $products->links('vendor.pagination.top_nav') }}
 
           <div class="d-none d-sm-flex pb-3">
 

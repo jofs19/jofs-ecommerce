@@ -1,3 +1,4 @@
+<?php use Barryvdh\DomPDF\Facade as PDF; ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -122,9 +123,9 @@
         <td align="center">{{ $item->color }}</td>
         <td align="center">{{ $item->product->product_code }}</td>
         <td align="center">{{ $item->qty }}</td>
-        <td align="center">${{ $item->price }}</td>
+        <td align="center">{{ $item->price }} php</td>
 
-        <td align="center">${{ $item->price * $item->qty }} </td>
+        <td align="center">{{ $item->price * $item->qty }} php </td>
       </tr>
 
 
@@ -136,8 +137,12 @@
   <table width="100%" style=" padding:0 10px 0 10px;">
     <tr>
         <td align="right" >
-            <h2><span style="color: green;">Sub total: </span>${{ $order->amount }}</h2>
-            <h2><span style="color: green;">Total:</span> ${{ $order->amount }}</h2>
+            <h3><span style="color: green;">Sub total: </span>{{ $order->amount }} php</h3>
+            <h3><span style="color: green;">Shipping amount: </span>{{ $order->shipping_charge }} php</h3>
+            {{-- discount amount --}}
+            
+
+            <h2><span style="color: green;">Total:</span> {{ $order->amount + $order->shipping_charge }} php</h2>
 
             {{-- <h2><span style="color: green;">Full Payment PAID</h2> --}}
         </td>
@@ -146,7 +151,7 @@
 
   </table>
   <div class="thanks mt-3">
-    <p>Thanks For Buying Products..!!</p>
+    <p>Thanks For Buying Products!</p>
   </div>
   <div class="authority float-right mt-5">
       <p>-----------------------------------</p>

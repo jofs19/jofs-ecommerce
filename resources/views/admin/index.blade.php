@@ -9,9 +9,44 @@
     $year = date('Y');
 	$year = App\Models\Order::where('order_year',$year)->sum('amount');
     $pending = App\Models\Order::where('status','pending')->get();
+    $best_seller_product = App\Models\OrderItem::with('product')->select('product_id',DB::raw('count(product_id) as total'))->groupBy('product_id')->orderBy('total','DESC')->first();
 @endphp
 
 <div class="container-full">
+
+    
+    {{-- BEST SELLER --}}
+    {{-- <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="box">
+                    <div class="box-header
+                    with-border">
+                        <h3 class="box-title">Best Seller Product</h3>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="box box-widget widget-user-2">
+                                <div class="widget-user-header bg-info">
+                                    <div class="widget-user-image">
+                                        <img class="rounded-circle" src="{{ asset($best_seller_product->product->product_thumbnail) }}" alt="User Avatar">
+                                    </div>
+                                    <h3 class="widget-user-username">{{ $best_seller_product->product->product_name_en }}</h3>
+                                    <h5 class="widget-user-desc">Total Sell: {{ $best_seller_product->total }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+
+    
+
+    
 
     <!-- Main content -->
     <section class="content">
@@ -19,12 +54,12 @@
             <div class="col-xl-3 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
-                        <div class="icon bg-success-light rounded w-60 h-60">
-                            <i class="text-success mr-0 font-size-24 glyphicon glyphicon-ok-sign"></i>
+                        <div class="widget-user-image w-60 h-60">
+                            <img class="rounded-circle" src="{{ asset($best_seller_product->product->product_thumbnail) }}" alt="User Avatar">
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Today's Sale</p>
-                            <h3 class="text-white mb-0 font-weight-500">${{ $today  }} <small class="text-success"><i class="fa fa-caret-up"></i> Php</small></h3>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Best Seller Product</p>
+                            <h4 class="text-white mb-0 font-weight-500">{{ $best_seller_product->product->product_name_en }} <br> <small class="text-success"><i class="fa fa-caret-up"></i> Total Sell: {{ $best_seller_product->total }}</small></h4>
                         </div>
                     </div>
                 </div>
@@ -37,7 +72,7 @@
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Monthly Sale </p>
-                            <h3 class="text-white mb-0 font-weight-500">${{ $month }} <small class="text-success"><i class="fa fa-caret-up"></i> Php</small></h3>
+                            <h3 class="text-white mb-0 font-weight-500">₱{{ $month }} <small class="text-success"><i class="fa fa-caret-up"></i> Php</small></h3>
                         </div>
                     </div>
                 </div>
@@ -50,7 +85,7 @@
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Yearly Sale </p>
-                            <h3 class="text-white mb-0 font-weight-500">${{ $year }} <small class="text-success"><i class="fa fa-caret-up"></i> Php</small></h3>
+                            <h3 class="text-white mb-0 font-weight-500">₱{{ $year }} <small class="text-success"><i class="fa fa-caret-up"></i> Php</small></h3>
                         </div>
                     </div>
                 </div>

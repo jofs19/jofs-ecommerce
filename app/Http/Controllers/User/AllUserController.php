@@ -17,6 +17,8 @@ use App\Mail\OrderMail;
 use Barryvdh\DomPDF\Facade\PDF;
 
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -24,31 +26,35 @@ use Intervention\Image\Facades\Image;
 class AllUserController extends Controller
 {
     public function MyOrders(){
+       
+    	$orders = Order::where('user_id',Auth::id());
 
-    	$orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->paginate(10);
+        if(isset($_GET['sort_order']) && !empty($_GET['sort_order'])){
+            if($_GET['sort_order'] == 'pending'){
+               $orders = $orders->where('status','pending');
+            }elseif($_GET['sort_order'] == 'confirmed'){
+               $orders = $orders->where('status','confirm');
+            }elseif($_GET['sort_order'] == 'processed'){
+                $orders = $orders->where('status','processing');
+            }elseif($_GET['sort_order'] == 'picked'){
+                $orders = $orders->where('status','picked');
+            }elseif($_GET['sort_order'] == 'shipped'){
+                $orders = $orders->where('status','shipped');
+            }elseif($_GET['sort_order'] == 'delivered'){
+                $orders = $orders->where('status','delivered');
+            }elseif($_GET['sort_order'] == 'rejected'){
+                $orders = $orders->where('status','cancel');
+            }elseif($_GET['sort_order'] == 'return'){
+                $orders = $orders->where('return_order',1);
+            }elseif($_GET['sort_order'] == 'all'){
+                $orders = $orders->orderBy('id','DESC');
+            }
+            
 
-        // if(isset($_GET['sort']) && !empty($_GET['sort'])){
-        //     if($_GET['sort'] == 'pending'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','pending')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'confirmed'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','confirm')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'processed'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','processing')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'picked'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','picked')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'shipped'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','shipped')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'delivered'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','delivered')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'rejected'){
-        //         $orders = Order::where('user_id',Auth::id())->where('status','cancel')->orderBy('id','DESC')->paginate(10);
-        //     }elseif($_GET['sort'] == 'returned'){
-        //         $orders = Order::where('user_id',Auth::id())->where('return_order',1)->orderBy('id','DESC')->paginate(10);
-        //     }else{
-        //         $orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->paginate(10);
-        //     }
+         }
 
-        // }
+        $orders = $orders->paginate(10);
+
 
     	return view('frontendv2.user.order.order_view',compact('orders'));
 

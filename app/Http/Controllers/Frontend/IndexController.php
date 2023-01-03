@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 use App\Models\Review;
 use Exception;
+// use stateless
+use Illuminate\Support\Facades\Cookie;
 
 use Laravel\Jetstream\Events\AddingTeam;
 use Laravel\Socialite\Facades\Socialite;
@@ -79,11 +81,23 @@ class IndexController extends Controller
 
     public function UserProfileStore(Request $request)
     {
+
+        $request->validate([
+            'email' => 'unique:users',
+        ],
+        [
+            'email.unique:users' => 'Email has already been used!',
+            
+        ]);
+
         $data = User::find(Auth::user()->id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+
+        //if email exist
+
 
     // $old_img = $request->old_image;
         // if ($request->file('profile_photo_path')) {
@@ -210,7 +224,34 @@ class IndexController extends Controller
 
 
     public function TagWiseProduct($tag){
-		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag)->orderBy('id','DESC')->paginate(6);
+		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag);
+
+        if(isset($_GET['sort']) && !empty($_GET['sort'])){
+            if($_GET['sort'] == 'product_latest'){
+               $products = $products->orderBy('id','DESC');
+            }elseif($_GET['sort'] == 'product_oldest'){
+               $products = $products->orderBy('id','ASC');
+            }elseif($_GET['sort'] == 'price_lowest'){
+              if($products->where('discount_price','!=',NULL)->exists()){
+                 $products = $products->orderBy('discount_price','ASC');
+              }else{
+                 $products = $products->orderBy('selling_price','ASC');
+              }
+            }elseif($_GET['sort'] == 'price_highest'){
+                if($products->where('discount_price','!=',NULL)->exists()){
+                   $products = $products->orderBy('discount_price','DESC');
+                }else{
+                   $products = $products->orderBy('selling_price','DESC');
+                }
+            }elseif($_GET['sort'] == 'name_a_z'){
+               $products = $products->orderBy('product_name_en','ASC');
+            }elseif($_GET['sort'] == 'name_z_a'){
+               $products = $products->orderBy('product_name_en','DESC');
+            }
+         }
+         
+         $products = $products->paginate(6);
+
 		$categories = Category::orderBy('category_name_en','ASC')->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
 
@@ -220,7 +261,34 @@ class IndexController extends Controller
 
       // Subcategory wise data
 	public function SubCatWiseProduct(Request $request,$subcat_id,$slug){
-        $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);		
+        $products = Product::where('status',1)->where('subcategory_id',$subcat_id);
+
+             if(isset($_GET['sort']) && !empty($_GET['sort'])){
+                if($_GET['sort'] == 'product_latest'){
+                   $products = $products->orderBy('id','DESC');
+                }elseif($_GET['sort'] == 'product_oldest'){
+                   $products = $products->orderBy('id','ASC');
+                }elseif($_GET['sort'] == 'price_lowest'){
+                  if($products->where('discount_price','!=',NULL)->exists()){
+                     $products = $products->orderBy('discount_price','ASC');
+                  }else{
+                     $products = $products->orderBy('selling_price','ASC');
+                  }
+                }elseif($_GET['sort'] == 'price_highest'){
+                    if($products->where('discount_price','!=',NULL)->exists()){
+                       $products = $products->orderBy('discount_price','DESC');
+                    }else{
+                       $products = $products->orderBy('selling_price','DESC');
+                    }
+                }elseif($_GET['sort'] == 'name_a_z'){
+                   $products = $products->orderBy('product_name_en','ASC');
+                }elseif($_GET['sort'] == 'name_z_a'){
+                   $products = $products->orderBy('product_name_en','DESC');
+                }
+             }
+             
+             $products = $products->paginate(6);
+
         $categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
@@ -241,7 +309,34 @@ class IndexController extends Controller
 
       // Sub-Subcategory wise data
 	public function SubSubCatWiseProduct(Request $request,$subsubcat_id,$slug){
-		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
+		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id);
+
+        if(isset($_GET['sort']) && !empty($_GET['sort'])){
+            if($_GET['sort'] == 'product_latest'){
+               $products = $products->orderBy('id','DESC');
+            }elseif($_GET['sort'] == 'product_oldest'){
+               $products = $products->orderBy('id','ASC');
+            }elseif($_GET['sort'] == 'price_lowest'){
+              if($products->where('discount_price','!=',NULL)->exists()){
+                 $products = $products->orderBy('discount_price','ASC');
+              }else{
+                 $products = $products->orderBy('selling_price','ASC');
+              }
+            }elseif($_GET['sort'] == 'price_highest'){
+                if($products->where('discount_price','!=',NULL)->exists()){
+                   $products = $products->orderBy('discount_price','DESC');
+                }else{
+                   $products = $products->orderBy('selling_price','DESC');
+                }
+            }elseif($_GET['sort'] == 'name_a_z'){
+               $products = $products->orderBy('product_name_en','ASC');
+            }elseif($_GET['sort'] == 'name_z_a'){
+               $products = $products->orderBy('product_name_en','DESC');
+            }
+         }
+         
+         $products = $products->paginate(6);
+        
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
@@ -289,10 +384,15 @@ class IndexController extends Controller
 		$item = $request->search;
 		// echo "$item";
         $categories = Category::orderBy('category_name_en','ASC')->get();
-		$products = Product::where('product_name_en','LIKE',"%$item%")->get();
+        $subcategories = SubCategory::orderBy('subcategory_name_en','ASC')->get();
+        $subsubcategories = SubSubCategory::orderBy('subsubcategory_name_en','ASC')->get();
+        $tags_en = Product::orderBy('product_tags_en','ASC')->get();
+        $tags_fil = Product::orderBy('product_tags_fil','ASC')->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
+		$products = Product::where('product_name_en','LIKE',"%$item%")->orWhere('product_name_fil','LIKE',"%$item%")->orWhere('product_tags_en','LIKE',"%$item%")->orWhere('product_tags_fil','LIKE',"%$item%")->orWhere('product_code','LIKE',"%$item%")->orWhere('product_qty','LIKE',"%$item%")->orWhere('product_size_en','LIKE',"%$item%")->orWhere('product_size_fil','LIKE',"%$item%")->orWhere('product_color_en','LIKE',"%$item%")->orWhere('product_color_fil','LIKE',"%$item%")->orWhere('selling_price','LIKE',"%$item%")->orWhere('discount_price','LIKE',"%$item%")->orWhere('short_descp_en','LIKE',"%$item%")->orWhere('short_descp_fil','LIKE',"%$item%")->orWhere('long_descp_en','LIKE',"%$item%")->orWhere('long_descp_fil','LIKE',"%$item%")->orderBy('id','DESC')->get();
 
-		return view('frontendv2.product.search',compact('products','categories','brands'));
+
+		return view('frontendv2.product.search',compact('products','categories','brands','subcategories','subsubcategories','tags_en','tags_fil'));
 
 	}
 
@@ -329,7 +429,7 @@ class IndexController extends Controller
         //Google login
         public function redirectToGoogle()
         {
-            return Socialite::driver('google')->redirect();
+            return Socialite::driver('google')->stateless()->redirect();
         }
     
         //Google callback
@@ -337,13 +437,73 @@ class IndexController extends Controller
         {
             
                 
-                $user = Socialite::driver('google')->user();
+                $user = Socialite::driver('google')->stateless()->user();
             
                 $this->_registerOrLoginUser($user);
     
                 return redirect()->route('dashboard');
                 
         }
+
+
+        //Facebook login
+        public function redirectToFacebook()
+        {
+            return Socialite::driver('facebook')->stateless()->redirect();
+        }
+    
+        //Facebook callback
+        public function handleFacebookCallback()
+        {
+            
+                
+                $user = Socialite::driver('facebook')->stateless()->user();
+            
+                $this->_registerOrLoginUser($user);
+    
+                return redirect()->route('dashboard');
+                
+        }
+
+
+        //Github login
+        public function redirectToGithub()
+        {
+            return Socialite::driver('github')->stateless()->redirect();
+        }
+
+        //Github callback
+        public function handleGithubCallback()
+        {
+            
+                
+                $user = Socialite::driver('github')->stateless()->user();
+            
+                $this->_registerOrLoginUser($user);
+    
+                return redirect()->route('dashboard');
+                
+        }
+
+        //twitter login
+        public function redirectToTwitter()
+        {
+            return Socialite::driver('twitter')->redirect();
+        }
+
+        //twitter callback
+        public function handleTwitterCallback()
+        {
+            
+                
+                $user = Socialite::driver('twitter')->user();
+            
+                $this->_registerOrLoginUser($user);
+    
+                return redirect()->route('dashboard');
+                
+        }
+        
 
         protected function _registerOrLoginUser($data)
         {

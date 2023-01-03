@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogos.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vlogos.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -29,6 +29,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/themes/prism.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
 
     
 
@@ -38,6 +39,8 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.css') }}"/>
     
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
+
 
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/css/theme.min.css') }}">
@@ -81,6 +84,28 @@
     .shimmer-btn:hover{
       background-position-x: -150%;
       transition: background-position-x 1s ease-in-out;
+    }
+
+    .dropdown-item:not(.lang) {
+      color: #000;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .dropdown-item:not(.lang)::before {
+      background: #f3f5f9;
+      content: "";
+      inset: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s ease-in-out;
+      z-index: -1;
+    }
+
+    .dropdown-item:hover:not(.lang)::before {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     /* body.modal-open .container{
@@ -281,6 +306,7 @@
 
     {{-- <script src="{{ asset('frontendv2/assets/js/jquery-1.11.1.min.js') }}"></script>  --}}
     <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
 
@@ -298,32 +324,48 @@
           </div>
           <div class="modal-body tab-content py-4">
 
+
             {{-- ANCHOR SIGN-IN FORM --}}
             <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab" method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
                 @csrf
 
-              <div class="mb-3">
-                <label class="form-label" for="si-email">Email address</label>
-                <input class="form-control" type="email" id="email" name="email" placeholder="johnoliversantiago@example.com" required>
-                <div class="invalid-feedback">Please provide a valid email address.</div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="si-password">Password</label>
-                <div class="password-toggle">
-                  <input class="form-control" type="password" id="password" name="password" required>
-                  <label class="password-toggle-btn" aria-label="Show/hide password">
-                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                  </label>
+                <div class="py-1">
+                  <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">With social account:</h3>
+                  <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="{{ route('login.google') }}" data-bs-toggle="tooltip" title="Sign in with Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="{{ route('login.facebook') }}" data-bs-toggle="tooltip" title="Sign in with Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="{{ route('login.twitter') }}" data-bs-toggle="tooltip" title="Sign in with Twitter"><i class="ci-twitter"></i></a></div>
                 </div>
-              </div>
-              <div class="mb-3 d-flex flex-wrap justify-content-between">
-                <div class="form-check mb-2">
-                  <input class="form-check-input" type="checkbox" id="si-remember">
-                  <label class="form-check-label" for="si-remember">Remember me</label>
-                </div><a class="fs-sm" href="{{ route('password.request') }}">Forgot password?</a>
-              </div>
-              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Sign in</button>
-            </form>
+                <hr>
+                <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
+
+                <div class="input-group mb-3"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+					
+                  <input class="form-control rounded-start" type="email" placeholder="Email" id="email" name="email" required>
+                </div>
+                <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                  <div class="password-toggle w-100">
+                    <input class="form-control" type="password" placeholder="Password" id="password" name="password" required>
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+            <div class="invalid-feedback">{{ $message }}</div>
+          </span>	  
+            
+            @enderror 
+            
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-between">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" checked id="remember_me">
+                    <label class="form-check-label" for="remember_me">Remember me</label>
+                  </div><a class="nav-link-inline fs-sm" href="{{ route('password.request') }}">Forgot password?</a>
+                </div>
+                <hr class="mt-3">
+                <div class="text-end pt-4">
+                  <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Sign in</button>
+                </div>
+              </form>
             {{-- END SIGN-IN FORM --}}
 
             {{-- ANCHOR SIGN-UP FORM --}}
@@ -1928,8 +1970,8 @@ $('select[name="district_id"]').on('change', function(){
 
     <script src="{{ asset('frontendv2/assets/vendor/lg-zoom.js/dist/lg-zoom.min.js') }}"></script>
 
-    
-
+    {{-- add custom js --}}
+    <script src="{{ asset('frontendv2/assets/js/custom.js') }}"></script>
     
 
     <!-- Main theme script-->

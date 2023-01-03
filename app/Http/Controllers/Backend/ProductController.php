@@ -59,9 +59,11 @@ class ProductController extends Controller
       	'product_size_fil' => $request->product_size_fil,
       	'product_color_en' => $request->product_color_en,
       	'product_color_fil' => $request->product_color_fil,
-
+		
       	'selling_price' => $request->selling_price,
       	'discount_price' => $request->discount_price,
+		'total_price' => ($request->selling_price + $request->discount_price) - $request->selling_price,
+
       	'short_descp_en' => $request->short_descp_en,
       	'short_descp_fil' => $request->short_descp_fil,
       	'long_descp_en' => $request->long_descp_en,
@@ -161,6 +163,8 @@ class ProductController extends Controller
 
       	'selling_price' => $request->selling_price,
       	'discount_price' => $request->discount_price,
+		'total_price' => $request->selling_price - $request->discount_price,
+
       	'short_descp_en' => $request->short_descp_en,
       	'short_descp_fil' => $request->short_descp_fil,
       	'long_descp_en' => $request->long_descp_en,
@@ -169,7 +173,11 @@ class ProductController extends Controller
       	'hot_deals' => $request->hot_deals,
       	'featured' => $request->featured,
       	'special_offer' => $request->special_offer,
-      	'special_deals' => $request->special_deals,      	 
+      	'special_deals' => $request->special_deals,
+
+		'sale_time' => $request->sale_time,
+		'so_saletime' => $request->so_saletime,
+
       	'status' => 1,
       	'created_at' => Carbon::now(),   
 

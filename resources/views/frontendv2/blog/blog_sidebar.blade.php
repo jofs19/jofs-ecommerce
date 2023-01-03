@@ -41,10 +41,10 @@
         </div>
         
         <!-- Promo banner-->
-        <div class="bg-size-cover bg-position-center rounded-3 py-5 mx-lg-2" style="background-image: url({{ asset('upload/vartouhi-logo.png') }});">
-          <div class="py-2 px-4 text-center">
-            <h5 class="mb-2 pt-2"></h5>
-            <p class="fs-sm text-muted pt-5 mt-5"></p><a class="btn btn-warning btn-shadow btn-sm" href="{{ route('shop.page') }}">Shop now!</a>
+        <div class="bg-size-cover bg-position-center rounded-3 py-5 mx-lg-2" style="background-image: url({{ asset('frontendv2/assets/img/blog/banner-bg.jpg') }});">
+          <div class="py-5 px-4 text-center">
+            <h5 class="mb-2">No more dreaming anymore,</h5>
+            <p class="fs-sm text-muted">It's about time to glow!</p><a class="btn btn-primary btn-shadow btn-sm" href="{{ route('shop.page') }}">Shop now!</a>
           </div>
         </div>
 

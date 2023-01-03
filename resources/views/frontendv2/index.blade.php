@@ -147,7 +147,7 @@ Vartouhi | Beauty & Cosmetics Store
                 </div>
             </div>
             <!-- Banner group-->
-            <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0 tilt-in-fwd-tr">
+            <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0">
                 <div class="table-responsive" data-simplebar>
                     <div class="d-flex d-xl-block"><a
                             class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
@@ -200,7 +200,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-        <h2 class="h3 mb-0 pt-3 me-2">New Arrivals</h2>
+        <h2 class="h3 mb-0 pt-3 me-2 text-shadow-drop-center">New Arrivals</h2>
         <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">More products<i
                     class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
@@ -533,7 +533,7 @@ Vartouhi | Beauty & Cosmetics Store
             </div>
 
                 
-            <div class="col-md-6 pt-3 mt-3"><img src="{{ asset($product->product_thumbnail) }}" alt="iPad Pro"></div>
+            <div class="col-md-6 pt-3 mt-3"><img src="{{ asset($product->product_thumbnail) }}" alt="Special Offer Product" class="shadow-drop-2-center"></div>
 
                 @empty
 
@@ -657,6 +657,8 @@ Vartouhi | Beauty & Cosmetics Store
 
 {{-- End Blog Area --}}
 
+@include('frontendv2.partials.review_section')
+
 
 {{-- Container Blog + Instagram Area --}}
 <section class="container-fluid px-0">
@@ -682,13 +684,11 @@ Vartouhi | Beauty & Cosmetics Store
 
 
    <!-- Messenger Chat Plugin Code -->
-<div class="hide-me">
    <div id="fb-root"></div>
 
    <!-- Your Chat Plugin code -->
    <div id="fb-customer-chat" class="fb-customerchat">
    </div>
-</div>
 
    <script>
      var chatbox = document.getElementById('fb-customer-chat');

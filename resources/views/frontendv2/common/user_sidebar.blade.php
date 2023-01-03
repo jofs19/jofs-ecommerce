@@ -7,6 +7,19 @@
   $prefix = Request::route()->getPrefix();
   $route = Route::current()->getName();
 @endphp
+
+<head>
+  <style>
+        @media screen and (min-width: 1024px) {
+      .user-email{
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+  }
+  </style>
+</head>
 {{-- {{ Str::limit(Auth::user()->email,20) }} --}}
 <aside class="col-lg-4 pt-4 pt-lg-0 pe-xl-5">
     <div class="bg-white rounded-3 shadow-lg pt-1 mb-5 mb-lg-0">
@@ -19,8 +32,11 @@
             {{-- <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"> --}}
 
           </div>
-          <div class="ps-md-3">
-            <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ Auth::user()->email }}">{{ Auth::user()->email }}</span> <br>
+          <div class="ps-md-3 user-email">
+            <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3>
+            
+            <span class="text-accent fs-sm " data-bs-toggle="tooltip" data-bs-placement="right" title="{{ Auth::user()->email }}">{{ Auth::user()->email }}</span>
+             <br>
             <span class="text-accent fs-ms">{{ Auth::user()->phone }}</span>
           </div>
           

@@ -37,7 +37,7 @@ Vartouhi | Track {{  $track->invoice_no }}
                 @if($track->payment_method == 'Cash On Delivery')
                 Cash On Delivery
                 @else
-                Payed via GCash
+                Paid via GCash
                 @endif
 
             

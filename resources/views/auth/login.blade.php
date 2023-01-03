@@ -159,11 +159,11 @@
         <div class="card border-0 shadow">
           <div class="card-body">
             <h2 class="h4 mb-1">Sign in</h2>
-            <div class="py-3">
+            <div class="py-1">
               <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">With social account:</h3>
-              <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="{{ route('login.google') }}" data-bs-toggle="tooltip" title="Sign in with Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="{{ route('login.facebook') }}" data-bs-toggle="tooltip" title="Sign in with Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="{{ route('login.github') }}" data-bs-toggle="tooltip" title="Sign in with Github"><i class="ci-twitter"></i></a></div>
+              <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="{{ route('login.google') }}" data-bs-toggle="tooltip" title="Sign in with Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="{{ route('login.facebook') }}" data-bs-toggle="tooltip" title="Sign in with Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="{{ route('login.twitter') }}" data-bs-toggle="tooltip" title="Sign in with Twitter"><i class="ci-twitter"></i></a></div>
             </div>
-            <hr>
+            <hr class="my-3">
             <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
             <form class="needs-validation" novalidate method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
 				@csrf

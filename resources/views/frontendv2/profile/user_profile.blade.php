@@ -69,6 +69,9 @@
             <div class="col-sm-6">
               <label class="form-label" for="account-ln">Email Address</label>
               <input class="form-control" name="email" type="email" id="account-ln" value="{{ $user->email }}">
+              @error('email')
+              <span class="text-danger">{{ $message }}</span>         
+              @enderror
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="account-email">Main Address</label>

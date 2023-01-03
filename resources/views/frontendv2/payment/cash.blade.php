@@ -71,9 +71,16 @@ Vartouhi | COD
           <div class="col-sm-6">
             <h4 class="h6">Shipping to:</h4>
             <ul class="list-unstyled fs-sm">
+              
               <li><span class="text-muted">Recipient:&nbsp;</span>{{ Auth::user()->name }}</li>
-              <li><span class="text-muted">Address:&nbsp;</span>{{ Auth::user()->address }}</li>
-              <li><span class="text-muted">Phone:&nbsp;</span>{{ Auth::user()->phone }}</li>
+              <li><span class="text-muted">Email:&nbsp;</span>{{ $data['shipping_email'] }}</li>
+              <li><span class="text-muted">Phone:&nbsp;</span>{{ $data['shipping_phone'] }}</li>
+              @if ($data['notes'] == null)
+              <li><span class="text-muted">Notes:&nbsp;</span>----</li>
+              @else
+              <li><span class="text-muted">Notes:&nbsp;</span>{{ $data['notes'] }}</li>               
+              @endif
+
             </ul>
           </div>
           <div class="col-sm-6">
@@ -81,6 +88,16 @@ Vartouhi | COD
             <ul class="list-unstyled fs-sm">
               <li><span class="text-muted">Standard Payment:&nbsp;</span>Cash on Delivery (COD)</li>
             </ul>
+
+            <h4 class="h6">Shipping Address:</h4>
+            <ul class="list-unstyled fs-sm">
+              <li><span class="text-muted">Address 1:&nbsp;</span>{{ $data['shipping_address'] }}</li>
+              @if ($data['shipping_address2'] != null)
+              <li><span class="text-muted">Address 2:&nbsp;</span>{{ $data['shipping_address2'] }}</li>
+              @endif
+              <li><span class="text-muted">City:&nbsp;</span>{{ $data['post_code'] }}</li>
+            </ul>
+
           </div>
         </div>
       </div>

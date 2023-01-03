@@ -46,7 +46,9 @@
                             @endforeach
                           {{-- <li class="widget-list-item widget-filter-item"><a class="widget-list-link d-flex justify-content-between align-items-center" href="{{ $category->category_slug_en }}"><span class="widget-filter-item-text">View all</span><span class="fs-xs text-muted ms-3"></span></a></li> --}}
 
-                          @foreach($subcategories as $subcategory)
+                          @foreach($subcategories as $key => $subcategory)
+
+                          @if($key > 0)
 
                           <li class="widget-list-item widget-filter-item"><a class="widget-list-link d-flex justify-content-between align-items-center" href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}"><span class="widget-filter-item-text">@if(session()->get('language') == 'filipino') {{ $subcategory->subcategory_name_fil }} @else {{ $subcategory->subcategory_name_en }} @endif</span><span class="fs-xs text-muted ms-3">
 
@@ -60,6 +62,7 @@
                             {{ $count }}
                         
                         </span></a></li>   
+                        @endif
                           
                           @endforeach
 
@@ -80,7 +83,7 @@
             <form action="{{ route('shop.filter') }}" method="post">
               @csrf
             <!-- Price range-->
-            <div class="widget mb-4 pb-4 border-bottom">
+            {{-- <div class="widget mb-4 pb-4 border-bottom">
               <h3 class="widget-title">Price</h3>
               <div class="range-slider" id="slider-range" data-start-min="500" data-start-max="1500" data-min="0" data-max="2000" data-step="1">
                 <div class="range-slider-ui"></div>
@@ -105,7 +108,15 @@
               <button type="submit" class="btn btn-accent btn-sm text-center btn-shadow">Filter Price</button>
               </div>
 
-            </div>
+            </div> --}}
+
+            {{-- <div id="slider-range" class="price-filter-range" data-min="0" data-max="2000" ></div>
+            <input type="hidden" id="price_range" name="price_range" value="">
+            <input type="text" id="amount" value="$0 - $2000" readonly="">
+      
+          <br><br>
+      
+           <button type="submit" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</button> --}}
 
             <!-- Filter by Category-->
 
@@ -220,7 +231,7 @@
                         values: price,  
                     slide: function (event, ui) { 
                     $("#amount").val('$'+ui.values[0]+"-"+'$'+ui.values[1]);
-                    $(".price_range").val(ui.values[0]+"-"+ui.values[1]);
+                    $("#price_range").val(ui.values[0]+"-"+ui.values[1]);
                     }
                     });  
             }

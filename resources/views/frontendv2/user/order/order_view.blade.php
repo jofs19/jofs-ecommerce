@@ -57,19 +57,20 @@
       <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
         <div class="d-flex align-items-center">
           <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
-          {{-- <form name="sortProducts" id="sortProducts"> --}}
+          <form name="sortOrders" id="sortOrders">
+            {{-- <input type="hidden" name="url" id="url" value="{{ $url }}"> --}}
           <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
-          <select class="form-select" id="sort" name="sort">
-            <option value="all">All</option>
-            <option value="pending">Pending</option>
-            <option value="confirmed">Confirmed</option>
-            <option value="processed">Processed</option>
-            <option value="picked">Picked</option>
-            <option value="shipped">Shipped</option>
-            <option value="delivered">Delivered</option>
-            <option value="rejected">Rejected</option>
+          <select class="form-select" id="sort_order" name="sort_order">
+            <option value="all" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'all') selected="" @endif>All</option>
+            <option value="pending" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'pending') selected="" @endif>Pending</option>
+            <option value="confirmed" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'confirmed') selected="" @endif>Confirmed</option>
+            <option value="processed" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'processed') selected="" @endif>Processed</option>
+            <option value="picked" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'picked') selected="" @endif>Picked</option>
+            <option value="shipped" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'shipped') selected="" @endif>Shipped</option>
+            <option value="delivered" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'delivered') selected="" @endif>Delivered</option>
+            <option value="rejected" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'rejected') selected="" @endif>Rejected</option>
           </select>
-        {{-- </form> --}}
+        </form>
         </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i class="ci-sign-out me-2"></i>Sign out</a>
       </div>
 
@@ -91,132 +92,24 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($orders as $order)
+            @if($orders->count() > 0)
 
 
+            <div class="filter_orders">
 
-                @if($order->status == 'pending')  
+              @include('frontendv2.user.order.ajax_order_listing')
 
-                <tr class="bg-faded-light">
+            </div>
 
-                
-                @elseif ($order->status == 'confirm')
-
-                <tr class="bg-faded-info">
-
-                @elseif ($order->status == 'processing')
-
-                <tr class="bg-faded-accent">
-
-                @elseif($order->status == 'picked')
-
-                <tr class="bg-faded-warning">
-
-                @elseif($order->status == 'shipped')
-
-                <tr class="bg-faded-primary">
-
-                @elseif($order->status == 'delivered')
-
-                <tr class="bg-faded-success">
-              
-                @else
-                <tr class="bg-faded-danger">
-
-                @endif
-
-
-              <td class="py-3"> 
-                @foreach ($orders as $key => $item)
-                    @if ($item->id == $order->id)
-                        {{ $orders->firstItem()+$key }}
-                    @endif
-                      
-                @endforeach
-              </td>
-
-              <td class="py-3"><a class="nav-link-style fw-medium fs-sm" target="_blank" href="{{ url('user/order_details/'.$order->id ) }}">{{ $order->invoice_no }}</a></td>
-              <td class="py-3">{{ $order->order_date }}</td>
-              <td class="py-3">{{ $order->payment_method }}</td>
-              <td class="py-3">
-                @if($order->amount >= 1000)
-                 ₱{{ number_format($order->amount,2) }}
-
-                @else
-                ₱{{ number_format($order->amount + $order->shipping_charge,2) }}
-
-                @endif
-              </td>
-              <td class="py-3">
-                @if($order->status == 'pending')  
-
-                <span class="badge bg-secondary m-0">Pending</span>
-
-                
-                @elseif ($order->status == 'confirm')
-
-                <span class="badge bg-info m-0">Confirmed</span>
-
-                @elseif ($order->status == 'processing')
-
-                <span class="badge bg-accent m-0">Processed</span>
-
-                @elseif($order->status == 'picked')
-
-                <span class="badge bg-warning m-0">Picked</span>
-
-                @elseif($order->status == 'shipped')
-
-                <span class="badge bg-primary m-0">Shipped</span>
-
-                @elseif($order->status == 'delivered')
-
-                <span class="badge bg-success m-0">Delivered</span>
-
-                @elseif($order->status == 'cancel_order')
-
-                <span class="badge bg-danger m-0">Cancelled</span>
-
-
-                @if($order->return_order == 1) 
-
-                <br>
-                <span class="badge bg-light m-0">Return requested</span>
-
-                @elseif($order->return_order == 2)
-
-                <span class="badge bg-light m-0">Returned Successfully</span>
-
-                @endif
-
-                @else
-                <span class="badge bg-danger m-0">Rejected</span>
-
-                @endif
-
-              </td>
-
-
-              <td class="py-3">
-                
-                {{-- <a class="nav-link-style fs-ms text-accent action" target="_blank" href="{{ url('user/order_details/'.$order->id ) }}"><i class="ci-eye align-middle me-1"></i>View</a> --}}
-                {{-- <a class="nav-link-style fs-normal text-info action" target="_blank" href="{{ url('user/invoice_download/'.$order->id ) }}"><i class="ci-download align-middle me-1"></i>Invoice</a>   --}}
-
-                <a class="btn btn-outline-dark rounded-pill btn-icon btn-sm" href="{{ url('user/invoice_download/'.$order->id ) }}" target="_blank">
-                  <i class="ci-download"></i>
-                </a>
-                
-                <!-- Toolbar example -->
-              
-            </td>
+            @else
+            <tr>
+              <td colspan="7" class="text-center">No Order Found</td>
             </tr>
-
-            @endforeach
+            @endif
             
           </tbody>
 
           <tfoot>
-
             <tr>
               <th>#</th>
               <th>Invoice No.</th>
@@ -227,7 +120,6 @@
 
               <th>Action</th>
             </tr>
-
           </tfoot>
 
         </table>

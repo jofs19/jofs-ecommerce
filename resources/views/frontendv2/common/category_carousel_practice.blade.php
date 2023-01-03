@@ -68,7 +68,7 @@
     {{-- Heading --}}
 <div class="d-flex flex-wrap mb-3">
       <h2 class="h3 mb-0">Products in&nbsp;</h2>
-    <div class="dropdown d-inline-block" data-bs-toggle="select"><a class="dropdown-toggle h3 text-primary" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="dropdown-toggle-label">All categories</span></a>
+    <div class="dropdown d-inline-block" data-bs-toggle="select"><a class="dropdown-toggle h3 text-primary" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="dropdown-toggle-label blink-2">All categories</span></a>
         <input type="hidden" name="trending-category">
         <div class="dropdown-menu dropdown-menu-end" style="">
           <div class="nav">

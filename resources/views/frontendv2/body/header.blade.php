@@ -40,14 +40,14 @@
                 <div class="topbar-text language-dropdown dropdown disable-autohide">
   
                     @if(session()->get('language') == 'filipino')
-                    <a class="topbar-link dropdown-toggle d-sm-block text-xs" href="#" data-bs-toggle="dropdown"><img
+                    <a class="topbar-link dropdown-toggle d-sm-block text-xs lang" href="#" data-bs-toggle="dropdown"><img
                             alt="File:Flag of the Philippines.svg"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/800px-Flag_of_the_Philippines.svg.png?20210924060643"
                             decoding="async" width="20"
                             srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1200px-Flag_of_the_Philippines.svg.png?20210924060643 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1600px-Flag_of_the_Philippines.svg.png?20210924060643 2x"
                             data-file-width="1200" data-file-height="600" class="me-2">Lengguwahe </a>
                     @else
-                    <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><img alt="US Flag"
+                    <a class="topbar-link dropdown-toggle lang" href="#" data-bs-toggle="dropdown"><img alt="US Flag"
                             src="{{ asset('frontendv2/assets/img/flags/en.png') }}" width="20" class="me-2">
                         Language</a>
                     @endif
@@ -58,11 +58,11 @@
                         width="20" class="me-2">English</a></li> --}}
   
                         @if(session()->get('language') == 'filipino')
-                        <li><a class="dropdown-item" href="{{ route('english.language') }}"><img alt="US Flag"
+                        <li class="lang"><a class="dropdown-item lang" href="{{ route('english.language') }}"><img alt="US Flag"
                                     src="{{ asset('frontendv2/assets/img/flags/en.png') }}" width="20"
                                     class="me-2">English</a></li>
                         @else
-                        <li><a class="dropdown-item" href="{{ route('filipino.language') }}"><img
+                        <li class="lang"><a class="dropdown-item lang" href="{{ route('filipino.language') }}"><img
                                     alt="File:Flag of the Philippines.svg"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/800px-Flag_of_the_Philippines.svg.png?20210924060643"
                                     decoding="async" width="20"
@@ -95,11 +95,14 @@
                 </ul>
             </div>
             <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block"
-              href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>Wishlist (<span class="wishlistQty">0</span>)</a><a
+              href="{{ route('wishlist') }}"><i class="ci-heart mt-n1"></i>@if(session()->get('language') ==
+              'filipino') Kagustuhan (<span class="wishlistQty">0</span>) @else Wishlist (<span class="wishlistQty">0</span>) @endif</a><a
                     class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
-                    href="{{ route('compare') }}"><i class="ci-compare mt-n1"></i>Compare (<span class="compareQty">0</span>)</a><a
+                    href="{{ route('compare') }}"><i class="ci-compare mt-n1"></i>@if(session()->get('language') ==
+                    'filipino') Ikumpara (<span class="compareQty">0</span>) @else Compare (<span class="compareQty">0</span>) @endif</a><a
                     class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
-                    data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i class="ci-location mt-n1"></i>Order tracking</a></div>
+                    data-bs-toggle="modal" data-bs-target="#modalLarge" href="#modalLarge"><i class="ci-location mt-n1"></i>@if(session()->get('language') ==
+                    'filipino') Sundan ang Order @else Order Tracking @endif</a></div>
         </div>
     </div>
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
@@ -321,7 +324,9 @@
                                           $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
                                           @endphp
   
-                                          @foreach ($subcategories as $subcategory)
+                                          @foreach ($subcategories as $key => $subcategory)
+
+                                          @if($key > 0)
   
                                           <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
                                             <div class="widget widget-links">
@@ -330,6 +335,7 @@
                                               @if(session()->get('language') ==
                                 'filipino') {{ $subcategory->subcategory_name_fil }} @else {{ $subcategory->subcategory_name_en }} @endif
                                               </h6></a>
+
   
   
   
@@ -350,26 +356,40 @@
                                                     </li>
                                                     
                                                 </ul>
+
                               @endforeach                    
                                 
                                             </div>
                                         </div>
-                                            
+                                        @endif
+
                                           @endforeach
   
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
                                                     class="d-block mb-2" href="#">
   
                                               @php
-                                                $productss = App\Models\Product::where('subcategory_id',$subcategory->id)->orderBy('id','DESC')->first();
+                                                $productss = App\Models\Product::where('subcategory_id',$subcategory->id)->where('status', 1)->orderBy('id','DESC')->oldest()->get();
                                                 $lowest_price = App\Models\Product::where('subcategory_id',$subcategory->id)->min('selling_price');
                                               @endphp
   
+
+                                              @foreach ($productss as $product)
+                                                
+                                              <center>
+                                              <img class="d-block rounded-lg" src="{{ asset($product->product_thumbnail) }}" alt="Shop" width="180">
+                                              </center>
+                                              @endforeach
+
                                                     
-                                                      
-                                                    {{-- <img src="{{ asset($productss->product_thumbnail) }}"
-                                                        alt="product" width="200" class="pb-2 mb-2"> --}}
-  
+                                                      {{-- @if ($productss->product_thumbnail == NULL)
+                                                        
+                                                      @else
+                                                        
+                                                     
+                                                      <img src="{{ $productss->product_thumbnail }}" alt="">
+                                                      @endif --}}
+
                                                      
   
                                                       

@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Controllers\Auth\FacebookController;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /*
@@ -58,6 +59,10 @@ use Laravel\Socialite\Facades\Socialite;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 	Route::get('/login', [AdminController::class, 'loginForm']);
@@ -388,6 +393,8 @@ Route::get('/user/change/password', [IndexController::class, 'UserChangePassword
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
 
+
+
 // SOCIAL LOGIN ROUTES
 /** GOOGLE **/
 Route::get('login/google', [IndexController::class, 'redirectToGoogle'])->name('login.google');
@@ -400,6 +407,11 @@ Route::get('login/facebook/callback', [IndexController::class, 'handleFacebookCa
 /** GITHUB **/
 Route::get('login/github', [IndexController::class, 'redirectToGithub'])->name('login.github');
 Route::get('login/github/callback', [IndexController::class, 'handleGithubCallback']);
+
+/** Twitter **/
+Route::get('login/twitter', [IndexController::class, 'redirectToTwitter'])->name('login.twitter');
+Route::get('login/twitter/callback', [IndexController::class, 'handleTwitterCallback']);
+
 
 
 Route::get('/auth/facebook/redirect', [FacebookController::class, 'handleFacebookRedirect']);
@@ -570,6 +582,10 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
 
     /// Product Search Route 
     Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+
+    //['get','post']
+    // Route::match(['get','post'],'/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+    
 
     // Advance Search Routes 
     Route::post('search-product', [IndexController::class, 'SearchProduct']);

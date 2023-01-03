@@ -605,80 +605,7 @@
                           </div>
                         </div>
                         <div>
-                          <div class="star-rating">
 
-
-                            @if($item->rating == NULL)
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-
-                            @elseif($item->rating == 1)
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            @elseif($item->rating == 2)
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                             
-                            @elseif($item->rating == 3)
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                             
-                            @elseif($item->rating == 4)
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star"></i>
-                            @elseif($item->rating == 5)
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                            <i class="star-rating-icon ci-star-filled active"></i>
-                             
-                             @endif
-
-                             <small>
-                            @if ($item->user_id == Auth::id())
-                            <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" 
-                            href="{{ route('delete.reviews', $item->id) }}" id="removeComment" data-scroll><i class="ci-trash"></i></a>
-                            @endif
-                            </small>
-                          </div>
-
-                          
-
-                          <div class="fs-ms text-muted">
-                            
-                            @if($item->rating == 1)
-                            Unsatisfied
-                            @elseif($item->rating == 2)
-                            Not Bad
-                            @elseif($item->rating == 3)
-                            Satisfied
-                            @elseif($item->rating == 4)
-                            Very Good
-                            @elseif($item->rating == 5)
-                            Excellent
-                            @else
-                            No Rating
-                            @endif
-
-                            
-                          
-                          </div>
 
 
                             
@@ -692,6 +619,81 @@
                         <dd>{{ $item->comment }}</dd>
                         
                       </dl>
+
+                      <div class="star-rating">
+
+
+                        @if($item->rating == NULL)
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+
+                        @elseif($item->rating == 1)
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        @elseif($item->rating == 2)
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                         
+                        @elseif($item->rating == 3)
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                         
+                        @elseif($item->rating == 4)
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star"></i>
+                        @elseif($item->rating == 5)
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                        <i class="star-rating-icon ci-star-filled active"></i>
+                         
+                         @endif
+
+                         <small>
+                        @if ($item->user_id == Auth::id())
+                        <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" 
+                        href="{{ route('delete.reviews', $item->id) }}" id="removeComment" data-scroll><i class="ci-trash"></i></a>
+                        @endif
+                        </small>
+                      </div>
+
+                      
+
+                      <div class="fs-ms text-muted pb-2">
+                        
+                        @if($item->rating == 1)
+                        Unsatisfied
+                        @elseif($item->rating == 2)
+                        Not Bad
+                        @elseif($item->rating == 3)
+                        Satisfied
+                        @elseif($item->rating == 4)
+                        Very Good
+                        @elseif($item->rating == 5)
+                        Excellent
+                        @else
+                        No Rating
+                        @endif
+
+                        
+                      
+                      </div>
 
                       @if($item->image != NULL)
                       <div class="gallery">

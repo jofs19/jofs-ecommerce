@@ -1,5 +1,19 @@
 {{-- Product Category Area / Featured Product--}}
 
+<head>
+    <style>
+         @media screen and (max-width: 767px) {
+
+        .truncated {
+          width: 120px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+    }
+    </style>
+  </head>
+
 
 <section class="container pt-lg-3 mb-4 mb-sm-5">
 
@@ -15,8 +29,8 @@
             <div class="d-flex flex-column h-100 overflow-hidden rounded-3" style="background-color: #f6f8fb;">
                 <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
                     <div>
-                        <h3 class="mb-3">Featured Products</h3>
-                        <a class="fs-md" href="shop-grid-ls.html">Shop now
+                        <h3 class="mb-3 text-shadow-drop-center">Featured Products</h3>
+                        <a class="fs-md " href="{{ route('shop.page') }}"> <span class="bounce-right">Shop now</span> 
                             <i class="ci-arrow-right fs-xs align-middle ms-1"></i></a>
                         
                     </div>
@@ -25,7 +39,7 @@
                         <button type="button"><i class="ci-arrow-left"></i></button>
                         <button type="button"><i class="ci-arrow-right"></i></button>
                     </div>
-                </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100"
+                </div><a class="d-none d-md-block mt-auto" href="{{ route('shop.page') }}"><img class="d-block w-100"
                     src="{{ asset("frontendv2/assets/img/home/categories/cat-lg02.jpg") }}"
                         alt="For Women"></a>
             </div>
@@ -94,46 +108,7 @@
                                     </a>
 
                                     <div class="card-body py-2">
-                                        @foreach ($categories->chunk(6) as $category)
-                                        @foreach ($category as $cat)
-                                        @if ($item->category_id == $cat->id)
-                                        <a class="product-meta d-block fs-xs pb-1"
-                                            href="#">{{ $cat->category_name_en }}</a>
-                                        @endif
-                                        @endforeach
-                                        @endforeach
-
-
-                                        <h3 class="product-title fs-sm"><a
-                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price">
-
-                                                @php
-                                                $amount = $item->selling_price - $item->discount_price;
-                                                $discount = ($amount/$item->selling_price) * 100;
-                                                @endphp
-
-                                                @if($item->discount_price == NULL)
-                                                <span
-                                                    class="text-accent">₱{{$item->selling_price}}.<small>00</small></span>
-                                                @else
-                                                <span
-                                                    class="text-accent">₱{{$item->discount_price}}.<small>00</small></span>
-                                                {{-- <del
-                                                    class="fs-sm text-muted">${{$item->selling_price}}.<small>00</small></del>
-                                                --}}
-                                                @endif
-
-
-
-                                                {{-- <span class="text-accent"> ₱{{ $item->pro }}.<small>00</small></span>
-                                                --}}
-
-
-                                            </div>
-
-
+                                        
                                             @php
                                             $reviewcount =
                                             App\Models\Review::where('product_id',$item->id)->where('status',1)->latest()->get();
@@ -221,6 +196,50 @@
                                         </div>
 
                                         @endif
+                                        
+                                        @foreach ($categories->chunk(6) as $category)
+                                        @foreach ($category as $cat)
+                                        @if ($item->category_id == $cat->id)
+                                        <a class="product-meta d-block fs-xs pb-1 truncated"
+                                            href="#">{{ $cat->category_name_en }}</a>
+                                        @endif
+                                        @endforeach
+                                        @endforeach
+
+
+                                        <h3 class="product-title fs-sm truncated"><a
+                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{ Str::of($item->product_name_en)->limit(15)}}</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            
+                                            
+                                            <div class="product-price">
+
+                                                @php
+                                                $amount = $item->selling_price - $item->discount_price;
+                                                $discount = ($amount/$item->selling_price) * 100;
+                                                @endphp
+
+                                                @if($item->discount_price == NULL)
+                                                <span
+                                                    class="text-accent">₱{{$item->selling_price}}.<small>00</small></span>
+                                                @else
+                                                <span
+                                                    class="text-accent">₱{{$item->discount_price}}.<small>00</small></span>
+                                                 <del
+                                                    class="fs-xs text-muted">₱{{$item->selling_price}}.<small>00</small></del>
+                                                
+                                                @endif
+
+
+
+                                                {{-- <span class="text-accent"> ₱{{ $item->pro }}.<small>00</small></span>
+                                                --}}
+
+
+                                            </div>
+
+
+
 
 
 
@@ -277,16 +296,105 @@
                                 </a>
 
                                 <div class="card-body py-2">
+                                    
+                                                                                @php
+                                            $reviewcount =
+                                            App\Models\Review::where('product_id',$item->id)->where('status',1)->latest()->get();
+                                            $average =
+                                            App\Models\Review::where('product_id',$item->id)->where('status',1)->avg('rating');
+                                            @endphp
+
+                                            @if($average == 0 || $average < 0) <a
+                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                <div class="star-rating"><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i>
+                                                </div>
+                                                {{-- <span class="review">{{ count($reviewcount) }}
+                                                Review(s)</span> --}}
+                                                </a>
+                                                @elseif($average == 1 || $average < 2) <a
+                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                    <div class="star-rating"><i
+                                                            class="star-rating-icon ci-star-filled active"></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i>
+                                                    </div>
+                                                    {{-- <span class="review">{{ count($reviewcount) }}
+                                                    Review(s)</span> --}}
+                                                    </a>
+                                                    @elseif($average == 2 || $average < 3) <a
+                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                        <div class="star-rating"><i
+                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                class="star-rating-icon ci-star-filled "></i><i
+                                                                class="star-rating-icon ci-star-filled "></i><i
+                                                                class="star-rating-icon ci-star-filled "></i>
+                                                        </div>
+                                                        {{-- <span class="review">{{ count($reviewcount) }}
+                                                        Review(s)</span> --}}
+                                                        </a>
+
+                                                        @elseif($average == 3 || $average < 4) <a
+                                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                            <div class="star-rating"><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled "></i><i
+                                                                    class="star-rating-icon ci-star-filled"></i>
+                                                            </div>
+                                                            {{-- <span class="review">{{ count($reviewcount) }}
+                                                            Review(s)</span> --}}
+                                                            </a>
+
+
+                                                            @elseif($average == 4 || $average < 5) <a
+                                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                                <div class="star-rating"><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled "></i>
+                                                                </div>
+                                                                {{-- <span class="review">{{ count($reviewcount) }}
+                                                                Review(s)</span> --}}
+                                                                </a>
+                                                                @elseif($average == 5 || $average < 5) <div
+                                                                    class="reviews">
+                                                                    <a
+                                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                                        <div class="star-rating"><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i>
+                                                                        </div>
+                                                                        {{-- <span class="review">{{ count($reviewcount) }}
+                                                                        Review(s)</span> --}}
+                                                                    </a>
+                                        </div>
+
+                                        @endif
+                                    
                                     @foreach ($categories->chunk(6) as $category)
                                     @foreach ($category as $cat)
                                     @if ($item->category_id == $cat->id)
-                                    <a class="product-meta d-block fs-xs pb-1" href="#">{{ $cat->category_name_en }}</a>
+                                    <a class="product-meta d-block fs-xs pb-1 truncated" href="#">{{ $cat->category_name_en }}</a>
                                     @endif
                                     @endforeach
                                     @endforeach
 
 
-                                    <h3 class="product-title fs-sm"><a
+                                    <h3 class="product-title fs-sm truncated"><a
                                             href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price">
@@ -301,9 +409,9 @@
                                             @else
                                             <span
                                                 class="text-accent">₱{{$item->discount_price}}.<small>00</small></span>
-                                            {{-- <del
-                                                class="fs-sm text-muted">${{$item->selling_price}}.<small>00</small></del>
-                                            --}}
+                                             <del
+                                                class="fs-xs text-muted">${{$item->selling_price}}.<small>00</small></del>
+                                            
                                             @endif
 
 
@@ -314,92 +422,6 @@
 
                                         </div>
 
-
-                                        @php
-                                        $reviewcount =
-                                        App\Models\Review::where('product_id',$item->id)->where('status',1)->latest()->get();
-                                        $average =
-                                        App\Models\Review::where('product_id',$item->id)->where('status',1)->avg('rating');
-                                        @endphp
-
-                                        @if($average == 0 || $average < 0) <a
-                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                            <div class="star-rating"><i class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i>
-                                            </div>
-                                            {{-- <span class="review">{{ count($reviewcount) }}
-                                            Review(s)</span> --}}
-                                            </a>
-                                            @elseif($average == 1 || $average < 2) <a
-                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                <div class="star-rating"><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i>
-                                                </div>
-                                                {{-- <span class="review">{{ count($reviewcount) }}
-                                                Review(s)</span> --}}
-                                                </a>
-                                                @elseif($average == 2 || $average < 3) <a
-                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                    <div class="star-rating"><i
-                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                            class="star-rating-icon ci-star-filled "></i><i
-                                                            class="star-rating-icon ci-star-filled "></i><i
-                                                            class="star-rating-icon ci-star-filled "></i>
-                                                    </div>
-                                                    {{-- <span class="review">{{ count($reviewcount) }}
-                                                    Review(s)</span> --}}
-                                                    </a>
-
-                                                    @elseif($average == 3 || $average < 4) <a
-                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                        <div class="star-rating"><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled "></i><i
-                                                                class="star-rating-icon ci-star-filled"></i>
-                                                        </div>
-                                                        {{-- <span class="review">{{ count($reviewcount) }}
-                                                        Review(s)</span> --}}
-                                                        </a>
-
-
-                                                        @elseif($average == 4 || $average < 5) <a
-                                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                            <div class="star-rating"><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled "></i>
-                                                            </div>
-                                                            {{-- <span class="review">{{ count($reviewcount) }}
-                                                            Review(s)</span> --}}
-                                                            </a>
-                                                            @elseif($average == 5 || $average < 5) <div class="reviews">
-                                                                <a
-                                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                                    <div class="star-rating"><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i>
-                                                                    </div>
-                                                                    {{-- <span class="review">{{ count($reviewcount) }}
-                                                                    Review(s)</span> --}}
-                                                                </a>
-                                    </div>
-
-                                    @endif
 
 
 
@@ -473,16 +495,105 @@
                                 </a>
 
                                 <div class="card-body py-2">
+                                    
+                                                                                @php
+                                            $reviewcount =
+                                            App\Models\Review::where('product_id',$item->id)->where('status',1)->latest()->get();
+                                            $average =
+                                            App\Models\Review::where('product_id',$item->id)->where('status',1)->avg('rating');
+                                            @endphp
+
+                                            @if($average == 0 || $average < 0) <a
+                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                <div class="star-rating"><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i><i
+                                                        class="star-rating-icon ci-star-filled "></i>
+                                                </div>
+                                                {{-- <span class="review">{{ count($reviewcount) }}
+                                                Review(s)</span> --}}
+                                                </a>
+                                                @elseif($average == 1 || $average < 2) <a
+                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                    <div class="star-rating"><i
+                                                            class="star-rating-icon ci-star-filled active"></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i><i
+                                                            class="star-rating-icon ci-star-filled "></i>
+                                                    </div>
+                                                    {{-- <span class="review">{{ count($reviewcount) }}
+                                                    Review(s)</span> --}}
+                                                    </a>
+                                                    @elseif($average == 2 || $average < 3) <a
+                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                        <div class="star-rating"><i
+                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                class="star-rating-icon ci-star-filled "></i><i
+                                                                class="star-rating-icon ci-star-filled "></i><i
+                                                                class="star-rating-icon ci-star-filled "></i>
+                                                        </div>
+                                                        {{-- <span class="review">{{ count($reviewcount) }}
+                                                        Review(s)</span> --}}
+                                                        </a>
+
+                                                        @elseif($average == 3 || $average < 4) <a
+                                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                            <div class="star-rating"><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                                    class="star-rating-icon ci-star-filled "></i><i
+                                                                    class="star-rating-icon ci-star-filled"></i>
+                                                            </div>
+                                                            {{-- <span class="review">{{ count($reviewcount) }}
+                                                            Review(s)</span> --}}
+                                                            </a>
+
+
+                                                            @elseif($average == 4 || $average < 5) <a
+                                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                                <div class="star-rating"><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled active"></i><i
+                                                                        class="star-rating-icon ci-star-filled "></i>
+                                                                </div>
+                                                                {{-- <span class="review">{{ count($reviewcount) }}
+                                                                Review(s)</span> --}}
+                                                                </a>
+                                                                @elseif($average == 5 || $average < 5) <div
+                                                                    class="reviews">
+                                                                    <a
+                                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+                                                                        <div class="star-rating"><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                                                class="star-rating-icon ci-star-filled active"></i>
+                                                                        </div>
+                                                                        {{-- <span class="review">{{ count($reviewcount) }}
+                                                                        Review(s)</span> --}}
+                                                                    </a>
+                                        </div>
+
+                                        @endif
+                                    
                                     @foreach ($categories->chunk(6) as $category)
                                     @foreach ($category as $cat)
                                     @if ($item->category_id == $cat->id)
-                                    <a class="product-meta d-block fs-xs pb-1" href="#">{{ $cat->category_name_en }}</a>
+                                    <a class="product-meta d-block fs-xs pb-1 truncated" href="#">{{ $cat->category_name_en }}</a>
                                     @endif
                                     @endforeach
                                     @endforeach
 
 
-                                    <h3 class="product-title fs-sm"><a
+                                    <h3 class="product-title fs-sm truncated"><a
                                             href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">{{$item->product_name_en}}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price">
@@ -497,9 +608,9 @@
                                             @else
                                             <span
                                                 class="text-accent">₱{{$item->discount_price}}.<small>00</small></span>
-                                            {{-- <del
-                                                class="fs-sm text-muted">${{$item->selling_price}}.<small>00</small></del>
-                                            --}}
+                                            <del
+                                                class="fs-xs text-muted">${{$item->selling_price}}.<small>00</small></del>
+                                            
                                             @endif
 
 
@@ -511,91 +622,7 @@
                                         </div>
 
 
-                                        @php
-                                        $reviewcount =
-                                        App\Models\Review::where('product_id',$item->id)->where('status',1)->latest()->get();
-                                        $average =
-                                        App\Models\Review::where('product_id',$item->id)->where('status',1)->avg('rating');
-                                        @endphp
-
-                                        @if($average == 0 || $average < 0) <a
-                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                            <div class="star-rating"><i class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i><i
-                                                    class="star-rating-icon ci-star-filled "></i>
-                                            </div>
-                                            {{-- <span class="review">{{ count($reviewcount) }}
-                                            Review(s)</span> --}}
-                                            </a>
-                                            @elseif($average == 1 || $average < 2) <a
-                                                href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                <div class="star-rating"><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i><i
-                                                        class="star-rating-icon ci-star-filled "></i>
-                                                </div>
-                                                {{-- <span class="review">{{ count($reviewcount) }}
-                                                Review(s)</span> --}}
-                                                </a>
-                                                @elseif($average == 2 || $average < 3) <a
-                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                    <div class="star-rating"><i
-                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                            class="star-rating-icon ci-star-filled "></i><i
-                                                            class="star-rating-icon ci-star-filled "></i><i
-                                                            class="star-rating-icon ci-star-filled "></i>
-                                                    </div>
-                                                    {{-- <span class="review">{{ count($reviewcount) }}
-                                                    Review(s)</span> --}}
-                                                    </a>
-
-                                                    @elseif($average == 3 || $average < 4) <a
-                                                        href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                        <div class="star-rating"><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                                class="star-rating-icon ci-star-filled "></i><i
-                                                                class="star-rating-icon ci-star-filled"></i>
-                                                        </div>
-                                                        {{-- <span class="review">{{ count($reviewcount) }}
-                                                        Review(s)</span> --}}
-                                                        </a>
-
-
-                                                        @elseif($average == 4 || $average < 5) <a
-                                                            href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                            <div class="star-rating"><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                                    class="star-rating-icon ci-star-filled "></i>
-                                                            </div>
-                                                            {{-- <span class="review">{{ count($reviewcount) }}
-                                                            Review(s)</span> --}}
-                                                            </a>
-                                                            @elseif($average == 5 || $average < 5) <div class="reviews">
-                                                                <a
-                                                                    href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
-                                                                    <div class="star-rating"><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i><i
-                                                                            class="star-rating-icon ci-star-filled active"></i>
-                                                                    </div>
-                                                                    {{-- <span class="review">{{ count($reviewcount) }}
-                                                                    Review(s)</span> --}}
-                                                                </a>
-                                    </div>
-
-                                    @endif
+ 
 
 
 
@@ -646,7 +673,6 @@
 
 
 </section>
-
 
 
 

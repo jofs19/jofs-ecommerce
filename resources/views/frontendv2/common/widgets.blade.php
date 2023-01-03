@@ -49,7 +49,7 @@
                 </div>
                 @endforeach
 
-                <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">View more<i
+                <p class="mb-0">...</p><a class="fs-sm bounce-right" href="{{ route('shop.page') }}">View more<i
                         class="ci-arrow-right fs-xs ms-1"></i></a>
             </div>
         </div>
