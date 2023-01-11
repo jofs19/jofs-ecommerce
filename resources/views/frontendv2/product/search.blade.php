@@ -127,7 +127,7 @@ Vartouhi | Search
           <div class="col-md-4 col-sm-6 px-2 mb-4">
 
 
-            <div class="card product-card">
+            <div class="card product-card product-section">
 
                 @php
                 $amount = $product->selling_price - $product->discount_price;

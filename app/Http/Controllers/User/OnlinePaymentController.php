@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
+use App\Models\User;
+use App\Notifications\OrderComplete;
+use Illuminate\Support\Facades\Notification;
 
 class OnlinePaymentController extends Controller
 {
     
     public function OnlineOrder(Request $request){
 
+        $user = User::findOrFail(Auth::id());
 
     	if (Session::has('coupon')) {
     		$total_amount = Session::get('coupon')['total_amount'];
@@ -102,9 +106,14 @@ class OnlinePaymentController extends Controller
 			'alert-type' => 'success'
 		);
 
-		$order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
-        $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();  
+		$order_invoice = Order::findOrFail($order_id)->invoice_no;
 
+
+		$order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get(); 
+		
+        Notification::send($user, new OrderComplete($request->name,$order_invoice));
+		// $user->notify(new OrderComplete($request->name));
 		return view('frontendv2.checkout.checkout_complete',compact('order', 'orderItem'))->with($notification);
 
 

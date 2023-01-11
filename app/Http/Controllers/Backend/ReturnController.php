@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OrderReturned;
+
 class ReturnController extends Controller
 {
     public function ReturnRequest(){
@@ -32,6 +36,14 @@ class ReturnController extends Controller
 
     	Order::where('id',$order_id)->update(['return_order' => 2]);
     	$orders = Order::where('return_order',2)->orderBy('id','DESC')->get();
+
+        		// get user id in order db to send notifications
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+        $order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderReturned($order_id,$order_invoice));
 
     	$notification = array(
             'message' => 'Return Order Successfully',

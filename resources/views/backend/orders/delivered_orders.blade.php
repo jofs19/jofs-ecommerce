@@ -40,13 +40,8 @@
 	 <tr>
 		<td> {{ $item->order_date }}  </td>
 		<td> {{ $item->invoice_no }}  </td>
-		<td>  @if($item->amount >= 1000)
-			₱ {{ $item->amount }}
-
-			@else
-			₱ {{ $item->amount + $item->shipping_charge }}
-
-			@endif  </td>
+		<td>  			₱ {{ $item->amount + $item->shipping_charge }}
+		</td>
 
 		<td> {{ $item->payment_method }}  </td>
 		<td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span>  </td>

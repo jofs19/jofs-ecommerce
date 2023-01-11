@@ -125,7 +125,7 @@
         <!-- Product-->
             @foreach($products_category as $product)
             <div>
-                <div class="card product-card-alt">
+                <div class="card product-card-alt product-section">
                     @php
                     $amount = $product->selling_price - $product->discount_price;
                     $discount = ($amount/$product->selling_price) * 100;
@@ -359,7 +359,7 @@
                   <!-- Product-->
                       @forelse($catwiseProduct as $product)
                       <div>
-                          <div class="card product-card-alt">
+                          <div class="card product-card-alt product-section">
                             @php
                             $amount = $product->selling_price - $product->discount_price;
                             $discount = ($amount/$product->selling_price) * 100;

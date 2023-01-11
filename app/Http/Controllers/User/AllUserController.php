@@ -42,12 +42,14 @@ class AllUserController extends Controller
                 $orders = $orders->where('status','shipped');
             }elseif($_GET['sort_order'] == 'delivered'){
                 $orders = $orders->where('status','delivered');
-            }elseif($_GET['sort_order'] == 'rejected'){
-                $orders = $orders->where('status','cancel');
+            }elseif($_GET['sort_order'] == 'cancelled'){
+                $orders = $orders->where('status','cancel_order');
             }elseif($_GET['sort_order'] == 'return'){
                 $orders = $orders->where('return_order',1);
             }elseif($_GET['sort_order'] == 'all'){
                 $orders = $orders->orderBy('id','DESC');
+            }elseif($_GET['sort_order'] == 'rejected'){
+                $orders = $orders->where('status','reject');
             }
             
 
@@ -121,7 +123,7 @@ class AllUserController extends Controller
 
 
       $notification = array(
-            'message' => 'Return Request Send Successfully',
+            'message' => 'Return Request Sent Successfully',
             'alert-type' => 'success'
         );
 

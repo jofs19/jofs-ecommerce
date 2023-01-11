@@ -23,7 +23,7 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="table-responsive">
-					  <table id="example1" class="table table-bordered table-striped">
+					  <table id="example1" class="table table-bordered table-striped text-center">
 						<thead>
 							<tr>
 								<th>Image </th>
@@ -50,7 +50,7 @@
 		
 		</td>
 		<td>{{ $item->product_name_en }}</td>
-		 <td>{{ $item->selling_price }} $</td>
+		 <td>₱{{ $item->selling_price }}</td>
 		 <td>{{ $item->product_qty }} pcs.</td>
 
 		 <td> 

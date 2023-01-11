@@ -68,10 +68,11 @@
             <option value="picked" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'picked') selected="" @endif>Picked</option>
             <option value="shipped" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'shipped') selected="" @endif>Shipped</option>
             <option value="delivered" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'delivered') selected="" @endif>Delivered</option>
+            <option value="cancelled" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'cancelled') selected="" @endif>Cancelled</option>
             <option value="rejected" @if (isset($_GET['sort_order']) && $_GET['sort_order'] == 'rejected') selected="" @endif>Rejected</option>
           </select>
         </form>
-        </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i class="ci-sign-out me-2"></i>Sign out</a>
+        </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="{{ route('user.logout') }}"><i class="ci-sign-out me-2"></i>Sign out</a>
       </div>
 
 

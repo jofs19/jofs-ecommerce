@@ -63,7 +63,7 @@
                             
 
                             @if($loop->iteration < 5) <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
-                                <div class="card product-card card-static">
+                                <div class="card product-card card-static product-section">
 
                                                     @php
                 $amount = $item->selling_price - $item->discount_price;
@@ -256,7 +256,7 @@
                         <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
 
 
-                            <div class="card product-card card-static">
+                            <div class="card product-card card-static product-section">
                                 @php
                                 $amount = $item->selling_price - $item->discount_price;
                                 $discount = ($amount/$item->selling_price) * 100;
@@ -449,7 +449,7 @@
                         <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
 
 
-                            <div class="card product-card card-static">
+                            <div class="card product-card card-static product-section">
                                 @php
                                 $amount = $item->selling_price - $item->discount_price;
                                 $discount = ($amount/$item->selling_price) * 100;

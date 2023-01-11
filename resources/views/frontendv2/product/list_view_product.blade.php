@@ -3,7 +3,7 @@
             <!-- Product-->
             @forelse ($products as $product)
 
-            <div class="card product-card product-list">
+            <div class="card product-card product-list product-section">
 
 
                 @php

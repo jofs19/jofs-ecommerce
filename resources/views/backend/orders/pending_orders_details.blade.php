@@ -326,7 +326,7 @@
         $shipping_charge_format = number_format($shipping_charge, 2);
        @endphp
 
-        @if($subtotal_format >= 1000)
+        @if($order->shipping_charge == null)
         <p>Shipping Charge : Free Shipping</p>
         @else
         <p>Shipping Charge : ₱ {{ $shipping_charge_format }}</p>
@@ -336,7 +336,7 @@
 
 
 
-        @if($subtotal_format >= 1000)
+        @if($order->shipping_charge == null)
 
         @php
 

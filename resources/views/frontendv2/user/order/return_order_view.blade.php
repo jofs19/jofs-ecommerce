@@ -27,14 +27,14 @@
         <!-- Toolbar-->
         <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
           <div class="d-flex align-items-center">
-            <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="ticket-sort">Sort tickets:</label>
-            <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="ticket-sort">Sort tickets:</label>
+            <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="ticket-sort">Sort Orders:</label>
+            <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="ticket-sort">Sort Orders:</label>
             <select class="form-select" id="ticket-sort">
               <option>All</option>
               <option>Open</option>
               <option>Closed</option>
             </select>
-          </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i class="ci-sign-out me-2"></i>Sign out</a>
+          </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="{{ route('user.logout') }}"><i class="ci-sign-out me-2"></i>Sign out</a>
         </div>
         <!-- Tickets list-->
         <div class="table-responsive fs-md mb-4">

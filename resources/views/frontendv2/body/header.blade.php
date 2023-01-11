@@ -210,6 +210,35 @@
                                     class="dropdown-item d-flex align-items-center {{ (request()->is('user/return/order/list')) ? 'active' : '' }}" href="{{ route('return.order.list') }}"><i
                                         class="ci-reply opacity-60 me-2"></i>Returned Orders<span
                                         class="fs-xs text-muted ms-auto">{{ count($returned) }}</span></a>
+
+                                        @php
+			                                  if (Auth::check()){
+                                          $ncount = Auth::user()->unreadNotifications()->count();
+                                        }
+                                        else{
+                                          $ncount = 0;
+
+                                        }
+
+                                        
+                                        @endphp
+
+
+                                        {{-- @if(Auth::check())
+
+                                        $ncount = Auth::user()->unreadNotifications()->count()
+
+                                        @else
+
+                                        $ncount = 0;
+
+                                        @endif --}}
+
+
+                                        <a type="button"
+                                    class="dropdown-item d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><i
+                                        class="ci-bell opacity-60 me-2"></i>Notifications<span
+                                        class="fs-xs text-muted ms-auto">{{ $ncount }}</span></a>
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">More Settings</h6><a
                                     class="dropdown-item d-flex align-items-center {{ (request()->is('user/profile')) ? 'active' : '' }}" href="{{ route('user.profile') }}"><i
@@ -231,6 +260,9 @@
                         <div class="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
                     </a>
                     @endauth
+
+
+
   
   
                     {{-- My Cart Area --}}

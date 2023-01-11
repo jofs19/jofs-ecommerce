@@ -13,6 +13,8 @@
     <meta name="author" content="John Oliver Santiago">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" />
+
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
@@ -237,7 +239,28 @@
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span>
-      </span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
+      </span><span class="handheld-toolbar-label">Wishlist</span></a>
+
+      
+      <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
+    
+                                        @php
+			                                  if (Auth::check()){
+                                          $ncount = Auth::user()->unreadNotifications()->count();
+                                        }
+                                        else{
+                                          $ncount = 0;
+
+                                        }
+
+                                       
+                                        
+                                        @endphp
+      <a class="d-table-cell handheld-toolbar-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><span class="handheld-toolbar-icon"><i class="ci-bell"></i><span class="badge bg-primary rounded-pill ms-1">  {{ $ncount }}  </span></span> <span class="handheld-toolbar-label">Notifications</span></a>
+    
+      <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
+
+    </div>
     </div>
     {{-- End Mobile UI Area --}}
 
@@ -245,7 +268,14 @@
 
     {{-- Mobile UI Area for Shop Page --}}
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span></span><span class="handheld-toolbar-label">Wishlist</span></a>
+
+        
+        <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
+      
+        <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
+      
+      </div>
     </div>
     {{-- End Mobile UI Area for Shop Page --}}
 
@@ -253,7 +283,16 @@
 
     <!-- Toolbar for handheld devices (Blog)-->
     <div class="handheld-toolbar">
-      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#blog-sidebar"><span class="handheld-toolbar-icon"><i class="ci-sign-in"></i></span><span class="handheld-toolbar-label">Sidebar</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a></div>
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#blog-sidebar"><span class="handheld-toolbar-icon"><i class="ci-sign-in"></i></span><span class="handheld-toolbar-label">Sidebar</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a>
+        
+
+        
+        <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
+      
+        <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
+      
+      </div>
+        
     </div>
 
     @endif
@@ -281,6 +320,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 
     {{-- TOASTR + SWEETALERT CDN --}}
+
+    {{-- GSAP PLUGINS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
+    
 
     <script src="{{ asset('frontendv2/assets/js/code2.js') }}"></script>
 
@@ -310,6 +356,65 @@
 
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
 
+
+    @php
+    $user = Auth::user();
+    @endphp
+
+                        <!-- Offcanvas Notifications -->
+<div class="offcanvas offcanvas-end" id="offcanvasRight" tabindex="-1">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title">Notifications</h5>
+    <button class="btn-close" type="button" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" data-simplebar>
+
+    @if(Auth::check())
+
+    @forelse($user->notifications as $notification)
+
+    <!-- Post comment -->
+<div class=" d-flex align-items-start border-bottom py-2 my-2">
+  <img class="rounded-circle" width="50" src="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" alt="Laura Willson"/>
+  <div class="ps-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h6 class="fs-md mb-0"> @php
+        $truncate = Auth::user()->name;
+        $numOfChars = strlen($truncate);
+        if ($numOfChars > 11) {
+            $truncate = substr($truncate, 0, 20).'...';
+        }else{
+            $truncate = substr($truncate, 0, 20);
+        }
+    @endphp
+
+    
+      Vartouhi Corporation </h6>
+      
+    </div>
+    <p class="fs-md mb-1">{{ $notification->data['message'] }}</p>
+    <span class="fs-ms text-muted">
+      <i class="ci-time align-middle me-2"></i>
+      {{ Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}
+    </span>
+  </div>
+</div>
+
+
+    @empty
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="text-center py-4">
+        <h4 class="h4 mb-4 text-muted">No Notifications</h4>
+      </div>
+    </div>
+    @endforelse
+
+    @endif
+
+
+
+  </div>
+</div>
 
     {{-- Sign-in/Sign-up Modal Area --}}
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
@@ -1939,6 +2044,44 @@ $('select[name="district_id"]').on('change', function(){
             window.location.href = 'https://www.tutorialspoint.com/javascript/';
          }, 3000);
       </script> --}}
+
+
+
+      <script>
+
+gsap.registerPlugin(ScrollTrigger);
+
+let sections = gsap.utils.toArray(".product-section");
+
+sections.forEach((section) => {
+  // scoped selector - select elements inside this section.
+  let q = gsap.utils.selector(section)
+  let tl = gsap.timeline({
+    delay: 0.5,
+    defaults: {
+      duration: 1,
+      ease: "sine.out"
+    },
+    scrollTrigger: {
+      trigger: section,
+      fastScrollEnd: true,
+      // markers: true,
+      start: "top bottom",
+      end: "top 80%", // fastScrollEnd triggers as we leave the section so make sure you have an end position set low down enough to see the impact.
+      toggleActions: "play none none reverse",
+    }
+  });
+  tl.from(q('img'), {
+    scale: 0.8,
+    opacity: 0
+  })
+  .from(q('p'), {
+    y: 50,
+    opacity: 0
+  },'<50%')
+});
+
+      </script>
       
 
 

@@ -165,3 +165,8 @@
 @-webkit-keyframes shadow-drop-2-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-transform:translateZ(50px);transform:translateZ(50px);-webkit-box-shadow:0 0 20px 0 rgba(0,0,0,.35);box-shadow:0 0 20px 0 rgba(0,0,0,.35)}}@keyframes shadow-drop-2-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-transform:translateZ(50px);transform:translateZ(50px);-webkit-box-shadow:0 0 20px 0 rgba(0,0,0,.35);box-shadow:0 0 20px 0 rgba(0,0,0,.35)}}
 {{-- SHADOW DROP-2 --}}
 
+<!--VIBRATE-2-->
+.vibrate-2{-webkit-animation:vibrate-2 2s linear infinite both;animation:vibrate-2 2s linear infinite both}
+@-webkit-keyframes vibrate-2{0%{-webkit-transform:translate(0);transform:translate(0)}20%{-webkit-transform:translate(2px,-2px);transform:translate(2px,-2px)}40%{-webkit-transform:translate(2px,2px);transform:translate(2px,2px)}60%{-webkit-transform:translate(-2px,2px);transform:translate(-2px,2px)}80%{-webkit-transform:translate(-2px,-2px);transform:translate(-2px,-2px)}100%{-webkit-transform:translate(0);transform:translate(0)}}@keyframes vibrate-2{0%{-webkit-transform:translate(0);transform:translate(0)}20%{-webkit-transform:translate(2px,-2px);transform:translate(2px,-2px)}40%{-webkit-transform:translate(2px,2px);transform:translate(2px,2px)}60%{-webkit-transform:translate(-2px,2px);transform:translate(-2px,2px)}80%{-webkit-transform:translate(-2px,-2px);transform:translate(-2px,-2px)}100%{-webkit-transform:translate(0);transform:translate(0)}}
+<!--VIBRATE-2-->
+

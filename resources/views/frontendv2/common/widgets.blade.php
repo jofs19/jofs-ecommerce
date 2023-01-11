@@ -10,14 +10,14 @@
                 @foreach($hot_deals as $product)
 
                 @if($loop->iteration == 1)
-                <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center pb-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                         href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
 
                 @elseif($loop->iteration == 4)
-                <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center py-2 product-section"><a class="d-block flex-shrink-0"
                     href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                 @else
-                <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center py-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                     href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                 @endif
                 
@@ -79,14 +79,14 @@
                 @foreach ($special_deals as $product)
                     
                 @if($loop->iteration == 1)
-                <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center pb-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                         href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
 
                 @elseif($loop->iteration == 4)
-                <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center py-2 product-section"><a class="d-block flex-shrink-0"
                     href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                 @else
-                <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
+                <div class="d-flex align-items-center py-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                     href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                 @endif
                         
@@ -139,14 +139,14 @@
                         @foreach($discounted_products as $product)
         
                         @if($loop->iteration == 1)
-                        <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                        <div class="d-flex align-items-center pb-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                                 href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
         
                         @elseif($loop->iteration == 4)
-                        <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
+                        <div class="d-flex align-items-center py-2 product-section"><a class="d-block flex-shrink-0"
                             href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                         @else
-                        <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
+                        <div class="d-flex align-items-center py-2 border-bottom product-section"><a class="d-block flex-shrink-0"
                             href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                         @endif
                         

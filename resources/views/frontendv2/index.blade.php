@@ -194,7 +194,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 {{-- Trending Products Area --}}
 
-<section class="container pt-5">
+<section class="container pt-5 ">
     <!-- Heading-->
 
 
@@ -210,7 +210,7 @@ Vartouhi | Beauty & Cosmetics Store
 
         <!-- Product-->
         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" >
-            <div class="card product-card cardProduct" >
+            <div class="card product-card cardProduct product-section" >
 
                 @php
                 $amount = $product->selling_price - $product->discount_price;
@@ -533,7 +533,7 @@ Vartouhi | Beauty & Cosmetics Store
             </div>
 
                 
-            <div class="col-md-6 pt-3 mt-3"><img src="{{ asset($product->product_thumbnail) }}" alt="Special Offer Product" class="shadow-drop-2-center"></div>
+            <div class="col-md-6 pt-3 mt-3 product-section"><img src="{{ asset($product->product_thumbnail) }}" alt="Special Offer Product" class="shadow-drop-2-center"></div>
 
                 @empty
 
@@ -601,7 +601,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 {{-- Blog Area --}}
 
-<section class="container pb-5 mb-md-3">
+<section class="container pb-5 mb-md-3 product-section">
     <div class="border rounded-3 p-3">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
@@ -661,7 +661,7 @@ Vartouhi | Beauty & Cosmetics Store
 
 
 {{-- Container Blog + Instagram Area --}}
-<section class="container-fluid px-0">
+<section class="container-fluid px-0 product-section">
     <div class="row g-0">
         <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
                 href="{{ route('home.blog') }}">

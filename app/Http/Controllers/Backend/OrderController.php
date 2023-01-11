@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+
+
+use App\Notifications\OrderConfirmed;
+use App\Notifications\OrderProcessed;
+use App\Notifications\OrderPicked;
+use App\Notifications\OrderShipped;
+use App\Notifications\OrderDelivered;
+use App\Notifications\OrderRejected;
 
 class OrderController extends Controller
 {
@@ -91,12 +101,25 @@ class OrderController extends Controller
     public function PendingToConfirm($order_id){
 
         Order::findOrFail($order_id)->update(['status' => 'confirm']);
-  
+
+		// get user id in order db to send notifications
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		// order invoice
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+	
+		Notification::send($user, new OrderConfirmed($order_id,$order_invoice));
+		// $user->notify(new OrderConfirmed($order_id));
+
         $notification = array(
               'message' => 'Order Confirmed Successfully',
               'alert-type' => 'success'
           );
-  
+
+		  // Send Notification to users
+
+
           return redirect()->route('pending-orders')->with($notification);
   
   
@@ -105,6 +128,13 @@ class OrderController extends Controller
 	  public function RejectOrders($order_id){
 
 		Order::findOrFail($order_id)->update(['status' => 'reject']);
+
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderRejected($order_id,$order_invoice));
 
 		$notification = array(
 			'message' => 'Order Rejected Successfully',
@@ -118,6 +148,13 @@ class OrderController extends Controller
       public function ConfirmToProcessing($order_id){
 
         Order::findOrFail($order_id)->update(['status' => 'processing']);
+
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderProcessed($order_id,$order_invoice));
   
         $notification = array(
               'message' => 'Order Processing Successfully',
@@ -134,6 +171,13 @@ class OrderController extends Controller
           public function ProcessingToPicked($order_id){
   
         Order::findOrFail($order_id)->update(['status' => 'picked']);
+
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderPicked($order_id,$order_invoice));
   
         $notification = array(
               'message' => 'Order Picked Successfully',
@@ -149,6 +193,13 @@ class OrderController extends Controller
        public function PickedToShipped($order_id){
   
         Order::findOrFail($order_id)->update(['status' => 'shipped']);
+
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderShipped($order_id,$order_invoice));
   
         $notification = array(
               'message' => 'Order Shipped Successfully',
@@ -170,6 +221,13 @@ class OrderController extends Controller
 		} 
   
         Order::findOrFail($order_id)->update(['status' => 'delivered']);
+
+		$user_id = Order::where('id',$order_id)->first()->user_id;
+		$user = User::where('id',$user_id)->first();
+
+		$order_invoice = Order::where('id',$order_id)->first()->invoice_no;
+
+		Notification::send($user, new OrderDelivered($order_id,$order_invoice));
   
         $notification = array(
               'message' => 'Order Delivered Successfully',
