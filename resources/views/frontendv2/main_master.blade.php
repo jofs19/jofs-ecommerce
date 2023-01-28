@@ -32,7 +32,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     
 
 
@@ -306,6 +306,33 @@
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
     {{-- JQUERY CDN --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script>
+        var availableTags = [];
+          $.ajax({
+            url: "/product-list",
+            type: "GET",
+
+            success: function(data) {
+              // console.log(data);
+              startAutoComplete(data);
+            }
+          });
+
+          function startAutoComplete(availableTags) {
+            $( ".search_product" ).autocomplete({
+              source: availableTags
+            });
+          }
+
+
+        // $( "#search_product" ).autocomplete({
+        //   source: availableTags
+        // });
+      </script>
 
 
     {{-- VENDOR PLUGINS --}}

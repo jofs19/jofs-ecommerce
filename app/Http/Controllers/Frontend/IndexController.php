@@ -421,6 +421,52 @@ class IndexController extends Controller
 
 	} // end method 
 
+    public function productlistAjax(){
+        $products = Product::where('status',1)->orderBy('id','DESC')->get();
+
+        $data = [];
+
+        // foreach($products as $product){
+        //     $data[] = [
+        //         'id' => $product->id,
+        //         'name' => $product->product_name_en,
+        //         'price' => $product->selling_price,
+        //         'image' => $product->product_thumbnail,
+        //         'url' => route('product.details',$product->product_slug_en),
+        //     ];
+        // }
+
+        foreach($products as $item){
+            $data[] = [
+                $data[] = $item['product_name_en'],
+            ];
+        }
+
+        return $data;
+
+    }
+
+    public function searchProd(Request $request){
+
+        $searched_product = $request->search;
+
+        if($searched_product != ''){
+            $products = Product::where('product_name_en','LIKE','%'.$searched_product.'%')->first();
+            if($products){
+                return view('frontendv2.product.search',compact('products'));
+            }else{
+                
+                return redirect()->back()->with('error','No Product Found');
+
+            }
+        }else{
+            return redirect()->back();
+        }
+
+    }
+
+
+
 
 
 

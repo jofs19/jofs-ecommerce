@@ -942,6 +942,36 @@ progress {
     width: 50%;
   }
 
+  .search-bar{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .ui-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999999 !important;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 4px 0 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    background-clip: padding-box;
+  }
+
   .row-cols-sm-3 > * {
     flex: 0 0 auto;
     width: 33.3333333333%;

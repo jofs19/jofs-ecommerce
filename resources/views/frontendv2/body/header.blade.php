@@ -1,5 +1,5 @@
 {{-- <i><span class="ci-globe"></span></i>Language --}}
-
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> --}}
 <head>
 
   <style>
@@ -27,6 +27,41 @@
         box-sizing: border-box;
         -webkit-animation: rotation 1s linear infinite;
         animation: rotation 1s linear infinite; }
+
+        .ui-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999999 !important;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0 0 4px 4px;
+    
+    
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    background-clip: padding-box;
+  }
+
+  .ui-menu-divider:hover{
+    display: block;
+    cursor: pointer;
+    color: #dae1e7;
+  }
+
+
+  /* color anchor to grey */
+
+  .ui-menu-divider a {
+    color: #dae1e7;
+  }
   
   </style>
   
@@ -106,7 +141,6 @@
         </div>
     </div>
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-     <!-- Search-->
                 
      <form method="POST" action="{{ route('product.search') }}">
       @csrf
@@ -138,14 +172,30 @@
                     </select>
   
                 </div> --}}
-  
-                <div class="input-group d-none d-lg-flex flex-nowrap ms-3 me-4">
-                  <input class="form-control rounded-end pe-5" name="search" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
+
+                <!-- Search (PC)-->
+
+                <form method="POST" action="{{ url('searchproduct') }}">
+                  @csrf
+                <div class="input-group d-none d-lg-flex flex-nowrap ms-3 me-4 search-bar">
+
+                
+                  <input class="form-control  pe-5 search_product" name="search" type="text" placeholder="Search for products">
+                  
+                  <button class="btn btn-primary rounded-end" type="submit"><i class="ci-search"></i></button>
+
+
+                  
+                  
                 </div>
+              </form>
+
+
+                <!-- End Search (PC)-->
+
   
               </form>
   
-                <!-- End Search-->
   
   
                 <!-- Toolbar-->
@@ -313,13 +363,20 @@
   
                   <form autocomplete="off" method="post" action="{{ route('product.search') }}">
                       @csrf
+
+                      <form method="POST" action="{{ url('searchproduct') }}">
+                        @csrf
   
-                    <!-- Search-->
+                    <!-- Search (MOBILE)-->
                     <div class="input-group d-lg-none my-3"><i
                             class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                        <input class="form-control rounded-start" type="text" placeholder="Search for products" name="search">
+
+                        <input class="form-control rounded-start search_product" type="text" placeholder="Search for products" name="search">
+                        <button class="btn btn-primary rounded-end" type="submit"><i class="ci-search"></i></button>
+
                     </div>
-                    <!-- End Search-->
+                    <!-- End Search (MOBILE)-->
+                    </form>
   
                   </form>
   

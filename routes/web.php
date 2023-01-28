@@ -590,6 +590,12 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
     // Advance Search Routes 
     Route::post('/search-product', [IndexController::class, 'SearchProduct']);
 
+
+    // NEW ADVANCE SEARCH
+    Route::get('product-list', [IndexController::class, 'productlistAjax']);
+    Route::post('searchproduct', [IndexController::class, 'searchProd']);
+
+
     // Shop Page Route 
     Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop.page');
 
