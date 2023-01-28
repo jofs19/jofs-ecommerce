@@ -224,11 +224,11 @@
               <div class="invalid-feedback">Please enter valid email address!</div>
             </div>
             <div class="col-sm-6">
-              <label class="form-label" for="address">Street Address</label>
-              <input class="form-control" type="text" id="address" name="address" required>
+              <label class="form-label" for="address">Home Address</label>
+              <input class="form-control" type="text" id="address" name="address" required placeholder="House #, Street/Bldg. Name, Brgy.">
 			  <div class="invalid-feedback">Please enter your address!</div>
 
-			  <div class="form-text">(<strong>e.g.</strong> #26 Padilla St. West)</div>
+			  <div class="form-text">(<strong>e.g.</strong> #26 Padilla St. West Poblacion)</div>
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="phone">Phone Number </label>

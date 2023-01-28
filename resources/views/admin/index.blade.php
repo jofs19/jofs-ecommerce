@@ -10,6 +10,14 @@
 	$year = App\Models\Order::where('order_year',$year)->sum('amount');
     $pending = App\Models\Order::where('status','pending')->get();
     $best_seller_product = App\Models\OrderItem::with('product')->select('product_id',DB::raw('count(product_id) as total'))->groupBy('product_id')->orderBy('total','DESC')->first();
+
+
+    // Convert product_qty to integer
+
+    $out_of_stock = App\Models\Product::where('stock','<','1')->get();
+    $soon_to_be_out_of_stock = App\Models\Product::where('stock','<=','10')->get();
+    $soon_to_be_out_of_stock_count = App\Models\Product::where('stock','<=','10')->count();
+    $total_user = App\Models\User::count();
 @endphp
 
 <div class="container-full">
@@ -51,7 +59,20 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-4 col-6">
+                <div class="box overflow-hidden pull-up">
+                    <div class="box-body">							
+                        <div class="icon bg-success-light rounded w-60 h-60">
+                            <i class="text-success mr-0 font-size-24 glyphicon glyphicon-user"></i>
+                        </div>
+                        <div>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Total Users </p>
+                            <h3 class="text-white mb-0 font-weight-500">{{ $total_user }} <small class="text-success"><i class="fa fa-user"></i> Number of Users</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="widget-user-image w-60 h-60">
@@ -59,12 +80,12 @@
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Best Seller Product</p>
-                            <h4 class="text-white mb-0 font-weight-500">{{ $best_seller_product->product->product_name_en }} <br> <small class="text-success"><i class="fa fa-caret-up"></i> Total Sell: {{ $best_seller_product->total }}</small></h4>
+                            <h4 class="text-white mb-0 font-weight-500">{{ $best_seller_product->product->product_name_en }} <br> <small class="text-success"><i class="fa fa-caret-up"></i> Sold by: {{ $best_seller_product->total }} Users</small></h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-4 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="icon bg-primary-light rounded w-60 h-60">
@@ -77,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-4 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="icon bg-info-light rounded w-60 h-60">
@@ -90,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-4 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="icon bg-danger-light rounded w-60 h-60">
@@ -102,6 +123,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-xl-4 col-6">
+                <a type="btn" data-toggle="modal" data-target=".bs-example-modal-lg">
+                <div class="box overflow-hidden pull-up">
+                    <div class="box-body">							
+                        <div class="icon bg-warning-light rounded w-60 h-60">
+                            <i class="text-danger mr-0 font-size-24 glyphicon glyphicon-warning-sign"></i>
+                        </div>
+                        <div>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Nearly Out of Stock Products </p>
+                            <h3 class="text-white mb-0 font-weight-500">{{ $soon_to_be_out_of_stock_count }} products   <small class="text-primary"><i class="fa fa-caret-up"></i> Check Now </small></h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
             </div>
  
             <div class="col-12">
@@ -260,4 +296,53 @@
     </section>
     <!-- /.content -->
   </div>
+
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header pb-2 mb-2">
+                {{-- Put badge --}}
+                <h4 class="modal-title py-2 my-2 font-bold" id="myLargeModalLabel">Nearly Out of Stock Products! </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover display nowrap margin-top-10 w-p100 text-center font-bold">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($soon_to_be_out_of_stock as $item)
+                        <tr>
+                            <td>{{ $item->product_name_en }}</td>
+                            <td>{{ $item->product_qty }}</td>
+                            @if($item->discount_price == NULL)
+                            <td>{{ $item->selling_price }}</td>
+                            @else
+                            <td>{{ $item->discount_price }}</td>
+                            @endif
+                            <td><img src="{{ asset($item->product_thumbnail) }}" alt="" style="height: 50px; width: 50px;"></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-rounded text-left" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
   @endsection

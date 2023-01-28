@@ -36,10 +36,10 @@
 
 
 <div class="form-group">
-	<h5>Select City <span class="text-danger">*</span></h5>
+	<h5>Select Province <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select City</option>
+			<option value="" selected="" disabled="">Select Province</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}" {{ $div->id == $state->division_id ? 'selected': '' }}>{{ $div->division_name }}</option>	
 			@endforeach
@@ -53,10 +53,10 @@
 
 
 <div class="form-group">
-	<h5>Select Province <span class="text-danger">*</span></h5>
+	<h5>Select City <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="district_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Province</option>
+			<option value="" selected="" disabled="">Select City</option>
 			@foreach($district as $dis)
 			<option value="{{ $dis->id }}" {{ $dis->id == $state->district_id ? 'selected': '' }}>{{ $dis->district_name }}</option>	
 			@endforeach

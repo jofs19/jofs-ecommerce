@@ -217,6 +217,13 @@ Vartouhi | Beauty & Cosmetics Store
                 $discount = ($amount/$product->selling_price) * 100;
                 @endphp
 
+                @if($product->product_qty < 1)
+                <span class="badge bg-danger badge-shadow">
+                    <i class="ci-security-close"></i> Out of Stock
+                </span>
+
+                @else
+
                 @if($product->discount_price == NULL)
                 <span class="badge bg-success badge-shadow">
                     New
@@ -226,6 +233,9 @@ Vartouhi | Beauty & Cosmetics Store
                    <i class="ci-discount"></i> Sale {{ round($discount) }}% 
                 </span>
                 @endif
+
+                @endif
+
 
 
 
@@ -601,10 +611,10 @@ Vartouhi | Beauty & Cosmetics Store
 
 {{-- Blog Area --}}
 
-<section class="container pb-5 mb-md-3 product-section">
+<section class="container pb-5 mb-md-3">
     <div class="border rounded-3 p-3">
         <div class="row">
-            <div class="col-md-4 mb-3 mb-md-0">
+            <div class="col-md-4 mb-3 mb-md-0 product-section">
 
 
 
@@ -637,7 +647,7 @@ Vartouhi | Beauty & Cosmetics Store
                         
                         
                         <a class="d-block text-decoration-0 px-2"
-                            href="{{ route('post.details', $blog->id) }}" data-bs-toggle="video">
+                            href="{{ route('post.details', $blog->id) }}">
 
 
                             <div class="position-relative mb-2"><span

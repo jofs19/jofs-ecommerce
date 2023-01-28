@@ -24,7 +24,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Edit Province </h3>
+				  <h3 class="box-title">Edit City </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -54,7 +54,7 @@
 
 
 	 <div class="form-group">
-		<h5>Province Name  <span class="text-danger">*</span></h5>
+		<h5>City Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="district_name" class="form-control" value="{{ $district->district_name }}" > 
 	 @error('district_name') 

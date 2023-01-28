@@ -7,6 +7,10 @@ Vartouhi | Contact Us
 @endsection
 
 
+          @php
+         $setting = App\Models\SiteSetting::find(1);
+          @endphp
+
 <div class="page-title-overlap bg-dark pt-4">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
       <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -33,7 +37,7 @@ Vartouhi | Contact Us
           <div class="col-xl-3 col-sm-6 mb-grid-gutter"><a class="card h-100" href="#map" data-scroll>
               <div class="card-body text-center"><i class="ci-location h3 mt-2 mb-4 text-primary"></i>
                 <h3 class="h6 mb-2">Main store address</h3>
-                <p class="fs-sm text-muted">DJ5 Bldg, 51 Don Placido Campos Avenue, Dasmariñas, Cavite</p>
+                <p class="fs-sm text-muted">{{ $setting->company_name }}, {{ $setting->company_address }}</p>
                 <div class="fs-sm text-primary">Click to see map<i class="ci-arrow-right align-middle ms-1"></i></div>
               </div></a></div>
           <div class="col-xl-3 col-sm-6 mb-grid-gutter">
@@ -52,8 +56,8 @@ Vartouhi | Contact Us
               <div class="card-body text-center"><i class="ci-phone h3 mt-2 mb-4 text-primary"></i>
                 <h3 class="h6 mb-3">Phone numbers</h3>
                 <ul class="list-unstyled fs-sm mb-0">
-                  <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style" href="tel:+108044357260">+63 947 5220 247</a></li>
-                  <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a class="nav-link-style" href="tel:+100331697720">+63 948 1879 035</a></li>
+                  <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style" href="tel:+108044357260">{{ $setting->phone_one }}</a></li>
+                  <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a class="nav-link-style" href="tel:+100331697720">{{ $setting->phone_two }}</a></li>
                 </ul>
               </div>
             </div>
@@ -63,8 +67,8 @@ Vartouhi | Contact Us
               <div class="card-body text-center"><i class="ci-mail h3 mt-2 mb-4 text-primary"></i>
                 <h3 class="h6 mb-3">Email addresses</h3>
                 <ul class="list-unstyled fs-sm mb-0">
-                  <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style" href="mailto:+108044357260">jofs@example.com</a></li>
-                  <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a class="nav-link-style" href="mailto:support@example.com">jofs@example.com</a></li>
+                  <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style" href="mailto:+108044357260">{{ $setting->email }}</a></li>
+                  <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a class="nav-link-style" href="mailto:support@example.com">{{ $setting->email }}</a></li>
                 </ul>
               </div>
             </div>
@@ -135,7 +139,7 @@ Vartouhi | Contact Us
       <div class="container-fluid px-0" id="map">
         <div class="row g-0">
           <div class="col-lg-12 iframe-full-height-wrap">
-            <iframe class="iframe-full-height" width="600" height="250" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.6043528593855!2d120.93190919281669!3d14.330611840657317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d5025a84bc9b%3A0xb9d91ed8254e394!2sVartouhi%20corporation!5e0!3m2!1sen!2sph!4v1666233324676!5m2!1sen!2sph"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d241.35982484503816!2d121.05339483791542!3d14.555872672864227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sUnit%20707%20Avida%20One%20Park%20Drive%2C%2011th%20Drive%20corner%209th%20Avenue%20BGC%201634%20Taguig!5e0!3m2!1sen!2sph!4v1673502085111!5m2!1sen!2sph" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           {{-- <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
             <h2 class="h4 mb-4">Drop us a line</h2>

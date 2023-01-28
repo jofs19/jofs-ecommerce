@@ -40,7 +40,7 @@
                     @else
 
                     <span class="text-accent widget-product-meta">₱{{$product->discount_price}}.<small>00</small></span>
-                    <del class="fs-sm text-muted widget-product-meta">${{$product->selling_price}}.<small>00</small></del>
+                    <del class="fs-sm text-muted widget-product-meta"> ₱{{$product->selling_price}}.<small>00</small></del>
                                                
 
                     @endif
@@ -107,7 +107,7 @@
                     @else
 
                     <span class="text-accent widget-product-meta">₱{{$product->discount_price}}.<small>00</small></span>
-                    <del class="fs-sm text-muted widget-product-meta">${{$product->selling_price}}.<small>00</small></del>
+                    <del class="fs-sm text-muted widget-product-meta"> ₱{{$product->selling_price}}.<small>00</small></del>
                                                
 
                     @endif
@@ -122,7 +122,7 @@
                 
 
 
-                <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">View more<i
+                <p class="mb-0">...</p><a class="fs-sm" href="{{ route('shop.page') }}">View more<i
                         class="ci-arrow-right fs-xs ms-1"></i></a>
             </div>
         </div>
@@ -169,7 +169,7 @@
                             @else
         
                             <span class="text-accent widget-product-meta">₱{{$product->discount_price}}.<small>00</small></span>
-                            <del class="fs-sm text-muted widget-product-meta">${{$product->selling_price}}.<small>00</small></del>
+                            <del class="fs-sm text-muted widget-product-meta"> ₱{{$product->selling_price}}.<small>00</small></del>
                                                        
         
                             @endif
@@ -178,7 +178,7 @@
                         </div>
                         @endforeach
         
-                        <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">View more<i
+                        <p class="mb-0">...</p><a class="fs-sm" href="{{ route('shop.page') }}">View more<i
                                 class="ci-arrow-right fs-xs ms-1"></i></a>
                     </div>
                 </div>

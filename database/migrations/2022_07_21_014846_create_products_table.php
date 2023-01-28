@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('product_slug_fil');
             $table->string('product_code');
             $table->string('product_qty');
+            $table->integer('stock')->nullable();
             $table->string('product_tags_en');
             $table->string('product_tags_fil')->nullable();;
             $table->string('product_size_en')->nullable();

@@ -26,8 +26,8 @@
 					  <table id="example1" class="table table-bordered table-striped text-center">
 						<thead>
 							<tr>
-								<th>City Name </th> 
-								<th>Province Name </th>
+								<th>Province Name </th> 
+								<th>City Name </th>
 								<th>State Name </th>
 								<th>Action</th>
 
@@ -82,10 +82,10 @@
 
 
 <div class="form-group">
-	<h5>Division Select <span class="text-danger">*</span></h5>
+	<h5>Select Provice<span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select City</option>
+			<option value="" selected="" disabled="">Select Province</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}">{{ $div->division_name }}</option>	
 			@endforeach
@@ -99,10 +99,10 @@
 
 
 <div class="form-group">
-	<h5>District Select <span class="text-danger">*</span></h5>
+	<h5>Select City <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="district_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Province</option>
+			<option value="" selected="" disabled="">Select City</option>
 			@foreach($district as $dis)
 			<option value="{{ $dis->id }}">{{ $dis->district_name }}</option>	
 			@endforeach

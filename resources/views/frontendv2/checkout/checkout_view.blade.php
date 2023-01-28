@@ -12,8 +12,8 @@ Checkout Details
       <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-            <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
-            <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+            <li class="breadcrumb-item"><a class="text-nowrap" href="url('/')"><i class="ci-home"></i>Home</a></li>
+            <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.page') }}">Shop</a>
             </li>
             <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
           </ol>
@@ -30,7 +30,7 @@ Checkout Details
         <!-- Steps-->
         <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="{{ route('mycart') }}">
             <div class="step-progress"><span class="step-count">1</span></div>
-            <div class="step-label"><i class="ci-cart"></i>Cart</div></a><a class="step-item active current" href="checkout-details.html">
+            <div class="step-label"><i class="ci-cart"></i>Cart</div></a><a class="step-item active current" href="{{ route('mycart') }}">
             <div class="step-progress"><span class="step-count">2</span></div>
             <div class="step-label"><i class="ci-user-circle"></i>Details</div></a><a class="step-item" href="{{ route('checkout') }}">
             {{-- <div class="step-progress"><span class="step-count">3</span></div>
@@ -50,7 +50,22 @@ Checkout Details
               {{-- <span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span> --}}
               <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path)) ? asset($user->profile_photo_path):url('upload/no_image.jpg') }}" width="90" alt="User Image"></div>
             <div class="ps-3">
-              <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm">{{ Auth::user()->email }}</span>
+              <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span class="text-accent fs-sm">
+                
+                @php
+                $truncate = Auth::user()->email;
+                $numOfChars = strlen($truncate);
+                if ($numOfChars > 11) {
+                    $truncate = substr($truncate, 0, 22).'...';
+                }else{
+                    $truncate = substr($truncate, 0, 22);
+                }
+                @endphp
+            
+            {{ $truncate }}
+              
+              
+              </span>
             </div>
           </div><a class="btn btn-light btn-sm btn-shadow mt-3 mt-sm-0" href="{{ route('user.profile') }}"><i class="ci-edit me-2"></i>Edit profile</a>
         </div>
@@ -92,37 +107,73 @@ Checkout Details
         <div class="row">
           <div class="col-sm-6">
             <div class="mb-3">
-              <label class="form-label" for="checkout-company"> <small> <span class="ci-announcement mb-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Field is required"></span></small> Address 1 </label>
-              <input class="form-control" type="text" id="checkout-company" name="shipping_address" value="{{ Auth::user()->address }}" required>
+              <label class="form-label" for="checkout-company"> <small> <span class="ci-announcement mb-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Field is required"></span></small> Home Address [House #, Street/Bldg. Name, Brgy.] </label>
+              <input class="form-control" type="text" id="checkout-company" name="shipping_address" value="{{ Auth::user()->address }}" required placeholder="House #, Street/Bldg. Name, Brgy.">
             </div>
           </div>
+
           <div class="col-sm-6">
-            <div class="mb-3">
-              <label class="form-label" for="checkout-country">Address 2 </label>
-              <input class="form-control" type="text" id="checkout-company" name="shipping_address2" placeholder="Address Line 2 (optional)">
-            </div>
+
+
+
+                      <div class="mb-3">
+
+                        <label class="form-label" for="checkout-company"> <small> <span class="ci-announcement mb-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Field is required"></span></small> Choose Province/City/Region </label>
+
+                        <select class="form-select" required="required" name="division_id">
+                          <option value="" disabled class="bg-secondary" selected>Choose your Province</option>
+
+                          @foreach($divisions as $item)
+                              <option value="{{ $item->id }}">{{ $item->division_name }}</option>	
+                          @endforeach        
+
+                        </select>
+                        
+                       
+                        <div class="invalid-feedback">Please choose your Province!</div>
+                      </div>
+
+
+                  <input type="hidden" name="shipping_charge" class="form-control unicase-form-control text-input" id="shipping_form" placeholder="(optional)">
+
+              
+
+
           </div>
+
+
+
+
+
+
+
         </div>
         {{-- <div class="row">
             <div class="col-12 mb-4">
                 <label class="form-label mb-3" for="fd-comments"><span class="badge bg-info fs-xs me-2">Note</span>Additional comments</label>
                 <textarea class="form-control" rows="5" id="fd-comments" name="notes" placeholder="Write a note... (optional)"></textarea>
               </div>
-        </div> --}}
-        {{-- <div class="row">
+        </div>  --}}
+       <div class="row">
           <div class="col-sm-6">
             <div class="mb-3">
-              <label class="form-label" for="checkout-address-1">Address 1</label>
-              <input class="form-control" type="text" id="checkout-address-1">
+              <select class="form-select" required="required" name="district_id">
+                <option value="" disabled class="bg-secondary" selected>Choose your City</option>
+                
+              </select>
+              <div class="invalid-feedback">Please choose your City!</div>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="mb-3">
-              <label class="form-label" for="checkout-address-2">Address 2</label>
-              <input class="form-control" type="text" id="checkout-address-2">
-            </div>
+              <select class="form-select" required="required" name="state_id">
+                  <option value="">Your Region</option>
+                  
+                </select>
+                <div class="invalid-feedback">Please choose your city!</div>
           </div>
-        </div> --}}
+          </div>
+        </div>
         <h6 class="mb-3 py-3 border-bottom">Select Mode of Payment</h6>
 
         <div class="row">
@@ -357,44 +408,7 @@ Checkout Details
 
 
 
-            <div class="accordion accordio-flush shadow-sm rounded-3 mb-4" id="order-options">
-                
-                <div class="accordion-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Field is required">
-                  <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shipping-estimates" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Select Local Area </a></h3>
-                  <div class="accordion-collapse collapse show" id="shipping-estimates" data-bs-parent="#order-options" style="">
-                    <div class="accordion-body">
-                        <div class="mb-3">
-                          <select class="form-select" required="required" name="division_id">
-                            <option value="" disabled class="bg-secondary" selected>Choose your Barangay</option>
 
-                            @foreach($divisions as $item)
-                                <option value="{{ $item->id }}">{{ $item->division_name }}</option>	
-                            @endforeach        
-
-                          </select>
-                          
-                         
-                          <div class="invalid-feedback">Please choose your Barangay!</div>
-                        </div>
-                        <div class="mb-3">
-                          <select class="form-select" required="required" name="district_id">
-                            <option value="" disabled class="bg-secondary" selected>Choose your Province</option>
-                            
-                          </select>
-                          <div class="invalid-feedback">Please choose your Province!</div>
-                        </div>
-                        <div class="mb-3">
-                            <select class="form-select" required="required" name="state_id">
-                                <option value="">Your Region</option>
-                                
-                              </select>
-                              <div class="invalid-feedback">Please choose your city!</div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="shipping_charge" class="form-control unicase-form-control text-input" id="shipping_form" placeholder="(optional)">
-                  </div>
-                </div>
-              </div>
 
             
 

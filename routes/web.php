@@ -588,7 +588,7 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
     
 
     // Advance Search Routes 
-    Route::post('search-product', [IndexController::class, 'SearchProduct']);
+    Route::post('/search-product', [IndexController::class, 'SearchProduct']);
 
     // Shop Page Route 
     Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop.page');

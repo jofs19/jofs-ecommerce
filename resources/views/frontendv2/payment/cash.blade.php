@@ -11,8 +11,8 @@ Vartouhi | COD
     <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-          <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
-          <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+          <li class="breadcrumb-item"><a class="text-nowrap" href="url('/')"><i class="ci-home"></i>Home</a></li>
+          <li class="breadcrumb-item text-nowrap"><a href="route('shop.page')">Shop</a>
           </li>
           <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
         </ol>
@@ -119,8 +119,8 @@ Vartouhi | COD
         <input type="hidden" name="change_amount" value="{{ $data['change_amount'] }}"> 
       <!-- Navigation (desktop)-->
       <div class="d-none d-lg-flex pt-4">
-        <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-        <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
+        {{-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div> --}}
+        <div class="w-100 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
       </div>
     </section>
     <!-- Sidebar-->
@@ -204,8 +204,8 @@ Vartouhi | COD
   <div class="row d-lg-none">
     <div class="col-lg-8">
       <div class="d-flex pt-4 mt-3">
-        <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-        <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
+        {{-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div> --}}
+        <div class="w-100 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
       </div>
     </div>
   </div>

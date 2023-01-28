@@ -18,7 +18,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Province List</h3>
+				  <h3 class="box-title">City List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -27,7 +27,7 @@
 						<thead>
 							<tr>
 								<th>Province Name </th> 
-								<th>Province Name </th>
+								<th>City Name </th>
 								<th>Action</th>
 
 							</tr>
@@ -67,7 +67,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Add Province </h3>
+				  <h3 class="box-title">Add City </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -97,7 +97,7 @@
 
 
 	 <div class="form-group">
-		<h5>Province Name  <span class="text-danger">*</span></h5>
+		<h5>City Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="district_name" class="form-control" > 
 	 @error('district_name') 

@@ -401,16 +401,22 @@
                                                     class="d-block mb-2" href="#">
   
                                               @php
-                                                $productss = App\Models\Product::where('subcategory_id',$subcategory->id)->where('status', 1)->orderBy('id','DESC')->oldest()->get();
+                                                $productss = App\Models\Product::where('subcategory_id',$subcategory->id)->get();
                                                 $lowest_price = App\Models\Product::where('subcategory_id',$subcategory->id)->min('selling_price');
                                               @endphp
   
 
                                               @foreach ($productss as $product)
+                                              
+                                              {{-- get first result --}}
+                                              @if ($loop->first)
                                                 
                                               <center>
                                               <img class="d-block rounded-lg" src="{{ asset($product->product_thumbnail) }}" alt="Shop" width="180">
                                               </center>
+
+                                              @endif
+
                                               @endforeach
 
                                                     

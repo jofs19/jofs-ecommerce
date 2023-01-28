@@ -47,6 +47,14 @@ class CartPageController extends Controller
      // Cart Increment 
      public function CartIncrement($rowId){
         $row = Cart::get($rowId);
+
+        // here I want to check the product quantity from database
+
+        $product = Product::where('id',$row->id)->first();
+
+        if ($product->product_qty < $row->qty + 1) {
+            return response()->json('out of stock');
+        }
         
         Cart::update($rowId, $row->qty + 1);
 
@@ -59,6 +67,8 @@ class CartPageController extends Controller
             $total = (int)str_replace(',','',Cart::total()); 
             Session::put('coupon',[ 'coupon_name' => $coupon->coupon_name, 'coupon_discount' => $coupon->coupon_discount, 'discount_amount' => round($total * $coupon->coupon_discount/100), 'total_amount' => round($total - $total * $coupon->coupon_discount/100) ]);
         }
+
+        
 
         return response()->json('increment');
 
@@ -82,6 +92,8 @@ class CartPageController extends Controller
         return response()->json('Decrement');
 
     }// end method 
+
+    
 
 
 

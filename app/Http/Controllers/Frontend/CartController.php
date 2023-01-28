@@ -21,39 +21,53 @@ class CartController extends Controller
 			Session::forget('coupon');
 		 }
 
-    	$product = Product::findOrFail($id);
-    	if ($product->discount_price == NULL) {
-    		Cart::add([
-    			'id' => $id, 
-    			'name' => $request->product_name, 
-    			'qty' => $request->quantity, 
-    			'price' => $product->selling_price,
-    			'weight' => 1, 
-    			'options' => [
-    				'image' => $product->product_thumbnail,
-    				'color' => $request->color,
-    				'size' => $request->size,
-    			],
-    		]);
-    		return response()->json(['success' => 'Successfully Added to Cart']);
-    		 
-    	}else{
+			// if qty is not greater that product_qty
 
-    		Cart::add([
-    			'id' => $id, 
-    			'name' => $request->product_name, 
-    			'qty' => $request->quantity, 
-    			'price' => $product->discount_price,
-    			'weight' => 1, 				
-    			'options' => [
-    				'image' => $product->product_thumbnail,
-    				'color' => $request->color,
-    				'size' => $request->size,
-    			],
+		
+
+    	$product = Product::findOrFail($id);
+//8 > 8-1
+		if($product->product_qty > $request->quantity-1){
+			if ($product->discount_price == NULL) {
+				Cart::add([
+					'id' => $id, 
+					'name' => $request->product_name, 
+					'qty' => $request->quantity, 
+					'price' => $product->selling_price,
+					'weight' => 1, 
+					'options' => [
+						'image' => $product->product_thumbnail,
+						'color' => $request->color,
+						'size' => $request->size,
+					],
+				]);
 				
-    		]);
-    		return response()->json(['success' => 'Successfully Added to Cart']);
-    	}
+				return response()->json(['success' => 'Successfully Added to Cart']);
+				 
+			}else{
+	
+				Cart::add([
+					'id' => $id, 
+					'name' => $request->product_name, 
+					'qty' => $request->quantity, 
+					'price' => $product->discount_price,
+					'weight' => 1, 				
+					'options' => [
+						'image' => $product->product_thumbnail,
+						'color' => $request->color,
+						'size' => $request->size,
+					],
+					
+				]);
+				return response()->json(['success' => 'Successfully Added to Cart']);
+			}
+		}else{
+
+			return response()->json(['error' => 'Quantity exceeded the product stock!']);
+
+		}
+
+
     } // end mehtod 
 
 

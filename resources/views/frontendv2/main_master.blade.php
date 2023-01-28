@@ -234,7 +234,7 @@
     {{-- End Footer Area --}}
 
 
-    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password') || request()->is('help') || request()->is('about') || request()->is('contact'))
+    @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password') || request()->is('help') || request()->is('about') || request()->is('contact') || request()->is('checkout/store') || request()->is('user/cash/order') || request()->is('user/online/order') )
     
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
@@ -252,11 +252,14 @@
                                           $ncount = 0;
 
                                         }
-
                                        
-                                        
                                         @endphp
+
+      @if(Auth::check())
+                                        
       <a class="d-table-cell handheld-toolbar-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><span class="handheld-toolbar-icon"><i class="ci-bell"></i><span class="badge bg-primary rounded-pill ms-1">  {{ $ncount }}  </span></span> <span class="handheld-toolbar-label">Notifications</span></a>
+
+      @endif
     
       <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
 
@@ -374,11 +377,12 @@
     @forelse($user->notifications as $notification)
 
     <!-- Post comment -->
-<div class=" d-flex align-items-start border-bottom py-2 my-2">
+<div class=" d-flex align-items-start border-bottom py-2 my-2 roll-in-blurred-right">
   <img class="rounded-circle" width="50" src="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" alt="Laura Willson"/>
   <div class="ps-3">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h6 class="fs-md mb-0"> @php
+      <h6 class="fs-md mb-0"> 
+    @php
         $truncate = Auth::user()->name;
         $numOfChars = strlen($truncate);
         if ($numOfChars > 11) {
@@ -407,6 +411,15 @@
         <h4 class="h4 mb-4 text-muted">No Notifications</h4>
       </div>
     </div>
+
+    @if(!Auth::check())
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="text-center py-4">
+        <h4 class="h4 mb-4 text-muted">No Notifications</h4>
+      </div>
+    </div>
+    @endif
+
     @endforelse
 
     @endif
@@ -490,8 +503,9 @@
               </div>
 
               <div class="mb-2">
-                <label for="su-address" class="form-label">Street address</label>
-                <input class="form-control" type="text" id="address" name="address" placeholder="(e.g. Padilla St. West)" required>
+                <label for="su-address" class="form-label">Home Address <span> <div class="form-text">(<strong>e.g.</strong> #26 Padilla St. West Poblacion)</div></span>
+                </label>
+                <input class="form-control" type="text" id="address" name="address" placeholder="House #, Street/Bldg. Name, Brgy." required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
 
@@ -704,12 +718,14 @@
                                         <div class="d-flex align-items-center pt-2 pb-4">
                                           
                                           {{-- <input type="number" class="form-control" id="qty" value="0" min="1"> --}}
-                                          <input class="form-control me-3" type="number" id="qty" min="0" value="0"   style="width: 6rem;">
+                                          
+                                          <input class="form-control me-3 product-qty" type="number" id="qty" min="0" value="0" style="width: 6rem;">
 
                                          
                                           
+                                          
                                           <input type="hidden" id="product_id">
-<button type="submit" id="try" class="btn btn-primary btn-shadow d-block w-100 btn-shadow" onclick="addToCart()" ><i class="ci-cart fs-lg me-1"></i>Add to Cart</button>
+<button type="submit" id="try" class="btn btn-primary btn-shadow d-block w-100 btn-shadow add-cart" onclick="addToCart()" ><i class="ci-cart fs-lg me-1"></i>Add to Cart</button>
 
                                               
                                         </div>
@@ -872,6 +888,10 @@
                 $('#longDetailsFil').html(data.product.long_descp_fil);
                 $('#pquantity').text(data.product.product_qty);                              
                 $('#qty').val(1);
+                // !! Start Product Color !!
+
+              
+
                 // Product Price 
                 if (data.product.discount_price == null) {
                     $('#pprice').text('');
@@ -883,11 +903,13 @@
                 } // end prodcut price 
                 // Start Stock opiton
                 if (data.product.product_qty > 0) {
+                  
                     $('#aviable').text('');
                     $('#stockout').text('');
                     $('#aviable').html(`<div class="product-badge product-available mt-n1"><i class="ci-security-check" ></i>Product Available</div>`);
                     $('#try').attr('disabled',false);
                     $('#qty').attr('max',data.product.product_qty);  
+
                 }else{
                     $('#aviable').text('');
                     $('#stockout').text('');
@@ -898,6 +920,7 @@
                     $('#qty').attr('max',data.product.product_qty);
     
                 } // end Stock Option 
+            
 
 
 
@@ -938,6 +961,9 @@
         var color = $('#color option:selected').text();
         var size = $('#size option:selected').text();
         var quantity = $('#qty').val();
+
+        
+
         $.ajax({
             type: "POST",
             dataType: 'json',
@@ -947,8 +973,7 @@
             url: "/cart/data/store/"+id,
             success:function(data){
 
-              miniCart();
-
+              miniCart();               
                 $('#closeModel').click();
                 // console.log(data)
                 // Start Message 
@@ -959,13 +984,20 @@
                       showConfirmButton: false,
                       timer: 3000
                     })
+                    const Toast2 = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'error',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
                 if ($.isEmptyObject(data.error)) {
                     Toast.fire({
                         type: 'success',
                         title: data.success
                     })
                 }else{
-                    Toast.fire({
+                    Toast2.fire({
                         type: 'error',
                         title: data.error
                     })
@@ -1445,7 +1477,7 @@
             <div class="pt-2">
               <h3 class="product-title fs-base mb-2"><a href="#">${value.name}</a></h3>
               <div class="fs-sm"><span class="text-muted me-2">Size:</span>${value.options.size == null ? `---`:`${value.options.size}`}</div>
-              <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div>
+              <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div> 
               <div class="fs-lg text-accent pt-2"> <span class="fs-ms text-dark">₱ ${value.price}.<small>00</small> x <strong>${value.qty}</strong> = </span>   
                 ₱ ${value.subtotal}.<small>00</small></div>
             </div>

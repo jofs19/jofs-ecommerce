@@ -13,6 +13,10 @@ use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use App\Models\MultiImg;
 
+use App\Models\User;
+use App\Notifications\StockNotification;
+use Illuminate\Support\Facades\Notification;
+
 class ProductController extends Controller
 {
     
@@ -53,6 +57,7 @@ class ProductController extends Controller
       	'product_code' => $request->product_code,
 
       	'product_qty' => $request->product_qty,
+		'stock' => (int)$request->product_qty,
       	'product_tags_en' => $request->product_tags_en,
       	'product_tags_fil' => $request->product_tags_fil,
       	'product_size_en' => $request->product_size_en,
@@ -154,6 +159,8 @@ class ProductController extends Controller
       	'product_code' => $request->product_code,
 
       	'product_qty' => $request->product_qty,
+		'stock' => (int)$request->product_qty,
+
       	'product_tags_en' => $request->product_tags_en,
       	'product_tags_fil' => $request->product_tags_fil,
       	'product_size_en' => $request->product_size_en,
@@ -312,6 +319,9 @@ class ProductController extends Controller
 	public function ProductStock(){
 
     $products = Product::latest()->get();
+
+	// Notifications if product is nearly out of stock
+
     return view('backend.product.product_stock',compact('products'));
   }
    

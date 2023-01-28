@@ -66,21 +66,39 @@ Vartouhi | Pay Online
     </div>
 
       <!-- Client details-->
+      <!-- Client details-->
       <div class="bg-secondary rounded-3 px-4 pt-4 pb-2">
         <div class="row">
           <div class="col-sm-6">
             <h4 class="h6">Shipping to:</h4>
             <ul class="list-unstyled fs-sm">
+              
               <li><span class="text-muted">Recipient:&nbsp;</span>{{ Auth::user()->name }}</li>
-              <li><span class="text-muted">Address:&nbsp;</span>{{ Auth::user()->address }}</li>
-              <li><span class="text-muted">Phone:&nbsp;</span>{{ Auth::user()->phone }}</li>
+              <li><span class="text-muted">Email:&nbsp;</span>{{ $data['shipping_email'] }}</li>
+              <li><span class="text-muted">Phone:&nbsp;</span>{{ $data['shipping_phone'] }}</li>
+              @if ($data['notes'] == null)
+              <li><span class="text-muted">Notes:&nbsp;</span>----</li>
+              @else
+              <li><span class="text-muted">Notes:&nbsp;</span>{{ $data['notes'] }}</li>               
+              @endif
+
             </ul>
           </div>
           <div class="col-sm-6">
             <h4 class="h6">Payment method:</h4>
             <ul class="list-unstyled fs-sm">
-              <li><span class="text-muted">Online Payment:&nbsp;</span>GCash</li>
+              <li><span class="text-muted">Online Payment:&nbsp;</span>Gcash</li>
             </ul>
+
+            <h4 class="h6">Shipping Address:</h4>
+            <ul class="list-unstyled fs-sm">
+              <li><span class="text-muted">Address 1:&nbsp;</span>{{ $data['shipping_address'] }}</li>
+              @if ($data['shipping_address2'] != null)
+              <li><span class="text-muted">Address 2:&nbsp;</span>{{ $data['shipping_address2'] }}</li>
+              @endif
+              <li><span class="text-muted">City:&nbsp;</span>{{ $data['post_code'] }}</li>
+            </ul>
+
           </div>
         </div>
       </div>
@@ -102,8 +120,13 @@ Vartouhi | Pay Online
         <input type="hidden" name="change_amount" value="{{ $data['change_amount'] }}"> 
       <!-- Navigation (desktop)-->
       <div class="d-none d-lg-flex pt-4">
-        <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-        <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
+        {{-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div> --}}
+        <div class="w-100 ps-2">
+          
+          <button class="btn btn-primary d-block w-100 complete" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button>
+        
+        
+        </div>
       </div>
     </section>
     <!-- Sidebar-->
@@ -175,6 +198,7 @@ Vartouhi | Pay Online
 
               @endif <!--if($cartTotal > 1000)-->
 
+{{-- ANCHOR OLIVER --}}
 
   @endif <!--If session has coupon-->
 
@@ -187,13 +211,53 @@ Vartouhi | Pay Online
   <div class="row d-lg-none">
     <div class="col-lg-8">
       <div class="d-flex pt-4 mt-3">
-        <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-        <div class="w-50 ps-2"><button class="btn btn-primary d-block w-100" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button></div>
+        {{-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div> --}}
+        <div class="w-100 ps-2">
+          
+          <button class="btn btn-primary d-block w-100 complete" type="submit"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></button>
+        
+
+        <div style="visibility: collapse">
+          <button type="button" class="btn btn-primary d-block w-100">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+        </div>
+        
+        </div>
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
 </div>
 
 </form>
+
+
+
+
+
+<script>
+
+
+if($('.complete').on('click', function(e){
+
+
+
+
+}))
+
+
+
+</script>
+
+
+
 
 @endsection
