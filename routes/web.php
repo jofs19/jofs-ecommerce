@@ -51,6 +51,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Role;
 
 
+// Vendor controllers
+use App\Http\Controllers\Backend\VendorProductController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -503,7 +507,7 @@ Route::post('/add-to-compare/{product_id}', [CartController::class, 'AddToCompar
 // Wishlist page
 //  User Must Login
 
-Route::middleware(['auth','role:user'])->group(function() {
+Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'User'],function(){
 
 
 Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
@@ -658,6 +662,33 @@ Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name
     Route::get('/vendor/change/password', [VendorController::class, 'VendorChangePassword'])->name('vendor.change.password');
 
     Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
+
+
+// Vendor Add Product All Route
+Route::controller(VendorProductController::class)->group(function(){
+    Route::get('/vendor/all/product' , 'VendorAllProduct')->name('vendor.all.product');
+    Route::get('/vendor/add/product' , 'VendorAddProduct')->name('vendor.add.product');
+
+    Route::post('/vendor/store/product' , 'VendorStoreProduct')->name('vendor.store.product');
+    Route::get('/vendor/edit/product/{id}' , 'VendorEditProduct')->name('vendor.edit.product');
+
+    Route::post('/vendor/update/product' , 'VendorUpdateProduct')->name('vendor.update.product');
+    Route::post('/vendor/update/product/thumbnail' , 'VendorUpdateProductThumbnail')->name('vendor.update.product.thumbnail');
+
+    Route::post('/vendor/update/product/multiimage' , 'VendorUpdateProductmultiImage')->name('vendor.update.product.multiimage');
+
+    Route::get('/vendor/product/multiimg/delete/{id}' , 'VendorMultiimgDelete')->name('vendor.product.multiimg.delete');
+
+    Route::get('/vendor/product/inactive/{id}' , 'VendorProductInactive')->name('vendor.product.inactive');
+    Route::get('/vendor/product/active/{id}' , 'VendorProductActive')->name('vendor.product.active');
+
+    Route::get('/vendor/delete/product/{id}' , 'VendorProductDelete')->name('vendor.delete.product');
+
+    Route::get('/vendor/subcategory/ajax/{category_id}' , 'VendorGetSubCategory');
+    Route::get('/vendor/sub-subcategory/ajax/{subcategory_id}', 'VendorGetSubCategory');
+
+
+});
 
 
 });

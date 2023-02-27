@@ -46,7 +46,6 @@ class ProductController extends Controller
     	$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
     	Image::make($image)->resize(518,484)->save('upload/products/thumbnail/'.$name_gen);
     	$save_url = 'upload/products/thumbnail/'.$name_gen;
-
 		$product_id = Product::insertGetId([
       	'brand_id' => $request->brand_id,
       	'category_id' => $request->category_id,
@@ -57,7 +56,6 @@ class ProductController extends Controller
       	'product_slug_en' =>  strtolower(str_replace(' ', '-', $request->product_name_en)),
       	'product_slug_fil' => str_replace(' ', '-', $request->product_name_fil),
       	'product_code' => $request->product_code,
-
       	'product_qty' => $request->product_qty,
 		'stock' => (int)$request->product_qty,
       	'product_tags_en' => $request->product_tags_en,
@@ -66,28 +64,22 @@ class ProductController extends Controller
       	'product_size_fil' => $request->product_size_fil,
       	'product_color_en' => $request->product_color_en,
       	'product_color_fil' => $request->product_color_fil,
-
       	'selling_price' => $request->selling_price,
       	'discount_price' => $request->discount_price,
 		'total_price' => ($request->selling_price + $request->discount_price) - $request->selling_price,
-
       	'short_descp_en' => $request->short_descp_en,
       	'short_descp_fil' => $request->short_descp_fil,
       	'long_descp_en' => $request->long_descp_en,
       	'long_descp_fil' => $request->long_descp_fil,
-
       	'hot_deals' => $request->hot_deals,
       	'featured' => $request->featured,
       	'special_offer' => $request->special_offer,
       	'special_deals' => $request->special_deals,
-
 		'sale_time' => $request->sale_time,
 		'so_saletime' => $request->so_saletime,
-
       	'product_thumbnail' => $save_url,
       	'status' => 1,
         'vendor_id' => $request->vendor_id,
-
       	'created_at' => Carbon::now(),
 
 

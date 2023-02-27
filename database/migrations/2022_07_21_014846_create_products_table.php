@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name_en');
             $table->string('product_name_fil')->nullable();;
             $table->string('product_slug_en');
-            $table->string('product_slug_fil');
+            $table->string('product_slug_fil')->nullable();
             $table->string('product_code');
             $table->string('product_qty');
             $table->integer('stock')->nullable();

@@ -13,12 +13,12 @@
     <meta name="author" content="John Oliver Santiago">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" />
+    <meta property="og:image" content="{{ asset('frontendv2/assets/img/logo.png') }}" />
 
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/logo.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">

@@ -13,12 +13,12 @@
     <meta name="author" content="John Oliver Santiago">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" />
+    <meta property="og:image" content="{{ asset('frontendv2/assets/img/logo.png') }}" />
 
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/vlogoss.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontendv2/assets/img/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontendv2/assets/img/logo.png') }}">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -32,8 +32,20 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/flatpickr/dist/flatpickr.min.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -43,10 +55,15 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+
+
 
 
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/css/theme.min.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 
     <style>
 
@@ -282,6 +299,37 @@
     </div>
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
     <!-- Vendor scrits: js libraries and plugins-->
+    {{-- tags input --}}
+
+
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}";
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+    </script>
+
+        {{-- <script src="{{ asset('frontendv2/assets/js/jquery-1.11.1.min.js') }}"></script>  --}}
+        <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
+
+    <script src="{{ asset('frontendv2/assets/js/vendorcode.js') }}"></script>
+
     <script src="{{ asset('frontendv2/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontendv2/assets/vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('frontendv2/assets/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
@@ -305,6 +353,9 @@
 
     <script src="{{ asset('frontendv2/assets/vendor/lg-zoom.js/dist/lg-zoom.min.js') }}"></script>
     <script src="{{ asset('frontendv2/assets/vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-
+    KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
 
 
     {{-- add custom js --}}
@@ -314,4 +365,45 @@
     <!-- Main theme script-->
     <script src="{{ asset('frontendv2/assets/js/theme.min.js') }}"></script>
   </body>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/@yaireo/tagify"></script>
+  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+  <script>
+    // The DOM element you wish to replace with Tagify
+var input1 = document.querySelector('.tag1')
+var input2 = document.querySelector('.tag2')
+var input3 = document.querySelector('.tag3')
+
+
+// initialize Tagify on the above input node reference and convert to string
+new Tagify(input1)
+new Tagify(input2)
+new Tagify(input3)
+
+// convert to string
+var str =
+
+  </script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- TOASTR + SWEETALERT --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+
+
+    {{-- TOASTR + SWEETALERT CDN --}}
+
+
+
+
+
+
+
 </html>

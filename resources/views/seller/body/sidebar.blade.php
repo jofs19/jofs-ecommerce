@@ -19,10 +19,14 @@ $status = $verdorId->status;
                       <h3 class="fs-sm mb-0 text-muted">Seller Dashboard</h3>
                     </div>
 
+                    @php
+                        $productCount = App\Models\Product::where('vendor_id', $id)->count();
+                    @endphp
+
                     <ul class="list-unstyled mb-0">
                       <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="dashboard-sales.html"><i class="ci-money-bag opacity-60 me-2"></i>Sales<span class="fs-sm text-muted ms-auto">₱1,375.00</span></a></li>
-                      <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-products.html"><i class="ci-package opacity-60 me-2"></i>Products<span class="fs-sm text-muted ms-auto">5</span></a></li>
-                      <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-add-new-product.html"><i class="ci-cloud-upload opacity-60 me-2"></i>Add New Product</a></li>
+                      <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('vendor.all.product') }}"><i class="ci-package opacity-60 me-2"></i>Products<span class="fs-sm text-muted ms-auto">{{ $productCount }}</span></a></li>
+                      <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('vendor.add.product') }}"><i class="ci-cloud-upload opacity-60 me-2"></i>Add New Product</a></li>
                       <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-payouts.html"><i class="ci-currency-exchange opacity-60 me-2"></i>Payouts</a></li>
 
                     </ul>

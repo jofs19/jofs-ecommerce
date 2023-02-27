@@ -358,7 +358,7 @@
             <div class="container">
                 <div class="left">
                     <div class="header">
-                        <h2 class="animation a1">Welcome Back</h2>
+                        <h2 class="animation a1">Welcome Back, Vendor!</h2>
                         <h4 class="animation a2">Log in to your account using email and password</h4>
                     </div>
 

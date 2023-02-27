@@ -6,7 +6,7 @@ $status = $verdorId->status;
 
 
 
-<header class="bg-darker shadow-sm navbar-sticky">
+<header class="bg-darker shadow-sm">
     <div class="navbar navbar-expand-lg navbar-dark">
       <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0 me-4 order-lg-1" href="{{ route('vendor.dashboard') }}"><img src="{{ asset('frontendv2/assets/img/logo5.svg') }}" width="100" alt="PCBUILD"></a><a class="navbar-brand d-sm-none me-2 order-lg-1" href="{{ route('vendor.dashboard') }}"><img src="{{ asset('frontendv2/assets/img/logo5.svg') }}" width="70" alt="PCBUILD"></a>
 
@@ -119,13 +119,22 @@ $status = $verdorId->status;
       <div class="d-flex">
         <div class="text-sm-end me-5">
           <div class="text-light fs-base">Total sales</div>
-          <h3 class="text-light">426</h3>
+          @php
+                $total_orders = App\Models\Order::where('user_id', Auth::user()->id)->where('status', 'delivered')->count();
+
+          @endphp
+          <h3 class="text-light">{{ $total_orders }}</h3>
         </div>
         <div class="text-sm-end">
           <div class="text-light fs-base">Seller rating</div>
-          <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+          <div class="star-rating">
+            <i class="star-rating-icon ci-star-filled active"></i>
+            <i class="star-rating-icon ci-star"></i>
+            <i class="star-rating-icon ci-star"></i>
+            <i class="star-rating-icon ci-star"></i>
+            <i class="star-rating-icon ci-star"></i>
           </div>
-          <div class="text-light opacity-60 fs-xs">Based on 98 reviews</div>
+          <div class="text-light opacity-60 fs-xs">Based on 1 review(s)</div>
         </div>
       </div>
     </div>

@@ -24,10 +24,10 @@
 
                 {{-- STAR RATING --}}
 
-            @php 
+            @php
                 $reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
                 $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
-            @endphp 	
+            @endphp
 
               <div class="star-rating">
 
@@ -37,7 +37,7 @@
                 <i class="star-rating-icon ci-star "></i>
                 <i class="star-rating-icon ci-star "></i>
                 <i class="star-rating-icon ci-star "></i>
-                <i class="star-rating-icon ci-star"></i>                
+                <i class="star-rating-icon ci-star"></i>
                 @elseif($average == 1 || $average < 2)
                 <i class="star-rating-icon ci-star-filled active"></i>
                 <i class="star-rating-icon ci-star "></i>
@@ -56,7 +56,7 @@
                <i class="star-rating-icon ci-star-filled active"></i>
                <i class="star-rating-icon ci-star "></i>
                <i class="star-rating-icon ci-star"></i>
-             
+
                @elseif($average == 4 || $average < 5)
                <i class="star-rating-icon ci-star-filled active"></i>
                <i class="star-rating-icon ci-star-filled active"></i>
@@ -70,12 +70,12 @@
                <i class="star-rating-icon ci-star-filled active"></i>
                <i class="star-rating-icon ci-star-filled active"></i>
                 @endif
-             
+
               </div>
 
               @if(count($reviewcount) < 1)
 
-              <span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">    
+              <span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">
                         No Reviews yet
               </span>
 
@@ -84,15 +84,15 @@
             @php
                 $convertAverage = number_format($average, 0, '.', '');
               @endphp
-              <span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">               
+              <span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">
                ({{ number_format($average,1) }} out of 5)
-              
-              
+
+
               </span>
             @endif
 
                 {{-- END STAR RATING --}}
-              
+
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
                             <div class="image-zoom-pane"></div>
                           </div>
                         @endif
-               
+
 
                         @endforeach
 
@@ -154,7 +154,7 @@
                   <!-- Product details-->
                   <div class="col-lg-5 pt-4 pt-lg-0">
                     <div class="product-details ms-auto pb-3">
-                        
+
 
                       @if ($product->discount_price == NULL)
                       <div class="h3 fw-normal text-accent mb-3 me-1">${{ $product->selling_price }}.<small>00</small></div>
@@ -164,7 +164,7 @@
                         <del class="text-muted fs-lg me-3">₱ {{ $product->selling_price }}.<small>00</small></del>
 
                         <span class="h4 fw-normal text-accent me-1">₱ {{ $product->discount_price }}.<small>00</small></span>
-                        
+
                         <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
                       </div>
 
@@ -187,15 +187,15 @@
                         </div>
                       </div>
 
-                      
+
                       @endif
 
-                      
-                     
 
-                                      
-                        
-                        
+
+
+
+
+
                         {{-- @foreach ($product_color_en as $color)
                           @if($color == null)
 
@@ -204,20 +204,20 @@
                           <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1 ">
 
                           Variant:
-                          
+
                         </span>
                         <span class="text-muted" id="color">----</span>
                     </div>
                     @endif
                           @endif
                         @endforeach --}}
-                                        
+
 
 <br>
 
                       <div class="position-relative me-n4 mb-3">
 
-                        
+
 
                         @if($product->product_qty < 1)
                         <div class="product-badge product-not-available mt-n1"><i class="ci-security-close"></i>Out of Stock</div>
@@ -233,7 +233,7 @@
 
 
                       <!-- Select Color -->
-                      @if($product->product_color_en == NULL || $product->product_color_fil == NULL)
+                      @if($product->product_color_en == NULL)
 
                       @else
 
@@ -243,9 +243,9 @@
                           <option class="bg-secondary" disabled>Select variant...</option>
 
                           @foreach($product_color_en as $color)
-                          <option value="{{ $color }}">{{ ucwords($color) }}</option>		 
+                          <option value="{{ $color }}">{{ ucwords($color) }}</option>
                           @endforeach
-                          
+
                         </select>
                       </div>
 
@@ -253,7 +253,7 @@
 
                       @if($product->product_size_en == null)
 
-                      @else	
+                      @else
                       <div class="mb-3">
                         {{-- <div class="d-flex justify-content-between align-items-center pb-1">
                           <label class="form-label" for="product-size">Choose Size:</label><a class="nav-link-style fs-sm" href="#size-chart" data-bs-toggle="modal"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
@@ -261,7 +261,7 @@
                         <select class="form-select" id="size">
                           <option disabled class="bg-faded-dark">Select size...</option>
                           @foreach($product_size_en as $size)
-                          <option value="{{ $size }}">{{ ucwords($size) }}</option>		 
+                          <option value="{{ $size }}">{{ ucwords($size) }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -281,10 +281,10 @@
   <label for="m" class="form-option-label">150 ML</label>
 </div> --}}
 
-                      
-                      
+
+
                       <div class="d-flex align-items-center pt-2 pb-4">
-                        
+
                         @if($product->product_qty < 1)
                         <input class="form-control me-3" type="number" id="qty" value="0" min="0"  max="0" style="width: 6rem;">
                         @else
@@ -293,7 +293,7 @@
 
 
                         @if($product->product_qty < 1)
-                        
+
                         <button class="btn btn-secondary btn-shadow d-block w-100" disabled type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
                         @else
 
@@ -354,16 +354,16 @@
                         <div class="accordion-item">
                           <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-list text-muted fs-lg align-middle mt-n1 me-2"></i>Product Description</a></h3>
                           <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
-                            <div class="accordion-body pt-3 pb-1">                            
+                            <div class="accordion-body pt-3 pb-1">
                                 <dl>
-                                  <dt class="fw-semibold">@if(session()->get('language') == 'filipino') 
-                                    {{ $product->short_descp_fil }} 
-                                    @else {{  $product->short_descp_en }} 
+                                  <dt class="fw-semibold">@if(session()->get('language') == 'filipino')
+                                    {{ $product->short_descp_fil }}
+                                    @else {{  $product->short_descp_en }}
                                     @endif</dt>
-                                  <dd>@if(session()->get('language') == 'filipino') 
+                                  <dd>@if(session()->get('language') == 'filipino')
                                     {!! $product->long_descp_fil !!} @else {!! $product->long_descp_en !!} @endif</dd>
-                                
-                                </dl>                                                        
+
+                                </dl>
                             </div>
                           </div>
                         </div>
@@ -376,7 +376,7 @@
               </div>
               <!-- End General info tab -->
 
-              
+
 
               <!-- Reviews tab-->
               <div class="tab-pane fade" id="reviews" role="tabpanel">
@@ -388,16 +388,16 @@
                       @if ($product->discount_price == NULL)
                       <div class="h4 fw-normal text-accent">₱ {{ number_format($product->selling_price,2) }}</div>
                       @else
- 
+
                       <div class="mb-3">
                         <del class="text-muted fs-lg me-3">₱ {{ number_format($product->selling_price,2) }}</del>
 
                         <span class="h3 fw-normal text-accent me-1">₱ {{ number_format($product->discount_price,2) }}</span>
-                        
+
                         <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
                       </div>
 
-                      
+
                       @endif
 
                       {{-- <div class="h4 fw-normal text-accent">$124.<small>99</small></div> --}}
@@ -416,7 +416,7 @@
 
 
                       @if($product->product_qty < 1)
-                        
+
                         <button class="btn btn-secondary btn-shadow me-2" disabled type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button>
                         @else
 
@@ -424,7 +424,7 @@
                       <button type="submit" id="try" onclick="addToCart()" class="btn btn-primary btn-shadow me-2 shimmer-btn placeholder-wave" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add to Cart" style="width: 15rem"><i class="ci-cart fs-lg me-sm-2"></i> <span class="d-none d-sm-inline">Add to Cart</span></button>
 
                         @endif
-                        
+
 
                     {{-- <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to Cart</span></button> --}}
                     <div class="me-2">
@@ -448,7 +448,7 @@
                 $fivestar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',5)->count();
 
                 $zerostar = App\Models\Review::where('product_id',$product->id)->where('status',1)->where('rating',0)->count();
-                
+
                 if($onestar != null){
                   $onestarpercent = ($onestar / $reviews->count()) * 100;
                 }else{
@@ -481,12 +481,12 @@
 
                 $fivepercent = round($fivestarpercent);
 
-                @endphp		
+                @endphp
 
                 <div class="row pt-2 pb-3">
                   <div class="col-lg-4 col-md-5">
                     <h2 class="h3 mb-4">{{ count($reviewcount) }} Reviews </h2>
-                    
+
                     <div class="star-rating me-2">
                       @if($average == 0)
                       <i class="ci-star fs-sm text-muted me-1"></i>
@@ -512,7 +512,7 @@
                       <i class="ci-star-filled fs-sm text-accent me-1"></i>
                       <i class="ci-star fs-sm text-muted me-1"></i>
                       <i class="ci-star fs-sm text-muted me-1"></i>
-                   
+
                      @elseif($average == 4 || $average < 5)
                      <i class="ci-star-filled fs-sm text-accent me-1"></i>
                       <i class="ci-star-filled fs-sm text-accent me-1"></i>
@@ -528,7 +528,7 @@
                       @endif
                     </div>
 
-                      
+
 
                     <span class="d-inline-block align-middle"> {{ number_format($average,1) }} Overall rating</span>
                     <p class="pt-3 fs-sm text-muted">{{ $fivestar }} out of {{ count($reviewcount) }} ({{ $fivepercent }}%)<br>Customers recommended this product</p>
@@ -594,7 +594,7 @@
                     </div>
                     @foreach($reviews as $item)
                     @if($item->status == 0)
-                
+
                     @else
                     <!-- Review-->
                     <div class="product-review pb-4 mb-4 border-bottom">
@@ -608,7 +608,7 @@
 
 
 
-                            
+
 
 
 
@@ -617,7 +617,7 @@
                       <dl>
                         <dt>{{ $item->summary }}</dt>
                         <dd>{{ $item->comment }}</dd>
-                        
+
                       </dl>
 
                       <div class="star-rating">
@@ -642,14 +642,14 @@
                         <i class="star-rating-icon ci-star"></i>
                         <i class="star-rating-icon ci-star"></i>
                         <i class="star-rating-icon ci-star"></i>
-                         
+
                         @elseif($item->rating == 3)
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star"></i>
                         <i class="star-rating-icon ci-star"></i>
-                         
+
                         @elseif($item->rating == 4)
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star-filled active"></i>
@@ -662,21 +662,21 @@
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star-filled active"></i>
                         <i class="star-rating-icon ci-star-filled active"></i>
-                         
+
                          @endif
 
                          <small>
                         @if ($item->user_id == Auth::id())
-                        <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right" 
+                        <a class="blog-entry-meta-link text-nowrap text-right ms-2" style="text-align: right"
                         href="{{ route('delete.reviews', $item->id) }}" id="removeComment" data-scroll><i class="ci-trash"></i></a>
                         @endif
                         </small>
                       </div>
 
-                      
+
 
                       <div class="fs-ms text-muted pb-2">
-                        
+
                         @if($item->rating == 1)
                         Unsatisfied
                         @elseif($item->rating == 2)
@@ -691,8 +691,8 @@
                         No Rating
                         @endif
 
-                        
-                      
+
+
                       </div>
 
                       @if($item->image != NULL)
@@ -715,12 +715,12 @@
                     <!-- End Review-->
                     @endif
                     @endforeach
-                    
+
                     <div class="text-center">
                       <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load more reviews</button>
                     </div>
 
-                    
+
 
                   </div>
                   <!-- Leave review form-->
@@ -729,9 +729,9 @@
                       <h3 class="h4 pb-2">Write a review</h3>
                       <form class="needs-validation" method="post" action="{{ route('review.store') }}" novalidate enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">	
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                        
+
 
                         <div class="mb-3">
                           <label class="form-label" for="review-name">Your name<span class="text-danger">*</span></label>
@@ -765,7 +765,7 @@
                           <textarea class="form-control" rows="6" required id="review-text" name="comment"></textarea>
                           <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review must be at least 50 characters.</small>
                         </div>
-                        
+
                         <div class="mb-4">
                           <label class="form-label" for="review-cons">Upload image <span class="text-muted fs-xs">(optional)</span></label>
                           <!-- Drag and drop file upload -->
@@ -787,7 +787,7 @@
                 </div>
               </div>
               <!-- End Reviews tab-->
-              
+
             </div>
           </div>
         </div>
@@ -797,17 +797,17 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <h2 class="h3 pb-2">
-              @if(session()->get('language') == 'filipino') 
-              {{ $product->short_descp_fil }} 
-              @else {{  $product->short_descp_en }} 
-              @endif                     
+              @if(session()->get('language') == 'filipino')
+              {{ $product->short_descp_fil }}
+              @else {{  $product->short_descp_en }}
+              @endif
             </h2>
 
-            
-            <p class="text">@if(session()->get('language') == 'filipino') 
+
+            <p class="text">@if(session()->get('language') == 'filipino')
               {!! $product->long_descp_fil !!} @else {!! $product->long_descp_en !!} @endif</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-            
+
             <img src="{{ asset('frontendv2/assets/img/shop/single/prod-img2.jpg') }}" alt="Product description">
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
           </div>
@@ -834,7 +834,7 @@
                     New
                 </span> @else
                 <span class="badge bg-danger badge-shadow">
-                   
+
                    <i class="ci-discount"></i> Sale {{ round($discount) }}%
                 </span>
                 @endif
@@ -870,9 +870,9 @@
                     $average =
                     App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
                     @endphp
-  
-  
-  
+
+
+
                     @if($average == 0 || $average < 0) <a
                         href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                         <div class="star-rating"><i class="star-rating-icon ci-star-filled "></i><i
@@ -907,7 +907,7 @@
                                 {{-- <span class="review">{{ count($reviewcount) }}
                                 Review(s)</span> --}}
                                 </a>
-  
+
                                 @elseif($average == 3 || $average < 4) <a
                                     href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                     <div class="star-rating"><i
@@ -920,8 +920,8 @@
                                     {{-- <span class="review">{{ count($reviewcount) }}
                                     Review(s)</span> --}}
                                     </a>
-  
-  
+
+
                                     @elseif($average == 4 || $average < 5) <a
                                         href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                         <div class="star-rating"><i
@@ -948,7 +948,7 @@
                                                 Review(s)</span> --}}
                                             </a>
                 </div>
-  
+
                 @endif
 
 
@@ -958,7 +958,7 @@
             </div>
             <!-- End Product-->
             @endforeach
-    
+
           </div>
         </div>
       </div>
@@ -1041,11 +1041,11 @@
         </div>
       </div> --}}
 
-      
+
 {{-- Color Options --}}
 @include('frontendv2.common.colorOptions')
 {{-- End Color Options --}}
 
-      
+
 
 @endsection
