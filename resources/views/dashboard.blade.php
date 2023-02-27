@@ -51,12 +51,12 @@
             <!-- Toolbar-->
             <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
                 <div class="d-flex align-items-center">
-                   
+
                 </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="{{ route('user.logout') }}"><i
                         class="ci-sign-out me-2"></i>Sign out</a>
             </div>
 
-          
+
 
 
             @php
@@ -90,45 +90,83 @@
 
             @endphp
 
-            
-
-                    
 
 
-              {{-- {{ $greatest_wishlist }} 
+
+
+
+              {{-- {{ $greatest_wishlist }}
 
                      {{ $greatest_wishlist_name }}        --}}
 
-                    
+
                      <div class="row mx-n2 pt-2">
                         <div class="col-md-4 col-sm-6 px-2 mb-4">
                           <div class="bg-secondary h-100 rounded-3 p-4 text-center">
                             <h3 class="fs-sm text text-accent">Most Wishlisted Product</h3>
+                            {{-- image --}}
+
+                            {{-- <img src="{{ asset($best_seller_product->product->product_thumbnail) }}" alt="" style="width: 100px; height: 100px;">
+
                             <p class="h2 mb-2">{{ $greatest_wishlist_name }}</p>
                             <p class="fs-ms text-muted"> Wishlisted by {{ $greatest_wishlist_count }} users </p>
+ --}}
+
+                            <a href="{{ url('product/details/'.$greatest_wishlist->product->id.'/'.$greatest_wishlist->product->product_slug_en ) }}">
+                            <figure class="figure">
+                              <img src="{{ asset($greatest_wishlist->product->product_thumbnail) }}" class="figure-img" alt="product">
+                              <figcaption class="figure-caption text-center">{{ $greatest_wishlist_name }}</figcaption>
+                            </figure>
+                            </a>
+
+
+                            <p class="fs-ms text-muted"> Wishlisted by {{ $greatest_wishlist_count }} users </p>
+
+
                           </div>
                         </div>
 
                         <div class="col-md-4 col-sm-6 px-2 mb-4">
                           <div class="bg-secondary h-100 rounded-3 p-4 text-center">
-                            <h3 class="fs-sm text text-accent">Most Reviewed Product</h3>
-                            <p class="h2 mb-2">{{ $greatest_reviewedProduct_name }}</p>
+                            <h3 class="fs-sm text text-danger">Most Reviewed Product</h3>
+
+
+                            <a href="{{ url('product/details/'.$greatest_reviewedProduct->product->id.'/'.$greatest_reviewedProduct->product->product_slug_en ) }}">
+
+                            <figure class="figure">
+                              <img src="{{ asset($greatest_reviewedProduct->product->product_thumbnail) }}" class="figure-img" alt="product">
+                              <figcaption class="figure-caption text-center">{{ $greatest_reviewedProduct_name }}</figcaption>
+                            </figure>
+
+                            </a>
+
+                            {{-- <p class="h2 mb-2">{{ $greatest_reviewedProduct_name }}</p> --}}
                             <p class="fs-ms text-muted"> Reviewed by {{ $greatest_reviewedProduct_count }} users </p>
                           </div>
                         </div>
 
                         <div class="col-md-4 col-sm-6 px-2 mb-4">
                           <div class="bg-secondary h-100 rounded-3 p-4 text-center">
-                            <h3 class="fs-sm text text-accent">Best Seller Product</h3>
-                            <p class="h2 mb-2">{{ $best_seller_product_name }}</p>
-                            <p class="fs-ms text-muted"> Sold by {{ $best_seller_product_count }} users </p>
+                            <h3 class="fs-sm text text-warning">Best Seller Product</h3>
+
+
+                            <a href="{{ url('product/details/'.$best_seller_product->product->id.'/'.$best_seller_product->product->product_slug_en ) }}">
+
+                            <figure class="figure">
+                              <img src="{{ asset($best_seller_product->product->product_thumbnail) }}" class="figure-img" alt="product">
+                              <figcaption class="figure-caption text-center">{{ $best_seller_product_name }}</figcaption>
+                            </figure>
+
+                            </a>
+
+                            <p class="fs-ms text-muted"> Bought by {{ $best_seller_product_count }} users </p>
                           </div>
-                        </div>  
-                        
+                        </div>
+
 
                      </div>
 
-                     
+
 
 
 
@@ -142,15 +180,15 @@
                         </div>
                       </div>
 
-                          
+
 
                    </div> --}}
 
 
 
-                    
 
-                    
+
+
 
 
             <h2 class="h3 py-2 text-center text-sm-start">Your total spent / orders</h2>
@@ -161,20 +199,20 @@
                     <h3 class="fs-sm text-muted">Total spent</h3>
                     <p class="h2 mb-2">₱{{ $total_spent-$total_return }}.<small>00</small> </p>
 
-                    
+
                     <p class="fs-ms text-muted mb-0">
                         @if ($account_created == $current_date)
 
                         {{ $account_created }}
-                        
+
                         @else
 
                         {{ $account_created }} - {{ $current_date }}
 
                         @endif
-                        
-                        
-                        
+
+
+
                     </p>
                   </div>
                 </div>
@@ -262,18 +300,18 @@
               </div>
             </div>--}}
 
-            </div> 
+            </div>
 
-            
+
 
         </section>
 
 
         <!-- ANCHOR End ORDER VIEW Content (transfer it later) -->
-        
+
 
     </div>
-    
+
 </div>
 
 

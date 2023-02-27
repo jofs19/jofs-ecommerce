@@ -47,6 +47,7 @@ class CreateProductsTable extends Migration
             $table->string('so_saletime')->nullable();
             $table->integer('special_deals')->nullable();
             $table->integer('status')->default(0);
+            $table->string('vendor_id')->nullable();
             $table->timestamps();
         });
     }
@@ -61,4 +62,3 @@ class CreateProductsTable extends Migration
         Schema::dropIfExists('products');
     }
 }
- 

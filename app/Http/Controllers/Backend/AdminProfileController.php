@@ -17,18 +17,18 @@ class AdminProfileController extends Controller
     public function AdminCalendar(){
         return view('admin.calendar');
     }
-    
+
     public function AdminProfile()
     {
 		$id = Auth::user()->id;
-		$adminData = Admin::find($id);        
+		$adminData = User::find($id);
         return view('admin.admin_profile_view', compact('adminData'));
     }
-    
+
     public function AdminProfileEdit()
     {
 		$id = Auth::user()->id;
-		$editData = Admin::find($id);        
+		$editData = User::find($id);
         return view('admin.admin_profile_edit', compact('editData'));
     }
 
@@ -60,18 +60,18 @@ class AdminProfileController extends Controller
 	// 		'alert-type' => 'info'
 	// 	);
 	// 	return redirect()->route('all.admin.user')->with($notification);
-  
+
 
     // }
 
     public function AdminProfileStore(Request $request){
- 
+
         $id = Auth::user()->id;
         $data = User::find($id);
         // $data->name = $request->name;
         // $data->email = $request->email;
         // $data->phone = $request->phone;
-        // $data->address = $request->address;   
+        // $data->address = $request->address;
 
         $request->validate([
             'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg',
@@ -86,47 +86,47 @@ class AdminProfileController extends Controller
         Image::make($image)->resize(917,1000)->save('upload/admin_images/'.$name_gen);
         $save_url = 'upload/admin_images/'.$name_gen;
 
-           
-        Admin::findOrFail($id)->update([
+
+        User::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'profile_photo_path' => $save_url,
         ]);
 
-        
 
-         
+
+
         $notification = array(
             'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'success'
         );
- 
+
         return redirect()->route('admin.profile')->with($notification);
-        
+
 
         }else{
 
-            Admin::findOrFail($id)->update([
+            User::findOrFail($id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
             ]);
 
-             
+
         $notification = array(
             'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'success'
         );
- 
+
         return redirect()->route('admin.profile')->with($notification);
 
         }
         // $data->save();
 
- 
-    } // End Mehtod  
-    
+
+    } // End Mehtod
+
 
     // public function AdminProfileStore(Request $request)
     // {
@@ -163,7 +163,7 @@ class AdminProfileController extends Controller
         return view('admin.admin_change_password');
     }
 
- 
+
 
     public function AdminUpdateChangePassword(Request $request){
         // $validateData = $request->validate([
@@ -173,7 +173,7 @@ class AdminProfileController extends Controller
 
         // ]);
 
-       
+
         $hashedPassword = Auth::user()->password;
         if (Hash::check($request->oldpassword,$hashedPassword)) {
             $admin = Admin::find(Auth::id());
@@ -212,13 +212,13 @@ class AdminProfileController extends Controller
 	   return redirect()->back()->with($notification);
 	} // end method
 
-  
 
-  
+
+
 }
 
 // public function AdminUpdateChangePassword(Request $request){
- 
+
 //     $validateData = $request->validate([
 //         'oldpassword' => 'required',
 //         'password' => 'required|confirmed',

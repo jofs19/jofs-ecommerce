@@ -17,6 +17,12 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class AdminController extends Controller
 {
     /**
@@ -35,12 +41,84 @@ class AdminController extends Controller
     public function __construct(StatefulGuard $guard)
     {
         $this->guard = $guard;
-         
+
     }
 
-    public function loginForm(){
-    	return view('auth.admin_login', ['guard' => 'admin']);
-    }
+    // public function loginForm(){
+    // 	return view('auth.admin_login', ['guard' => 'admin']);
+    // }
+
+    public function AdminLogin(){
+        return view('admin.admin_login');
+    } // End Mehtod
+
+    public function AdminDashboard(){
+
+        return view('admin.index');
+
+    } // End Mehtod
+
+
+    public function InactiveVendor(){
+        $inActiveVendor = User::where('status','inactive')->where('role','vendor')->latest()->get();
+        return view('backend.vendor.inactive_vendor',compact('inActiveVendor'));
+    } // End Mehtod
+
+
+    public function ActiveVendor(){
+        $ActiveVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+        return view('backend.vendor.active_vendor',compact('ActiveVendor'));
+
+    }// End Mehtod
+
+
+    public function InactiveVendorDetails($id){
+
+        $inactiveVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.inactive_vendor_details',compact('inactiveVendorDetails'));
+
+    }// End Mehtod
+
+    public function ActiveVendorApprove(Request $request){
+
+        $verdor_id = $request->id;
+        $user = User::findOrFail($verdor_id)->update([
+            'status' => 'active',
+        ]);
+
+        $notification = array(
+            'message' => 'Vendor Active Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('active.vendor')->with($notification);
+
+    }// End Mehtod
+
+
+    public function ActiveVendorDetails($id){
+
+        $activeVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.active_vendor_details',compact('activeVendorDetails'));
+
+    }// End Mehtod
+
+
+     public function InActiveVendorApprove(Request $request){
+
+        $verdor_id = $request->id;
+        $user = User::findOrFail($verdor_id)->update([
+            'status' => 'inactive',
+        ]);
+
+        $notification = array(
+            'message' => 'Vendor InActive Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('inactive.vendor')->with($notification);
+
+    }// End Mehtod
 
     /**
      * Show the login view.

@@ -30,16 +30,18 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/themes/prism.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/flatpickr/dist/flatpickr.min.css') }}"/>
+
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    
+
 
 
 
 
     <link rel="stylesheet" media="screen" href="{{ asset('frontendv2/assets/vendor/nouislider/dist/nouislider.min.css') }}"/>
-    
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
 
@@ -152,7 +154,7 @@
     }
 
 
-    
+
     @media screen and (min-width: 767px) and (max-width: 1024px) {
       div .wrap{
       width: 210px;
@@ -168,19 +170,19 @@
 
 
   <div id="loader-wrapper">
-  	<div> 
+  	<div>
       <img src="{{ asset('frontendv2/assets/img/my-loader.svg') }}" alt="" srcset="" width="80" height="80" style="text-align: center; display:inline-block; margin-top:calc(50vh - 20px);
-      ">  
+      ">
     </div>
   </div>
-  
+
   <!-- Body-->
   <body class="handheld-toolbar-enabled"></body>
 
   {{-- <div id="loader-wrapper">
   	<div class="loader"></div>
   </div> --}}
-            
+
 
 
     <main class="page-wrapper">
@@ -221,13 +223,13 @@
       {{-- End Blog + Instagram info cards --}}
 
       {{-- Size chart Modal --}}
-      
+
       {{-- End Size chart Modal --}}
 
     </main>
     <!-- Footer-->
 
-    
+
 
     {{-- Footer Area --}}
     @include('frontendv2.body.footer')
@@ -235,15 +237,15 @@
 
 
     @if(request()->is('/') || request()->is('dashboard') || request()->is('product/details/*') || request()->is('user/wishlist')|| request()->is('mycart') || request()->is('login') || request()->is('checkout') || request()->is('user/order_details/*') || request()->is('user/order/tracking') || request()->is('user/compare') || request()->is('user/my/orders') || request()->is('user/return/order/list') || request()->is('user/profile') || request()->is('user/change/password') || request()->is('help') || request()->is('about') || request()->is('contact') || request()->is('checkout/store') || request()->is('user/cash/order') || request()->is('user/online/order') )
-    
+
     {{-- Mobile UI Area for Home Page --}}
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span>
       </span><span class="handheld-toolbar-label">Wishlist</span></a>
 
-      
+
       <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
-    
+
                                         @php
 			                                  if (Auth::check()){
                                           $ncount = Auth::user()->unreadNotifications()->count();
@@ -252,15 +254,15 @@
                                           $ncount = 0;
 
                                         }
-                                       
+
                                         @endphp
 
       @if(Auth::check())
-                                        
+
       <a class="d-table-cell handheld-toolbar-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><span class="handheld-toolbar-icon"><i class="ci-bell"></i><span class="badge bg-primary rounded-pill ms-1">  {{ $ncount }}  </span></span> <span class="handheld-toolbar-label">Notifications</span></a>
 
       @endif
-    
+
       <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
 
     </div>
@@ -273,11 +275,11 @@
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty">0</span></span><span class="handheld-toolbar-label">Wishlist</span></a>
 
-        
+
         <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
-      
+
         <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
-      
+
       </div>
     </div>
     {{-- End Mobile UI Area for Shop Page --}}
@@ -287,20 +289,20 @@
     <!-- Toolbar for handheld devices (Blog)-->
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="offcanvas" data-bs-target="#blog-sidebar"><span class="handheld-toolbar-icon"><i class="ci-sign-in"></i></span><span class="handheld-toolbar-label">Sidebar</span></a><a class="d-table-cell handheld-toolbar-item" href="{{ route('wishlist') }}"><span class="handheld-toolbar-icon"><i class="ci-heart"></i><span class="badge bg-primary rounded-pill ms-1 wishlistQty"></span></span><span class="handheld-toolbar-label">Wishlist</span></a>
-        
 
-        
+
+
         <a class="d-table-cell handheld-toolbar-item" href="{{ route('mycart') }}"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1 cartQty"></span></span> <span class="handheld-toolbar-label" id="cartSubTotal"></span></a>
-      
+
         <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a>
-      
+
       </div>
-        
+
     </div>
 
     @endif
 
- 
+
 
 
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
@@ -356,7 +358,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
-    
+
 
     <script src="{{ asset('frontendv2/assets/js/code2.js') }}"></script>
 
@@ -375,10 +377,10 @@
      break;
      case 'error':
      toastr.error(" {{ Session::get('message') }} ");
-     break; 
+     break;
   }
-  @endif  
-</script> 
+  @endif
+</script>
 
     {{-- <script src="{{ asset('frontendv2/assets/js/jquery-1.11.1.min.js') }}"></script>  --}}
     <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
@@ -408,7 +410,7 @@
   <img class="rounded-circle" width="50" src="{{ asset('frontendv2/assets/img/vartouhi-logo.png') }}" alt="Laura Willson"/>
   <div class="ps-3">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h6 class="fs-md mb-0"> 
+      <h6 class="fs-md mb-0">
     @php
         $truncate = Auth::user()->name;
         $numOfChars = strlen($truncate);
@@ -419,9 +421,9 @@
         }
     @endphp
 
-    
+
       Vartouhi Corporation </h6>
-      
+
     </div>
     <p class="fs-md mb-1">{{ $notification->data['message'] }}</p>
     <span class="fs-ms text-muted">
@@ -471,7 +473,7 @@
 
 
             {{-- ANCHOR SIGN-IN FORM --}}
-            <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab" method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
+            <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab" method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <div class="py-1">
@@ -482,7 +484,7 @@
                 <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
 
                 <div class="input-group mb-3"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-					
+
                   <input class="form-control rounded-start" type="email" placeholder="Email" id="email" name="email" required>
                 </div>
                 <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
@@ -491,10 +493,10 @@
             @error('password')
             <span class="invalid-feedback" role="alert">
             <div class="invalid-feedback">{{ $message }}</div>
-          </span>	  
-            
-            @enderror 
-            
+          </span>
+
+            @enderror
+
                     <label class="password-toggle-btn" aria-label="Show/hide password">
                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                     </label>
@@ -552,7 +554,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror --}}
-                
+
 				{{-- <div class="form-text"><strong>Password must contain:</strong> Minimum of <strong>8</strong> characters; atleast <strong>1</strong> Alphabet and <strong>1</strong> Number.</div> --}}
 				<div class="invalid-feedback">Please provide valid password.</div>
 			  </div>
@@ -565,17 +567,17 @@
         @error('password_confirmation')
         <span class="invalid-feedback" role="alert">
           <div class="invalid-feedback">{{ $message }}</div>
-      </span>	  
-          
+      </span>
+
         @enderror
 
                 {{-- <div class="invalid-feedback">Password does not match!</div> --}}
 
                 <div class="confirm" id="confirm"><small><span class="text-danger"> Password does not match!</span></small></div>
 
-                
-               
-                
+
+
+
 			  </div>
 
               <button class="btn btn-primary btn-shadow d-block w-100" type="submit" id="sign-up">Sign up</button>
@@ -598,13 +600,13 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            
+
 
                             <h4 class="modal-title product-title"><a id="plink" href="#" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="Go to product page">
-                                    
-                                    <strong><span id="pname"></span> </strong> 
-                                    
+
+                                    <strong><span id="pname"></span> </strong>
+
 
                                     <i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" id="closeModel"></button>
@@ -618,7 +620,7 @@
                                             <div class="product-gallery-preview-item active" id="first">
                                                 <img class="image-zoom"
                                                     id="pimage"
-                                                    
+
                                                     alt="Product image">
                                                 <div class="image-zoom-pane"></div>
                                             </div>
@@ -682,28 +684,28 @@
                                         <div class="product-price">
                                           <del class="fs-lg text-muted" id="oldprice">
                                               <small>.00</small></del>
-                                          <span class=" fs-lg text-accent" id="pprice"> 
+                                          <span class=" fs-lg text-accent" id="pprice">
                                               <small>.00</small></span>
-          
+
                                       </div>
 
-                                      
+
 
                                       {{-- <label for="color">Choose Color</label>
                                       <select class="form-control" id="color" name="color"> --}}
 
-                                       
+
 
 
                                         {{-- <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span>
-                                          
+
                                           <span class="text-muted" id="colorOptionText">Dark blue/Orange</span></div> --}}
                                         <div class="position-relative me-n4 mb-3">
-                                            
 
 
 
-                                            
+
+
 
                                             <div id="aviable"></div>
                                             <br>
@@ -714,47 +716,47 @@
                                           <label for="size">Choose Size</label>
                                           <select class="form-control" id="size" name="size">
                                             <option>1</option>
-                                             
+
                                           </select>
                                         </div>  <!-- // end form group --> --}}
-                                                                              
+
 
                                         </div>
 
 
-                                        
+
                                         <div class="mb-3">
                                           <label for="color" class="form-label">Choose Variant</label>
                                           <select class="form-select" id="color" name="color">
                                             {{-- <option class="bg-secondary" disabled>Choose option...</option> --}}
-                                            
+
                                           </select>
                                         </div>
 
                                         <div class="my-3" id="sizeArea">
                                           <label for="size" class="form-label">Choose Size</label>
                                           <select class="form-select" id="size" name="size">
-                                            
+
                                             <option>1</option>
-                                                                                        
+
                                           </select>
                                         </div>
 
 
 
                                         <div class="d-flex align-items-center pt-2 pb-4">
-                                          
+
                                           {{-- <input type="number" class="form-control" id="qty" value="0" min="1"> --}}
-                                          
+
                                           <input class="form-control me-3 product-qty" type="number" id="qty" min="0" value="0" style="width: 6rem;">
 
-                                         
-                                          
-                                          
+
+
+
                                           <input type="hidden" id="product_id">
 <button type="submit" id="try" class="btn btn-primary btn-shadow d-block w-100 btn-shadow add-cart" onclick="addToCart()" ><i class="ci-cart fs-lg me-1"></i>Add to Cart</button>
 
-                                              
+
                                         </div>
                                         {{-- <div class="d-flex mb-4"> <!--START-->
                                             <div class="w-100 me-3"> --}}
@@ -782,7 +784,7 @@
                                                         class="ci-compare fs-lg me-2"></i>Compare</button>
                                             </div> --}}
                                         {{-- </div> --}} <!--END-->
-                                        
+
                       <!-- Product panels-->
                       <div class="accordion mb-4" id="productPanels">
                         <div class="accordion-item">
@@ -800,7 +802,7 @@
                                 <div>
                                   <div class="fw-semibold text-dark">Product Category</div>
                                   <div class="fs-sm text-muted">
-                                    
+
                                     @if(session()->get('language') == 'filipino')
                                     <span id="pcategoryFil"></span>
                                     @else
@@ -836,22 +838,25 @@
                                 </div>
                                 <div>...</div>
                               </div>
+
+
+
                             </div>
                           </div>
                         </div>
                         <div class="accordion-item">
                           <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-list text-muted fs-lg align-middle mt-n1 me-2"></i>Product Description</a></h3>
                           <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
-                            <div class="accordion-body pt-3 pb-1">                            
+                            <div class="accordion-body pt-3 pb-1">
                                 <dl>
                                   <dt class="fw-semibold">
-                                    @if(session()->get('language') == 'filipino') 
+                                    @if(session()->get('language') == 'filipino')
                                     <span id="shortDetailsFil" class="text"></span>
-                                    @else 
+                                    @else
                                     <span id="shortDetailsEng" class="text"></span>
 
                                     @endif</dt>
-                                  <dd @if(session()->get('language') == 'filipino') 
+                                  <dd @if(session()->get('language') == 'filipino')
                                     id="longDetailsFil"
                                     @else
                                     id="longDetailsEng"
@@ -862,12 +867,40 @@
 
 
                                   </dd>
-                                
-                                </dl>                                                        
+
+                                </dl>
                             </div>
                           </div>
                         </div>
-                      </div>
+                        {{-- <div class="accordion-item">
+                            <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-list text-muted fs-lg align-middle mt-n1 me-2"></i>Product Vendor</a></h3>
+                            <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
+                              <div class="accordion-body pt-3 pb-1">
+                                  <dl>
+                                    <dt class="fw-semibold">
+                                      @if(session()->get('language') == 'filipino')
+                                      <span id="shortDetailsFil" class="text"></span>
+                                      @else
+                                      <span id="shortDetailsEng" class="text"></span>
+
+                                      @endif</dt>
+                                    <dd @if(session()->get('language') == 'filipino')
+                                      id="longDetailsFil"
+                                      @else
+                                      id="longDetailsEng"
+                                      @endif
+                                      >
+
+
+
+
+                                    </dd>
+
+                                  </dl>
+                              </div>
+                            </div>
+                          </div>
+                      </div> --}}
 
                                     </div>
                                 </div>
@@ -887,7 +920,7 @@
                 'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
             }
         })
-    // Start Product View with Modal 
+    // Start Product View with Modal
     function productView(id){
         // alert(id)
         $.ajax({
@@ -905,6 +938,7 @@
                 $('#pcategoryFil').text(data.product.category.category_name_fil);
                 $('#pbrand').text(data.product.brand.brand_name_en);
                 $('#pimage').attr('src','/'+data.product.product_thumbnail);
+                $('#pvendor_id').text(data.product.vendor_id);
                 $('#pimage').attr('data-zoom','/'+data.product.product_thumbnail);
                 $('#pgallery').attr('src','/'+data.product.product_thumbnail);
                 $('#shortDetailsEng').text(data.product.short_descp_en);
@@ -913,13 +947,13 @@
                 $('#ptagsFil').text(data.product.product_tags_fil);
                 $('#longDetailsEng').html(data.product.long_descp_en);
                 $('#longDetailsFil').html(data.product.long_descp_fil);
-                $('#pquantity').text(data.product.product_qty);                              
+                $('#pquantity').text(data.product.product_qty);
                 $('#qty').val(1);
                 // !! Start Product Color !!
 
-              
 
-                // Product Price 
+
+                // Product Price
                 if (data.product.discount_price == null) {
                     $('#pprice').text('');
                     $('#oldprice').text('');
@@ -927,15 +961,15 @@
                 }else{
                     $('#pprice').html('₱'+data.product.discount_price+'<small>.00</small>');
                     $('#oldprice').html('₱'+data.product.selling_price+'<small>.00</small>');
-                } // end prodcut price 
+                } // end prodcut price
                 // Start Stock opiton
                 if (data.product.product_qty > 0) {
-                  
+
                     $('#aviable').text('');
                     $('#stockout').text('');
                     $('#aviable').html(`<div class="product-badge product-available mt-n1"><i class="ci-security-check" ></i>Product Available</div>`);
                     $('#try').attr('disabled',false);
-                    $('#qty').attr('max',data.product.product_qty);  
+                    $('#qty').attr('max',data.product.product_qty);
 
                 }else{
                     $('#aviable').text('');
@@ -945,23 +979,23 @@
                     $('#try').attr('disabled',true);
 
                     $('#qty').attr('max',data.product.product_qty);
-    
-                } // end Stock Option 
-            
+
+                } // end Stock Option
+
 
 
 
         // Color
-        $('select[name="color"]').empty();        
+        $('select[name="color"]').empty();
     $.each(data.color,function(key,value){
         $('select[name="color"]').append('<option value=" '+value+' ">'+value+' </option>')
     }) // end color
 
-            
+
 
 
          // Size
-    $('select[name="size"]').empty();        
+    $('select[name="size"]').empty();
     $.each(data.size,function(key,value){
         $('select[name="size"]').append('<option value=" '+value+' ">'+value+' </option>')
         if (data.size == "") {
@@ -972,38 +1006,39 @@
     }) // end size
 
 
-        
-     
+
+
             }
         })
-     
+
     }
-    // Eend Product View with Modal 
-    
-    
- // Start Add To Cart Product 
+    // Eend Product View with Modal
+
+
+ // Start Add To Cart Product
     function addToCart(){
         var product_name = $('#pname').text();
         var id = $('#product_id').val();
+        var vendor = $('#vproduct_id').val();
         var color = $('#color option:selected').text();
         var size = $('#size option:selected').text();
         var quantity = $('#qty').val();
 
-        
+
 
         $.ajax({
             type: "POST",
             dataType: 'json',
             data:{
-                color:color, size:size, quantity:quantity, product_name:product_name
+                color:color, size:size, quantity:quantity, product_name:product_name,vendor:vendor
             },
             url: "/cart/data/store/"+id,
             success:function(data){
 
-              miniCart();               
+              miniCart();
                 $('#closeModel').click();
                 // console.log(data)
-                // Start Message 
+                // Start Message
                 const Toast = Swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -1029,17 +1064,17 @@
                         title: data.error
                     })
                 }
-                // End Message 
+                // End Message
             }
         })
     }
-  
-// End Add To Cart Product 
+
+// End Add To Cart Product
 </script>
 
 
-    
-    
+
+
     <script type="text/javascript">
          function miniCart(){
             $.ajax({
@@ -1051,14 +1086,14 @@
                     $('.cartQty').text(response.cartQty);
                   var miniCart = ""
                     $.each(response.carts, function(key,value){
-                      
+
                         miniCart += `<div class="widget-cart-item pb-2 border-bottom">
                                       <button class="btn-close text-danger pt-1" type="button" id="${value.rowId}" onclick="miniCartRemove(this.id)" aria-label="Remove"><span
                                               aria-hidden="true">&times;</span></button>
                                       <div class="d-flex align-items-center"><a class="d-block flex-shrink-0"
                                               href="#"><img
                                                   src="/${value.options.image}" width="64" alt="Product" class="pt-1"></a>
-                                          <div class="ps-2"> 
+                                          <div class="ps-2">
                                               <h6 class="widget-product-title"><a href="#">${value.name}</a></h6>
                                               <div class="widget-product-meta"><span
                                                       class="text-accent me-2"> ₱ ${value.price}.<small>00</small></span><span
@@ -1067,28 +1102,28 @@
                                       </div>
                                   </div>`
                     });
-                    
+
                     if(response.cartQty < 1){
                       $("#mcart").removeClass("jello-horizontal");
                         miniCart += `<div class="d-flex justify-content-center align-items-center py-3">
                           <p class="fs-sm text-muted mb-0">Your cart is currently empty...</p>
-                          
-                                        
+
+
                                     </div>`
                       $('.checkoutMe').addClass('disabled',true);
                     }else{
                       $("#mcart").addClass("jello-horizontal");
                       $('.checkoutMe').removeClass('disabled',false);
                     }
-                    
+
                     $('#miniCart').html(miniCart);
                 }
             })
          }
      miniCart();
-    
-    
-     /// mini cart remove Start 
+
+
+     /// mini cart remove Start
      function miniCartRemove(rowId){
             $.ajax({
                 type: 'GET',
@@ -1096,7 +1131,7 @@
                 dataType:'json',
                 success:function(data){
                 miniCart();
-                 // Start Message 
+                 // Start Message
                     const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
@@ -1115,34 +1150,34 @@
                             title: data.error
                         })
                     }
-                    // End Message 
+                    // End Message
                 }
             });
         }
-     //  end mini cart remove 
+     //  end mini cart remove
     </script>
-    
-    
+
+
     <!--  /// Start Add Wishlist Page  //// -->
-    
+
     <script type="text/javascript">
-        
+
       function addToWishList(product_id){
           $.ajax({
               type: "POST",
               dataType: 'json',
               url: "/add-to-wishlist/"+product_id,
               success:function(data){
-                
-                    // Start Message 
+
+                    // Start Message
                     const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
-                    
+
                     showConfirmButton: false,
                     timer: 3000
                   })
-    
+
                   if ($.isEmptyObject(data.error)) {
                       Toast.fire({
                           type: 'success',
@@ -1156,33 +1191,33 @@
                           title: data.error
                       })
                   }
-                    // End Message 
+                    // End Message
                     $('.wishlistQty').text(data.wishlistQty);
 
-    
+
               }
           })
       }
-    
+
       </script>
-    
+
        <!--  /// End Add Wishlist Page  ////   -->
         {{-- var id = value.product_id; --}}
         {{-- var slug = value.product.product_slug_en; --}}
         {{-- {{ url('product/details/'.$product->id.'/'.$product->product_slug_en') }} --}}
-    
+
        <script type="text/javascript">
         function wishlist(){
            $.ajax({
                type: 'GET',
-               url: '/user/get-wishlist-product',           
+               url: '/user/get-wishlist-product',
                dataType:'json',
                success:function(response){
                 $('.wishlistQty').text(response.wishlistQty);
                    var rows = ""
                    $.each(response.wishlist, function(key,value){
-                    
-                       rows += ` 
+
+                       rows += `
         <div class="d-sm-flex justify-content-between my-4 mt-lg-4 pb-3 pb-sm-4 border-bottom">
           <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="/product/details/${value.product_id}/${value.product.product_slug_en}" style="width: 10rem;"><img src="/${value.product.product_thumbnail}" alt="Product"></a>
             <div class="pt-2">
@@ -1193,7 +1228,7 @@
             </div>
           </div>
           <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-            
+
             <button class="btn btn-outline-primary btn-sm" type="submit" href="#quick-view-electro"
                             data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
                             onclick="productView(${value.product_id})"><i class="ci-cart me-2"></i>Add to Cart</button>
@@ -1201,27 +1236,27 @@
           </div>
         </div>`
            });
-                   
+
                    $('#wishlist').html(rows);
                }
            })
         }
     wishlist();
-    
-    
-     ///  Wishlist remove Start 
+
+
+     ///  Wishlist remove Start
      function wishlistRemove(id){
             $.ajax({
                 type: 'GET',
-                url: '/user/wishlist-remove/'+id,            
+                url: '/user/wishlist-remove/'+id,
                 dataType:'json',
                 success:function(data){
                 wishlist();
-                 // Start Message 
+                 // Start Message
                     const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
-                          
+
                           showConfirmButton: false,
                           timer: 3000
                         })
@@ -1238,15 +1273,15 @@
                             title: data.error
                         })
                     }
-                    // End Message 
+                    // End Message
                 }
             });
         }
-     // End Wishlist remove   
-    
-    
-    </script> 
-        
+     // End Wishlist remove
+
+
+    </script>
+
     <!-- /// End Load Wish list Data  -->
 
 
@@ -1254,28 +1289,28 @@
 
 
 
-    
+
 
         <!--  /// Start Add Compare Page  //// -->
-    
+
         <script type="text/javascript">
-        
+
           function addToCompare(product_id){
               $.ajax({
                   type: "POST",
                   dataType: 'json',
                   url: "/add-to-compare/"+product_id,
                   success:function(data){
-                    
-                        // Start Message 
+
+                        // Start Message
                         const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
-                        
+
                         showConfirmButton: false,
                         timer: 3000
                       })
-        
+
                       if ($.isEmptyObject(data.error)) {
                           Toast.fire({
                               type: 'success',
@@ -1289,24 +1324,24 @@
                               title: data.error
                           })
                       }
-                        // End Message 
+                        // End Message
                         $('.compareQty').text(data.compareQty);
-    
-        
+
+
                   }
               })
           }
-        
+
           </script>
-        
+
            <!--  /// End Add Compare Page  ////   -->
-        
-        
+
+
            <script type="text/javascript">
             function compare(){
                $.ajax({
                    type: 'GET',
-                   url: '/user/get-compare-product',           
+                   url: '/user/get-compare-product',
                    dataType:'json',
                    success:function(response){
                     $('.compareQty').text(response.compareQty);
@@ -1321,34 +1356,34 @@
                        var buttons = ""
 
                 $.each(response.compare, function(key,value){
-                           rows += ` 
-                           
+                           rows += `
+
                            <td class="text-center px-4 pb-4">
-                         
+
                             <a class="btn btn-sm d-block w-100 text-danger mb-2 reload" type="submit" id="${value.id}" onclick="compareRemove(this.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="ci-trash me-1"></i>Remove</a>
-                            
+
                             <a class="d-inline-block mb-3" href="/product/details/${value.product_id}/${value.product.product_slug_en}"><img src="/${value.product.product_thumbnail}" width="100" alt="Apple iPhone Xs Max"></a>
                   <h3 class="product-title fs-sm"><a href="/product/details/${value.product_id}/${value.product.product_slug_en}">${value.product.product_name_en}</a></h3>
                   <button class="btn btn-icon btn-primary btn-sm" type="submit" href="#quick-view-electro"
                             data-bs-toggle="modal" data-bs-target="#quick-view-electro" id="${value.id}"
                             onclick="productView(${value.product_id})" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><i class="ci-cart fs-lg"></i></button>
-                  
+
                   <button class="btn btn-sm btn-danger btn-icon" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" id="${value.id}" onclick="addToWishList(this.id)" ><i class="ci-heart fs-lg"></i></button>
 
                   </td>
                 `
                });
-                       
+
                        $('#compareTable .table-header').append(rows);
                        $('.reload').on('click', function(){
                         window.location.reload();
-                       }); 
+                       });
 
               $.each(response.compare, function(key,value){
                         tname += `<td class="text-center"><span class="text-dark fw-medium text-dark">${value.product.product_name_en}</span></td>`
 
                });
-                       
+
                        $('#compareTable .tname').append(tname);
 
 
@@ -1357,7 +1392,7 @@
                 description += `<td class="text-center">
 
                   <dl>
-                  
+
                     <dt>
                       <div class="mx-auto wrap">
                     ${value.product.short_descp_en}
@@ -1368,21 +1403,21 @@
                       <div class="mx-auto wrap">
 
                       ${value.product.long_descp_en}
-                      
+
                     </div>
 
                       </dd>
 
                   </dl>
-                   
-                  
+
+
                   </td>
-                
-                
+
+
                 `
 
       });
-              
+
               $('#compareTable .description').append(description);
 
 
@@ -1391,7 +1426,7 @@
                         sizes += `<td class="text-center">${value.product.product_size_en}</td>`
 
                 });
-                        
+
                         $('#compareTable .sizes').append(sizes);
 
 
@@ -1400,7 +1435,7 @@
               variants += `<td class="text-center">${value.product.product_color_en}</td>`
 
                 });
-                        
+
                         $('#compareTable .variants').append(variants);
 
 
@@ -1408,7 +1443,7 @@
               stock += `<td class="text-center">${value.product.product_qty}</td>`
 
                 });
-                        
+
                         $('#compareTable .stock').append(stock);
 
 
@@ -1416,7 +1451,7 @@
                 price_rating += `<td class="text-center">${value.product.discount_price == null ? `₱ ${value.product.selling_price}` : `<del class="text-muted fs-lg me-1">₱ ${value.product.selling_price}.<small>00</small></del> <span> ₱ ${value.product.discount_price}</span>`}.<small>00</small> </td>`
 
                 });
-                        
+
                         $('#compareTable .price_rating').append(price_rating);
 
 
@@ -1428,7 +1463,7 @@
                 </td>`
 
                 });
-                        
+
                         $('#compareTable .buttons').append(buttons);
 
 
@@ -1436,26 +1471,26 @@
 
 
 
-                       
+
                    }
                })
             }
         compare();
-        
-        
-         ///  Compare remove Start 
+
+
+         ///  Compare remove Start
          function compareRemove(id){
                 $.ajax({
                     type: 'GET',
-                    url: '/user/compare-remove/'+id,            
+                    url: '/user/compare-remove/'+id,
                     dataType:'json',
                     success:function(data){
                     compare();
-                     // Start Message 
+                     // Start Message
                         const Toast = Swal.mixin({
                               toast: true,
                               position: 'top-end',
-                              
+
                               showConfirmButton: false,
                               timer: 3000
                             })
@@ -1472,20 +1507,20 @@
                                 title: data.error
                             })
                         }
-                        // End Message 
+                        // End Message
                     }
                 });
             }
-         // End Compare remove   
-        
-        
-        </script> 
-            
+         // End Compare remove
+
+
+        </script>
+
         <!-- /// End Load Compare Data  -->
-    
-    
+
+
     <!-- /// Load My Cart /// -->
-    
+
     <script type="text/javascript">
       function cart(){
          $.ajax({
@@ -1495,7 +1530,7 @@
              success:function(response){
               // $('.product_max_qty').attr('max',response.product_max_qty);
 
-              
+
      var rows = ""
      $.each(response.carts, function(key,value){
          rows += `
@@ -1504,8 +1539,8 @@
             <div class="pt-2">
               <h3 class="product-title fs-base mb-2"><a href="#">${value.name}</a></h3>
               <div class="fs-sm"><span class="text-muted me-2">Size:</span>${value.options.size == null ? `---`:`${value.options.size}`}</div>
-              <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div> 
-              <div class="fs-lg text-accent pt-2"> <span class="fs-ms text-dark">₱ ${value.price}.<small>00</small> x <strong>${value.qty}</strong> = </span>   
+              <div class="fs-sm"><span class="text-muted me-2">Variant:</span>${value.options.color == null ? `---`:`${value.options.color}`}</div>
+              <div class="fs-lg text-accent pt-2"> <span class="fs-ms text-dark">₱ ${value.price}.<small>00</small> x <strong>${value.qty}</strong> = </span>
                 ₱ ${value.subtotal}.<small>00</small></div>
             </div>
           </div>
@@ -1521,7 +1556,7 @@
               }
 
                 <input class="form-control text-center" type="text" placeholder="..." readonly value="${value.qty}" min="1">
-                
+
 
 
 
@@ -1533,10 +1568,10 @@
             <button class="btn btn-link px-0 text-danger" type="submit" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="ci-close-circle me-2"></i><span class="fs-sm">Remove</span></button>
           </div>
         </div>`
-        
+
 
          });
-         
+
         if(response.cartQty < 1){
           rows += `<div class="container py-4 mb-lg-3">
     <div class="row justify-content-center pt-lg-4 text-center">
@@ -1550,19 +1585,19 @@
       </a>
       </div>
     </div>
-    
+
   </div>`
         }
-                 
+
                  $('#cartPage').html(rows);
              }
          })
       }
     cart();
-    
-    
-    ///  Cart remove Start 
-    function cartRemove(id){     
+
+
+    ///  Cart remove Start
+    function cartRemove(id){
       $.ajax({
              type: 'GET',
              url: '/user/cart-remove/'+id,
@@ -1570,14 +1605,14 @@
              success:function(data){
                 couponCalculation();
               cart();
-                miniCart();         
+                miniCart();
                 $('#couponField').show();
-                $('#coupon_name').val(''); 
-                // Start Message 
+                $('#coupon_name').val('');
+                // Start Message
                  const Toast = Swal.mixin({
                        toast: true,
                        position: 'top-end',
-                       
+
                        showConfirmButton: false,
                        timer: 3000
                      })
@@ -1594,13 +1629,13 @@
                          title: data.error
                      })
                  }
-                 // End Message 
+                 // End Message
              }
          });
      }
-    // End Cart remove   
-    
-    
+    // End Cart remove
+
+
     // -------- CART INCREMENT --------//
     function cartIncrement(rowId){
             $.ajax({
@@ -1615,8 +1650,8 @@
             });
         }
      // ---------- END CART INCREMENT -----///
-    
-    
+
+
       // -------- CART Decrement  --------//
       function cartDecrement(rowId){
             $.ajax({
@@ -1631,11 +1666,11 @@
             });
         }
      // ---------- END CART Decrement -----///
-    
-    </script>  
-    
+
+    </script>
+
     <!-- //End Load My cart / -->
-    
+
     <!--  //// =========== Coupon Apply Start ================= ////  -->
     <script type="text/javascript">
         function applyCoupon(){
@@ -1650,17 +1685,17 @@
                 if (data.validity == true) {
                     $('#couponField').hide(500);
                 }
-    
-                // Start Message 
+
+                // Start Message
                     const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
-                    
+
                     showConfirmButton: false,
                     timer: 3000
                     })
                     if ($.isEmptyObject(data.error)) {
-    
+
                         Toast.fire({
                             type: 'success',
                             icon: 'success',
@@ -1673,11 +1708,11 @@
                             title: data.error
                         })
                     }
-                    // End Message 
+                    // End Message
               }
           })
-        }  
-    
+        }
+
         function couponCalculation(){
         $.ajax({
             type:'GET',
@@ -1690,14 +1725,14 @@
               }else{
                 $(".applyCpn").attr("disabled", false);
               }
-    
+
                 if (data.total) {
                     $('#couponCalField').html(
                         `<div class="widget mb-3">
               <h2 class="widget-title text-center">Subtotal</h2>
               <h3 class="fw-normal text-center my-4">₱ ${data.total}</h3>
 
-    
+
             </div>
             <ul class="list-unstyled fs-sm pb-2 border-bottom">
               <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">₱ ${data.total}</span></li>
@@ -1711,14 +1746,14 @@
                 }else{
                   @php
                     $total = floor(str_replace(',', '', Cart::Subtotal()));
-                    
+
                   @endphp
                      $('#couponCalField').html(
                         `<div class="widget mb-3">
               <h2 class="widget-title text-center">Subtotal</h2>
               <h3 class="fw-normal text-center my-4">₱ ${data.subtotal}</h3>
 
-    
+
             </div>
             <ul class="list-unstyled fs-sm pb-2 border-bottom">
               <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">₱ ${data.subtotal}</span></li>
@@ -1728,14 +1763,14 @@
               <ul class="list-unstyled fs-lead pb-2 ">
                 <li class="d-flex justify-content-between align-items-center"><span class="me-2 fw-bold">Grand Total:</span><span class="text-end">₱ ${data.total_amount}<small>.00</small></span></li>
             </ul>
-            
+
 <div class="alert alert-accent d-flex text-center alert-dismissible fade show" role="alert">
-  <div class="alert-icon"> 
-    <i class="ci-discount me-1"></i><small>${Math.round((data.discount_amount / data.total_value)*100)}</small> 
+  <div class="alert-icon">
+    <i class="ci-discount me-1"></i><small>${Math.round((data.discount_amount / data.total_value)*100)}</small>
   </div>
   <div class="text-center">${data.coupon_name.length < 16 ? `${data.coupon_name.substring(0, 16)}`:`${data.coupon_name.substring(0, 16)}...`}   <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="couponRemove()"></button>
 </div>
-  
+
 </div> `
                 )
                 }
@@ -1743,15 +1778,15 @@
         });
       }
      couponCalculation();
-    
+
       </script>
       <!-- //////////////// =========== End Coupon Apply Start ================= //// -->
-    
-    
+
+
       <!--  //////////////// =========== Start Coupon Remove================= ////  -->
-    
+
     <script type="text/javascript">
-         
+
         function couponRemove(){
            $.ajax({
                type:'GET',
@@ -1761,11 +1796,11 @@
                    couponCalculation();
                    $('#couponField').show(500);
                    $('#coupon_name').val('');
-                    // Start Message 
+                    // Start Message
                    const Toast = Swal.mixin({
                          toast: true,
                          position: 'top-end',
-                         
+
                          showConfirmButton: false,
                          timer: 3000
                        })
@@ -1782,24 +1817,24 @@
                            title: data.error
                        })
                    }
-                   // End Message 
+                   // End Message
                }
            });
         }
     </script>
 
 <script>
-        
+
   function checkPassword(form) {
     password = form.password.value;
     password_confirmation = form.password_confirmation.value;
-    
-        
-    // If Not same return False.    
+
+
+    // If Not same return False.
     if (password != password_confirmation) {
       // alert ("\nPassword did not match: Please try again...")
       $('.confirm').removeClass();
-      
+
     }else{
       $('#confirm').addClass('confirm');
     }
@@ -1856,7 +1891,7 @@ Array.prototype.slice.call(forms)
                   type:"GET",
                   dataType:"json",
                   success:function(data) {
-                      $('select[name="state_id"]').empty(); 
+                      $('select[name="state_id"]').empty();
                      var d =$('select[name="district_id"]').empty();
                         $.each(data, function(key, value){
                             $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name + '</option>');
@@ -1885,38 +1920,38 @@ $('select[name="district_id"]').on('change', function(){
                       if(value.state_name == 'Luzon'){
                           if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 35.00 `);
-                              
-                              
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 35,2)}} 
-                              
+
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 35,2)}}
+
                               `);
                           $('#shipping_form').val(35);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }}
+
                               `);
                           $('#shipping_form').val(0);
 
                           }
-                          
 
-                              
+
+
                       }else if(value.state_name == 'Metro Manila'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 45.00 `);
-                              
-                              
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 45,2)}} 
-                              
+
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 45,2)}}
+
                               `);
                           $('#shipping_form').val(45);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }}
+
                               `);
                           $('#shipping_form').val(0);
 
@@ -1925,17 +1960,17 @@ $('select[name="district_id"]').on('change', function(){
                       }else if(value.state_name == 'Visayas'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 65.00 `);
-                              
-                              
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 65,2)}} 
-                              
+
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 65,2)}}
+
                               `);
                           $('#shipping_form').val(65);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }}
+
                               `);
                           $('#shipping_form').val(0);
 
@@ -1943,17 +1978,17 @@ $('select[name="district_id"]').on('change', function(){
                       }else if(value.state_name == 'BANGSAMORO'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 75.00 `);
-                              
-                              
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 75,2)}} 
-                              
+
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 75,2)}}
+
                               `);
                           $('#shipping_form').val(75);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }}
+
                               `);
                           $('#shipping_form').val(0);
 
@@ -1961,17 +1996,17 @@ $('select[name="district_id"]').on('change', function(){
                       }else if(value.state_name == 'Mindanao'){
                         if({{ session()->get('coupon')['total_amount'] }} < 1000){
                               $('.shipping_fee').html(`+₱ 80.00 `);
-                              
-                              
 
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 80,2)}} 
-                              
+
+
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'] + 80,2)}}
+
                               `);
                           $('#shipping_form').val(80);
                           }else{
                               $('.shipping_fee').html(` Free Shipping `);
-                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }} 
-                              
+                              $('.grand_total').html(` ₱ {{ number_format(session()->get('coupon')['total_amount'],2) }}
+
                               `);
                           $('#shipping_form').val(0);
 
@@ -1980,22 +2015,22 @@ $('select[name="district_id"]').on('change', function(){
 
 
                           // If Session has no coupon
-                          @else 
+                          @else
 
                           // If order is below 1000 and state is region I
                           if(value.state_name == 'Luzon'){
                               if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 35.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 35,2) }} 
-                              
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 35,2) }}
+
                               `);
 
                               $('#shipping_form').val(35);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }}
+
                                   `);
                                   $('#shipping_form').val(0);
 
@@ -2006,15 +2041,15 @@ $('select[name="district_id"]').on('change', function(){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 45.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 45,2) }} 
-                              
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 45,2) }}
+
                               `);
 
                               $('#shipping_form').val(45);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }}
+
                                   `);
                                   $('#shipping_form').val(0);
 
@@ -2023,15 +2058,15 @@ $('select[name="district_id"]').on('change', function(){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 65.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 65,2) }} 
-                              
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 65,2) }}
+
                               `);
 
                               $('#shipping_form').val(65);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }}
+
                                   `);
                                   $('#shipping_form').val(0);
 
@@ -2040,15 +2075,15 @@ $('select[name="district_id"]').on('change', function(){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 75.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 75,2) }} 
-                              
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 75,2) }}
+
                               `);
 
                               $('#shipping_form').val(75);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }}
+
                                   `);
                                   $('#shipping_form').val(0);
 
@@ -2057,15 +2092,15 @@ $('select[name="district_id"]').on('change', function(){
                             if({{ str_replace(',', '', Cart::Subtotal()) }} < 1000){
                                   $('.shipping_fee').html(`+₱ 80.00 `);
 
-                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 80,2) }} 
-                              
+                              $('.grand_total').html(` ₱  {{number_format(str_replace(',', '', Cart::Subtotal()) + 80,2) }}
+
                               `);
 
                               $('#shipping_form').val(80);
                               }else{
                                   $('.shipping_fee').html(` Free Shipping `);
-                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }} 
-                                  
+                                  $('.grand_total').html(` ₱ {{str_replace(',', '', Cart::Subtotal()) }}
+
                                   `);
                                   $('#shipping_form').val(0);
 
@@ -2077,7 +2112,7 @@ $('select[name="district_id"]').on('change', function(){
 
 
 
-                            
+
                         });
                   },
               });
@@ -2085,7 +2120,7 @@ $('select[name="district_id"]').on('change', function(){
               alert('danger');
           }
 
-          
+
 
       });
 
@@ -2141,7 +2176,7 @@ sections.forEach((section) => {
 });
 
       </script>
-      
+
 
 
 
@@ -2171,15 +2206,16 @@ sections.forEach((section) => {
     <script src="{{ asset('frontendv2/assets/vendor/lg-fullscreen.js/dist/lg-fullscreen.min.js') }}"></script>
 
     <script src="{{ asset('frontendv2/assets/vendor/lg-zoom.js/dist/lg-zoom.min.js') }}"></script>
+    <script src="{{ asset('frontendv2/assets/vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 
     {{-- add custom js --}}
     <script src="{{ asset('frontendv2/assets/js/custom.js') }}"></script>
-    
+
 
     <!-- Main theme script-->
     <script src="{{ asset('frontendv2/assets/js/theme.min.js') }}"></script>
 
-  
+
 
 
 

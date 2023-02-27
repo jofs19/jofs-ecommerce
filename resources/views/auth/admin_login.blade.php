@@ -158,11 +158,11 @@
                     flex: 1;
                     background-color: black;
                     transition: 2s;
-                    background-image: url({{ asset('backend/images/vart-logo.jpg') }});
+                    background-image: url({{ asset('frontendv2/assets/img/logo5.svg') }});
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
-					background-size: 135% 135%;
+					background-size: 100% 100%;
                 }
 
 			}
@@ -172,10 +172,12 @@
                     flex: 1;
                     background-color: black;
                     transition: 2s;
-                    background-image: url({{ asset('backend/images/vart-logo.jpg') }});
+                    background-image: url({{ asset('frontendv2/assets/img/logo5.svg') }});
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
+                    background-size: 100% 100%;
+
                 }
 
 				}
@@ -186,11 +188,11 @@
                     flex: 1;
                     background-color: black;
                     transition: 2s;
-                    background-image: url({{ asset('backend/images/vart-logo.jpg') }});
+                    background-image: url({{ asset('frontendv2/assets/img/logo5.svg') }});
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
-					background-size: 135% 135%;
+					background-size: 100% 100%;
                 }
 
 				}
@@ -371,7 +373,7 @@
 							
 
                         <p class="animation a5"><a href="{{ route('password.request') }}">Forgot Password</a></p>
-						<button type="submit" class="animation a6">LOGIN</button>
+						<button type="submit" class="animation a6">Login</button>
 
 					
 					</form>

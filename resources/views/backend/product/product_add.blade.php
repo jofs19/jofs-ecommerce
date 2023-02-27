@@ -21,8 +21,8 @@
                     <div class="col">
 
                         <form method="post" action="{{ route('product-store') }}" enctype="multipart/form-data" >
-                            @csrf                            
-                            
+                            @csrf
+
                             <div class="row">
                                 <div class="col-12">
 
@@ -32,7 +32,7 @@
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Brand Select <span class="text-danger">*</span></h5>
+                                                <h5>Select Brand  <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="brand_id" class="form-control" required="">
                                                         <option value="" selected="" disabled>Select Brand</option>
@@ -52,7 +52,7 @@
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Category Select <span class="text-danger">*</span></h5>
+                                                <h5>Select Category  <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="category_id" class="form-control" required="">
                                                         <option value="" selected="" disabled>Select Category
@@ -98,7 +98,7 @@
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>SubSubCategory Select <span class="text-danger">*</span></h5>
+                                                <h5>Select SubSubCategory  <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="subsubcategory_id" class="form-control" required="">
                                                         <option value="" selected="" disabled>Select Sub- Sub Category
@@ -178,19 +178,26 @@
 
                                         </div> <!-- end col md 4 -->
 
+
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="">
-                                                    @error('selling_price')
+                                                <h5>Select Vendor <span class="text-danger">*</span></h5>
+                                                    {{-- <label for="inputCollection" class="form-label">Select Vendor</label> --}}
+                                                    <select name="vendor_id"  class="form-control" id="inputCollection">
+                                                        <option></option>
+                                                    @foreach($activeVendor as $vendor)
+                                                        <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                                         @endforeach
+                                                      </select>
+                                                    @error('vendor_id')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
+
 
 
                                     </div> <!-- end 3RD row  -->
@@ -353,7 +360,7 @@
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="discount_price" class="form-control">
-                                                    
+
                                                 </div>
                                             </div>
 
@@ -361,10 +368,24 @@
 
                                     </div> <!-- end 6th row  -->
                                     <div class="form-group row">
- 
-                                        
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="selling_price" class="form-control" required="">
+                                                    @error('selling_price')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+
+
+                                        <div class="col-md-4">
 
                                             <div class="form-group ">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
@@ -378,28 +399,28 @@
                                                         </span>
                                                         <input type="text" name="discount_price" class="form-control">
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
 
                                             <div class="form-group sale_duration">
                                                 <h5>Sale Duration <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    
+
 
                                                     <input class="form-control" type="date" name="sale_time" min="{{ Carbon\Carbon::now()->format('m/y/d') }}">
 
-                                                    
-                                                    
+
+
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 6 -->
-                                        
+
                                     </div>
 
 
@@ -456,7 +477,7 @@
                                                 <div class="controls">
 
                                                     <textarea id="editor2" name="long_descp_fil" rows="10" cols="80" required="" placeholder="Textarea text">
-                                                        
+
                                                     </textarea>
                                                 </div>
                                             </div>
@@ -481,7 +502,7 @@
                                                             value="1">
                                                         <label for="checkbox_2">Best Seller</label> <!--HOT DEALS-->
                                                     </fieldset>
-                                                    
+
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_4" name="special_offer"
                                                             value="1" class="special_offer">
@@ -489,7 +510,7 @@
                                                     </fieldset>
 
                                                     <fieldset class="show_time">
-                                                        
+
                                                         <input class="form-control" type="date" name="so_saletime" min="{{ Carbon\Carbon::now()->format('m/y/d') }}">
                                                     </fieldset>
                                                 </div>
@@ -508,8 +529,8 @@
                                                         <label for="checkbox_3">Featured Products</label> <!--FEATURED PRODUCTS-->
                                                     </fieldset>
 
-                                                    
-                                                    
+
+
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_5" name="special_deals"
                                                             value="1">
@@ -521,19 +542,19 @@
                                         </div>
                                     </div>
 
-                                    
+
 
                                     {{-- <div class="col-md-6"> --}}
 
                                         {{-- <div class="form-group">
                                             <h5>Digital Product <span class="text-danger">pdf,xlx,csv*</span></h5>
                                             <div class="controls">
-                                     <input type="file" name="file" class="form-control" > 
-                                
+                                     <input type="file" name="file" class="form-control" >
+
                                               </div>
                                         </div> --}}
-                                
-                                
+
+
                                             {{-- </div> <!-- end col md 4 --> --}}
 
                                     <div class="text-xs-right">
@@ -607,38 +628,38 @@ $('select[name="subcategory_id"]').on('change', function(){
 			};
 			reader.readAsDataURL(input.files[0]);
 		}
-	}	
+	}
 </script>
 
 
 <script>
- 
+
   $(document).ready(function(){
    $('#multiImg').on('change', function(){ //on file input change
       if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
       {
           var data = $(this)[0].files; //this file data
-           
+
           $.each(data, function(index, file){ //loop though each file
               if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
                   var fRead = new FileReader(); //new filereader
                   fRead.onload = (function(file){ //trigger function on successful read
                   return function(e) {
                       var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(80)
-                  .height(80); //create image element 
+                  .height(80); //create image element
                       $('#preview_img').append(img); //append image to output element
                   };
                   })(file);
                   fRead.readAsDataURL(file); //URL representing the file's data.
               }
           });
-           
+
       }else{
           alert("Your browser doesn't support File API!"); //if File API is absent
       }
    });
   });
-   
+
   </script>
 
   <script>

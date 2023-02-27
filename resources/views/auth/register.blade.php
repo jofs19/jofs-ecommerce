@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="sign-in-page">
 			<div class="row">
-				<!-- Sign-in -->			
+				<!-- Sign-in -->
 <div class="col-md-6 col-sm-6 sign-in">
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account!</p>
@@ -42,7 +42,7 @@
 		  	<a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
 		</div>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
-	</form>					
+	</form>
 </div>
 <!-- Sign-in -->
 
@@ -59,7 +59,7 @@
 			@error('name')
 				<span class="invalid-feedback" role="alert">
 					<strong>{{ $message }}</strong>
-				</span>		
+				</span>
 			@enderror
 		</div>
 
@@ -69,7 +69,7 @@
 			@error('email')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 	  	</div>
 
@@ -79,7 +79,7 @@
 			@error('phone')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 
@@ -90,7 +90,7 @@
 			@error('address')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 
@@ -100,7 +100,7 @@
 			@error('password')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
          <div class="form-group">
@@ -109,14 +109,14 @@
 			@error('password_confirmation')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
 	</form>
-	
-	
-</div>	
+
+
+</div>
 <!-- create a new account -->			</div><!-- /.row -->
 		</div><!-- /.sigin-in-->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->

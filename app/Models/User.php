@@ -10,8 +10,10 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
+use HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
@@ -24,18 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'provider_id',
-        'fb_id',
-        'google_id',
-        'git_id',
-        'phone',
-        'address',
-        'password',
-        'last_seen',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -72,5 +63,42 @@ class User extends Authenticatable implements MustVerifyEmail
          public function UserOnline(){
             return Cache::has('user-is-online' . $this->id);
         }
+
+
+
+
+// * INSERTED CODE
+
+        public static function getpermissionGroups(){
+
+            $permission_groups = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+            return $permission_groups;
+        } // End Method
+
+
+        public static function getpermissionByGroupName($group_name){
+            $permissions = DB::table('permissions')
+                            ->select('name','id')
+                            ->where('group_name',$group_name)
+                            ->get();
+            return $permissions;
+        }// End Method
+
+
+        public static function roleHasPermissions($role,$permissions){
+
+            $hasPermission = true;
+            foreach($permissions as $permission){
+                if (!$role->hasPermissionTo($permission->name)) {
+                    $hasPermission = false;
+                    return $hasPermission;
+                }
+                return $hasPermission;
+            }
+
+        }// End Method
+
+// * INSERTED CODE
+
 
 }

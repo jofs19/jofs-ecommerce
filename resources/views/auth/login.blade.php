@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="sign-in-page">
 			<div class="row">
-				<!-- Sign-in -->			
+				<!-- Sign-in -->
 <div class="col-md-6 col-sm-6 sign-in">
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account!</p>
@@ -49,7 +49,7 @@
 		  	<a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
 		</div>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
-	</form>					
+	</form>
 </div>
 <!-- Sign-in -->
 
@@ -66,7 +66,7 @@
 			@error('name')
 				<span class="invalid-feedback" role="alert">
 					<strong>{{ $message }}</strong>
-				</span>		
+				</span>
 			@enderror
 		</div>
 
@@ -76,7 +76,7 @@
 			@error('email')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 	  	</div>
 
@@ -86,7 +86,7 @@
 			@error('phone')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 
@@ -97,7 +97,7 @@
 			@error('address')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 
@@ -107,7 +107,7 @@
 			@error('password')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
          <div class="form-group">
@@ -116,14 +116,14 @@
 			@error('password_confirmation')
 			<span class="invalid-feedback" role="alert">
 				<strong>{{ $message }}</strong>
-			</span>		
+			</span>
 			@enderror
 		</div>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
 	</form>
-	
-	
-</div>	
+
+
+</div>
 <!-- create a new account -->			</div><!-- /.row -->
 		</div><!-- /.sigin-in-->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
@@ -143,7 +143,7 @@
 			visibility: collapse;
 		}
 
-		
+
 
 	</style>
 
@@ -168,7 +168,7 @@
             <form class="needs-validation" novalidate method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
 				@csrf
               <div class="input-group mb-3"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-					
+
                 <input class="form-control rounded-start" type="email" placeholder="Email" id="email" name="email" required>
               </div>
               <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
@@ -177,10 +177,10 @@
 				  @error('password')
 				  <span class="invalid-feedback" role="alert">
 					<div class="invalid-feedback">{{ $message }}</div>
-				</span>	  
-					
-				  @enderror 
-				  
+				</span>
+
+				  @enderror
+
                   <label class="password-toggle-btn" aria-label="Show/hide password">
                     <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                   </label>
@@ -214,7 +214,7 @@
             <div class="col-sm-6">
               <label class="form-label" for="name">Username</label>
               <input class="form-control" type="text" required  id="name" name="name" >
-			  
+
               <div class="invalid-feedback">Please enter your username!</div>
             </div>
             <div class="col-sm-6">
@@ -241,14 +241,14 @@
 			  @error('password')
 			  <span class="invalid-feedback" role="alert">
 				<div class="invalid-feedback">{{ $message }}</div>
-			</span>	  				
+			</span>
 			  @enderror
 
-			
 
-			  <div class="invalid-feedback" id="validate_p">Please provide valid password!</div>      
 
-			  
+			  <div class="invalid-feedback" id="validate_p">Please provide valid password!</div>
+
+
 			{{-- <div class="mt-3">
 				<div class="form-check">
 				  <input class="form-check-input" type="checkbox" id="invalidCheck" required>
@@ -266,19 +266,19 @@
               <div class="invalid-feedback" id="validate_cp">Password does not match!</div>
 
 			  <div class="confirms" id="confirms"><small><span class="text-danger"> Password does not match!</span></small></div>
-			 
+
 			  @error('password_confirmation')
 			  <span class="invalid-feedback" role="alert">
 				<div class="invalid-feedback">{{ $message }}</div>
-			</span>	  
-				
+			</span>
+
 			  @enderror
 			  {{-- <div class="valid-feedback">Looks good!</div>       --}}
 
             </div>
-			
+
             <div class="col-12 text-end">
-				
+
               <button class="btn btn-primary" type="submit" id="myBut"><i class="ci-user me-2 ms-n1"></i>Sign Up</button>
             </div>
           </div>
@@ -322,9 +322,9 @@
 					minlength: 8,
 					maxlength: 20,
 					equalTo: "#password"
-					
+
 				}
-			
+
 			},
 			messages: {
 				password: {
@@ -351,23 +351,23 @@
 			unhighlight: function (element, errorClass, validClass) {
 				$(element).removeClass('is-invalid');
 			}
-            
+
         });
     });
-    
+
 </script>
 
 
 <script>
-          
+
 
 	function checkPasswords(form) {
 		password = form.password.value;
 		password_confirmation = form.password_confirmation.value;
 
-		
-			  
-		// If Not same return False.    
+
+
+		// If Not same return False.
 		if (password != password_confirmation) {
 			// alert ("\nPassword did not match: Please try again...")
 			$('.confirms').removeClass();

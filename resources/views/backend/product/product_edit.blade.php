@@ -36,7 +36,7 @@
                                                     <select name="brand_id" class="form-control" required="">
                                                         <option value="" selected="" disabled>Select Brand</option>
                                                         @foreach($brands as $brand)
-                                                        <option value="{{ $brand->id }}" {{ $brand->id == $products->brand_id ? 'selected': '' }} >{{ $brand->brand_name_en }}</option>	
+                                                        <option value="{{ $brand->id }}" {{ $brand->id == $products->brand_id ? 'selected': '' }} >{{ $brand->brand_name_en }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('brand_id')
@@ -56,7 +56,7 @@
                                                         <option value="" selected="" disabled>Select Category
                                                         </option>
                                                         @foreach($categories as $category)
-                                                        <option value="{{ $category->id }}" {{ $category->id == $products->category_id ? 'selected': '' }} >{{ $category->category_name_en }}</option>	
+                                                        <option value="{{ $category->id }}" {{ $category->id == $products->category_id ? 'selected': '' }} >{{ $category->category_name_en }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('category_id')
@@ -77,7 +77,7 @@
                                                         <option value="" selected="" disabled>Select Sub Category
                                                         </option>
                                                         @foreach($subcategory as $sub)
-                                                        <option value="{{ $sub->id }}" {{ $sub->id == $products->subcategory_id ? 'selected': '' }} >{{ $sub->subcategory_name_en }}</option>	
+                                                        <option value="{{ $sub->id }}" {{ $sub->id == $products->subcategory_id ? 'selected': '' }} >{{ $sub->subcategory_name_en }}</option>
                                                         @endforeach
 
                                                     </select>
@@ -104,7 +104,7 @@
                                                         <option value="" selected="" disabled>Select Sub- Sub Category
                                                         </option>
                                                         @foreach($subsubcategory as $subsub)
-                                                        <option value="{{ $subsub->id }}" {{ $subsub->id == $products->subsubcategory_id ? 'selected': '' }} >{{ $subsub->subsubcategory_name_en }}</option>	
+                                                        <option value="{{ $subsub->id }}" {{ $subsub->id == $products->subsubcategory_id ? 'selected': '' }} >{{ $subsub->subsubcategory_name_en }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('subsubcategory_id')
@@ -180,19 +180,26 @@
 
                                         </div> <!-- end col md 4 -->
 
+
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $products->selling_price }}">
-                                                    @error('selling_price')
+                                                <h5>Select Vendor <span class="text-danger">*</span></h5>
+                                                    {{-- <label for="inputCollection" class="form-label">Select Vendor</label> --}}
+                                                    <select name="vendor_id"  class="form-control" id="inputCollection">
+                                                        <option></option>
+                                                    @foreach($activeVendor as $vendor)
+                                                    <option value="{{ $vendor->id }}" {{ $vendor->id == $products->vendor_id ? 'selected' : '' }}>{{ $vendor->name }}</option>
+                                                    @endforeach
+                                                      </select>
+                                                    @error('vendor_id')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>
                                             </div>
 
                                         </div> <!-- end col md 4 -->
+
+
 
 
                                     </div> <!-- end 3RD row  -->
@@ -349,7 +356,21 @@
 
                                         </div> <!-- end col md 4 --> --}}
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $products->selling_price }}">
+                                                    @error('selling_price')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- end col md 4 -->
+
+                                        <div class="col-md-4">
 
                                             <div class="form-group ">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
@@ -363,23 +384,23 @@
                                                         </span>
                                                         <input type="text" name="discount_price" class="form-control" value="{{ $products->discount_price }}">
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
 
                                         </div> <!-- end col md 6 -->
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
 
                                             <div class="form-group sale_duration">
                                                 <h5>Sale Duration <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    
+
 
                                                     <input class="form-control" type="date" name="sale_time" min="{{ Carbon\Carbon::now()->format('m/y/d') }}" value="{{ $products->sale_time }}">
 
-                                                    
-                                                    
+
+
                                                 </div>
                                             </div>
 
@@ -538,7 +559,7 @@
                                                             value="1" {{ $products->hot_deals == 1 ? 'checked': '' }}>
                                                         <label for="checkbox_2">Best Seller</label> <!--HOT DEALS-->
                                                     </fieldset>
-                                                    
+
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_4" name="special_offer"
                                                             value="1" class="special_offer" {{ $products->special_offer == 1 ? 'checked': '' }}>
@@ -546,7 +567,7 @@
                                                     </fieldset>
 
                                                     <fieldset class="show_time">
-                                                        
+
                                                         <input class="form-control" type="date" name="so_saletime" min="{{ Carbon\Carbon::now()->format('m/y/d') }}" value="{{ $products->so_saletime }}">
                                                     </fieldset>
                                                 </div>
@@ -565,8 +586,8 @@
                                                         <label for="checkbox_3">Featured Products</label> <!--FEATURED PRODUCTS-->
                                                     </fieldset>
 
-                                                    
-                                                    
+
+
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_5" name="special_deals"
                                                             value="1" {{ $products->special_deals == 1 ? 'checked': '' }}>
@@ -838,7 +859,7 @@
                             return function (e) {
                                 var img = $('<img/>').addClass('thumb').attr('src',
                                         e.target.result).width(80)
-                                    .height(80); //create image element 
+                                    .height(80); //create image element
                                 $('#preview_img').append(
                                     img); //append image to output element
                             };

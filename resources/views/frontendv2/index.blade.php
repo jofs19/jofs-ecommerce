@@ -152,34 +152,28 @@ Vartouhi | Beauty & Cosmetics Store
                     <div class="d-flex d-xl-block"><a
                             class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
                             href="{{ route('shop.page') }}" style="min-width: 16rem;"><img
-                                src="{{ asset('upload/skinn-soap.png') }}" width="125"
+                                src="{{ asset('frontendv2/assets/img/intelc-9.svg') }}" width="125"
                                 alt="Banner">
-                            <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">Variants of</span><br>Vartouhi -<span
-                                        class="fw-light"></span><br>Cream!</h5>
-                                <div class="text-info fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
-                            </div>
+                                <div class="py-4 px-2">
+                                    <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>CPU <span class="fw-light">with</span><br>Intel Cores</h5>
+                                    <div class="text-info fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
+                                </div>
                         </a><a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
                             href="{{ route('shop.page') }}" style="min-width: 16rem;"><img
-                                src="{{ asset('upload/prem-soap.png') }}" width="125"
+                                src="{{ asset('frontendv2/assets/img/gpu.svg') }}" width="125"
                                 alt="Banner">
-                            <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">Our Newest</span><br>Premium<br><span
-                                        class="fw-light">7in1 </span>Soap!</h5>
-                                <div class="text-warning fs-ms">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
-                            </div>
+                                <div class="py-4 px-2">
+                                    <h5 class="mb-2"><span class="fw-light">Top Rated</span><br>GPUs<br><span class="fw-light">are on </span>Sale</h5>
+                                    <div class="text-warning fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
+                                  </div>
                         </a><a class="d-flex align-items-center bg-faded-primary rounded-3 pt-2 ps-2 mb-4" href="{{ route('shop.page') }}"
                             style="min-width: 16rem;"><img
-                                src="{{ asset('upload/summ-soap.png') }}" width="125"
+                                src="{{ asset('frontendv2/assets/img/ram.svg') }}" width="130"
                                 alt="Banner">
-                            <div class="py-4 px-2">
-                                <h5 class="mb-2"><span class="fw-light">All Natural</span><br>Skincare <span
-                                        class="fw-light"></span><br>Products!</h5>
-                                <div class="text-primary fs-sm">
-                                    Shop now<i class="ci-arrow-right fs-xs ms-1"></i> 
-                                
-                                </div>
-                            </div>
+                                <div class="py-4 px-2">
+                                    <h5 class="mb-2"><span class="fw-light">Catch Big</span><br>Deals <span class="fw-light">on</span><br>RAM</h5>
+                                    <div class="text-primary fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
+                                  </div>
                         </a></div>
                 </div>
             </div>
@@ -447,19 +441,6 @@ Vartouhi | Beauty & Cosmetics Store
     <!-- Product-->
     @endforeach
 
-
-    <!-- Product-->
-
-    <!-- Product-->
-
-    <!-- Product-->
-
-    <!-- Product-->
-
-    <!-- Product-->
-
-    <!-- Product-->
-
     </div>
 
 
@@ -630,7 +611,7 @@ Vartouhi | Beauty & Cosmetics Store
             </div>
             <div class="col-md-8">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 pb-2">
-                    <h2 class="h4 mb-3">Latest Blogs from Vartouhi</h2><a
+                    <h2 class="h4 mb-3">Latest Blogs from PC Build</h2><a
                         class="btn btn-outline-accent btn-sm mb-3" href="{{ route('home.blog') }}">More Blogs<i
                             class="ci-arrow-right fs-xs ms-1 me-n1"></i></a>
                 </div>

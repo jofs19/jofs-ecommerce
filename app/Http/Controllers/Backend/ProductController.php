@@ -19,11 +19,13 @@ use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
 {
-    
+
     public function AddProduct(){
+        $activeVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+
 		$categories = Category::latest()->get();
 		$brands = Brand::latest()->get();
-		return view('backend.product.product_add',compact('categories','brands'));
+		return view('backend.product.product_add',compact('categories','brands','activeVendor'));
 
 	} //end method AddProduct
 
@@ -33,7 +35,7 @@ class ProductController extends Controller
 		// $request->validate([
 		// 	'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
 		//   ]);
-	  
+
 		//   if ($files = $request->file('file')) {
 		// 	$destinationPath = 'upload/pdf'; // upload path
 		// 	$digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
@@ -64,7 +66,7 @@ class ProductController extends Controller
       	'product_size_fil' => $request->product_size_fil,
       	'product_color_en' => $request->product_color_en,
       	'product_color_fil' => $request->product_color_fil,
-		
+
       	'selling_price' => $request->selling_price,
       	'discount_price' => $request->discount_price,
 		'total_price' => ($request->selling_price + $request->discount_price) - $request->selling_price,
@@ -84,7 +86,9 @@ class ProductController extends Controller
 
       	'product_thumbnail' => $save_url,
       	'status' => 1,
-      	'created_at' => Carbon::now(),   	 
+        'vendor_id' => $request->vendor_id,
+
+      	'created_at' => Carbon::now(),
 
 
 
@@ -98,25 +102,25 @@ class ProductController extends Controller
 				$make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
 			  Image::make($img)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
 			  $uploadPath = 'upload/products/multi-image/'.$make_name;
-	  
+
 			  MultiImg::insert([
-	  
+
 				  'product_id' => $product_id,
 				  'photo_name' => $uploadPath,
-				  'created_at' => Carbon::now(), 
-	  
+				  'created_at' => Carbon::now(),
+
 			  ]);
-	  
+
 			}
-	  
+
 			// End Multiple Image Upload  ///////////
-	  
-	  
+
+
 			 $notification = array(
 				  'message' => 'Product Inserted Successfully',
 				  'alert-type' => 'success'
 			  );
-	  
+
 			  return redirect()->route('manage-product')->with($notification);
 
 
@@ -133,12 +137,14 @@ class ProductController extends Controller
 	public function EditProduct($id){
 
 		$multiImgs = MultiImg::where('product_id',$id)->get();
+        $activeVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+
 		$categories = Category::latest()->get();
 		$brands = Brand::latest()->get();
 		$subcategory = SubCategory::latest()->get();
 		$subsubcategory = SubSubCategory::latest()->get();
 		$products = Product::findOrFail($id);
-		return view('backend.product.product_edit',compact('categories','brands','subcategory','subsubcategory','products','multiImgs'));
+		return view('backend.product.product_edit',compact('categories','brands','subcategory','subsubcategory','products','multiImgs','activeVendor'));
 
 	}// end	method
 
@@ -186,7 +192,9 @@ class ProductController extends Controller
 		'so_saletime' => $request->so_saletime,
 
       	'status' => 1,
-      	'created_at' => Carbon::now(),   
+        'vendor_id' => $request->vendor_id,
+
+      	'created_at' => Carbon::now(),
 
       ]);
 
@@ -198,7 +206,7 @@ class ProductController extends Controller
 		return redirect()->route('manage-product')->with($notification);
 
 
-	} // end method 
+	} // end method
 
 
 	/// Multiple Image Update
@@ -229,32 +237,32 @@ class ProductController extends Controller
 		return redirect()->back()->with($notification);
 
 	} // end method
-	
-	
-	/// Product Main thumbnail Update /// 
+
+
+	/// Product Main thumbnail Update ///
 	public function ThumbnailImageUpdate(Request $request){
 		$pro_id = $request->id;
 		$oldImage = $request->old_img;
 		unlink($oldImage);
-   
+
 	   $image = $request->file('product_thumbnail');
 		   $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
 		   Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
 		   $save_url = 'upload/products/thumbnail/'.$name_gen;
-   
+
 		   Product::findOrFail($pro_id)->update([
 			   'product_thumbnail' => $save_url,
 			   'updated_at' => Carbon::now(),
-   
+
 		   ]);
-   
+
 			$notification = array(
 			   'message' => 'Product Image thumbnail Updated Successfully',
 			   'alert-type' => 'info'
 		   );
-   
+
 		   return redirect()->back()->with($notification);
-   
+
 		} // end method
 
 		 // Multi Image Delete ////
@@ -262,15 +270,15 @@ class ProductController extends Controller
 			$oldimg = MultiImg::findOrFail($id);
 			unlink($oldimg->photo_name);
 			MultiImg::findOrFail($id)->delete();
-   
+
 			$notification = array(
 			   'message' => 'Product Image Deleted Successfully',
 			   'alert-type' => 'error'
 		   );
-   
+
 		   return redirect()->back()->with($notification);
-   
-		} // end method 
+
+		} // end method
 
 
 		public function ProductInactive($id){
@@ -279,20 +287,20 @@ class ProductController extends Controller
 			   'message' => 'Product Inactive',
 			   'alert-type' => 'success'
 		   );
-   
+
 		   return redirect()->back()->with($notification);
 		}
-   
-   
+
+
 	 public function ProductActive($id){
 		 Product::findOrFail($id)->update(['status' => 1]);
 			$notification = array(
 			   'message' => 'Product Active',
 			   'alert-type' => 'success'
 		   );
-   
+
 		   return redirect()->back()->with($notification);
-   
+
 		}
 
 	public function ProductDelete($id){
@@ -313,9 +321,9 @@ class ProductController extends Controller
 
 		return redirect()->back()->with($notification);
 
-	}// end method 
+	}// end method
 
-	  // product Stock 
+	  // product Stock
 	public function ProductStock(){
 
     $products = Product::latest()->get();
@@ -324,7 +332,7 @@ class ProductController extends Controller
 
     return view('backend.product.product_stock',compact('products'));
   }
-   
+
 
 
 }

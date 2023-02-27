@@ -1,7 +1,7 @@
 @php
   $prefix = Request::route()->getPrefix();
   $route = Route::current()->getName();
-  
+
 
 
 
@@ -10,31 +10,31 @@
 
 <aside class="main-sidebar">
     <!-- sidebar-->
-    <section class="sidebar">	
-		
+    <section class="sidebar">
+
         <div class="user-profile">
 			<div class="ulogo mb-0 pb-0">
 				 <a href="{{ url('admin/dashboard') }}">
 				  <!-- logo for regular state and mobile devices -->
-					 <div class="d-flex align-items-center justify-content-center pt-2 mt-2 pb-0 mb-0">					 	
-						  <img src="{{ asset('frontendv2/assets/img/vartouhi-logoss.png') }}" alt="" width="155">
+					 <div class="d-flex align-items-center justify-content-center pt-2 mt-2 pb-0 mb-0">
+						  <img src="{{ asset('frontendv2/assets/img/logo5.svg') }}" alt="" width="125">
 						  {{-- <h3><b>Vartouhi</b> Admin</h3> --}}
 					 </div>
 				</a>
 			</div>
         </div>
-      
+
       <!-- sidebar menu-->
-      <ul class="sidebar-menu mt-1 pt-1" data-widget="tree">  
-		  
+      <ul class="sidebar-menu mt-1 pt-1" data-widget="tree">
+
 		<li class="{{ ($route == 'dashboard')? 'active':'' }}">
           <a href="{{ url('admin/dashboard') }}">
             <i data-feather="pie-chart"></i>
 			<span>Dashboard</span>
           </a>
-        </li>  
+        </li>
 
-        @php
+        {{-- @php
         $brand = (auth()->guard('admin')->user()->brand == 1);
         $category = (auth()->guard('admin')->user()->category == 1);
         $product = (auth()->guard('admin')->user()->product == 1);
@@ -50,11 +50,11 @@
         $reports = (auth()->guard('admin')->user()->reports == 1);
         $alluser = (auth()->guard('admin')->user()->alluser == 1);
         $adminuserrole = (auth()->guard('admin')->user()->adminuserrole == 1);
-        @endphp
+        @endphp --}}
 
 
-       @if($brand == true) 
-		
+       {{-- @if($brand == true) --}}
+
         <li class="treeview {{ ($prefix == '/brand')? 'active':'' }}">
           <a href="#">
             <i class="glyphicon glyphicon-bitcoin"></i>
@@ -67,13 +67,13 @@
             <li class="{{ ($route == 'all.brand')? 'active':'' }}"><a href="{{ route('all.brand') }}"><i class="ti-more"></i>All Brand</a></li>
             {{-- <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li> --}}
           </ul>
-        </li> 
+        </li>
 
-        @else
-        @endif
+        {{-- @else
+        @endif --}}
 
 
-		  @if($category == true)
+		  {{-- @if($category == true) --}}
 
         <li class="treeview {{ ($prefix == '/category')? 'active':'' }}">
           <a href="#">
@@ -89,10 +89,10 @@
           </ul>
         </li>
 
-        @else
+        {{-- @else
         @endif
-		
-        @if($product == true)
+
+        @if($product == true) --}}
 
         <li class="treeview" class="treeview {{ ($prefix == '/product')? 'active':'' }}">
           <a href="#">
@@ -103,17 +103,35 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ ($route == 'add-product')? 'active':'' }}"><a href="{{ route('add-product') }}"><i class="ti-more"></i>Add Products</a></li>            
+            <li class="{{ ($route == 'add-product')? 'active':'' }}"><a href="{{ route('add-product') }}"><i class="ti-more"></i>Add Products</a></li>
             <li class="{{ ($route == 'manage-product')? 'active':'' }}"><a href="{{ route('manage-product') }}"><i class="ti-more"></i>Manage Products</a></li>
 
           </ul>
-        </li> 
+        </li>
 
-        @else
+
+        <li class="treeview {{ ($prefix == '/setting')?'active':'' }}  ">
+            <a href="#">
+              <i class="glyphicon glyphicon-home"></i>
+              <span>Manage Vendors</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+          <li class="{{ ($route == 'inactive.vendor')? 'active':'' }}"><a href="{{ route('inactive.vendor') }}"><i class="ti-more"></i>Unauthorized Vendors</a></li>
+
+          <li class="{{ ($route == 'active.vendor')? 'active':'' }}"><a href="{{ route('active.vendor') }}"><i class="ti-more"></i>Authorized Vendors</a></li>
+
+
+            </ul>
+          </li>
+
+        {{-- @else
         @endif
 
-        @if($slider == true)
-        
+        @if($slider == true) --}}
+
         <!--SLIDER-->
         <li class="treeview {{ ($prefix == '/slider')?'active':'' }}  ">
           <a href="#">
@@ -127,14 +145,14 @@
             <li class="{{ ($route == 'manage-slider')? 'active':'' }}"><a href="{{ route('manage-slider') }}"><i class="ti-more"></i>Manage Slider</a></li>
 
           </ul>
-        </li>   
+        </li>
 
-        
+{{--
         @else
         @endif
 
 
-        @if($coupons == true)
+        @if($coupons == true) --}}
         <!--Coupon section-->
 
         <li class="treeview {{ ($prefix == '/coupons')?'active':'' }}  ">
@@ -151,15 +169,15 @@
 
 
          </ul>
-       </li>   
-       
-       @else
+       </li>
+
+       {{-- @else
        @endif
-       
+
        <!-- End Coupon section-->
 
 
-       @if($shipping == true)
+       @if($shipping == true) --}}
 
       <!--Shipping section-->
 
@@ -178,15 +196,15 @@
 
           <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship State</a></li>
 
-          
+
 
         </ul>
-      </li>    
-      
-      @else
+      </li>
+
+      {{-- @else
       @endif
 
-      @if($blog == true)
+      @if($blog == true) --}}
 
       <li class="treeview {{ ($prefix == '/blog')?'active':'' }}  ">
         <a href="#">
@@ -204,14 +222,14 @@
       <li class="{{ ($route == 'add.post')? 'active':'' }}"><a href="{{ route('add.post') }}"><i class="ti-more"></i>Add Blog Post</a></li>
 
           </ul>
-        </li>  
+        </li>
 
 
-        @else
+        {{-- @else
         @endif
 
 
-        @if($setting == true)
+        @if($setting == true) --}}
 
         <li class="treeview {{ ($prefix == '/setting')?'active':'' }}  ">
           <a href="#">
@@ -228,14 +246,14 @@
 
 
           </ul>
-        </li>     
-        
-        @else
+        </li>
+
+        {{-- @else
         @endif
 
 
-        @if($returnorder == true)
-        
+        @if($returnorder == true) --}}
+
         <li class="treeview {{ ($prefix == '/return')?'active':'' }}  ">
           <a href="#">
             <i class="glyphicon glyphicon-circle-arrow-left"></i>
@@ -251,13 +269,13 @@
 
 
           </ul>
-        </li>   
+        </li>
 
-        @else
+        {{-- @else
         @endif
 
-        
-        @if($review == true)
+
+        @if($review == true) --}}
 
         <li class="treeview {{ ($prefix == '/review')?'active':'' }}  ">
           <a href="#">
@@ -274,19 +292,19 @@
 
 
           </ul>
-        </li>    
-
+        </li>
+{{--
         @else
         @endif
 
 
-		 
+
         <li class="header nav-small-cap">Manage Store</li>
 
 
-        @if($orders == true)
-		  
-        <li class="treeview {{ ($prefix == '/orders')?'active':'' }} ">          
+        @if($orders == true) --}}
+
+        <li class="treeview {{ ($prefix == '/orders')?'active':'' }} ">
           <a href="#">
             <i class="glyphicon glyphicon-bed"></i>
             <span>Orders </span>
@@ -300,23 +318,23 @@
             <li class="{{ ($route == 'confirmed-orders')? 'active':'' }}"><a href="{{ route('confirmed-orders') }}"><i class="ti-more"></i>Confirmed Orders</a></li>
 
             <li class="{{ ($route == 'processing-orders')? 'active':'' }}"><a href="{{ route('processing-orders') }}"><i class="ti-more"></i>Processed Orders</a></li>
-    
+
           <li class="{{ ($route == 'picked-orders')? 'active':'' }}"><a href="{{ route('picked-orders') }}"><i class="ti-more"></i> Picked Orders</a></li>
-    
+
           <li class="{{ ($route == 'shipped-orders')? 'active':'' }}"><a href="{{ route('shipped-orders') }}"><i class="ti-more"></i> Shipped Orders</a></li>
-    
+
          <li class="{{ ($route == 'delivered-orders')? 'active':'' }}"><a href="{{ route('delivered-orders') }}"><i class="ti-more"></i> Delivered Orders</a></li>
-    
+
       <li class="{{ ($route == 'cancel-orders')? 'active':'' }}"><a href="{{ route('cancel-orders') }}"><i class="ti-more"></i> Rejected Orders</a></li>
-    
+
           </ul>
         </li>
 
-        @else
+        {{-- @else
         @endif
 
 
-        @if($stock == true)
+        @if($stock == true) --}}
 
         <li class="treeview {{ ($prefix == '/stock')?'active':'' }}  ">
           <a href="#">
@@ -331,13 +349,13 @@
 
 
           </ul>
-        </li>  
-        
-        @else
+        </li>
+
+        {{-- @else
         @endif
 
-        @if($reports == true)
-		
+        @if($reports == true) --}}
+
         <li class="treeview {{ ($prefix == '/reports')?'active':'' }}  ">
           <a href="#">
             <i class="glyphicon glyphicon-file"></i>
@@ -349,14 +367,14 @@
           <ul class="treeview-menu">
         <li class="{{ ($route == 'all-reports')? 'active':'' }}"><a href="{{ route('all-reports') }}"><i class="ti-more"></i>All Reports</a></li>
 
-        
-          </ul>
-        </li>         
 
+          </ul>
+        </li>
+{{--
         @else
         @endif
 
-        @if($alluser == true)
+        @if($alluser == true) --}}
 
         <li class="treeview {{ ($prefix == '/alluser')?'active':'' }}  ">
           <a href="#">
@@ -371,13 +389,13 @@
 
 
           </ul>
-        </li>    
+        </li>
 
-        @else
+        {{-- @else
         @endif
 
 
-        @if($adminuserrole == true)
+        @if($adminuserrole == true) --}}
 
         <li class="treeview {{ ($prefix == '/adminuserrole')?'active':'' }}  ">
           <a href="#">
@@ -392,16 +410,16 @@
 
 
           </ul>
-        </li> 
-
+        </li>
+{{--
         @else
-        @endif
-		  
- 
-        
+        @endif --}}
+
+
+
       </ul>
     </section>
-	
+
 	<div class="sidebar-footer">
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>

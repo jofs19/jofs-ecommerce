@@ -28,7 +28,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        
+
         $blogpost = BlogPost::latest()->limit(4)->get();
         $products = Product::where('status',1)->orderBy('id','DESC')->limit(8)->get();
         $products_category = Product::where('status',1)->orderBy('id','DESC')->get();
@@ -40,13 +40,13 @@ class IndexController extends Controller
         $reviews = Review::where('status',1)->orderBy('id','DESC')->get();
 
     	$featured = Product::where('featured',1)->where('status',1)->orderBy('id','DESC')->get(); //done
-        $hot_deals = Product::where('hot_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = best seller	
+        $hot_deals = Product::where('hot_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = best seller
         $special_offer = Product::where('special_offer',1)->where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(1)->get();
     	$special_deals = Product::where('special_deals',1)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done = trending products
         $discounted_products = Product::where('discount_price','!=',NULL)->where('status',1)->orderBy('id','DESC')->limit(4)->get(); //done
         // $skip_category_0 = Category::skip(3)->first();
     	// $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
-        
+
     	// $skip_category_1 = Category::skip(1)->first();
     	// $skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->get();
 
@@ -59,6 +59,14 @@ class IndexController extends Controller
 
     	return view('frontendv2.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','blogpost','reviews', 'products_category','discounted_products','brands'));
     }
+
+    public function UserDashboard(){
+
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+        return view('dashboard',compact('userData'));
+
+    } // End Method
 
 
     public function UserLogout()
@@ -87,7 +95,7 @@ class IndexController extends Controller
         ],
         [
             'email.unique:users' => 'Email has already been used!',
-            
+
         ]);
 
         $data = User::find(Auth::user()->id);
@@ -108,19 +116,19 @@ class IndexController extends Controller
 		// 	}
         // if(file_exists($old_img)){
             // unlink($old_img);
-            
+
 		// }
 
         // $cat_id = $request->id;
         // $old_img = $request->old_image;
- 
-        // if ($request->file('post_image')) { 
-        // $image = $request->file('post_image'); 
-        
+
+        // if ($request->file('post_image')) {
+        // $image = $request->file('post_image');
+
         // $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         // Image::make($image)->resize(1303,906)->save('upload/blog/'.$name_gen);
         // $save_url = 'upload/blog/'.$name_gen;
- 
+
         // if(file_exists($old_img)){
         // unlink($old_img);
         // }
@@ -134,7 +142,7 @@ class IndexController extends Controller
 			$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
 			Image::make($image)->resize(300,300)->save('upload/user_images/'.$name_gen);
 			$save_url = 'upload/user_images/'.$name_gen;
-			$data['profile_photo_path'] = $save_url;			
+			$data['profile_photo_path'] = $save_url;
 		}
 
 
@@ -223,6 +231,23 @@ class IndexController extends Controller
 	} //end method
 
 
+    public function VendorDetails($id){
+
+        $vendor = User::findOrFail($id);
+        $vproduct = Product::where('vendor_id',$id)->get();
+        return view('frontendv2.seller.vendor_details',compact('vendor','vproduct'));
+
+     } // End Method
+
+
+     public function VendorAll(){
+
+        $vendors = User::where('status','active')->where('role','vendor')->orderBy('id','DESC')->get();
+        return view('frontendv2.seller.vendor_all',compact('vendors'));
+
+     } // End Method
+
+
     public function TagWiseProduct($tag){
 		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_fil',$tag);
 
@@ -249,7 +274,7 @@ class IndexController extends Controller
                $products = $products->orderBy('product_name_en','DESC');
             }
          }
-         
+
          $products = $products->paginate(6);
 
 		$categories = Category::orderBy('category_name_en','ASC')->get();
@@ -286,22 +311,22 @@ class IndexController extends Controller
                    $products = $products->orderBy('product_name_en','DESC');
                 }
              }
-             
+
              $products = $products->paginate(6);
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
 
-        		///  Load More Product with Ajax 
+        		///  Load More Product with Ajax
 		if ($request->ajax()) {
             $grid_view = view('frontendv2.product.grid_view_product',compact('products'))->render();
-         
+
             $list_view = view('frontendv2.product.list_view_product',compact('products'))->render();
-             return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);	
-         
+             return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);
+
                  }
-                 ///  End Load More Product with Ajax 
+                 ///  End Load More Product with Ajax
 
 		return view('frontendv2.product.subcategory_view',compact('products','categories','breadsubcat','brands'));
 	} // end method
@@ -334,30 +359,31 @@ class IndexController extends Controller
                $products = $products->orderBy('product_name_en','DESC');
             }
          }
-         
+
          $products = $products->paginate(6);
-        
+
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		$breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
         $brands = Brand::orderBy('brand_name_en','ASC')->get();
-        		///  Load More Product with Ajax 
+        		///  Load More Product with Ajax
 		if ($request->ajax()) {
             $grid_view = view('frontendv2.product.grid_view_product',compact('products'))->render();
-         
+
             $list_view = view('frontendv2.product.list_view_product',compact('products'))->render();
-             return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);	
-         
+             return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);
+
                  }
-                 ///  End Load More Product with Ajax 
+                 ///  End Load More Product with Ajax
 
 		return view('frontendv2.product.sub_subcategory_view',compact('products','categories','breadsubsubcat','brands'));
 	} //end method
-   
+
 
 
              /// Product View With Ajax
 	public function ProductViewAjax($id){
         $product_id = Product::findOrFail($id);
+        $vendor_id = $product_id->vendor_id;
         $product = Product::with('category','brand')->findOrFail($id);
 		$color = $product->product_color_en;
 
@@ -368,6 +394,8 @@ class IndexController extends Controller
         $multiImage = MultiImg::where('product_id',$id)->get();
 
 		return response()->json(array(
+            // vendor_id
+            'vendor_id' => $vendor_id,
 			'product' => $product,
 			'color' => $product_color,
 			'size' => $product_size,
@@ -375,10 +403,10 @@ class IndexController extends Controller
             'product_id' => $product_id,
 		));
 
-	} // end method 
+	} // end method
 
 
-     // Product Seach 
+     // Product Seach
 	public function ProductSearch(Request $request){
         $request->validate(["search" => "required"]);
 		$item = $request->search;
@@ -396,30 +424,30 @@ class IndexController extends Controller
 
 	}
 
-    	///// Advance Search Options 
+    	///// Advance Search Options
 
 	public function SearchProduct(Request $request){
 		$request->validate(["search" => "required"]);
 
-		$item = $request->search;		 
+		$item = $request->search;
 
 		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thumbnail','selling_price','id','product_slug_en')->limit(5)->get();
 
         return view('frontendv2.product.search_product',compact('products'));
 
-	} // end method 
+	} // end method
 
     public function ContactPage(Request $request){
-		
+
         return view('frontendv2.home.contact');
 
-	} // end method 
+	} // end method
 
     public function AboutPage(Request $request){
-		
+
         return view('frontendv2.home.about');
 
-	} // end method 
+	} // end method
 
     public function productlistAjax(){
         $products = Product::where('status',1)->orderBy('id','DESC')->get();
@@ -455,7 +483,7 @@ class IndexController extends Controller
             if($products){
                 return view('frontendv2.product.search',compact('products'));
             }else{
-                
+
                 return redirect()->back()->with('error','No Product Found');
 
             }
@@ -477,18 +505,18 @@ class IndexController extends Controller
         {
             return Socialite::driver('google')->stateless()->redirect();
         }
-    
+
         //Google callback
         public function handleGoogleCallback()
         {
-            
-                
+
+
                 $user = Socialite::driver('google')->stateless()->user();
-            
+
                 $this->_registerOrLoginUser($user);
-    
+
                 return redirect()->route('dashboard');
-                
+
         }
 
 
@@ -497,18 +525,18 @@ class IndexController extends Controller
         {
             return Socialite::driver('facebook')->stateless()->redirect();
         }
-    
+
         //Facebook callback
         public function handleFacebookCallback()
         {
-            
-                
+
+
                 $user = Socialite::driver('facebook')->stateless()->user();
-            
+
                 $this->_registerOrLoginUser($user);
-    
+
                 return redirect()->route('dashboard');
-                
+
         }
 
 
@@ -521,14 +549,14 @@ class IndexController extends Controller
         //Github callback
         public function handleGithubCallback()
         {
-            
-                
+
+
                 $user = Socialite::driver('github')->stateless()->user();
-            
+
                 $this->_registerOrLoginUser($user);
-    
+
                 return redirect()->route('dashboard');
-                
+
         }
 
         //twitter login
@@ -540,21 +568,21 @@ class IndexController extends Controller
         //twitter callback
         public function handleTwitterCallback()
         {
-            
-                
+
+
                 $user = Socialite::driver('twitter')->user();
-            
+
                 $this->_registerOrLoginUser($user);
-    
+
                 return redirect()->route('dashboard');
-                
+
         }
-        
+
 
         protected function _registerOrLoginUser($data)
         {
             $user = User::where('email', '=', $data->email)->first();
-    
+
             if (!$user) {
                 $user = new User();
                 $user->name = $data->name;
@@ -563,9 +591,9 @@ class IndexController extends Controller
                 $user->profile_photo_path = $data->avatar;
                 $user->save();
             }
-    
+
             Auth::login($user);
-    
+
             // return $user;
         }
 
